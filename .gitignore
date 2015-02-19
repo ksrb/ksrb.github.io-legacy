@@ -6,3 +6,12 @@
 .classpath
 /.settings
 *.project
+
+#Bower
+/bower_components
+
+#Compass
+Gemfile.lock
+
+#SASS
+/.sass-cache
