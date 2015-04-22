@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="121.3730469px" height="156px" viewBox="0 0 121.3730469 156" enable-background="new 0 0 121.3730469 156"
+	 xml:space="preserve">
+<rect fill="#FFFFFF" width="121.3730469" height="156"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="28.7236328" y1="46.0361328" x2="172.1986084" y2="189.5111084">
+	<stop  offset="0" style="stop-color:#003895"/>
+	<stop  offset="0.5" style="stop-color:#3A6BB6"/>
+	<stop  offset="1" style="stop-color:#607CAB"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" d="M117.4677734,3.9047852v148.1899414H3.9047852V3.9047852H117.4677734 M121.3730469,0H0v156
+	h121.3730469V0L121.3730469,0z"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="2.078125" y1="19.3925781" x2="170.2679443" y2="187.5823975">
+	<stop  offset="0" style="stop-color:#003895"/>
+	<stop  offset="0.5" style="stop-color:#3A6BB6"/>
+	<stop  offset="1" style="stop-color:#607CAB"/>
+</linearGradient>
+<path fill="url(#SVGID_2_)" d="M10.9296875,10.5400391v134.9208984h99.5126953V10.5400391H10.9296875z M60.28125,141.5556641
+	H14.8349609V78.5595703H60.28125V141.5556641z M106.5371094,77.4404297H61.0898438V14.4448242h45.4472656V77.4404297z"/>
+<text transform="matrix(1.0556901 0 0 1 72.5332031 129.7128906)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="52.47855">S</text>
+<text transform="matrix(1 0 0 1 20.6000977 64.1088867)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="54.6251411">K</text>
+</svg>
