@@ -6,7 +6,6 @@
   z-index: 1;
   display: block;
   width: $row-width;
-  opacity: .5;
 
   position: absolute;
   left: 50%;
@@ -15,19 +14,21 @@
 }
 
 .container {
-  opacity: .5;
   margin: 0 auto;
   position: relative;
-  padding-top: rem-calc(30px);
+  padding-top: rem-calc(19px);
   z-index: 2;
+}
+
+.template, .container {
+  opacity: .5;
 }
 
 /*===END Temporary Rules===*/
 
-nav.main-nav {
+$nav-height: rem-calc(41px);
 
-  margin-top: rem-calc(20px);
-  background-color: rgb(95, 138, 202);
+.main-nav {
   color: white;
 
   li {
@@ -36,60 +37,65 @@ nav.main-nav {
 
   ul {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: center;
-
-    //'Center' navbar
-    padding-left: rem-calc(50px);
 
     //Override foundation
     margin: 0;
 
     //Place 1st level <li>s horizontally
     > li {
-      margin: rem-calc(10px) rem-calc(19px);
       text-transform: uppercase;
       font-size: rem-calc(12px);
+
+      padding: rem-calc(10px) rem-calc(19px);
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      padding: 0;
+      margin: 0;
+
+      width: rem-calc(78px);
+    }
+
+    .experience {
+      width: rem-calc(82px);
+      padding-left: rem-calc(3px);
+      padding-right: rem-calc(3px);
+    }
+
+    .education {
+      width: rem-calc(76px);
+      padding-left: rem-calc(3px);
+      padding-right: rem-calc(3px);
+    }
+
+    .experience, .about {
+      height: rem-calc(49px);
+
+      background-color: rgb(69, 104, 160);
+    }
+
+    .skills, .education {
+      height: $nav-height;
+
+      background-color: rgb(79, 117, 179);
     }
   }
 
-  .logo, .logo img {
-    //Stop collpase from position:absolute + position:relative
-    width: rem-calc(77px);
-  }
+  position: relative;
 
-  .logo {
-    margin: 0;
-    position: relative;
-    img {
-      position: absolute;
-      top: -31px;
-    }
-  }
+  .background {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: -1;
 
-  .about, .about div {
-    //Stop collpase from position:absolute + position:relative
-    width: rem-calc(38px);
-  }
+    width: 100%;
+    height: $nav-height;
 
-  .about {
-    position: relative;
-    div {
-      position: absolute;
-    }
+    background-color: rgb(95, 138, 202);
   }
-
-  .experience, .experience div {
-    //Stop collapse from positoin:absolute + position:relative
-    width: rem-calc(60px);
-  }
-
-  .experience {
-    position: relative;
-    div {
-      position: absolute;
-    }
-  }
-
-  
 }
