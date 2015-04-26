@@ -2,7 +2,7 @@
 @import 'foundation/functions';
 
 /*===Temporary Rules===*/
-.template {
+#template {
   z-index: 1;
   display: block;
   width: $row-width;
@@ -13,14 +13,14 @@
   transform: translate(-50%, 0);
 }
 
-.container {
+#container {
   margin: 0 auto;
   position: relative;
   padding-top: rem-calc(19px);
   z-index: 2;
 }
 
-.template, .container {
+#template, #container {
   opacity: .5;
 }
 
@@ -28,60 +28,46 @@
 
 $nav-height: rem-calc(41px);
 
-.main-nav {
+#nav {
   color: white;
 
-  li {
-    list-style: none;
+  .logo {
+    width: rem-calc(78px);
   }
 
-  ul {
+  > ul {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: rem-calc(11px);
+    text-transform: uppercase;
 
     //Override foundation
     margin: 0;
 
-    //Place 1st level <li>s horizontally
     > li {
-      text-transform: uppercase;
-      font-size: rem-calc(12px);
+      list-style: none;
 
-      padding: rem-calc(10px) rem-calc(19px);
+      //Center content vertical + horizontal
       display: flex;
+      justify-content: center;
       align-items: center;
-    }
 
-    .logo {
-      padding: 0;
-      margin: 0;
+      //Inner nav elements
+      &:nth-child(2), &:nth-child(4) {
+        height: rem-calc(49px);
+        width: rem-calc(80px);
 
-      width: rem-calc(78px);
-    }
+        background-color: rgb(69, 104, 160);
+      }
 
-    .experience {
-      width: rem-calc(82px);
-      padding-left: rem-calc(3px);
-      padding-right: rem-calc(3px);
-    }
+      //Outer nav elements
+      &:nth-child(1), &:nth-child(5) {
+        height: $nav-height;
+        width: rem-calc(76px);
 
-    .education {
-      width: rem-calc(76px);
-      padding-left: rem-calc(3px);
-      padding-right: rem-calc(3px);
-    }
-
-    .experience, .about {
-      height: rem-calc(49px);
-
-      background-color: rgb(69, 104, 160);
-    }
-
-    .skills, .education {
-      height: $nav-height;
-
-      background-color: rgb(79, 117, 179);
+        background-color: rgb(79, 117, 179);
+      }
     }
   }
 
