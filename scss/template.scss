@@ -1,3 +1,4 @@
+@import "compass";
 @import "_settings.scss";
 @import 'foundation/functions';
 
@@ -36,9 +37,10 @@ $nav-height: rem-calc(41px);
   }
 
   > ul {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+
     font-size: rem-calc(11px);
     text-transform: uppercase;
 
@@ -49,9 +51,9 @@ $nav-height: rem-calc(41px);
       list-style: none;
 
       //Center content vertical + horizontal
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include display-flex;
+      @include align-items(center);
+      @include justify-content(center);
 
       //Inner nav elements
       &:nth-child(2), &:nth-child(4) {
