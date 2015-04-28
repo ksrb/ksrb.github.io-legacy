@@ -167,4 +167,46 @@ $nav-height: rem-calc(41px);
   }
 }
 
+#about {
+  color: white;
+  background-color: rgb(71, 85, 102);
+  padding-top: rem-calc(44px);
+  #{headings()} {
+    text-transform: uppercase;
+    color: white;
+  }
+
+  p {
+    margin-left: rem-calc(24px);
+    margin-bottom: rem-calc(43px);
+    font-size: rem-calc(20px);
+  }
+
+  .icons {
+    margin-top: rem-calc(8px);
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: white;
+      font-size: rem-calc(13px);
+      margin-bottom: rem-calc(18px);
+    }
+  }
+
+  .phone {
+    width: rem-calc(24px);
+  }
+
+  .email {
+    width: rem-calc(32px);
+  }
+
+  .github {
+    width: rem-calc(29px);
+  }
+
+  .linkedin {
+    width: rem-calc(28px);
+  }
 }
