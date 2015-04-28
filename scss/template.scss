@@ -87,3 +87,84 @@ $nav-height: rem-calc(41px);
     background-color: rgb(95, 138, 202);
   }
 }
+
+#workflow {
+  height: rem-calc(388px);
+  position: relative;
+
+  .slide {
+    background-color: white;
+
+    border: rem-calc(5px) solid rgb(21, 61, 113);
+    border-radius: 50%;
+
+    width: rem-calc(294px);
+    height: rem-calc(294px);
+
+    position: absolute;
+    overflow: hidden;
+
+    .content {
+      width: 100%;
+
+      transform: translate(-50%, 0);
+      position: absolute;
+      bottom: rem-calc(20px);
+      left: 50%;
+    }
+
+    .tag-line {
+      color: white;
+      text-align: center;
+      text-transform: uppercase;
+
+      height: rem-calc(20px);
+
+      background-color: rgb(21, 61, 113);
+    }
+
+    &.front {
+      z-index: 1;
+      left: 50%;
+      transform: translate(-50%, 0);
+      top: rem-calc(65px);
+    }
+
+    &.back {
+      top: rem-calc(8px);
+    }
+
+    &.left {
+      left: rem-calc(172px);
+    }
+
+    &.right {
+      left: rem-calc(533px);
+    }
+  }
+
+  #think.slide {
+    .content {
+      width: rem-calc(318px);
+
+      img {
+        position: relative;
+        bottom: rem-calc(5px);
+        left: rem-calc(2px);
+      }
+    }
+  }
+
+  #play.slide, #create.slide {
+    //Placeholder
+    img {
+      height: rem-calc(98px);
+      display: block;
+      margin: 0 auto;
+
+      text-align: center;
+    }
+  }
+}
+
+}
