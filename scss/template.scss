@@ -28,9 +28,10 @@
 /*===END Temporary Rules===*/
 
 $nav-height: rem-calc(41px);
+$white: #EAEAEA;
 
 #nav {
-  color: white;
+  color: $white;
 
   .logo {
     width: rem-calc(78px);
@@ -42,7 +43,6 @@ $nav-height: rem-calc(41px);
     @include justify-content(center);
 
     font-size: rem-calc(11px);
-    text-transform: uppercase;
 
     //Override foundation
     margin: 0;
@@ -93,9 +93,11 @@ $nav-height: rem-calc(41px);
   position: relative;
 
   .slide {
+    //Hide slides in back
     background-color: white;
 
     border: rem-calc(5px) solid rgb(21, 61, 113);
+    //Shape slide into a circle
     border-radius: 50%;
 
     width: rem-calc(294px);
@@ -107,16 +109,18 @@ $nav-height: rem-calc(41px);
     .content {
       width: 100%;
 
-      transform: translate(-50%, 0);
+      //Center content
       position: absolute;
+      transform: translate(-50%, 0);
       bottom: rem-calc(20px);
       left: 50%;
     }
 
     .tag-line {
-      color: white;
+      //Override content
+      color: $white;
+      font-size: rem-calc(13px);
       text-align: center;
-      text-transform: uppercase;
 
       height: rem-calc(20px);
 
@@ -145,6 +149,7 @@ $nav-height: rem-calc(41px);
 
   #think.slide {
     .content {
+      //Enlarge image to align to template
       width: rem-calc(318px);
 
       img {
@@ -168,18 +173,19 @@ $nav-height: rem-calc(41px);
 }
 
 #about {
-  color: white;
+  color: $white;
   background-color: rgb(71, 85, 102);
   padding-top: rem-calc(44px);
-  #{headings()} {
-    text-transform: uppercase;
-    color: white;
-  }
 
   p {
     margin-left: rem-calc(24px);
     margin-bottom: rem-calc(43px);
     font-size: rem-calc(20px);
+  }
+
+  #{headings()} {
+    //Override foundation
+    color: inherit;
   }
 
   .icons {
@@ -188,8 +194,11 @@ $nav-height: rem-calc(41px);
     flex-direction: column;
 
     a {
-      color: white;
+      //Override foundation
+      color: inherit;
       font-size: rem-calc(13px);
+
+      //Increase margin to align to template
       margin-bottom: rem-calc(18px);
     }
   }
