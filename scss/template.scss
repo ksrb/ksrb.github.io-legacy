@@ -31,10 +31,13 @@ $nav-height: rem-calc(41px);
 $white: #EAEAEA;
 
 #nav {
-  color: $white;
+  padding-bottom: rem-calc(20px);
+  padding-left: rem-calc(28px);
+  border-bottom: 2px solid rgb(247, 247, 247);
 
   .logo {
-    width: rem-calc(78px);
+    padding: 0;
+    width: rem-calc(60px);
   }
 
   > ul {
@@ -55,41 +58,32 @@ $white: #EAEAEA;
       @include align-items(center);
       @include justify-content(center);
 
-      //Inner nav elements
-      &:nth-child(2), &:nth-child(4) {
-        height: rem-calc(49px);
-        width: rem-calc(80px);
+      margin: 0 rem-calc(5px);
 
-        background-color: rgb(69, 104, 160);
+      &:nth-child(1), &:nth-child(5) {
+        padding: rem-calc(10px) rem-calc(5px);
+
+        &:hover {
+          background: #5076b3;
+          color: $white;
+        }
       }
 
-      //Outer nav elements
-      &:nth-child(1), &:nth-child(5) {
-        height: $nav-height;
-        width: rem-calc(76px);
+      &:nth-child(2), &:nth-child(4) {
+        padding: rem-calc(15px) rem-calc(5px);
 
-        background-color: rgb(79, 117, 179);
+        &:hover {
+          background: #4669a1;
+          color: $white;
+        }
       }
     }
-  }
-
-  position: relative;
-
-  .background {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    z-index: -1;
-
-    width: 100%;
-    height: $nav-height;
-
-    background-color: rgb(95, 138, 202);
   }
 }
 
 #workflow {
-  height: rem-calc(388px);
+  height: rem-calc(372px);
+  margin: 9px auto 20px auto;
   position: relative;
 
   .slide {
@@ -175,13 +169,7 @@ $white: #EAEAEA;
 #about {
   color: $white;
   background-color: rgb(71, 85, 102);
-  padding-top: rem-calc(44px);
-
-  p {
-    margin-left: rem-calc(24px);
-    margin-bottom: rem-calc(43px);
-    font-size: rem-calc(20px);
-  }
+  padding-top: rem-calc(25px);
 
   #{headings()} {
     //Override foundation
