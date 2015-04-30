@@ -10,7 +10,7 @@
 
   position: absolute;
   left: 50%;
-  top: 0;
+  top: -40px;
   transform: translate(-50%, 0);
 }
 
@@ -32,7 +32,9 @@ $white: #EAEAEA;
 
 #nav {
   padding-bottom: rem-calc(20px);
-  padding-left: rem-calc(28px);
+  //Center icon
+  padding-left: rem-calc(62px);
+
   border-bottom: 2px solid rgb(247, 247, 247);
 
   .logo {
@@ -129,6 +131,7 @@ $white: #EAEAEA;
     }
 
     &.back {
+      opacity: .5;
       top: rem-calc(8px);
     }
 
@@ -169,9 +172,10 @@ $white: #EAEAEA;
 #about {
   color: $white;
   background-color: rgb(71, 85, 102);
-  padding-top: rem-calc(25px);
+  padding: rem-calc(25px) 0 rem-calc(5px);
+  text-align: justify;
 
-  #{headings()} {
+  header #{headings()} {
     //Override foundation
     color: inherit;
   }
@@ -192,7 +196,8 @@ $white: #EAEAEA;
   }
 
   .phone {
-    width: rem-calc(24px);
+    width: rem-calc(31px);
+    height: rem-calc(35px);
   }
 
   .email {
@@ -205,5 +210,36 @@ $white: #EAEAEA;
 
   .linkedin {
     width: rem-calc(28px);
+  }
+}
+
+#skills {
+  padding-top: rem-calc(35px);
+  color: $white;
+
+  header #{headings()} {
+    color: rgb(7, 37, 110);
+  }
+
+  .decoration {
+    //Override foundation
+    color: inherit;
+
+    //Force h1 to wrap content
+    float: left;
+    position: relative;
+
+    //Pseudo element for background
+    &:before {
+      content: "";
+
+      position: absolute;
+      left: rem-calc(-4px);
+      z-index: -1;
+
+      width: rem-calc(70px);
+      border-top: rem-calc(24px) solid rgb(53, 76, 136);
+      border-right: rem-calc(13px) solid transparent;
+    }
   }
 }
