@@ -5,9 +5,17 @@
     <title>Hello World</title>
     <link rel="stylesheet" href="css/template.css"/>
     <link rel="stylesheet" href="css/app.css"/>
+
+    <!--TODO use requirejs-->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controller/controllers.js"></script>
+    <script src="app/directives/directives.js"></script>
+    <script src="app/models/models.js"></script>
+
 </head>
 <body>
-<div id="container">
+<div id="container" ng-app="app">
     <nav id="nav" class="row">
         <ul>
             <li>ABOUT</li>
@@ -74,9 +82,7 @@
                 <h5>SKILLS</h5>
             </header>
             <div class="small-11 column">
-                <div class="reference-meter">
-
-                </div>
+                <skills></skills>
             </div>
         </article>
     </section>

@@ -221,25 +221,4 @@ $white: #EAEAEA;
     color: rgb(7, 37, 110);
   }
 
-  .decoration {
-    //Override foundation
-    color: inherit;
-
-    //Force h1 to wrap content
-    float: left;
-    position: relative;
-
-    //Pseudo element for background
-    &:before {
-      content: "";
-
-      position: absolute;
-      left: rem-calc(-4px);
-      z-index: -1;
-
-      width: rem-calc(70px);
-      border-top: rem-calc(24px) solid rgb(53, 76, 136);
-      border-right: rem-calc(13px) solid transparent;
-    }
-  }
 }
