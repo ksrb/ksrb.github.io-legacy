@@ -17,6 +17,11 @@
                     return iconPathPrefix + skill.name + iconPathSuffix;
                 };
 
+                this.getGradientStop = function (category) {
+                    return SkillsFactory.getGradientStops()[category];
+                };
+
+
             }
         ]
     );
