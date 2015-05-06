@@ -22,19 +22,12 @@
   z-index: 2;
 }
 
-#template, #container {
-  opacity: .5;
-}
-
 /*===END Temporary Rules===*/
-
-$nav-height: rem-calc(41px);
-$white: #EAEAEA;
 
 #nav {
   padding-bottom: rem-calc(20px);
   //Center icon
-  padding-left: rem-calc(62px);
+  padding-left: percent-calc(62px);
 
   border-bottom: 2px solid rgb(247, 247, 247);
 
@@ -213,14 +206,4 @@ $white: #EAEAEA;
   .linkedin {
     width: rem-calc(28px);
   }
-}
-
-#skills {
-  padding-top: rem-calc(35px);
-  color: $white;
-
-  header #{headings()} {
-    color: rgb(7, 37, 110);
-  }
-
 }

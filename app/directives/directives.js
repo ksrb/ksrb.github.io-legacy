@@ -7,8 +7,12 @@
                 templateUrl: "app/partials/skills.html",
                 restrict: "E",
                 controller: "SkillsController",
-                controllerAs: "SkillsCtrl"
+                controllerAs: "SkillsCtrl",
+                link: function (elem, scope, attr) {
+
+                }
             };
         }
     );
+
 })(angular);

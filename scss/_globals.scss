@@ -1,0 +1,7 @@
+/*===Variables===*/
+$white: #EAEAEA;
+
+/*===Functions===*/
+@function percent-calc($value, $base: $width) {
+  @return (strip-unit($value) / strip-unit($base)) * 100%;
+}

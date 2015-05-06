@@ -1,0 +1,96 @@
+@import 'globals';
+@import 'foundation/functions';
+
+#skills {
+
+  /*Creates gradient stops for skill meters*/
+  @mixin create-gradient-stops($gradients...) {
+    $gradient-ids: "label", "beginner", "familiar", "proficient", "instructor";
+
+    $required-gradients: length($gradient-ids) * 2;
+    @if (length($gradients) != $required-gradients) {
+      @error "Mixin create-gradient-stops expects #{$required-gradients} gradients but only #{length($gradients)} gradient(s) were  passed"
+    }
+
+    @for $i from 1 through length($gradient-ids) {
+      ##{nth($gradient-ids, $i)} {
+        stop {
+          &:nth-child(1) {
+            stop-color: nth($gradients, ($i * 2) - 1)
+          }
+          &:nth-child(2) {
+            stop-color: nth($gradients, ($i * 2))
+          }
+        }
+      }
+    }
+  }
+
+  padding-top: rem-calc(35px);
+  color: $white;
+
+  header #{headings()} {
+    color: rgb(7, 37, 110);
+  }
+
+  .programming {
+    @include create-gradient-stops(
+            #354B88, #29538B,
+            #28548B, #28548B,
+            #1C6193, #4170A0,
+            #1C6193, #4170A0,
+            #4471A1, #6283AD
+    );
+  }
+
+  .design {
+    @include create-gradient-stops(
+            #467463, #406A5A,
+            #3F6859, #3E6556,
+            #3F6859, #4C7C6A,
+            #4F816E, #62A088,
+            #67A38C, #8DBAA9
+    );
+  }
+
+  .tools {
+    @include create-gradient-stops(
+            #744646, #744646,
+            #694040, #663F3F,
+            #663F3F, #7C4C4B,
+            #8E6261, #9F6061,
+            #A36666, #BB8E8E
+    );
+  }
+
+  .skill {
+    .icon {
+      width: 47px;
+      height: 53px;
+      position: absolute;
+
+      .image, .skill-label {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+
+      .image {
+        top: 4px;
+      }
+
+      .skill-label {
+        //Override foundation
+        margin: 0;
+        bottom: 0px;
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+
+
+
+
+

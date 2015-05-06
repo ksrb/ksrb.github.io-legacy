@@ -3,9 +3,13 @@
 
     angular.module("app")
         .factory("SkillsFactory",
-        [
-            function () {
-                var skills = [
+        function () {
+
+            function setIcon(icon) {
+                return iconPathPrefix + icon + iconPathSuffix;
+            }
+
+            var skills = [
                     {
                         name: "java",
                         category: "programming",
@@ -61,15 +65,15 @@
                         category: "tools",
                         level: 6
                     }
-                ];
+                ]
+                ;
 
-                return {
-                    getSkills: function () {
-                        return skills;
-                    }
-                };
-            }
-        ]
+            return {
+                getSkills: function () {
+                    return skills;
+                }
+            };
+        }
     )
     ;
 })
