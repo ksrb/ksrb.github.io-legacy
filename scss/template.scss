@@ -1,6 +1,7 @@
 @import "compass";
 @import "_settings.scss";
 @import 'foundation/functions';
+@import 'globals';
 
 /*===Temporary Rules===*/
 #template {
@@ -84,15 +85,16 @@ $white: #EAEAEA;
 }
 
 #workflow {
+
   height: rem-calc(372px);
-  margin: 9px auto 20px auto;
+  margin: rem-calc(9px) auto rem-calc(20px) auto;
   position: relative;
 
   .slide {
     //Hide slides in back
     background-color: white;
 
-    border: rem-calc(5px) solid rgb(21, 61, 113);
+    border: 5px solid rgb(21, 61, 113);
     //Shape slide into a circle
     border-radius: 50%;
 
@@ -101,6 +103,7 @@ $white: #EAEAEA;
 
     position: absolute;
     overflow: hidden;
+    left: 50%;
 
     .content {
       width: 100%;
@@ -113,7 +116,7 @@ $white: #EAEAEA;
     }
 
     .tag-line {
-      //Override content
+      //Override foundation
       color: $white;
       font-size: rem-calc(13px);
       text-align: center;
@@ -125,7 +128,6 @@ $white: #EAEAEA;
 
     &.front {
       z-index: 1;
-      left: 50%;
       transform: translate(-50%, 0);
       top: rem-calc(65px);
     }
@@ -136,11 +138,11 @@ $white: #EAEAEA;
     }
 
     &.left {
-      left: rem-calc(172px);
+      transform: translate(-111%, 0)
     }
 
     &.right {
-      left: rem-calc(533px);
+      transform: translate(11%, 0)
     }
   }
 
