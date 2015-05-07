@@ -10,25 +10,73 @@
     color: rgb(7, 37, 110);
   }
 
+  .search {
+    position: relative;
+    padding-bottom: rem-calc(8px);
 
+    .icon, input[type="text"] {
+      position: absolute;
+    }
+
+    input[type="text"] {
+      z-index: 2;
+      left: 53px;
+      margin: 0;
+
+      height: 32px;
+      width: 0;
+      visibility: hidden;
+      transition: visibility .8s linear, width 1s ease;
+
+      &.show {
+        //Override foundation
+        visibility: visible;
+        width: rem-calc(703px);
+        transition-delay: 0s;
+      }
+    }
+
+    .icon {
+      top: 0;
+      width: 53px;
+      height: 32px;
+      z-index: 1;
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .legend {
+      width: 756px;
+      height: 32px;
+    }
+
+    .icon, .legend {
+      max-width: none;
+    }
+  }
 
   .skill {
-    .icon {
+
+    .skill-label {
       width: 47px;
       height: 53px;
       position: absolute;
 
-      .image, .skill-label {
+      .icon, .name {
         position: absolute;
         left: 50%;
         transform: translate(-50%, 0);
       }
 
-      .image {
+      .icon {
         top: 4px;
       }
 
-      .skill-label {
+      .name {
         //Override foundation
         margin: 0;
         bottom: 0px;

@@ -1,9 +1,14 @@
-<div>
-    <input type="text" ng-model="name"/>
+<div class="search">
+    <input type="text" ng-model="name" ng-class="{show:showSearch}"/>
 
-    <div class="skill" ng-repeat="skill in SkillsCtrl.skills| filter: {name:name}">
-        <div class="icon">
-            <img class="image" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.name}}"/>
+    <div class="icon" ng-click="showSearch = !showSearch">
+        <img src="images/skills/search.svg" alt="search">
+    </div>
+    <img class="legend" src="images/skills/legend.svg" alt="legend"/>
+</div>
+<div class="skill" ng-repeat="skill in SkillsCtrl.skills| filter: {name:name}">
+    <div class="skill-label">
+        <img class="icon" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.name}}"/>
 
         <p class="name">{{skill.name | capitalize}}</p>
     </div>
@@ -44,6 +49,4 @@
                 <polygon fill="url(#instructor+{{$index}})" points="519.9,26.6 514.2,35 417.3,35 423,26.5 417.2,18 514.1,18 	" ng-show="SkillsCtrl.showMeter(skill.level, 8)" />
             </g>
         </svg>
-
-    </div>
 </div>
