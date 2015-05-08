@@ -1,6 +1,6 @@
-@import "compass";
 @import "_settings.scss";
 @import 'foundation/functions';
+@import "compass";
 @import 'globals';
 
 /*===Temporary Rules===*/
@@ -23,6 +23,12 @@
 }
 
 /*===END Temporary Rules===*/
+
+section.row {
+  header #{headings()} {
+    color: $primary;
+  }
+}
 
 #nav {
   padding-bottom: rem-calc(20px);
@@ -178,8 +184,8 @@
 
   .icons {
     margin-top: rem-calc(8px);
-    display: flex;
-    flex-direction: column;
+    @include display-flex;
+    @include flex-direction(column);
 
     a {
       //Override foundation

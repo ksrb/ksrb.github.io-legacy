@@ -1,14 +1,10 @@
-@import 'globals';
 @import 'foundation/functions';
+@import 'globals';
 
 #skills {
 
   padding-top: rem-calc(35px);
   color: $white;
-
-  header #{headings()} {
-    color: rgb(7, 37, 110);
-  }
 
   .search {
     position: relative;
