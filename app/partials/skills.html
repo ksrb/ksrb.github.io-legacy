@@ -1,11 +1,13 @@
 <div class="search">
-    <input type="text" ng-model="name" ng-class="{show:showSearch}"/>
-
+    <!--TODO onClick of search focus on text input-->
+    <input type="text" ng-model="name" ng-class="{'show':showSearch}"/>
+    <!--TODO consider refactoring to exploit nesting to change search background on hover-->
     <div class="icon" ng-click="showSearch = !showSearch">
         <div ng-include="'app/partials/search.svg'"></div>
     </div>
     <div class="legend" ng-include="'app/partials/legend.svg'"></div>
 </div>
+
 <div class="skill" ng-repeat="skill in SkillsCtrl.skills| filter: {name:name}">
     <div class="skill-label">
         <img class="icon" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.name}}"/>
@@ -13,5 +15,4 @@
         <p class="name">{{skill.name | capitalize}}</p>
     </div>
     <div class="meter" ng-include="'app/partials/meter.svg'"></div>
-</div>
 </div>

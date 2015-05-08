@@ -14,6 +14,15 @@
     position: relative;
     padding-bottom: rem-calc(8px);
 
+    &:hover {
+      .search-background {
+        fill: lighten($primary, 10%);
+      }
+      input[type="text"] {
+        border-color: lighten($primary, 10%);
+      }
+    }
+
     .icon, input[type="text"] {
       position: absolute;
     }
@@ -22,17 +31,23 @@
       z-index: 2;
       left: 53px;
       margin: 0;
+      padding: 0;
 
       height: 32px;
       width: 0;
+      border: 2px solid $primary;
+
       visibility: hidden;
-      transition: visibility .8s linear, width 1s ease;
+
+      transition: width 1s ease, visibility 1s linear;
 
       &.show {
         //Override foundation
-        visibility: visible;
         width: rem-calc(703px);
-        transition-delay: 0s;
+        visibility: visible;
+
+        //Foundation default
+        padding: .5rem;
       }
     }
 
@@ -41,7 +56,9 @@
       width: 53px;
       height: 32px;
       z-index: 1;
-      img {
+
+      //position svg search icon
+      svg {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -52,6 +69,9 @@
     .legend {
       width: 756px;
       height: 32px;
+
+      //paint all svg polygons
+      fill: $primary;
     }
 
     .icon, .legend {

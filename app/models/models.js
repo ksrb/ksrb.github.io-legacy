@@ -5,10 +5,6 @@
         .factory("SkillsFactory",
         function () {
 
-            function setIcon(icon) {
-                return iconPathPrefix + icon + iconPathSuffix;
-            }
-
             var skills = [
                 {
                     name: "java",
