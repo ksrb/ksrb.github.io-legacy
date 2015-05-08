@@ -26,14 +26,17 @@
 
 #nav {
   padding-bottom: rem-calc(20px);
-  //Center icon
-  padding-left: percent-calc(62px);
 
   border-bottom: 2px solid rgb(247, 247, 247);
 
   .logo {
     padding: 0;
     width: rem-calc(60px);
+    height: rem-calc(77px);
+    img {
+      //TODO In Firefox image dimensions are expanding beyond .logo's bounds
+      @extend .logo
+    }
   }
 
   > ul {
@@ -54,25 +57,23 @@
       @include align-items(center);
       @include justify-content(center);
 
-      margin: 0 rem-calc(5px);
+      width: rem-calc(80px);
+      padding: rem-calc(10px) 0;
 
-      &:nth-child(1), &:nth-child(5) {
-        padding: rem-calc(10px) rem-calc(5px);
+      //Override foundation
+      a {
+        color: black;
+      }
 
-        &:hover {
-          background: #5076b3;
+      //No hover effect for logo
+      &:hover:not(:nth-child(3)) {
+        background: #5076b3;
+        //Override foundation
+        a {
           color: $white;
         }
       }
 
-      &:nth-child(2), &:nth-child(4) {
-        padding: rem-calc(15px) rem-calc(5px);
-
-        &:hover {
-          background: #4669a1;
-          color: $white;
-        }
-      }
     }
   }
 }
@@ -166,7 +167,7 @@
 
 #about {
   color: $white;
-  background-color: rgb(71, 85, 102);
+  background-color: $primary;
   padding: rem-calc(25px) 0 rem-calc(5px);
   text-align: justify;
 
