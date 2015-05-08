@@ -19,12 +19,13 @@
 <body>
 <div id="container" ng-app="app">
     <nav id="nav" class="row">
-        <ul>
-            <li>ABOUT</li>
-            <li>SKILLS</li>
+        <!--TODO simplify jump to id via anchor-->
+        <ul ng-controller="NavbarController as NavbarCtrl">
+            <li><a ng-click="NavbarCtrl.scrollTo('about')">ABOUT</a></li>
+            <li><a ng-click="NavbarCtrl.scrollTo('skills')">SKILLS</a></li>
             <li class="logo"><img src="images/logo.svg" alt="logo"/></li>
-            <li>EXPERIENCE</li>
-            <li>EDUCATION</li>
+            <li><a ng-click="NavbarCtrl.scrollTo('experience')">EXPERIENCE</a></li>
+            <li><a ng-click="NavbarCtrl.scrollTo('education')">EDUCATION</a></li>
         </ul>
         <div class="background"></div>
     </nav>

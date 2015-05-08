@@ -2,6 +2,20 @@
     "use strict";
 
     angular.module("app")
+        .controller("NavbarController",
+        ["$location", "$anchorScroll",
+            function ($location, $anchorScroll) {
+                this.scrollTo = function (id) {
+                    var old = $location.hash();
+                    $location.hash(id);
+                    $anchorScroll();
+                    $location.hash(old);
+                };
+            }
+        ]
+    );
+
+    angular.module("app")
         .controller("SkillsController",
         ["SkillsFactory",
             function (SkillsFactory) {
