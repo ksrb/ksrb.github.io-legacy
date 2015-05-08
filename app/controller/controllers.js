@@ -39,5 +39,14 @@
             }
         ]
     );
+
+    angular.module("app")
+        .controller("ExperienceController",
+        ["ExperienceFactory",
+            function (ExperienceFactory) {
+
+            }
+        ]
+    );
 })();
 

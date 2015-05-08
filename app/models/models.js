@@ -97,5 +97,11 @@
             };
         }
     );
-})
-(angular);
+
+    angular.module("app")
+        .factory("ExperienceFactory",
+        function () {
+            return {};
+        }
+    );
+})(angular);

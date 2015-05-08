@@ -12,7 +12,13 @@
         }
     );
 
-                }
+    angular.module("app")
+        .directive("experience", function () {
+            return {
+                templateUrl: "app/partials/experience.html",
+                restrict: "E",
+                controller: "ExperienceController",
+                controllerAs: "ExperienceCtrl"
             };
         }
     );
