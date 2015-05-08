@@ -1,10 +1,46 @@
 ##ksrb.github.io
-Yes this page is a massive WIP but [Gradle](https://github.com/ksrb/Gradle-SS) is so shiny right now
-and [JavaScript](https://github.com/ksrb/JSSS) is so awesome that well a GitHub page can wait (or I need to get my priorities straight).
+
+###Commits
+
+* Work is on a dev file (template.html)
+* Commits often **do not include the recompiled css**
+* Template.png overlay is often left visible
+* Therefore the dev file is often not in a *viewable* state
 
 ###TODOs
-* Convert Resume to HTML
-* Convert Graphic Design portfolio to HTML
-* Improve interactivity with Angular
-* Get [Karma](http://karma-runner.github.io/0.12/index.html) in there
-* Find a excuse to use Gradle
+
+####Improve interactivity with Angular
+
+* Code Quality
+    * Testing not implemented
+    * Folder structure questionable need to consult best practices guide
+    
+#####Skills section
+
+* Code Quality 
+    * Refactor legend/search code
+    * Possibly refactor skill/icon code
+    * Move gradients to CSS (?)
+    * Generate meter svgs dynamically (?)
+    
+* Functionality (Pending refactoring)
+    * Tooltip on skill levels (beginner, familiar, etc.)
+    * Filter skills by clicking on skill level
+    * Animated skill meters
+
+
+####Convert Graphic Design portfolio to HTML
+
+* Not implemented **secondary** to showing experience
+
+####Get [Karma](http://karma-runner.github.io/0.12/index.html) in there
+
+* Important but can wait
+
+####Assets
+
+* Consider creating a icon typeset to reduce network traffic
+
+####Find a excuse to use Gradle
+
+* Lowest priority more for fun than necessary
