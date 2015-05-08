@@ -1,3 +1,88 @@
 @import 'foundation/functions';
+@import "compass";
 @import 'globals';
 
+.experience-container {
+
+  //Utility mixin to set spacing on elements
+  @mixin spacing() {
+    margin-bottom: rem-calc(10px);
+  }
+
+  @include spacing;
+  border: 1px solid #bbbbbb;
+
+  .organization-logo {
+    @include spacing;
+
+    text-align: center;
+
+    img {
+      height: 80px;
+    }
+  }
+
+  header {
+    @include spacing;
+
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #bbbbbb;
+    padding: 15px;
+  }
+
+  .skills-used {
+    @include display-flex;
+
+    text-align: center;
+    color: $white;
+    font-size: rem-calc(12px);
+  }
+
+  .content {
+    padding: rem-calc(15px);
+  }
+
+  .overview {
+    @include spacing;
+
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    .title {
+      color: #334C87;
+    }
+    .date {
+      text-align: right;
+      font-style: italic;
+    }
+  }
+  .samples {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  $prog-base-color: #354B88;
+  .Java {
+    @include background(linear-gradient(lighten($prog-base-color, 15%), $prog-base-color));
+  }
+  .js {
+    $base-color: lighten($prog-base-color, 10%);
+    @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+  }
+
+  $design-base-color: #457362;
+  .css {
+    @include background(linear-gradient(lighten($design-base-color, 15%), $design-base-color));
+  }
+
+  .Photoshop {
+    $base-color: lighten($design-base-color, 10%);
+    @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+  }
+
+  .Illustrator {
+    $base-color: lighten($design-base-color, 15%);
+    @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+  }
+}

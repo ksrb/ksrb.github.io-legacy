@@ -101,7 +101,79 @@
     angular.module("app")
         .factory("ExperienceFactory",
         function () {
-            return {};
+
+            var experience = [
+                {
+                    organization: "Niksun",
+                    website: "http://www.niksun.com",
+                    skills_used: [
+                        {
+                            name: "Java",
+                            usage: "80"
+                        },
+                        {
+                            name: "js",
+                            usage: "10"
+                        },
+                        {
+                            name: "css",
+                            usage: "10"
+                        }
+                    ],
+                    position: "Web Developer",
+                    start: new Date("2013-09"),
+                    end: new Date("2015-03"),
+                    //Below content could be transcluded
+                    purpose: "Company focused on providing network analysis software",
+                    contributions: [
+                        "Replace aging Flash UI with HTML5 technology",
+                        "Used GWT and Angular to create reporting, search, and navigation systems",
+                        "Increased developer productivity by introducing tools such as Gradle and git"
+                    ],
+                    samples: [
+                        "Website-Template",
+                        "Template-with-Pods",
+                        "Login-Template"
+                    ]
+                },
+                {
+                    organization: "Scholars for Charity",
+                    skills_used: [
+                        {
+                            name: "css",
+                            usage: "50"
+                        },
+                        {
+                            name: "Photoshop",
+                            usage: "40"
+                        },
+                        {
+                            name: "Illustrator",
+                            usage: "10"
+                        }
+                    ],
+                    position: "Webmaster",
+                    start: new Date("2012-12"),
+                    end: new Date("2013-05"),
+                    //Below content could be transcluded
+                    purpose: "Nonprofit that took proceeds from website creation to donate to charity",
+                    contributions: [
+                        "Maintained organization's websites",
+                        "Taught new members basic web and graphic design skills",
+                        "Extensive use of Photoshop for asset creation"
+                    ],
+                    samples: [
+                        "quintessence",
+                        "scholars-for-charity-banner"
+                    ]
+                }
+
+            ];
+            return {
+                getExperience: function () {
+                    return experience;
+                }
+            };
         }
     );
 })(angular);

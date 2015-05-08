@@ -44,6 +44,19 @@
         .controller("ExperienceController",
         ["ExperienceFactory",
             function (ExperienceFactory) {
+                this.experiences = ExperienceFactory.getExperience();
+
+                this.getLogoImage = function (experience) {
+                    return this.getExperienceFolderPath(experience) + "logo.png";
+                };
+
+                this.getSampleThumbNail = function (experience, sample) {
+                    return this.getExperienceFolderPath(experience) + sample + "-thumbnail.png";
+                };
+
+                this.getExperienceFolderPath = function (experience) {
+                    return "images/experience/" + experience.organization.toLowerCase() + "/";
+                };
 
             }
         ]

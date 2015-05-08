@@ -1,17 +1,40 @@
-<article class="exp-container">
+<article id="{{experience.organization | lowercase}}" class="experience-container"
+         ng-repeat="experience in ExperienceCtrl.experiences">
     <header>
-        <img class="company-logo">
+        <div class="organization-logo">
+            <a href="{{experience.website}}" target="_blank">
+                <img src="{{ExperienceCtrl.getLogoImage(experience)}}"
+                     alt="{{experience.organization}}">
+            </a>
+        </div>
 
-        <div class="skills-used"></div>
+        <div class="skills-used">
+            <div style="width:{{skills_used.usage}}%" class="{{skills_used.name}}"
+                 ng-repeat="skills_used in experience.skills_used">{{skills_used.name}} {{skills_used.usage}}%
+            </div>
+        </div>
     </header>
+
     <div class="content">
         <div class="overview">
             <div class="title">
+                {{experience.organization}}<br/>
+                {{experience.position}}
             </div>
             <div class="date">
+                {{experience.start | date: 'MMMM yyyy'}}<br/>
+                {{experience.end | date: 'MMMM yyyy'}}
             </div>
         </div>
-        <div class="description"></div>
-        <div class="samples"></div>
+        <div class="description">
+            <p>{{experience.purpose}}</p>
+            <ul>
+                <li ng-repeat="contributions in experience.contributions">{{contributions}}</li>
+            </ul>
+        </div>
+        <div class="samples">
+            <img src="{{ExperienceCtrl.getSampleThumbNail(experience, sample)}}"
+                 ng-repeat="sample in experience.samples" alt="sample">
+        </div>
     </div>
 </article>
