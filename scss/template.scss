@@ -199,32 +199,39 @@ section.row {
     margin-top: rem-calc(8px);
     @include display-flex;
     @include flex-direction(column);
+    font-size: rem-calc(13px);
 
-    a {
-      //Override foundation
-      color: inherit;
-      font-size: rem-calc(13px);
-
-      //Increase margin to align to template
+    .icon {
+      span:hover {
+        color: white;
+      }
       margin-bottom: rem-calc(18px);
     }
   }
 
   .phone {
-    width: rem-calc(31px);
-    height: rem-calc(35px);
+    img {
+      width: rem-calc(31px);
+      height: rem-calc(35px);
+    }
   }
 
   .email {
-    width: rem-calc(32px);
+    img {
+      width: rem-calc(32px);
+    }
   }
 
   .github {
-    width: rem-calc(29px);
+    img {
+      width: rem-calc(29px);
+    }
   }
 
   .linkedin {
-    width: rem-calc(28px);
+    img {
+      width: rem-calc(28px);
+    }
   }
 }
 
