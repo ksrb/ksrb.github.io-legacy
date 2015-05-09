@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="css/experience.css"/>
 
     <!--TODO use requirejs-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="app/carousel.js"></script>
+
     <script src="bower_components/angular/angular.js"></script>
     <script src="app/app.js"></script>
     <script src="app/controllers/controllers.js"></script>
@@ -32,25 +35,27 @@
     </nav>
 
     <section id="workflow" class="row">
-        <div id="think" class="slide front">
-            <div class="content">
-                <img src="images/about/think.svg" alt="think"/>
+        <div id="slides">
+            <div id="think" class="slide middle">
+                <div class="content">
+                    <img src="images/about/think.svg" alt="think"/>
 
-                <p class="tag-line">THINK</p>
+                    <p class="tag-line">THINK</p>
+                </div>
             </div>
-        </div>
-        <div id="create" class="slide back left">
-            <div class="content">
-                <img alt="Placeholder"/>
+            <div id="create" class="slide left">
+                <div class="content">
+                    <img alt="Placeholder"/>
 
-                <p class="tag-line">CREATE</p>
+                    <p class="tag-line">CREATE</p>
+                </div>
             </div>
-        </div>
-        <div id="play" class="slide back right">
-            <div class="content">
-                <img alt="Placeholder"/>
+            <div id="play" class="slide right">
+                <div class="content">
+                    <img alt="Placeholder"/>
 
-                <p class="tag-line">PLAY</p>
+                    <p class="tag-line">PLAY</p>
+                </div>
             </div>
         </div>
     </section>

@@ -85,16 +85,22 @@ section.row {
 }
 
 #workflow {
+  $slide-color: rgb(21, 61, 113);
+  $slide-transition: 1.5s;
 
-  height: rem-calc(372px);
-  margin: rem-calc(9px) auto rem-calc(20px) auto;
-  position: relative;
+  #slides {
+    position: relative;
+    margin: rem-calc(9px) auto rem-calc(20px) auto;
+
+    height: rem-calc(372px);
+    width: rem-calc(660px);
+  }
 
   .slide {
     //Hide slides in back
     background-color: white;
 
-    border: 5px solid rgb(21, 61, 113);
+    border: 5px solid $slide-color;
     //Shape slide into a circle
     border-radius: 50%;
 
@@ -104,6 +110,8 @@ section.row {
     position: absolute;
     overflow: hidden;
     left: 50%;
+
+    transition: z-index $slide-transition ease, transform $slide-transition ease, top $slide-transition ease, opacity $slide-transition ease, box-shadow .3s ease;
 
     .content {
       width: 100%;
@@ -123,26 +131,31 @@ section.row {
 
       height: rem-calc(20px);
 
-      background-color: rgb(21, 61, 113);
+      background-color: $slide-color;
     }
 
-    &.front {
+    &.middle {
       z-index: 1;
       transform: translate(-50%, 0);
       top: rem-calc(65px);
     }
 
-    &.back {
+    @mixin back {
       opacity: .5;
       top: rem-calc(8px);
     }
 
     &.left {
+      @include back;
       transform: translate(-111%, 0)
     }
 
     &.right {
+      @include back;
       transform: translate(11%, 0)
+    }
+    &:hover {
+      @include box-shadow(0 0 10px 0px lighten($slide-color, 10%));
     }
   }
 
