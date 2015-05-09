@@ -214,3 +214,20 @@ section.row {
     width: rem-calc(28px);
   }
 }
+
+#education {
+
+  article {
+    display: flex;
+    justify-content: space-between;
+
+    .degree {
+      color: $primary;
+      font-weight: bold;
+    }
+    .date {
+      text-align: right;
+    }
+  }
+
+}
