@@ -235,8 +235,9 @@ section.row {
     justify-content: space-between;
 
     .degree {
-      color: $primary;
-      font-weight: bold;
+      b {
+        color: $primary;
+      }
     }
     .date {
       text-align: right;
