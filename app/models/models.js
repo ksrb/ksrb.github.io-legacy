@@ -156,7 +156,7 @@
                     start: new Date("2012-12"),
                     end: new Date("2013-05"),
                     //Below content could be transcluded
-                    purpose: "Nonprofit that took proceeds from website creation to donate to charity",
+                    purpose: "Nonprofit that donates proceeds from web design to charity",
                     contributions: [
                         "Maintained organization's websites",
                         "Taught new members basic web and graphic design skills",
