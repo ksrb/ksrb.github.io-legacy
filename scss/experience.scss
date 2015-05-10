@@ -62,29 +62,41 @@
     align-items: center;
   }
 
-  //Gradients used for meters
-  //TODO consider generating gradients dynamically
-  $prog-base-color: #354B88;
-  .Java {
-    @include background(linear-gradient(lighten($prog-base-color, 15%), $prog-base-color));
-  }
-  .js {
-    $base-color: lighten($prog-base-color, 10%);
-    @include background(linear-gradient(lighten($base-color, 15%), $base-color));
-  }
-
-  $design-base-color: #457362;
-  .css {
-    @include background(linear-gradient(lighten($design-base-color, 15%), $design-base-color));
-  }
-
-  .Photoshop {
-    $base-color: lighten($design-base-color, 10%);
-    @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+  /**
+   * Creates a successively brighter gradient class for each skill entered
+   * @param $base-color - color in which gradients are based off of
+   * @param $skill - array of skills by name
+   */
+  @mixin generate-skills-gradient($base-color, $skills...) {
+    //Iterate through the skills
+    @for $i from 1 through length($skills) {
+      //Generate class name based on skill name
+      #{"."+nth($skills, $i)} {
+        //Lighten top gradient by 15% of base color
+        @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+      }
+      //lighten base color by 8% every iteration
+      $base-color: lighten($base-color, 8%);
+    }
   }
 
-  .Illustrator {
-    $base-color: lighten($design-base-color, 15%);
-    @include background(linear-gradient(lighten($base-color, 15%), $base-color));
-  }
+  //Programming skills are blue
+  @include generate-skills-gradient(#354B88, 'Java', 'js');
+
+  //Design skills are green
+  @include generate-skills-gradient(#457362, 'css', 'Photoshop', 'Illustrator');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
