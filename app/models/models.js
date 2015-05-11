@@ -87,12 +87,24 @@
                 ]
             };
 
+            var legends = [
+                {name: "beginner"},
+                {name: "familiar"},
+                {name: "proficient"},
+                {name: "instructor"},
+                {name: "expert"},
+                {name: "master"}
+            ];
+
             return {
                 getSkills: function () {
                     return skills;
                 },
                 getGradientStops: function () {
                     return gradientStops;
+                },
+                getLegends: function () {
+                    return legends;
                 }
             };
         }

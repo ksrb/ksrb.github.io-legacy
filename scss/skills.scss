@@ -1,78 +1,116 @@
+@import 'compass';
 @import 'foundation/functions';
 @import 'globals';
 
 #skills {
+  $height: 32px;
 
-  padding-top: rem-calc(35px);
   color: $white;
+  $hover-color: lighten($primary, 10%);
+
+  .legends {
+    margin-bottom: 15px;
+  }
 
   .search {
-    position: relative;
-    padding-bottom: rem-calc(8px);
 
-    &:hover {
-      .search-background {
-        fill: lighten($primary, 10%);
-      }
-      input[type="text"] {
-        border-color: lighten($primary, 10%);
-      }
-    }
-
-    .icon, input[type="text"] {
+    .bar {
       position: absolute;
-    }
-
-    input[type="text"] {
-      z-index: 2;
-      left: 53px;
-      margin: 0;
-      padding: 0;
-
-      height: 32px;
-      width: 0;
-      border: 2px solid $primary;
-
-      visibility: hidden;
-
-      transition: width 1s ease, visibility 1s linear;
-
-      &.show {
-        //Override foundation
-        width: rem-calc(703px);
-        visibility: visible;
-
-        //Foundation default
-        padding: .5rem;
-      }
-    }
-
-    .icon {
       top: 0;
-      width: 53px;
-      height: 32px;
+      left: 62px;
       z-index: 1;
 
-      //position svg search icon
-      svg {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+      margin: 0;
+      padding: 0;
+      height: $height;
+      width: 0px;
+
+      border: 2px solid $primary;
+
+      transition: width 1s ease, padding-left 1s ease;
+
+      &.show {
+        width: 706px;
+        padding: .5em .5em .5em rem-calc(19px);
       }
     }
 
-    .legend {
-      width: 756px;
-      height: 32px;
-
-      //paint all svg polygons
-      fill: $primary;
+    &:hover .bar {
+      border-color: $hover-color;
     }
 
-    .icon, .legend {
-      max-width: none;
+    .background {
+      z-index: 2;
+
+      width: 52px;
+
+      &:before {
+        border: none;
+      }
     }
+  }
+
+  .background {
+
+    position: relative;
+    margin-right: 26px;
+    float: left;
+
+    text-align: center;
+    font-size: 9px;
+
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+
+    background: $primary;
+
+    height: $height;
+    width: 90px;
+
+    &.master {
+      width: 95px;
+
+      &:after {
+        border: none;
+        margin: 0;
+      }
+    }
+
+    &:after, &:before {
+      content: "";
+
+      position: absolute;
+      top: 0;
+    }
+
+    &:before {
+      right: 100%;
+
+      border-top: $height/2 solid $primary;
+      border-left: 10px solid transparent;
+      border-bottom: $height/2 solid $primary;
+    }
+
+    &:after {
+      left: 100%;
+
+      border-top: $height/2 solid transparent;
+      border-left: 10px solid $primary;
+      border-bottom: $height/2 solid transparent;
+    }
+
+    &:hover {
+      background: $hover-color;
+      &:after {
+        border-left: 10px solid $hover-color;
+      }
+      &:before {
+        border-top: $height/2 solid $hover-color;
+        border-bottom: $height/2 solid $hover-color;
+      }
+    }
+
   }
 
   .skill {
@@ -93,13 +131,14 @@
       }
 
       .name {
-        //Override foundation
+        //Overr ide foundation
         margin: 0;
         bottom: 0px;
         font-size: 10px;
       }
     }
   }
+
 }
 
 

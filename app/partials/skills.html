@@ -1,11 +1,15 @@
-<div class="search">
-    <!--TODO onClick of search focus on text input-->
-    <input type="text" ng-model="name" ng-class="{'show':showSearch}"/>
-    <!--TODO consider refactoring to exploit nesting to change search background on hover-->
-    <div class="icon" ng-click="showSearch = !showSearch">
-        <div ng-include="'app/partials/search.svg'"></div>
+<!--<img style="position:absolute;opacity:.5;z-index:1;" src="app/partials/legend.svg"/>-->
+<div class="legends clearfix">
+    <div class="search">
+        <div class="background" ng-click="showSearch = !showSearch">
+            <img src="images/skills/search.svg"/>
+        </div>
+        <input class="bar" type="text" placeholder="Enter a skill (Java, Photoshop, css...)" ng-model="name"
+               ng-class="{'show':showSearch}">
     </div>
-    <div class="legend" ng-include="'app/partials/legend.svg'"></div>
+    <div class="{{legend.name}} background" ng-repeat="legend in SkillsCtrl.legends">
+        <span class="name">{{legend.name | uppercase}}</span>
+    </div>
 </div>
 
 <div class="skill" ng-repeat="skill in SkillsCtrl.skills| filter: {name:name}">

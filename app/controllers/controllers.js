@@ -21,6 +21,8 @@
             function (SkillsFactory) {
                 this.skills = SkillsFactory.getSkills();
 
+                this.legends = SkillsFactory.getLegends();
+
                 this.showMeter = function (skillLevel, meterNum) {
                     return skillLevel >= meterNum;
                 };
