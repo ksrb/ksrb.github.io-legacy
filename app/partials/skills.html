@@ -1,18 +1,20 @@
 <!--<img style="position:absolute;opacity:.5;z-index:1;" src="app/partials/legend.svg"/>-->
 <div class="legends clearfix">
     <div class="search">
-        <div class="background" ng-click="showSearch = !showSearch">
+        <div class="legend" ng-click="showSearch = !showSearch">
             <img src="images/skills/search.svg"/>
         </div>
-        <input class="bar" type="text" placeholder="Enter a skill (Java, Photoshop, css...)" ng-model="name"
+        <input class="bar" type="text" placeholder="Enter a skill (Java, Photoshop, css...)" ng-model="inputedName"
                ng-class="{'show':showSearch}">
     </div>
-    <div class="{{legend.name}} background" ng-repeat="legend in SkillsCtrl.legends">
+    <div class="legend" ng-repeat="legend in SkillsCtrl.legends"
+         ng-click="SkillsCtrl.setSelectedLegend(legend);" ng-class="{selected: SkillsCtrl.selectedLegend == legend}">
         <span class="name">{{legend.name | uppercase}}</span>
     </div>
 </div>
 
-<div class="skill" ng-repeat="skill in SkillsCtrl.skills| filter: {name:name}">
+<div class="skill"
+     ng-repeat="skill in SkillsCtrl.skills| filter: {name:inputedName}| filter: SkillsCtrl.skillIsGreaterThanSelectedSkill">
     <div class="skill-label">
         <img class="icon" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.name}}"/>
 

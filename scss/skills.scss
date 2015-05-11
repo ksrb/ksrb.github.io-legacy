@@ -10,6 +10,7 @@
 
   .legends {
     margin-bottom: 15px;
+    @include display-flex;
   }
 
   .search {
@@ -18,6 +19,7 @@
       position: absolute;
       top: 0;
       left: 62px;
+      //Moved search bar in front of other legends
       z-index: 1;
 
       margin: 0;
@@ -30,7 +32,7 @@
       transition: width 1s ease, padding-left 1s ease;
 
       &.show {
-        width: 706px;
+        width: 707px;
         padding: .5em .5em .5em rem-calc(19px);
       }
     }
@@ -39,22 +41,16 @@
       border-color: $hover-color;
     }
 
-    .background {
+    .legend {
+      //Moved search chevron in front of search bar
       z-index: 2;
-
-      width: 52px;
-
-      &:before {
-        border: none;
-      }
     }
   }
 
-  .background {
+  .legend {
 
     position: relative;
     margin-right: 26px;
-    float: left;
 
     text-align: center;
     font-size: 9px;
@@ -68,9 +64,19 @@
     height: $height;
     width: 90px;
 
-    &.master {
+    &:first-child {
+      width: 52px;
+
+      //Removed back of chevron
+      &:before {
+        border: none;
+      }
+    }
+
+    &:last-child {
       width: 95px;
 
+      //Remove front of chevron
       &:after {
         border: none;
         margin: 0;
@@ -84,6 +90,7 @@
       top: 0;
     }
 
+    //Back of chevron
     &:before {
       right: 100%;
 
@@ -92,6 +99,7 @@
       border-bottom: $height/2 solid $primary;
     }
 
+    //Front of chevron
     &:after {
       left: 100%;
 
@@ -100,8 +108,9 @@
       border-bottom: $height/2 solid transparent;
     }
 
-    &:hover {
+    &:hover, &.selected {
       background: $hover-color;
+      color: white;
       &:after {
         border-left: 10px solid $hover-color;
       }
@@ -131,14 +140,13 @@
       }
 
       .name {
-        //Overr ide foundation
+        //Override foundation
         margin: 0;
         bottom: 0px;
         font-size: 10px;
       }
     }
   }
-
 }
 
 

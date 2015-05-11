@@ -63,45 +63,37 @@
                 }
             ];
 
-            var gradientStops = {
-                programming: [
-                    ["#354B88", "#29538B"],
-                    ["#28548B", "#28548B"],
-                    ["#1C6193", "#4170A0"],
-                    ["#1C6193", "#4170A0"],
-                    ["#4471A1", "#6283AD"]
-                ],
-                design: [
-                    ["#467463", "#406A5A"],
-                    ["#3F6859", "#3E6556"],
-                    ["#3F6859", "#4C7C6A"],
-                    ["#4F816E", "#62A088"],
-                    ["#67A38C", "#8DBAA9"]
-                ],
-                tools: [
-                    ["#744646", "#744646"],
-                    ["#694040", "#663F3F"],
-                    ["#663F3F", "#7C4C4B"],
-                    ["#8E6261", "#9F6061"],
-                    ["#A36666", "#BB8E8E"]
-                ]
-            };
 
             var legends = [
-                {name: "beginner"},
-                {name: "familiar"},
-                {name: "proficient"},
-                {name: "instructor"},
-                {name: "expert"},
-                {name: "master"}
+                {
+                    name: "beginner",
+                    level: 2
+                },
+                {
+                    name: "familiar",
+                    level: 4
+                },
+                {
+                    name: "proficient",
+                    level: 6
+                },
+                {
+                    name: "instructor",
+                    level: 8
+                },
+                {
+                    name: "expert",
+                    level: 10
+                },
+                {
+                    name: "master",
+                    level: 12
+                }
             ];
 
             return {
                 getSkills: function () {
                     return skills;
-                },
-                getGradientStops: function () {
-                    return gradientStops;
                 },
                 getLegends: function () {
                     return legends;
