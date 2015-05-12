@@ -26,7 +26,7 @@
       margin: 0;
       padding: 0;
       height: $height;
-      width: 0px;
+      width: 0;
 
       border: 2px solid $primary;
 
@@ -151,7 +151,7 @@
       .name {
         //Override foundation
         margin: 0;
-        bottom: 0px;
+        bottom: 0;
         font-size: 10px;
       }
     }

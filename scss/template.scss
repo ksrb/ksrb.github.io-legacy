@@ -102,20 +102,20 @@ section.row {
   }
 
   #think {
-    img {
+    .icon {
       width: rem-calc(300px);
       bottom: rem-calc(65px);
     }
   }
 
   #design {
-    img {
+    .icon {
       width: rem-calc(300px);
     }
   }
 
   #create {
-    img {
+    .icon {
       width: rem-calc(235px);
     }
   }
@@ -135,15 +135,15 @@ section.row {
     overflow: hidden;
     left: 50%;
 
-    transition: z-index $slide-transition ease, transform $slide-transition ease, top $slide-transition ease, opacity $slide-transition ease, box-shadow .3s ease;
+    @include transition(z-index $slide-transition ease, transform $slide-transition ease, top $slide-transition ease, opacity $slide-transition ease, box-shadow .3s ease);
 
-    .tag-line, img {
+    .tag-line, .icon {
       position: absolute;
       left: 50%;
       transform: translate(-50%, 0);
     }
 
-    img {
+    .icon {
       //Override foundation
       max-width: none;
     }

@@ -23,7 +23,12 @@
                 this.legends = SkillsFactory.getLegends();
 
                 this.setSelectedLegend = function (legend) {
-                    this.selectedLegend = legend;
+                    //Double click 'deselect' legend
+                    if (this.selectedLegend === legend) {
+                        this.selectedLegend = null;
+                    } else {
+                        this.selectedLegend = legend;
+                    }
                 };
 
                 this.skillIsGreaterThanSelectedSkill = function (skill) {
@@ -31,7 +36,7 @@
                     if (!this.selectedLegend) {
                         return true;
                     }
-                    return skill.level >= this.selectedLegend.level - 1;
+                    return skill.level === this.selectedLegend.level - 1 || skill.level === this.selectedLegend.level;
                 }.bind(this);
 
                 this.showMeter = function (skillLevel, meterNum) {
