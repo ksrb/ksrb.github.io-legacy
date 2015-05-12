@@ -33,8 +33,10 @@
             </ul>
         </div>
         <div class="samples">
-            <img ng-src="{{ExperienceCtrl.getSampleThumbNail(experience, sample)}}"
-                 ng-repeat="sample in experience.samples" alt="sample">
+            <a href="{{ExperienceCtrl.getSample(experience, sample)}}" target="_blank"
+               ng-repeat="sample in experience.samples">
+                <img ng-src="{{ExperienceCtrl.getSampleThumbNail(experience, sample)}}" alt="sample">
+            </a>
         </div>
     </div>
 </article>

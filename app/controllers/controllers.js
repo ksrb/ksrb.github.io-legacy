@@ -92,6 +92,10 @@
                     return this.getExperienceFolderPath(experience) + sample + "-thumbnail.png";
                 };
 
+                this.getSample = function (experience, sample) {
+                    return this.getExperienceFolderPath(experience) + sample + ".png";
+                };
+
                 this.getExperienceFolderPath = function (experience) {
                     return "images/experience/" + experience.organization.toLowerCase() + "/";
                 };
