@@ -155,24 +155,28 @@ section.row {
       transform: translate(11%, 0)
     }
     &:hover {
-      @include box-shadow(0 0 10px 0px lighten($slide-color, 10%));
+      box-shadow: 0 0 10px rgba(0, 0, 0, .7);
     }
   }
 
-  #think.slide {
-    .content {
-      //Enlarge image to align to template
+  #think {
+    //Enlarge image to align to template
+    img {
       width: rem-calc(318px);
 
-      img {
-        position: relative;
-        bottom: rem-calc(5px);
-        left: rem-calc(2px);
-      }
+      position: relative;
+      bottom: rem-calc(5px);
+      left: rem-calc(2px);
     }
   }
 
-  #play.slide, #create.slide {
+  #play {
+    img {
+      width: rem-calc(265px);
+    }
+  }
+
+  #create {
     //Placeholder
     img {
       height: rem-calc(98px);
