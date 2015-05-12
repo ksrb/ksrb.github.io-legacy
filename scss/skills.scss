@@ -9,8 +9,9 @@
   $hover-color: lighten($primary, 10%);
 
   .legends {
-    margin-bottom: 15px;
     @include display-flex;
+    margin-bottom: 15px;
+    width: 780px;
   }
 
   .search {
@@ -48,6 +49,7 @@
   }
 
   .legend {
+    $transition-duration: .1s;
 
     position: relative;
     margin-right: 26px;
@@ -63,6 +65,10 @@
 
     height: $height;
     width: 90px;
+
+    cursor: pointer;
+
+    transition: background-color $transition-duration ease, color $transition-duration ease;
 
     &:first-child {
       width: 52px;
@@ -88,6 +94,8 @@
 
       position: absolute;
       top: 0;
+
+      transition: border-color $transition-duration ease;
     }
 
     //Back of chevron
@@ -111,6 +119,7 @@
     &:hover, &.selected {
       background: $hover-color;
       color: white;
+
       &:after {
         border-left: 10px solid $hover-color;
       }

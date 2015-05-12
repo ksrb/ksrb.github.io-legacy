@@ -56,6 +56,7 @@ section.row {
     margin: 0;
 
     > li {
+      $transition-duration: .1s;
       list-style: none;
 
       //Center content vertical + horizontal
@@ -66,14 +67,18 @@ section.row {
       width: rem-calc(80px);
       padding: rem-calc(10px) 0;
 
+      transition: background-color $transition-duration ease;
+
       //Override foundation
       a {
+        transition: color $transition-duration ease;
         color: black;
       }
 
       //No hover effect for logo
       &:hover:not(:nth-child(3)) {
         background: #5076b3;
+
         //Override foundation
         a {
           color: $white;
@@ -102,7 +107,7 @@ section.row {
 
     border: 5px solid $slide-color;
     //Shape slide into a circle
-    border-radius: 50%;
+    @include border-radius(50%);
 
     width: rem-calc(294px);
     height: rem-calc(294px);
@@ -190,9 +195,12 @@ section.row {
 
 #about {
   color: $white;
-  background-color: $primary;
-  padding: rem-calc(25px) 0 rem-calc(5px);
   text-align: justify;
+
+  background-color: $primary;
+
+  padding: rem-calc(25px) 0 rem-calc(5px);
+  margin-bottom: rem-calc(10px);
 
   header #{headings()} {
     //Override foundation
