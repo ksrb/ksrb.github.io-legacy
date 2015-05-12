@@ -101,6 +101,25 @@ section.row {
     width: rem-calc(660px);
   }
 
+  #think {
+    img {
+      width: rem-calc(300px);
+      bottom: rem-calc(65px);
+    }
+  }
+
+  #design {
+    img {
+      width: rem-calc(300px);
+    }
+  }
+
+  #create {
+    img {
+      width: rem-calc(235px);
+    }
+  }
+
   .slide {
     //Hide slides in back
     background-color: white;
@@ -118,14 +137,15 @@ section.row {
 
     transition: z-index $slide-transition ease, transform $slide-transition ease, top $slide-transition ease, opacity $slide-transition ease, box-shadow .3s ease;
 
-    .content {
-      width: 100%;
-
-      //Center content
+    .tag-line, img {
       position: absolute;
-      transform: translate(-50%, 0);
-      bottom: rem-calc(20px);
       left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    img {
+      //Override foundation
+      max-width: none;
     }
 
     .tag-line {
@@ -135,10 +155,14 @@ section.row {
       text-align: center;
 
       height: rem-calc(20px);
+      width: 100%;
+
+      bottom: rem-calc(20px);
 
       background-color: $slide-color;
     }
 
+    //Slide positioning
     &.middle {
       z-index: 1;
       transform: translate(-50%, 0);
@@ -161,34 +185,6 @@ section.row {
     }
     &:hover {
       box-shadow: 0 0 10px rgba(0, 0, 0, .7);
-    }
-  }
-
-  #think {
-    //Enlarge image to align to template
-    img {
-      width: rem-calc(318px);
-
-      position: relative;
-      bottom: rem-calc(5px);
-      left: rem-calc(2px);
-    }
-  }
-
-  #play {
-    img {
-      width: rem-calc(265px);
-    }
-  }
-
-  #create {
-    //Placeholder
-    img {
-      height: rem-calc(98px);
-      display: block;
-      margin: 0 auto;
-
-      text-align: center;
     }
   }
 }
