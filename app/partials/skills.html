@@ -1,10 +1,10 @@
 <div class="legends clearfix">
     <div class="search">
-        <div class="legend" ng-click="showSearch = !showSearch">
+        <div class="legend" ng-click="showSearch = !showSearch" ng-class="{'selected':showSearch}">
             <img src="images/skills/search.svg"/>
         </div>
         <input class="bar" type="text" placeholder="Enter a skill (Java, Photoshop, css...)" ng-model="inputedName"
-               ng-class="{'show':showSearch}">
+               ng-class="{'show':showSearch, 'selected':showSearch}">
     </div>
     <div class="legend" ng-repeat="legend in SkillsCtrl.legends"
          ng-click="SkillsCtrl.setSelectedLegend(legend);"
@@ -19,6 +19,7 @@
     </div>
 </div>
 
+<!--TODO questionable filter use see http://toddmotto.com/everything-about-custom-filters-in-angular-js/-->
 <div class="skill"
      ng-repeat="skill in SkillsCtrl.skills| filter: {name:inputedName}| filter: SkillsCtrl.skillIsGreaterThanSelectedSkill">
     <div class="skill-label">
