@@ -92,7 +92,7 @@ section.row {
 
 #workflow {
   $slide-color: rgb(21, 61, 113);
-  $slide-transition: 1.5s;
+  $transition-duration: 1.5s;
 
   #slides {
     position: relative;
@@ -125,7 +125,7 @@ section.row {
     //Hide slides in back
     background-color: white;
 
-    border: 5px solid $slide-color;
+    border: rem-calc(5px) solid $slide-color;
     //Shape slide into a circle
     @include border-radius(50%);
 
@@ -136,7 +136,7 @@ section.row {
     overflow: hidden;
     left: 50%;
 
-    @include transition(z-index $slide-transition ease, transform $slide-transition ease, top $slide-transition ease, opacity $slide-transition ease, box-shadow .3s ease);
+    @include transition(z-index $transition-duration ease, transform $transition-duration ease, top $transition-duration ease, opacity $transition-duration ease, box-shadow .3s ease);
 
     .tag-line, .icon {
       position: absolute;

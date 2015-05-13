@@ -86,7 +86,7 @@
                     name: "familiar",
                     level: 4,
                     description: "Used at least once professionally, some training required to use commercially.",
-                    colloquial: "As Gradle is the only skill on this list that applies, something I would gladly learn more about given the chance."
+                    colloquial: "Something I would gladly learn more about given the chance like Gradle."
                 },
                 {
                     name: "proficient",
@@ -109,7 +109,7 @@
                 {
                     name: "master",
                     level: 12,
-                    description: "Capable of authoring book, significant contributions to field.",
+                    description: "Capable of authoring a book, significant contributions to field.",
                     colloquial: "This is like Douglas Crock level, someone who is a member of W3C and shaping the future of the web."
                 }
             ];
