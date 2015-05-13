@@ -47,15 +47,19 @@
 
     display: flex;
     justify-content: space-between;
+
     font-weight: bold;
+
     .title {
       color: $primary;
     }
+
     .date {
       text-align: right;
       font-style: italic;
     }
   }
+
   .samples {
     display: flex;
     justify-content: space-between;
@@ -74,6 +78,10 @@
       #{"."+nth($skills, $i)} {
         //Lighten top gradient by 15% of base color
         @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+        &:hover {
+          $hover-color: lighten(adjust_hue($base-color, 5%), 5%);
+          @include background(linear-gradient(lighten($hover-color, 15%), $hover-color));
+        }
       }
       //lighten base color by 8% every iteration
       $base-color: lighten($base-color, 8%);

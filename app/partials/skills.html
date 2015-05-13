@@ -9,13 +9,21 @@
     <div class="legend" ng-repeat="legend in SkillsCtrl.legends"
          ng-click="SkillsCtrl.setSelectedLegend(legend);" ng-class="{selected: SkillsCtrl.selectedLegend == legend}">
         <span class="name">{{legend.name | uppercase}}</span>
+
+        <div class="legend-tooltip">
+            <p>{{legend.description}}</p>
+
+            <p>{{legend.colloquial}}</p>
+        </div>
     </div>
 </div>
 
 <div class="skill"
      ng-repeat="skill in SkillsCtrl.skills| filter: {name:inputedName}| filter: SkillsCtrl.skillIsGreaterThanSelectedSkill">
     <div class="skill-label">
-        <img class="icon" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.name}}"/>
+        <a href="{{skill.site}}" target="_blank">
+            <img class="icon" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.name}}"/>
+        </a>
 
         <p class="name">{{skill.name | capitalize}}</p>
     </div>

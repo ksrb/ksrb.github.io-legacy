@@ -6,7 +6,7 @@
   $height: 32px;
 
   color: $white;
-  $hover-color: lighten($primary, 10%);
+  $hover-color: lighten(adjust_saturation($primary, 5%), 10%);
 
   .legends {
     @include display-flex;
@@ -49,13 +49,10 @@
   }
 
   .legend {
-    $transition-duration: .1s;
+    $transition-duration: .3s;
 
     position: relative;
     margin-right: 26px;
-
-    text-align: center;
-    font-size: 9px;
 
     @include display-flex;
     @include align-items(center);
@@ -68,8 +65,61 @@
 
     cursor: pointer;
 
-    transition: background-color $transition-duration ease, color $transition-duration ease;
+    transition: background-color $transition-duration ease;
 
+    .name {
+      text-align: center;
+      font-size: 9px;
+    }
+
+    .legend-tooltip {
+      $border-color: #000000;
+
+      display: none;
+      position: absolute;
+      bottom: 42px;
+      left: -65px;
+
+      padding: 7px;
+      width: 225px;
+
+      background-color: $hover-color;
+      border-radius: 10px;
+
+      box-sizing: border-box;
+      opacity: 0;
+
+      transition: opacity $transition-duration ease;
+
+      &:after {
+        content: "";
+        display: block;
+
+        position: absolute;
+        left: 50%;
+        bottom: -20px;
+        transform: translate(-50%, 0);
+
+        border: 10px solid;
+        border-color: $hover-color transparent transparent;
+      }
+
+      p {
+        font-size: 11px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &:hover {
+      .legend-tooltip {
+        display: block;
+        opacity: 1;
+      }
+    }
+
+    //Chevron rules
     &:first-child {
       width: 52px;
 
@@ -118,7 +168,6 @@
 
     &:hover, &.selected {
       background: $hover-color;
-      color: white;
 
       &:after {
         border-left: 10px solid $hover-color;
