@@ -36,7 +36,7 @@
                     if (!this.selectedLegend) {
                         return true;
                     }
-                    return skill.level === this.selectedLegend.level - 1 || skill.level === this.selectedLegend.level;
+                    return skill.level >= this.selectedLegend.level - 1;
                 }.bind(this);
 
                 this.showMeter = function (skillLevel, meterNum) {

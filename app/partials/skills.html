@@ -7,7 +7,8 @@
                ng-class="{'show':showSearch}">
     </div>
     <div class="legend" ng-repeat="legend in SkillsCtrl.legends"
-         ng-click="SkillsCtrl.setSelectedLegend(legend);" ng-class="{selected: SkillsCtrl.selectedLegend == legend}">
+         ng-click="SkillsCtrl.setSelectedLegend(legend);"
+         ng-class="{selected: SkillsCtrl.selectedLegend.level >= legend.level}">
         <span class="name">{{legend.name | uppercase}}</span>
 
         <div class="legend-tooltip">
