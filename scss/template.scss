@@ -1,6 +1,7 @@
-@import "_settings.scss";
-@import 'foundation/functions';
 @import "compass";
+@import 'foundation/functions';
+@import 'foundation/components/global';
+@import "_settings.scss";
 @import 'globals';
 
 /*===Temporary Rules===*/
@@ -208,12 +209,21 @@ section.row {
     @include display-flex;
     @include flex-direction(column);
     font-size: rem-calc(13px);
+  }
 
-    .icon {
-      span:hover {
+  .icon {
+    span {
+      display: none;
+      &:hover {
         color: white;
       }
-      margin-bottom: rem-calc(18px);
+    }
+    margin-bottom: rem-calc(18px);
+
+    @media #{$large-up} {
+      span {
+        display: inline;
+      }
     }
   }
 
