@@ -3,49 +3,43 @@
 @import 'globals';
 
 #skills {
-  $height: 32px;
+  $legend-height: 32px;
+  $legend-width: 755px;
 
   color: $white;
   $hover-color: lighten(adjust_saturation($primary, 5%), 10%);
 
   .legends {
     @include display-flex;
-    margin-bottom: 15px;
-    width: 780px;
+    margin-bottom: 7px;
+    width: $legend-width;
   }
 
   .search {
+    //Moved search bar in front of other legends
+    visibility: hidden;
 
-    .bar {
-      position: absolute;
-      top: 0;
-      left: 62px;
-      //Moved search bar in front of other legends
-      z-index: 1;
+    width: $legend-width;
+    height: 0;
 
-      margin: 0;
-      padding: 0;
-      height: $height;
-      width: 0;
+    margin: 0;
+    padding: 0;
 
-      border: 2px solid $primary;
+    transition: height 1s ease, visibility 1s ease, margin 1s ease, padding 1s ease;
 
-      transition: width 1s ease, padding-left 1s ease;
+    &.show {
+      @extend .selected;
 
-      &.show {
-        width: 707px;
-        padding: .5em .5em .5em rem-calc(19px);
-      }
+      visibility: visible;
+      height: $legend-height;
+
+      padding: .5em;
+      margin: 0 0 7px;
     }
+  }
 
-    &:hover .bar {
-      border-color: $hover-color;
-    }
-
-    .legend {
-      //Moved search chevron in front of search bar
-      z-index: 2;
-    }
+  &:hover {
+    border-color: $hover-color;
   }
 
   .legend {
@@ -60,7 +54,7 @@
 
     background: $primary;
 
-    height: $height;
+    height: $legend-height;
     width: 90px;
 
     cursor: pointer;
@@ -131,6 +125,7 @@
 
     &:last-child {
       width: 95px;
+      margin-right: 0;
 
       //Remove front of chevron
       &:after {
@@ -152,18 +147,18 @@
     &:before {
       right: 100%;
 
-      border-top: $height/2 solid $primary;
+      border-top: $legend-height/2 solid $primary;
       border-left: 10px solid transparent;
-      border-bottom: $height/2 solid $primary;
+      border-bottom: $legend-height/2 solid $primary;
     }
 
     //Front of chevron
     &:after {
       left: 100%;
 
-      border-top: $height/2 solid transparent;
+      border-top: $legend-height/2 solid transparent;
       border-left: 10px solid $primary;
-      border-bottom: $height/2 solid transparent;
+      border-bottom: $legend-height/2 solid transparent;
     }
 
     &:hover, &.selected {
@@ -173,8 +168,8 @@
         border-left: 10px solid $hover-color;
       }
       &:before {
-        border-top: $height/2 solid $hover-color;
-        border-bottom: $height/2 solid $hover-color;
+        border-top: $legend-height/2 solid $hover-color;
+        border-bottom: $legend-height/2 solid $hover-color;
       }
     }
 

@@ -92,7 +92,7 @@
                     name: "proficient",
                     level: 6,
                     description: "Used multiple times professionally, minimal direction required to use commercially.",
-                    colloquial: "Something that I'm pretty good with and generally able to problems given some time."
+                    colloquial: "Something that I'm pretty good with and generally able to solve problems given some time."
                 },
                 {
                     name: "instructor",
