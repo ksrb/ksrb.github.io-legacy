@@ -1,29 +1,6 @@
-@import "compass";
-@import 'foundation/functions';
-@import 'foundation/components/global';
-@import "_settings.scss";
-@import 'globals';
-
-/*===Temporary Rules===*/
-#template {
-  z-index: 1;
-  display: block;
-  width: $row-width;
-
-  position: absolute;
-  left: 50%;
-  top: -40px;
-  transform: translate(-50%, 0);
-}
-
-#container {
-  margin: 0 auto;
-  position: relative;
-  padding-top: rem-calc(19px);
-  z-index: 2;
-}
-
-/*===END Temporary Rules===*/
+@import "partials/globals";
+@import 'partials/skills';
+@import 'partials/experience';
 
 section.row {
   header #{headings()} {
@@ -32,7 +9,7 @@ section.row {
 }
 
 #nav {
-  padding-bottom: rem-calc(20px);
+  padding: rem-calc(20px) 0;
 
   border-bottom: 2px solid rgb(247, 247, 247);
 
