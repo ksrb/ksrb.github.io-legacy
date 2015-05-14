@@ -41,7 +41,7 @@ section.row {
     width: rem-calc(60px);
     height: rem-calc(77px);
     img {
-      //TODO In Firefox image dimensions are expanding beyond .logo's bounds
+      //Fix for Firefox image dimensions are expanding beyond .logo's bounds
       @extend .logo
     }
   }
@@ -320,5 +320,4 @@ section.row {
       text-align: right;
     }
   }
-
 }

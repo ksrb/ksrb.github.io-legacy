@@ -1,3 +1,4 @@
+<!-- Consider more advanced directive use for both the legend and skills -->
 <div class="legends clearfix">
     <div class="legend" ng-click="showSearch = !showSearch" ng-class="{'selected':showSearch}">
         <img src="images/skills/search.svg"/>
@@ -19,7 +20,7 @@
 <input class="search" type="text" placeholder="Enter a skill (Java, Photoshop, css...)" ng-model="inputedName"
        ng-class="{'show':showSearch}">
 
-<!--TODO questionable filter use see http://toddmotto.com/everything-about-custom-filters-in-angular-js/-->
+<!--TODO questionable filter use see http://toddmotto.com/everything-about-custom-filters-in-angular-js-->
 <div class="skill"
      ng-repeat="skill in SkillsCtrl.skills| filter: {name:inputedName}| filter: SkillsCtrl.skillIsGreaterThanSelectedSkill">
     <div class="skill-label">
