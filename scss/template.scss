@@ -65,23 +65,23 @@ section.row {
       @include align-items(center);
       @include justify-content(center);
 
-      width: rem-calc(80px);
-      padding: rem-calc(10px) 0;
-
-      transition: background-color $transition-duration ease;
-
       //Override foundation
       a {
-        transition: color $transition-duration ease;
+        text-align: center;
         color: black;
+
+        width: rem-calc(80px);
+        padding: rem-calc(10px) 0;
+
+        transition: background-color $transition-duration ease, color $transition-duration ease;
       }
 
       //No hover effect for logo
       &:hover:not(:nth-child(3)) {
-        background: #5076b3;
 
         //Override foundation
         a {
+          background: #5076b3;
           color: $white;
         }
       }
