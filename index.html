@@ -2,165 +2,137 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Resume</title>
-    <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hello World</title>
 
-<section class="row">
-    <div class="small-12 column">
-        <h2>Kevin <span class="text-highlight">Suen</span></h2>
-        <h5>38 Stony Rd West | Edison NJ, 08817</h5>
-        <h5>
-            <strong>Cell</strong> (908) 240-5093 |
-            <strong>Email</strong> <a href="mailto:ksrbkevinsuen@gmail.com">ksrbkevinsuen@gmail.com</a>
-        </h5>
-        <h5>
-            <strong>GitHub</strong> <a href="https://github.com/ksrb">ksrb</a> |
-            <strong>Design</strong> <a href="images/Portfolio-v2.png" target="_blank">samples</a>
-        </h5>
+    <link rel="stylesheet" href="css/app.css"/>
+
+    <!--TODO use requirejs-->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="app/carousel.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/controllers.js"></script>
+    <script src="app/directives/directives.js"></script>
+    <script src="app/models/models.js"></script>
+    <script src="app/filters/filters.js"></script>
+
+    <script src="app/analytics.js"></script>
+</head>
+<body ng-app="app">
+<nav id="nav" class="row">
+    <!--TODO simplify jump to id via anchor-->
+    <ul ng-controller="NavbarController as NavbarCtrl">
+        <li><a ng-click="NavbarCtrl.scrollTo('about')">ABOUT</a></li>
+        <li><a ng-click="NavbarCtrl.scrollTo('skills')">SKILLS</a></li>
+        <li class="logo"><img src="images/logo.svg" alt="logo"/></li>
+        <li><a ng-click="NavbarCtrl.scrollTo('experience')">EXPERIENCE</a></li>
+        <li><a ng-click="NavbarCtrl.scrollTo('education')">EDUCATION</a></li>
+    </ul>
+    <div class="background"></div>
+</nav>
+
+<!-- TODO consider rasterizing SVGs for performance-->
+<section id="workflow" class="row">
+    <div id="slides">
+        <div id="think" class="slide middle">
+            <img class="splash-art" src="images/workflow/think.svg" alt="think"/>
+
+            <p class="tag-line">THINK</p>
+        </div>
+        <div id="design" class="slide left">
+            <img class="splash-art" src="images/workflow/design.svg" alt="design"/>
+
+            <p class="tag-line">DESIGN</p>
+        </div>
+        <div id="create" class="slide right">
+            <img class="splash-art" src="images/workflow/create.svg" alt="create"/>
+
+            <p class="tag-line">CREATE</p>
+        </div>
     </div>
 </section>
 
-<section class="row">
-    <div class="small-2 column">
-        <h6>EXPERIENCE</h6>
+<section id="about" class="row">
+    <header class="large-1 column">
+        <h5>ABOUT</h5>
+    </header>
+    <div class="large-8 medium-11 small-10 column">
+        <p>
+            Hi, I'm Kevin an aspiring JavaScript ninja. I'm currently enamored with AngularJS but am interested in
+            all things JavaScript. When I'm not programming you can catch me for a run, trying to draw better, or
+            watching <a href="https://www.youtube.com/user/ExtraCreditz">Extra Credits</a>.
+        </p>
+
+        <p>
+            If you're interested in working with me there's some ways to
+            reach me to the right. Lets be ninjas together.
+        </p>
     </div>
-    <div class="small-10 column">
-        <div class="row">
-            <div class="small-4 column">
-                <p>
-                    Web Developer<br>
-                    Niksun
-                </p>
+    <div class="large-3 medium-1 small-2 column">
+        <div class="icons">
+            <!-- TODO tel and mailto not working in chrome -->
+            <div class="phone icon">
+                <a href="tel:+908-240-5093">
+                    <img src="images/about/phone.svg" alt="phone"/>
+                </a>
+                <span>(908) 240-5093</span>
             </div>
-            <div class="small-offset-4 small-4 column text-right">
-                <p>
-                    Princeton NJ, USA<br>
-                    September 2013 - Current
-                </p>
+            <div class="email icon">
+                <a href="mailto:ksrbkevinsuen@gmail.com" target="_blank">
+                    <img src="images/about/email.svg" alt="email"/>
+                </a>
+                <span>ksrbkevinsuen@gmail.com</span>
+            </div>
+            <div class="github icon">
+                <a href="https://github.com/ksrb" target="_blank">
+                    <img src="images/about/github.svg" alt="github"/>
+                </a>
+                <span>github.com/ksrb</span>
+            </div>
+            <div class="linkedin icon">
+                <a href="https://www.linkedin.com/in/ksrb00" target="_blank">
+                    <img src="images/about/linkedin.svg" alt="linkedin"/>
+                </a>
+                <span>linkedin.com/in/ksrbkevinsuen</span>
             </div>
         </div>
-        Development
-        <ul>
-            <li>Using GWT and AngularJS to replace the GUI of Niksun’s network analysis applications</li>
-            <li>Wrote central control logic using JSNI to interface between GWT and AngularJS</li>
-            <li>Wrote core client side code to handle interactions with service layer</li>
-        </ul>
-        Practices
-        <ul>
-            <li>Employed experimental GWT development mode to reduce compile time</li>
-            <li>Created unit testing framework reducing reliance on Selenium XPath selectors</li>
-            <li>Created build script using Gradle to handle JavaScript and GWT dependencies</li>
-            <li>Deployed a Mediawiki to centralize documentation</li>
-        </ul>
     </div>
 </section>
 
-<section class="row">
-    <div class="small-2 column">
-        <h6>EDUCATION</h6>
-    </div>
-    <div class="small-10 column">
-        <p>
-            2013 Bachelor of Science graduate in Computer Science from Rutgers University, New Brunswick
-        </p>
-
-        Relevant course work
-        <p>
-            Internet Technology, Design and Analysis of Algorithms, Computer Security, Principles of
-            Information
-            and Data Management
-        </p>
+<section id="skills" class="row">
+    <header class="large-1 column">
+        <h5>SKILLS</h5>
+    </header>
+    <div class="large-11 small-12 column" skills>
     </div>
 </section>
 
-<section class="row">
-    <div class="small-2 column">
-        <h6>PROJECTS</h6>
-    </div>
-    <div class="small-10 column">
-        2014 Rutgers Map
-        <ul>
-            <li>Ongoing project to redesign Rutgers online map to increase clarity and ease of use</li>
-            <li>Used JavaScript with Google Maps API</li>
-            <li>Used Twitter Bootstrap with SASS to provide basic web framework</li>
-        </ul>
+<section id="experience" class="row">
+    <header class="large-12 column">
+        <h5>EXPERIENCE</h5>
+    </header>
+    <div class="large-11 large-offset-1 small-12 column" experience>
     </div>
 </section>
 
-<section class="row">
-    <div class="small-2 column">
-        <h6>VOLUNTEER</h6>
-    </div>
-    <div class="small-10 column">
-        <p>
-            2012 - 2013<br>
-            Webmaster for Scholars for Charity an organization that takes proceeds from
-            designing website and donates them to charity
-        </p>
-
-        Responsibilities included
-        <ul>
-            <li>Interacting and creating new sites for clients</li>
-            <li>Teaching new members how to web design</li>
-        </ul>
-    </div>
-</section>
-
-<section class="row">
-    <div class="small-2 column">
-        <h6>SKILLS</h6>
-    </div>
-    <div class="small-10 column">
-        <table>
-            <thead>
-            <tr>
-                <th>Programming</th>
-                <th>Design</th>
-                <th>IDE</th>
-                <th>Repository</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <ul>
-                        <li>Java</li>
-                        <li>GWT</li>
-                        <li>JavaScript</li>
-                        <li>Gradle</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>HTML</li>
-                        <li>SASS/CSS</li>
-                        <li>Adobe Photoshop</li>
-                        <li>Adobe Illustrator</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>Eclipse</li>
-                        <li>Intellij</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>git</li>
-                        <li>svn</li>
-                    </ul>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<section id="education" class="row">
+    <header class="large-1 column">
+        <h5>EDUCATION</h5>
+    </header>
+    <div class="large-offset-1 large-11 small-12 column">
+        <article>
+            <div class="degree">
+                <b>Bachelor of Science, Computer Science</b><br/>
+                Rutgers
+            </div>
+            <div class="date">
+                <b>2009 - 2013</b><br/>
+                New Brunswick
+            </div>
+        </article>
     </div>
 </section>
-
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/foundation/js/foundation.js"></script>
-<script>$(document).foundation();</script>
 </body>
 </html>
