@@ -1,13 +1,14 @@
 #skills {
   $legend-height: 32px;
   $legend-width: 755px;
+  $margin-bottom: 7px;
 
-  color: $white;
   $hover-color: lighten(adjust_saturation($primary, 5%), 10%);
 
   .legends {
     @include display-flex;
-    margin-bottom: 7px;
+    color: $white;
+    margin-bottom: $margin-bottom;
     width: $legend-width;
   }
 
@@ -29,7 +30,7 @@
       height: $legend-height;
 
       padding: .5em;
-      margin: 0 0 7px;
+      margin: 0 0 $margin-bottom;
     }
   }
 
@@ -140,7 +141,13 @@
 
     //Back of chevron
     &:before {
+      //Hide 1px white line that show up on mobile
       right: 100%;
+
+      @media #{$small-only}{
+        //Hide 1px white line that show up on mobile
+        right: 99%;
+      }
 
       border-top: $legend-height/2 solid $primary;
       border-left: 10px solid transparent;
@@ -150,6 +157,11 @@
     //Front of chevron
     &:after {
       left: 100%;
+
+      @media #{$small-only}{
+        //Hide 1px white line that show up on mobile
+        left: 99%;
+      }
 
       border-top: $legend-height/2 solid transparent;
       border-left: 10px solid $primary;
@@ -171,10 +183,16 @@
   }
 
   .skill {
+    $height: 53px;
+    $transition-duration: .5s;
+
+    color: $white;
+    margin-bottom: $margin-bottom;
+    transition: margin-bottom $transition-duration ease, opacity $transition-duration ease, height $transition-duration ease;
 
     .skill-label {
       width: 47px;
-      height: 53px;
+      height: $height;
       position: absolute;
 
       .icon, .name {
@@ -194,11 +212,20 @@
         font-size: 10px;
       }
     }
+    .meter {
+      height: $height;
+    }
+
+    &.ng-enter, &.ng-move, &.ng-leave.ng-leave-active {
+      height: 0;
+      opacity: 0;
+      margin-bottom: 0px;
+    }
+
+    &.ng-leave, &.ng-enter.ng-enter-active, &ng-move.ng-move-active {
+      height: $height;
+      opacity: 1;
+      margin-bottom: $margin-bottom;
+    }
   }
 }
-
-
-
-
-
-
