@@ -5,8 +5,12 @@
     margin-bottom: rem-calc(10px);
   }
 
+  $border-color: #bbbbbb;
+
   @include spacing;
-  border: 1px solid #bbbbbb;
+  border: 1px solid $border-color;
+
+  transition: box-shadow .3s ease;
 
   .organization-logo {
     @include spacing;
@@ -22,13 +26,14 @@
     @include spacing;
 
     background-color: #F5F5F5;
-    border-bottom: 1px solid #bbbbbb;
+    border-bottom: 1px solid $border-color;
     padding: 15px;
   }
 
   .skills-used {
     @include display-flex;
 
+    line-height: 16px;
     text-align: center;
     color: $white;
     font-size: rem-calc(12px);
@@ -60,6 +65,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5);
   }
 
   /**
