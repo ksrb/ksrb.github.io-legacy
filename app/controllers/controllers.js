@@ -89,10 +89,10 @@
             /**
              * Controller is used in ng-repeat, ng-repeat will attach its key to the controllers $scope
              * For example:
-             * <div ng-repeat="data in datas" ng-controller="MyCtrl"></div>
+             * <div ng-repeat="experience in experiences" ng-controller="MyCtrl"></div>
              *
              * In the controller:
-             * $scope.data //will access the data repeated via ng-repeat
+             * $scope.experience //will access the data repeated via ng-repeat
              */
                 function ctrl(ExperienceFactory, $modal, $scope) {
 
@@ -112,12 +112,14 @@
                     return "images/experience/" + $scope.experience.organization.toLowerCase() + "/";
                 }
 
-                $scope.openModal = function () {
+
+                $scope.openModal = function (slideNum) {
+                    $scope.slideNum = slideNum;
                     $modal.open({
-                        templateUrl: "app/partials/experience-modal.html",
                         //TODO consider a alternative to passing the scope to access common functions
-                        //Passing scope over to access utility image utility functions
-                        scope: $scope
+                        //Passing scope over to access image utility functions
+                        scope: $scope,
+                        templateUrl: "app/partials/experience-modal.html"
                     });
                 };
 
@@ -125,17 +127,5 @@
         ]
     );
 
-    angular.module("app")
-        .controller("ExperienceModalController",
-        ["$modalInstance", "$scope", "$document",
-            function ($modalInstance, $scope, $document) {
-
-                $scope.close = function () {
-                    $modalInstance.close();
-                };
-
-            }
-        ]
-    );
 
 })();
