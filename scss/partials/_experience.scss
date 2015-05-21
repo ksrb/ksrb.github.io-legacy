@@ -1,3 +1,8 @@
+@import 'compass';
+@import 'foundation/components/global';
+@import 'foundation/functions';
+@import 'globals';
+
 .experience-container {
 
   //Utility mixin to set spacing on elements
@@ -65,6 +70,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    //Hide all but the first on small displays
+    @media #{$small-only}{
+      .sample:not(:nth-child(1)) {
+        display: none;
+      }
+    }
+
   }
 
   &:hover {
@@ -100,16 +113,35 @@
   @include generate-skills-gradient(#457362, 'css', 'Photoshop', 'Illustrator');
 }
 
+.reveal-modal {
+  @media #{$small-only}{
+    min-height: 0;
+  }
+}
 
+.experience-slider {
+  //Change slick slider control colors
+  .slick-prev:before, .slick-next:before {
+    color: #7f7f7f;
+  }
 
+  .experience-slide {
+    position: relative;
 
+    .slide-image {
+      margin: 0 auto rem-calc(10px) auto;
+      max-height: 100vh;
+    }
 
+    .slide-caption {
+      margin: 0;
+      padding: rem-calc(20px) 0;
 
+      width: 100%;
 
+      background: #F5F5F5;
 
-
-
-
-
-
-
+      text-align: center;
+    }
+  }
+}
