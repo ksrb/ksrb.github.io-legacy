@@ -80,10 +80,6 @@
 
   }
 
-  &:hover {
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5);
-  }
-
   /**
    * Creates a successively brighter gradient class for each skill entered
    * @param $base-color - color in which gradients are based off of

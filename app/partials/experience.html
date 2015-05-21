@@ -1,42 +1,45 @@
-<article id="{{experience.organization | lowercase}}" class="experience-container"
+<article id="{{experience.organization | lowercase}}"
          ng-repeat="experience in experiences" ng-controller="ExperienceController">
-    <header>
-        <div class="organization-logo">
-            <a href="{{experience.website}}" target="_blank">
-                <img ng-src="{{getLogoImage()}}"
-                     alt="{{experience.organization}}">
-            </a>
-        </div>
+    <div class="experience-container">
+        <header>
+            <div class="organization-logo">
+                <a href="{{experience.website}}" target="_blank">
+                    <img ng-src="{{getLogoImage()}}"
+                         alt="{{experience.organization}}">
+                </a>
+            </div>
 
-        <div class="skills-used">
-            <div ng-attr-style="width:{{skills_used.usage}}%" class="{{skills_used.name}}"
-                 ng-repeat="skills_used in experience.skills_used">{{skills_used.name}} {{skills_used.usage}}%
+            <div class="skills-used">
+                <div ng-attr-style="width:{{skills_used.usage}}%" class="{{skills_used.name}}"
+                     ng-repeat="skills_used in experience.skills_used">{{skills_used.name}} {{skills_used.usage}}%
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <div class="content">
-        <div class="overview">
-            <div class="title">
-                {{experience.organization}}<br/>
-                {{experience.position}}
+        <div class="content">
+            <div class="overview">
+                <div class="title">
+                    {{experience.organization}}<br/>
+                    {{experience.position}}
+                </div>
+                <div class="date">
+                    {{experience.start | date: 'MMMM yyyy'}}<br/>
+                    {{experience.end | date: 'MMMM yyyy'}}
+                </div>
             </div>
-            <div class="date">
-                {{experience.start | date: 'MMMM yyyy'}}<br/>
-                {{experience.end | date: 'MMMM yyyy'}}
+            <div class="description">
+                <p>{{experience.purpose}}</p>
+                <ul>
+                    <li ng-repeat="contributions in experience.contributions">{{contributions}}</li>
+                </ul>
             </div>
-        </div>
-        <div class="description">
-            <p>{{experience.purpose}}</p>
-            <ul>
-                <li ng-repeat="contributions in experience.contributions">{{contributions}}</li>
-            </ul>
-        </div>
-        <div class="samples">
-            <img class="sample"
-                 ng-repeat="sample in experience.samples"
-                 ng-src="{{getSampleThumbNail(sample)}}"
-                 ng-click="openModal()" alt="sample">
+            <div class="samples">
+                <img class="sample"
+                     ng-repeat="sample in experience.samples"
+                     ng-src="{{getSampleThumbNail(sample)}}"
+                     ng-click="openModal()" alt="sample">
+            </div>
         </div>
     </div>
+    <hr ng-hide="$last"/>
 </article>
