@@ -164,7 +164,7 @@
                         },
                         {
                             image: "Template-with-Pods",
-                            caption: "A sample dashboard of NetDetector, a network analysis software package, implement using GWT."
+                            caption: "Dashboard of NetDetector, Niksun's network analysis software, implemented using GWT. This is a mock as the product is proprietary."
                         },
                         {
                             image: "Login-Template",
@@ -201,7 +201,7 @@
                     samples: [
                         {
                             image: "quintessence",
-                            caption: "Designed banner for Quintessence Music a organization that helps promote local music groups."
+                            caption: "Designed banner for client, Quintessence Music, a organization that helps promote local music groups."
                         },
                         {
                             image: "scholars-for-charity-banner",

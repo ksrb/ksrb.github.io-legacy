@@ -19,7 +19,7 @@
         <div class="content">
             <div class="overview">
                 <div class="title">
-                    {{experience.organization}}<br/>
+                    <a href="{{experience.website}}">{{experience.organization}}</a><br/>
                     {{experience.position}}
                 </div>
                 <div class="date">
@@ -37,7 +37,7 @@
                 <img class="sample"
                      ng-repeat="sample in experience.samples"
                      ng-src="{{getSampleThumbNail(sample)}}"
-                     ng-click="openModal()" alt="sample">
+                     ng-click="openModal($index)" alt="sample">
             </div>
         </div>
     </div>
