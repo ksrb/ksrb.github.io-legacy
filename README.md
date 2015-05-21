@@ -40,7 +40,7 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
     * Rewrite for clarity and strength of points
 
 * Functionality
-    * Create a modal slider for work samples
+    * Consider implementing modal and slider independently to reduce dependencies
     * Tooltip for skills 
     
 ####Convert Graphic Design portfolio to HTML

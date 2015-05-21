@@ -1,9 +1,9 @@
 <article id="{{experience.organization | lowercase}}" class="experience-container"
-         ng-repeat="experience in ExperienceCtrl.experiences">
+         ng-repeat="experience in experiences" ng-controller="ExperienceController">
     <header>
         <div class="organization-logo">
             <a href="{{experience.website}}" target="_blank">
-                <img ng-src="{{ExperienceCtrl.getLogoImage(experience)}}"
+                <img ng-src="{{getLogoImage()}}"
                      alt="{{experience.organization}}">
             </a>
         </div>
@@ -33,10 +33,10 @@
             </ul>
         </div>
         <div class="samples">
-            <a href="{{ExperienceCtrl.getSample(experience, sample)}}" target="_blank"
-               ng-repeat="sample in experience.samples">
-                <img ng-src="{{ExperienceCtrl.getSampleThumbNail(experience, sample)}}" alt="sample">
-            </a>
+            <img class="sample"
+                 ng-repeat="sample in experience.samples"
+                 ng-src="{{getSampleThumbNail(sample)}}"
+                 ng-click="openModal()" alt="sample">
         </div>
     </div>
 </article>

@@ -158,9 +158,18 @@
                         "Increased developer productivity by introducing tools such as Gradle and git"
                     ],
                     samples: [
-                        "Website-Template",
-                        "Template-with-Pods",
-                        "Login-Template"
+                        {
+                            image: "Website-Template",
+                            caption: "Proposal for new company homepage, designed using Photoshop."
+                        },
+                        {
+                            image: "Template-with-Pods",
+                            caption: "A sample dashboard of NetDetector, a network analysis software package, implement using GWT."
+                        },
+                        {
+                            image: "Login-Template",
+                            caption: "Redesigned login page for new UI."
+                        }
                     ]
                 },
                 {
@@ -190,8 +199,14 @@
                         "Extensive use of Photoshop for asset creation"
                     ],
                     samples: [
-                        "quintessence",
-                        "scholars-for-charity-banner"
+                        {
+                            image: "quintessence",
+                            caption: "Designed banner for Quintessence Music a organization that helps promote local music groups."
+                        },
+                        {
+                            image: "scholars-for-charity-banner",
+                            caption: "Redesigned banner for organization's site"
+                        }
                     ]
                 }
 

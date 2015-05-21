@@ -12,13 +12,27 @@
     );
 
     angular.module("app")
-        .directive("experience", function () {
+        .directive("experience", ["ExperienceFactory", function (ExperienceFactory) {
             return {
                 templateUrl: "app/partials/experience.html",
-                controller: "ExperienceController",
-                controllerAs: "ExperienceCtrl"
+                link: function (scope) {
+                    scope.experiences = ExperienceFactory.getExperience();
+                }
             };
-        }
+        }]
+    );
+
+    angular.module("app")
+        .directive('slickSlider', ["$timeout", function ($timeout) {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    $timeout(function () {
+                        $(element).slick(scope.$eval(attrs.slickSlider));
+                    });
+                }
+            };
+        }]
     );
 
 })(angular);

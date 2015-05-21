@@ -85,28 +85,57 @@
 
     angular.module("app")
         .controller("ExperienceController",
-        ["ExperienceFactory",
-            function (ExperienceFactory) {
-                this.experiences = ExperienceFactory.getExperience();
+        ["ExperienceFactory", "$modal", "$scope",
+            /**
+             * Controller is used in ng-repeat, ng-repeat will attach its key to the controllers $scope
+             * For example:
+             * <div ng-repeat="data in datas" ng-controller="MyCtrl"></div>
+             *
+             * In the controller:
+             * $scope.data //will access the data repeated via ng-repeat
+             */
+                function ctrl(ExperienceFactory, $modal, $scope) {
 
-                this.getLogoImage = function (experience) {
-                    return this.getExperienceFolderPath(experience) + "logo.png";
+                $scope.getLogoImage = function () {
+                    return getExperienceFolderPath() + "logo.png";
                 };
 
-                this.getSampleThumbNail = function (experience, sample) {
-                    return this.getExperienceFolderPath(experience) + sample + "-thumbnail.png";
+                $scope.getSampleThumbNail = function (sample) {
+                    return getExperienceFolderPath() + sample.image + "-thumbnail.png";
                 };
 
-                this.getSample = function (experience, sample) {
-                    return this.getExperienceFolderPath(experience) + sample + ".png";
+                $scope.getSample = function (sample) {
+                    return getExperienceFolderPath() + sample.image + ".png";
                 };
 
-                this.getExperienceFolderPath = function (experience) {
-                    return "images/experience/" + experience.organization.toLowerCase() + "/";
+                function getExperienceFolderPath() {
+                    return "images/experience/" + $scope.experience.organization.toLowerCase() + "/";
+                }
+
+                $scope.openModal = function () {
+                    $modal.open({
+                        templateUrl: "app/partials/experience-modal.html",
+                        //TODO consider a alternative to passing the scope to access common functions
+                        //Passing scope over to access utility image utility functions
+                        scope: $scope
+                    });
                 };
 
             }
         ]
     );
-})();
 
+    angular.module("app")
+        .controller("ExperienceModalController",
+        ["$modalInstance", "$scope", "$document",
+            function ($modalInstance, $scope, $document) {
+
+                $scope.close = function () {
+                    $modalInstance.close();
+                };
+
+            }
+        ]
+    );
+
+})();
