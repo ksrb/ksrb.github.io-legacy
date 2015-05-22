@@ -80,6 +80,7 @@
       align-items: center;
 
       .image {
+        cursor: pointer;
         transition: box-shadow .3s ease;
         &:hover {
           box-shadow: 0 0 10px #afafaf;
@@ -87,10 +88,13 @@
       }
     }
 
-    //Hide all but the first on small displays
     @media #{$small-only}{
-      .sample:not(:nth-child(1)) {
-        display: none;
+      .image {
+        margin: 0 auto;
+        //Hide all but the first on small displays
+        &:not(:nth-child(1)) {
+          display: none;
+        }
       }
     }
   }

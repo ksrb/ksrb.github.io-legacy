@@ -136,11 +136,11 @@
                     skills_used: [
                         {
                             name: "Java",
-                            usage: "80"
+                            usage: "60"
                         },
                         {
                             name: "js",
-                            usage: "10"
+                            usage: "30"
                         },
                         {
                             name: "css",
@@ -150,7 +150,6 @@
                     position: "Web Developer",
                     start: new Date("2013-09"),
                     end: new Date("2015-03"),
-                    //Below content could be transcluded
                     purpose: "Company focused on providing network analysis software",
                     contributions: [
                         "Replace aging Flash UI with HTML5 technology",
@@ -191,7 +190,6 @@
                     position: "Webmaster",
                     start: new Date("2012-12"),
                     end: new Date("2013-05"),
-                    //Below content could be transcluded
                     purpose: "Nonprofit organization that designs websites for charities.",
                     contributions: [
                         "Maintained organization's websites",
