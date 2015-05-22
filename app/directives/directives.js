@@ -25,10 +25,9 @@
     angular.module("app")
         .directive('slickSlider', ["$timeout", function ($timeout) {
             return {
-                restrict: 'A',
                 link: function (scope, element, attrs) {
                     $timeout(function () {
-                        $(element).slick(scope.$eval(attrs.slickSlider));
+                        $(element).slick(scope.$eval(attrs.data));
                     });
                 }
             };
