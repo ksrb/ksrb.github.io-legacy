@@ -1,3 +1,4 @@
+@import "globals";
 // Foundation by ZURB
 // foundation.zurb.com
 // Licensed under MIT Open Source
@@ -121,7 +122,7 @@ $row-width: rem-calc($width);
 
 // We use these to control various global styles
 // $body-bg: $white;
-// $body-font-color: $jet;
+$body-font-color: $primary-text-color;
 // $body-font-family: $font-family-sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
@@ -267,7 +268,7 @@ $row-width: rem-calc($width);
 // We use these to style the <hr> element
 // $hr-border-width: 1px;
 // $hr-border-style: solid;
-// $hr-border-color: $gainsboro;
+$hr-border-color: $divider-color;
 // $hr-margin: rem-calc(20);
 
 // We use these to style lists

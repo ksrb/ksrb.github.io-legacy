@@ -8,11 +8,9 @@
   $legend-width: 755px;
   $margin-bottom: 7px;
 
-  $hover-color: lighten(adjust_saturation($primary, 5%), 10%);
-
   .legends {
     @include display-flex;
-    color: $white;
+    color: $primary-color-text;
     margin-bottom: $margin-bottom;
     width: $legend-width;
   }
@@ -40,7 +38,7 @@
   }
 
   &:hover {
-    border-color: $hover-color;
+    border-color: $primary-color;
   }
 
   .legend {
@@ -53,7 +51,7 @@
     @include align-items(center);
     @include justify-content(center);
 
-    background: $primary;
+    background: $primary-color-dark;
 
     height: $legend-height;
     width: 90px;
@@ -78,7 +76,7 @@
       padding: 7px;
       width: 225px;
 
-      background-color: $hover-color;
+      background-color: $primary-color;
       border-radius: 10px;
 
       box-sizing: border-box;
@@ -96,7 +94,7 @@
         transform: translate(-50%, 0);
 
         border: 10px solid;
-        border-color: $hover-color transparent transparent;
+        border-color: $primary-color transparent transparent;
       }
 
       p {
@@ -154,9 +152,9 @@
         right: 99%;
       }
 
-      border-top: $legend-height/2 solid $primary;
+      border-top: $legend-height/2 solid $primary-color-dark;
       border-left: 10px solid transparent;
-      border-bottom: $legend-height/2 solid $primary;
+      border-bottom: $legend-height/2 solid $primary-color-dark;
     }
 
     //Front of chevron
@@ -169,19 +167,19 @@
       }
 
       border-top: $legend-height/2 solid transparent;
-      border-left: 10px solid $primary;
+      border-left: 10px solid $primary-color-dark;
       border-bottom: $legend-height/2 solid transparent;
     }
 
     &:hover, &.selected {
-      background: $hover-color;
+      background: $primary-color;
 
       &:after {
-        border-left: 10px solid $hover-color;
+        border-left: 10px solid $primary-color;
       }
       &:before {
-        border-top: $legend-height/2 solid $hover-color;
-        border-bottom: $legend-height/2 solid $hover-color;
+        border-top: $legend-height/2 solid $primary-color;
+        border-bottom: $legend-height/2 solid $primary-color;
       }
     }
 
@@ -191,7 +189,7 @@
     $height: 53px;
     $transition-duration: .5s;
 
-    color: $white;
+    color: $primary-color-text;
     margin-bottom: $margin-bottom;
     transition: margin-bottom $transition-duration ease, opacity $transition-duration ease, height $transition-duration ease;
 

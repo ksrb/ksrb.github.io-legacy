@@ -10,10 +10,8 @@
     margin-bottom: rem-calc(10px);
   }
 
-  $border-color: #bbbbbb;
-
   @include spacing;
-  border: 1px solid $border-color;
+  border: 1px solid $divider-color;
 
   transition: box-shadow .3s ease;
 
@@ -31,7 +29,7 @@
     @include spacing;
 
     background-color: #F5F5F5;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $divider-color;
     padding: rem-calc(15px);
   }
 
@@ -40,7 +38,7 @@
 
     line-height: rem-calc(16px);
     text-align: center;
-    color: $white;
+    color: $primary-color-text;
     font-size: rem-calc(12px);
   }
 
@@ -55,10 +53,6 @@
     justify-content: space-between;
 
     font-weight: bold;
-
-    .title {
-      color: $primary;
-    }
 
     .date {
       text-align: right;
@@ -84,7 +78,6 @@
         display: none;
       }
     }
-
   }
 
   /**

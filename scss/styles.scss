@@ -7,7 +7,7 @@
 
 section.row {
   header #{headings()} {
-    color: $primary;
+    color: $primary-color-dark;
   }
 }
 
@@ -61,8 +61,8 @@ section.row {
 
         //Override foundation
         a {
-          background: #5076b3;
-          color: $white;
+          background: $primary-color;
+          color: $primary-color-text;
         }
       }
 
@@ -72,7 +72,6 @@ section.row {
 
 //TODO consider alternative to using mass media queries to resize slides
 #workflow {
-  $slide-color: rgb(21, 61, 113);
   $transition-duration: 1.5s;
 
   #slides {
@@ -124,6 +123,7 @@ section.row {
   }
 
   .slide {
+    $slide-color: #264B7D;
     //Hide slides in back
     background-color: white;
 
@@ -155,7 +155,7 @@ section.row {
 
     .tag-line {
       //Override foundation
-      color: $white;
+      color: $primary-color-text;
       $font-size: 13px;
       font-size: rem-calc($font-size);
       text-align: center;
@@ -215,10 +215,10 @@ section.row {
 }
 
 #about {
-  color: $white;
+  color: $primary-color-text;
   text-align: justify;
 
-  background-color: $primary;
+  background-color: $primary-color-dark;
 
   padding: rem-calc(25px) 0 rem-calc(5px);
   margin-bottom: rem-calc(10px);
@@ -278,9 +278,9 @@ section.row {
   }
 
   a {
-    color: #D3D3D3;
+    color: darken($primary-color-text, 20%);
     &:active, &:hover {
-      color: white;
+      color: $primary-color-text;
     }
   }
 }
@@ -291,11 +291,6 @@ section.row {
     display: flex;
     justify-content: space-between;
 
-    .degree {
-      b {
-        color: $primary;
-      }
-    }
     .date {
       text-align: right;
     }
