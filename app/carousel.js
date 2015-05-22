@@ -13,13 +13,13 @@
         var rotateSlide = function (slide) {
             if (slide.hasClass("middle")) {
                 slide.removeClass("middle");
-                slide.addClass("right");
+                slide.addClass("left");
             } else if (slide.hasClass("left")) {
                 slide.removeClass("left");
-                slide.addClass("middle");
+                slide.addClass("right");
             } else if (slide.hasClass("right")) {
                 slide.removeClass("right");
-                slide.addClass("left");
+                slide.addClass("middle");
             }
         };
 

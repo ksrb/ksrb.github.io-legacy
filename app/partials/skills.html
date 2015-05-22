@@ -22,13 +22,16 @@
 
 <!--TODO questionable filter use see http://toddmotto.com/everything-about-custom-filters-in-angular-js-->
 <div class="skill"
-     ng-repeat="skill in SkillsCtrl.skills| filter: {name:inputedName}| filter: SkillsCtrl.skillIsGreaterThanSelectedSkill">
+     ng-repeat="skill in SkillsCtrl.skills | filter: {name:inputedName}| filter: SkillsCtrl.skillIsGreaterThanSelectedSkill as results">
     <div class="skill-label">
-        <a href="{{skill.site}}" target="_blank">
-            <img class="icon" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.name}}"/>
+        <a href="{{skill.obj.site}}" target="_blank">
+            <img class="icon" ng-src="{{SkillsCtrl.getIcon(skill)}}" alt="{{skill.obj.name}}"/>
         </a>
 
-        <p class="name">{{skill.name | capitalize}}</p>
+        <p class="name">{{skill.obj.name}}</p>
     </div>
     <div class="meter" ng-include="'app/partials/meter.svg'"></div>
+</div>
+<div class="important" ng-if="results.length == 0">
+    No results please try a different search
 </div>

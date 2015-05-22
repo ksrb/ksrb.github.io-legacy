@@ -5,72 +5,113 @@
         .factory("SkillsFactory",
         function () {
 
-            var skills = [
-                {
-                    name: "java",
+            var skillsObjs = {
+                java: {
+                    name: "Java",
                     category: "programming",
-                    level: 8,
-                    site: "http://en.wikipedia.org/wiki/Java_%28programming_language%29"
+                    site: "//en.wikipedia.org/wiki/Java_%28programming_language%29"
                 },
-                {
+                javascript: {
                     name: "javascript",
+                    short_name: "js",
                     category: "programming",
-                    level: 5,
-                    site: "http://en.wikipedia.org/wiki/JavaScript"
+                    site: "//en.wikipedia.org/wiki/JavaScript"
                 },
-                {
-                    name: "gradle",
+                angularJS: {
+                    name: "AngularJS",
+                    short_name: "Angular",
                     category: "programming",
-                    level: 4,
-                    site: "http://en.wikipedia.org/wiki/Gradle"
+                    site: "//en.wikipedia.org/wiki/AngularJS"
                 },
-                {
-                    name: "gwt",
+                gwt: {
+                    name: "GWT",
                     category: "programming",
-                    level: 6,
-                    site: "http://en.wikipedia.org/wiki/Google_Web_Toolkit"
+                    site: "//en.wikipedia.org/wiki/Google_Web_Toolkit"
                 },
-                {
-                    name: "html",
+                html: {
+                    name: "HTML",
                     category: "design",
-                    level: 7,
-                    site: "http://en.wikipedia.org/wiki/HTML"
+                    site: "//en.wikipedia.org/wiki/HTML"
                 },
-                {
+                css: {
                     name: "css",
                     category: "design",
-                    level: 7,
-                    site: "http://en.wikipedia.org/wiki/Cascading_Style_Sheets"
+                    site: "//en.wikipedia.org/wiki/Cascading_Style_Sheets"
                 },
-                {
-                    name: "photoshop",
+                photoshop: {
+                    name: "Photoshop",
+                    short_name: "Ps",
                     category: "design",
-                    level: 8,
-                    site: "http://en.wikipedia.org/wiki/Adobe_Photoshop"
+                    site: "//en.wikipedia.org/wiki/Adobe_Photoshop"
                 },
-                {
-                    name: "illustrator",
+                illustrator: {
+                    name: "Illustrator",
+                    short_name: "Ai",
                     category: "design",
-                    level: 5,
-                    site: "http://en.wikipedia.org/wiki/Adobe_Illustrator"
+                    site: "//en.wikipedia.org/wiki/Adobe_Illustrator"
                 },
-                {
-                    name: "eclipse",
+                eclipse: {
+                    name: "Eclipse",
                     category: "tools",
-                    level: 7,
-                    site: "http://en.wikipedia.org/wiki/Eclipse_%28software%29"
+                    site: "//en.wikipedia.org/wiki/Eclipse_%28software%29"
                 },
-                {
-                    name: "intellij",
+                intellij: {
+                    name: "Intellij",
                     category: "tools",
-                    level: 6,
-                    site: "http://en.wikipedia.org/wiki/IntelliJ_IDEA"
+                    site: "//en.wikipedia.org/wiki/IntelliJ_IDEA"
                 },
-                {
+                git: {
                     name: "git",
                     category: "tools",
-                    level: 6,
-                    site: "http://en.wikipedia.org/wiki/Git_%28software%29"
+                    site: "//en.wikipedia.org/wiki/Git_%28software%29"
+                }
+
+            };
+
+            var skills = [
+                {
+                    obj: skillsObjs.java,
+                    level: 7
+                },
+                {
+                    obj: skillsObjs.javascript,
+                    level: 5
+                },
+                {
+                    obj: skillsObjs.angularJS,
+                    level: 4
+                },
+                {
+                    obj: skillsObjs.gwt,
+                    level: 6
+                },
+                {
+                    obj: skillsObjs.html,
+                    level: 7
+                },
+                {
+                    obj: skillsObjs.css,
+                    level: 7
+                },
+                {
+                    obj: skillsObjs.photoshop,
+                    level: 8
+                },
+                {
+                    obj: skillsObjs.illustrator,
+                    level: 5
+                },
+                {
+                    obj: skillsObjs.eclipse,
+                    level: 7
+                },
+                {
+                    obj: skillsObjs.intellij,
+                    level: 6
+                },
+                {
+                    obj: skillsObjs.git,
+                    level: 6
                 }
             ];
 
@@ -120,6 +161,9 @@
                 },
                 getLegends: function () {
                     return legends;
+                },
+                getSkillsObjs: function (skill) {
+                    return skillsObjs[skill];
                 }
             };
         }
@@ -127,80 +171,132 @@
 
     angular.module("app")
         .factory("ExperienceFactory",
-        function () {
+        ["SkillsFactory",
+            function (SkillsFactory) {
+                var experience = [
+                    {
+                        organization: "Table Design Art",
+                        location: "Irvine, CA",
+                        website: "//www.tabledesignart.com",
+                        skills_used: [
+                            {
+                                name: "Liquid",
+                                usage: "40"
+                            },
+                            {
+                                obj: SkillsFactory.getSkillsObjs("css"),
+                                usage: "30"
+                            },
+                            {
+                                obj: SkillsFactory.getSkillsObjs("javascript"),
+                                usage: "30"
+                            }
 
-            var experience = [
-                {
-                    organization: "Niksun",
-                    website: "http://www.niksun.com",
-                    skills_used: [
-                        {
-                            name: "Java",
-                            usage: "80"
-                        },
-                        {
-                            name: "js",
-                            usage: "10"
-                        },
-                        {
-                            name: "css",
-                            usage: "10"
-                        }
-                    ],
-                    position: "Web Developer",
-                    start: new Date("2013-09"),
-                    end: new Date("2015-03"),
-                    //Below content could be transcluded
-                    purpose: "Company focused on providing network analysis software",
-                    contributions: [
-                        "Replace aging Flash UI with HTML5 technology",
-                        "Used GWT and Angular to create reporting, search, and navigation systems",
-                        "Increased developer productivity by introducing tools such as Gradle and git"
-                    ],
-                    samples: [
-                        "Website-Template",
-                        "Template-with-Pods",
-                        "Login-Template"
-                    ]
-                },
-                {
-                    organization: "Scholars for Charity",
-                    skills_used: [
-                        {
-                            name: "css",
-                            usage: "50"
-                        },
-                        {
-                            name: "Photoshop",
-                            usage: "40"
-                        },
-                        {
-                            name: "Illustrator",
-                            usage: "10"
-                        }
-                    ],
-                    position: "Webmaster",
-                    start: new Date("2012-12"),
-                    end: new Date("2013-05"),
-                    //Below content could be transcluded
-                    purpose: "Nonprofit that donates proceeds from web design to charity",
-                    contributions: [
-                        "Maintained organization's websites",
-                        "Taught new members basic web and graphic design skills",
-                        "Extensive use of Photoshop for asset creation"
-                    ],
-                    samples: [
-                        "quintessence",
-                        "scholars-for-charity-banner"
-                    ]
-                }
-
-            ];
-            return {
-                getExperience: function () {
-                    return experience;
-                }
-            };
-        }
+                        ],
+						title: "Web Developer - Part time",
+                        start: new Date("2015-04-1"),
+                        purpose: "Startup company specializing in creating decorative table banners for special occasion.",
+                        contributions: [
+                            "Used Shopify to rapidly create webstore, used the Liquid templating language to customize appearance.",
+                            "Simplified shipping process by integrating webstore with shipping providers such as FedEx and UPS.",
+                            "Helping manage social media campaign on Facebook, Pinterest, and Twitter."
+                        ],
+                    },
+                    {
+                        organization: "Niksun",
+                        location: "Princeton, NJ",
+                        website: "//www.niksun.com",
+                        skills_used: [
+                            {
+                                obj: SkillsFactory.getSkillsObjs("gwt"),
+                                usage: "70"
+                            },
+                            {
+                                obj: SkillsFactory.getSkillsObjs("javascript"),
+                                usage: "20"
+                            },
+                            {
+                                obj: SkillsFactory.getSkillsObjs("css"),
+                                usage: "10"
+                            }
+                        ],
+                        title: "Web Developer - Full time",
+                        start: new Date("2013-09-1"),
+                        end: new Date("2015-03-1"),
+                        purpose: "Company focused on providing network analysis software.",
+                        contributions: [
+                            /*
+                             * It was a web app that polled a file analysis service (virus scanner) telling the client when the analysis was completed
+                             */
+                            "Created a real time reporting web application for Niksun's file analysis service, used by several clients including Wells Fargo.",
+                            /*
+                             * Contributed the most LOC to the project, responsible for mocking and creating several prototypes.
+                             */
+                            "Rapidly designed and wireframed several prototypes in an effort to modernize Niksun's client facing applications.",
+                            /*
+                             * Created a build script using Gradle to automate workspace setup and running the project
+                             */
+                            "Created a workspace setup and build script using Gradle, significantly reducing onboarding time of new developers."
+                        ],
+                        samples: [
+                            {
+                                image: "Website-Template",
+                                caption: "Proposal for new company homepage, designed using Photoshop."
+                            },
+                            {
+                                image: "Template-with-Pods",
+                                caption: "Prototype of new NetDetector, Niksun's network analysis software, implemented using GWT. This is a mock I designed in Photoshop, screenshots of the actually product are proprietary."
+                            },
+                            {
+                                image: "Login-Template",
+                                caption: "Redesigned login page for Niksun client facing applications."
+                            }
+                        ]
+                    },
+                    {
+                        organization: "Scholars for Charity",
+                        location: "New Brunswick, NJ",
+                        skills_used: [
+                            {
+                                obj: SkillsFactory.getSkillsObjs("css"),
+                                usage: "50"
+                            },
+                            {
+                                obj: SkillsFactory.getSkillsObjs("photoshop"),
+                                usage: "40"
+                            },
+                            {
+                                obj: SkillsFactory.getSkillsObjs("illustrator"),
+                                usage: "10"
+                            }
+                        ],
+                        title: "Webmaster - Volunteer",
+                        start: new Date("2012-12-1"),
+                        end: new Date("2013-05-1"),
+                        purpose: "Nonprofit organization that designs websites for charity.",
+                        contributions: [
+                            "Gathered requirements, designed graphics, and created sites for clients.",
+                            "Lead session for web and graphic design training new members in basic development techniques and best practices.",
+                            "Actively promoted organization responsible for recruiting several members."
+                        ],
+                        samples: [
+                            {
+                                image: "quintessence",
+                                caption: "Designed banner for client, Quintessence Music, a organization that helps promote local music groups."
+                            },
+                            {
+                                image: "scholars-for-charity-banner",
+                                caption: "Redesigned banner for organization's site"
+                            }
+                        ]
+                    }
+                ];
+                return {
+                    getExperience: function () {
+                        return experience;
+                    }
+                };
+            }
+        ]
     );
 })(angular);

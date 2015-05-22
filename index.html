@@ -3,32 +3,69 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Hello World</title>
+    <title>Kevin Suen - Designer/Developer</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
 
     <!--TODO use requirejs-->
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="app/carousel.js"></script>
+    <!--Jquery-->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!--Custom-->
+    <script src="app/carousel.js"></script>
+    <script src="app/analytics.js"></script>
+
+    <!--Angular scripts-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.3.15/angular-animate.min.js"></script>
+    <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+
     <script src="app/app.js"></script>
     <script src="app/controllers/controllers.js"></script>
     <script src="app/directives/directives.js"></script>
     <script src="app/models/models.js"></script>
     <script src="app/filters/filters.js"></script>
 
-    <script src="app/analytics.js"></script>
+    <!--Slick carousel-->
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
+	<link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
+	<script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+
+
 </head>
 <body ng-app="app">
 <nav id="nav" class="row">
     <!--TODO simplify jump to id via anchor-->
     <ul ng-controller="NavbarController as NavbarCtrl">
+        <li><a href="images/portfolio.png" target="_blank">DESIGN</a></li>
         <li><a ng-click="NavbarCtrl.scrollTo('about')">ABOUT</a></li>
         <li><a ng-click="NavbarCtrl.scrollTo('skills')">SKILLS</a></li>
         <li class="logo"><img src="images/logo.svg" alt="logo"/></li>
         <li><a ng-click="NavbarCtrl.scrollTo('experience')">EXPERIENCE</a></li>
         <li><a ng-click="NavbarCtrl.scrollTo('education')">EDUCATION</a></li>
+        <li class="coming-soon"><a>BLOG</a></li>
     </ul>
     <div class="background"></div>
 </nav>
@@ -41,12 +78,12 @@
 
             <p class="tag-line">THINK</p>
         </div>
-        <div id="design" class="slide left">
+        <div id="design" class="slide right">
             <img class="splash-art" src="images/workflow/design.svg" alt="design"/>
 
-            <p class="tag-line">DESIGN</p>
+            <a href="images/portfolio.png" target="_blank"><p class="tag-line">DESIGN</p></a>
         </div>
-        <div id="create" class="slide right">
+        <div id="create" class="slide left">
             <img class="splash-art" src="images/workflow/create.svg" alt="create"/>
 
             <p class="tag-line">CREATE</p>
@@ -58,11 +95,12 @@
     <header class="large-1 column">
         <h5>ABOUT</h5>
     </header>
-    <div class="large-8 medium-11 small-10 column">
+    <div class="large-7 medium-11 small-10 column">
         <p>
             Hi, I'm Kevin an aspiring JavaScript ninja. I'm currently enamored with AngularJS but am interested in
-            all things JavaScript. When I'm not programming you can catch me for a run, trying to draw better, or
-            watching <a href="https://www.youtube.com/user/ExtraCreditz">Extra Credits</a>.
+            all things JavaScript. I've also got some decent <a href="images/portfolio.png" target="_blank">design
+            skills</a>. When I'm not programming you can catch me hiking, doodling on my Wacom tablet, or watching some
+            Crash Course.
         </p>
 
         <p>
@@ -70,34 +108,43 @@
             reach me to the right. Lets be ninjas together.
         </p>
     </div>
-    <div class="large-3 medium-1 small-2 column">
-        <div class="icons">
-            <!-- TODO tel and mailto not working in chrome -->
-            <div class="phone icon">
-                <a href="tel:+908-240-5093">
-                    <img src="images/about/phone.svg" alt="phone"/>
-                </a>
-                <span>(908) 240-5093</span>
-            </div>
-            <div class="email icon">
-                <a href="mailto:ksrbkevinsuen@gmail.com" target="_blank">
-                    <img src="images/about/email.svg" alt="email"/>
-                </a>
-                <span>ksrbkevinsuen@gmail.com</span>
-            </div>
-            <div class="github icon">
-                <a href="https://github.com/ksrb" target="_blank">
-                    <img src="images/about/github.svg" alt="github"/>
-                </a>
-                <span>github.com/ksrb</span>
-            </div>
-            <div class="linkedin icon">
-                <a href="https://www.linkedin.com/in/ksrb00" target="_blank">
-                    <img src="images/about/linkedin.svg" alt="linkedin"/>
-                </a>
-                <span>linkedin.com/in/ksrbkevinsuen</span>
-            </div>
-        </div>
+    <div class="large-4 medium-1 small-2 column">
+        <table class="contact-info">
+            <tr>
+                <td>
+                    <a href="tel:+908-240-5093" class="icon" ng-include="'images/about/phone.svg'"></a>
+                </td>
+                <td>
+                    <span>(908) 240-5093</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="mailto:ksrbkevinsuen@gmail.com" class="icon" target="_blank"
+                       ng-include="'images/about/email.svg'"></a>
+                </td>
+                <td>
+                    <span>ksrbkevinsuen@gmail.com</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="//github.com/ksrb" class="icon" target="_blank" ng-include="'images/about/github.svg'"></a>
+                </td>
+                <td>
+                    <span>github.com/ksrb</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="//linkedin.com/in/ksrbkevinsuen" class="icon" target="_blank"
+                       ng-include="'images/about/linkedin.svg'"></a>
+                </td>
+                <td>
+                    <span>linkedin.com/in/ksrbkevinsuen</span>
+                </td>
+            </tr>
+        </table>
     </div>
 </section>
 
@@ -105,7 +152,8 @@
     <header class="large-1 column">
         <h5>SKILLS</h5>
     </header>
-    <div class="large-11 small-12 column" skills>
+    <div class="large-11 small-12 column">
+        <skills></skills>
     </div>
 </section>
 
@@ -113,7 +161,8 @@
     <header class="large-12 column">
         <h5>EXPERIENCE</h5>
     </header>
-    <div class="large-11 large-offset-1 small-12 column" experience>
+    <div class="large-11 large-offset-1 small-12 column">
+        <experience></experience>
     </div>
 </section>
 
@@ -134,5 +183,6 @@
         </article>
     </div>
 </section>
+
 </body>
 </html>

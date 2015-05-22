@@ -48,7 +48,7 @@
                 var iconPathSuffix = ".svg";
 
                 this.getIcon = function (skill) {
-                    return iconPathPrefix + skill.name + iconPathSuffix;
+                    return iconPathPrefix + skill.obj.name.toLowerCase() + iconPathSuffix;
                 };
 
                 var gradientStops = {
@@ -75,8 +75,8 @@
                     ]
                 };
 
-                this.getGradientStop = function (category) {
-                    return gradientStops[category];
+                this.getGradientStop = function (skill) {
+                    return gradientStops[skill.obj.category];
                 };
 
             }
@@ -85,28 +85,59 @@
 
     angular.module("app")
         .controller("ExperienceController",
-        ["ExperienceFactory",
-            function (ExperienceFactory) {
-                this.experiences = ExperienceFactory.getExperience();
+        ["ExperienceFactory", "$modal", "$scope",
+            /**
+             * Controller is used in ng-repeat, ng-repeat will attach its key to the controllers $scope
+             * For example:
+             * <div ng-repeat="experience in experiences" ng-controller="MyCtrl"></div>
+             *
+             * In the controller:
+             * $scope.experience //will access the data repeated via ng-repeat
+             */
+                function ctrl(ExperienceFactory, $modal, $scope) {
 
-                this.getLogoImage = function (experience) {
-                    return this.getExperienceFolderPath(experience) + "logo.png";
+                $scope.getLogoImage = function () {
+                    return getExperienceFolderPath() + "logo.png";
                 };
 
-                this.getSampleThumbNail = function (experience, sample) {
-                    return this.getExperienceFolderPath(experience) + sample + "-thumbnail.png";
+                $scope.getSampleThumbNail = function (sample) {
+                    return getExperienceFolderPath() + sample.image + "-thumbnail.png";
                 };
 
-                this.getSample = function (experience, sample) {
-                    return this.getExperienceFolderPath(experience) + sample + ".png";
+                $scope.getSample = function (sample) {
+                    return getExperienceFolderPath() + sample.image + ".png";
                 };
 
-                this.getExperienceFolderPath = function (experience) {
-                    return "images/experience/" + experience.organization.toLowerCase() + "/";
+                $scope.getSkillName = function (skill, useShort) {
+                    //If referencing a skill object access the name
+                    if (skill.obj) {
+                        if (useShort && skill.obj.short_name) {
+                            return skill.obj.short_name;
+                        }
+                        return skill.obj.name;
+                    }
+                    //If not referencing a skill obj try name obj
+                    return skill.name;
+                }
+
+                function getExperienceFolderPath() {
+                    return "images/experience/" + $scope.experience.organization.toLowerCase() + "/";
+                }
+
+
+                $scope.openModal = function (slideNum) {
+                    $scope.slideNum = slideNum;
+                    $modal.open({
+                        //TODO consider a alternative to passing the scope to access common functions
+                        //Passing scope over to access image utility functions
+                        scope: $scope,
+                        templateUrl: "app/partials/experience-modal.html"
+                    });
                 };
 
             }
         ]
     );
-})();
 
+
+})();
