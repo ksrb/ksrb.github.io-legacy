@@ -8,8 +8,7 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
 
 ###TODOs
 
-####Improve interactivity with Angular
-
+####General
 * Code Quality
     * Testing not implemented
     * Folder structure questionable need to consult best practices guide
@@ -23,11 +22,11 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
     * Rewrite to sound more professional
 
 ####Skills section
-
 * Code Quality 
     * Possibly refactor skill/icon code
     * Move gradients to CSS (?) - not possible SVGs are only compatible with <linearGradient>s
     * Generate SVG meters dynamically (?)
+    * Consider removing gradients and SVGs entirely for pseudo elements and solid color
     
 * Functionality (Pending refactoring)
     * Refactor for mobile
@@ -35,27 +34,26 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
     * Tooltip for skills
 
 ####Experience section
-
 * Content
     * Rewrite for clarity and strength of points
+    
+* Code Quality
+    * Consider implementing modal and slider independently to reduce dependencies
+    * If keeping dependencies consider using [angular-slick](https://github.com/vasyabigi/angular-slick)
 
 * Functionality
-    * Consider implementing modal and slider independently to reduce dependencies
     * Tooltip for skills 
+    * Consider pie chart for skill usage (would probably require redesign)
     
 ####Convert Graphic Design portfolio to HTML
-
 * Not implemented **secondary** to showing experience
 
 ####Get [Karma](http://karma-runner.github.io/0.12/index.html) in there
-
 * Important but can wait
 
 ####Assets
-
 * Consider creating a icon typeset to reduce network traffic
 
 ####Find a excuse to use Gradle
-
 * Lowest priority more for fun than necessary
 * Maybe necessary for custom deployment
