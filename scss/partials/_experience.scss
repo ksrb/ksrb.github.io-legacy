@@ -25,7 +25,7 @@
     }
   }
 
-  header {
+  > header {
     @include spacing;
 
     background-color: #F5F5F5;
@@ -61,14 +61,29 @@
   }
 
   .samples {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-    .sample {
-      transition: box-shadow .3s ease;
-      &:hover {
-        box-shadow: 0 0 10px #afafaf;
+    header {
+      margin: 0 auto;
+      @include spacing;
+      width: 50%;
+
+      text-align: center;
+      color: $divider-color;
+
+      border-bottom: 1px solid $divider-color;
+    }
+
+    .images {
+
+      @include display-flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .image {
+        transition: box-shadow .3s ease;
+        &:hover {
+          box-shadow: 0 0 10px #afafaf;
+        }
       }
     }
 
