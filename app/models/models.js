@@ -152,9 +152,18 @@
                     end: new Date("2015-03"),
                     purpose: "Company focused on providing network analysis software",
                     contributions: [
-                        "Replace aging Flash UI with HTML5 technology",
-                        "Used GWT and Angular to create reporting, search, and navigation systems",
-                        "Increased developer productivity by introducing tools such as Gradle and git"
+                        /*
+                         * It was a web app that polled a file analysis service (virus scanner) telling the client when the analysis was completed
+                         */
+                        "Created a real time reporting web application for Niksun's file analysis service, used by several clients including Wells Fargo.",
+                        /*
+                         * Contributed the most LOC to the project, responsible for mocking and creating several prototypes.
+                         */
+                        "Rapidly designed and wireframed several prototypes in a effort to modernize Niksun's client facing applications.",
+                        /*
+                         * Created a build script using Gradle to automate workspace setup and running the project
+                         */
+                        "Created a workspace setup and build script using Gradle, significantly reducing onboarding time of new developers."
                     ],
                     samples: [
                         {
@@ -163,11 +172,11 @@
                         },
                         {
                             image: "Template-with-Pods",
-                            caption: "Dashboard of NetDetector, Niksun's network analysis software, implemented using GWT. This is a mock as the product is proprietary."
+                            caption: "Prototype of new NetDetector, Niksun's network analysis software, implemented using GWT. This is a mock as the product is proprietary."
                         },
                         {
                             image: "Login-Template",
-                            caption: "Redesigned login page for new UI."
+                            caption: "Redesigned login page for Niksun client facing applications."
                         }
                     ]
                 },
@@ -190,11 +199,11 @@
                     position: "Webmaster",
                     start: new Date("2012-12"),
                     end: new Date("2013-05"),
-                    purpose: "Nonprofit organization that designs websites for charities.",
+                    purpose: "Nonprofit organization that designs websites for charity.",
                     contributions: [
-                        "Maintained organization's websites",
-                        "Taught new members basic web and graphic design skills",
-                        "Extensive use of Photoshop for asset creation"
+                        "Gathered requirements, designed graphics, and created sites for clients.",
+                        "Lead session for web and graphic design training new members in basic development techniques and best practices.",
+                        "Actively promoted organization responsible for recruiting several members."
                     ],
                     samples: [
                         {

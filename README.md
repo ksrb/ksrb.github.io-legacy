@@ -2,7 +2,7 @@
 
 ###[Master branch](https://github.com/ksrb/ksrb.github.io/tree/master)
 * Github pages for a user are deployed under the repository [username].github.io under the master branch.
-* Therefore to avoid polluting the 'production' branch with unnecessary developments files (bower and scss) the master branch
+* Therefore to avoid polluting the development branch with unnecessary files (compiled css and js) the master
 has been orphaned and all necessary changes are manually pulled from the [dev branch](https://github.com/ksrb/ksrb.github.io/tree/dev)
 * Major releases will be tagged
 

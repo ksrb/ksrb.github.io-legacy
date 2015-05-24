@@ -15,6 +15,14 @@
 
   transition: box-shadow .3s ease;
 
+  > header {
+    @include spacing;
+
+    background-color: #F5F5F5;
+    border-bottom: 1px solid $divider-color;
+    padding: rem-calc(15px);
+  }
+
   .organization-logo {
     @include spacing;
 
@@ -23,14 +31,6 @@
     img {
       height: rem-calc(80px);
     }
-  }
-
-  > header {
-    @include spacing;
-
-    background-color: #F5F5F5;
-    border-bottom: 1px solid $divider-color;
-    padding: rem-calc(15px);
   }
 
   .skills-used {
@@ -60,17 +60,20 @@
     }
   }
 
+  .contributions {
+    width: 60%;
+  }
+
   .samples {
 
     header {
       margin: 0 auto;
       @include spacing;
-      width: 50%;
 
       text-align: center;
       color: $divider-color;
 
-      border-bottom: 1px solid $divider-color;
+      box-shadow: 0px 4px 10px -6px;
     }
 
     .images {
