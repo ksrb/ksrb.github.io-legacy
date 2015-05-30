@@ -54,6 +54,16 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
 ####Assets
 * Consider creating a icon typeset to reduce network traffic
 
-####Find a excuse to use Gradle
-* Lowest priority more for fun than necessary
-* Maybe necessary for custom deployment
+####Deployment process
+* Currently deployment is too complex, the current process looks something like this:
+    * git checkout master
+    * git checkout dev .
+    * git reset
+    * compass compile
+    * git add -u
+    * manually diff index.html to switch ensure CDNs are being used
+    * manually add new any assets
+    * git clean -xdf - remove untracked, directories, and ignore files
+    * python -m SimpleHTTPServer 8000 - to test the changes 
+    * git push to deploy
+    * git tag [vX.X] -af [ref]
