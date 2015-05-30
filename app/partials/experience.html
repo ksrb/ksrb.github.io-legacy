@@ -24,7 +24,12 @@
                 </div>
                 <div class="date">
                     {{experience.start | date: 'MMMM yyyy'}}<br/>
-                    {{experience.end | date: 'MMMM yyyy'}}
+                    <span ng-show="experience.end">
+                        {{experience.end | date: 'MMMM yyyy'}}
+                    </span>
+                    <span ng-show="!experience.end">
+                        Current
+                    </span>
                 </div>
             </div>
             <div class="description">
@@ -35,10 +40,13 @@
             </div>
             <div class="samples">
                 <header>Sample work</header>
-                <div class="images">
+                <div class="images" ng-show="experience.samples">
                     <img class="image" ng-repeat="sample in experience.samples"
                          ng-src="{{getSampleThumbNail(sample)}}"
                          ng-click="openModal($index)" alt="sample">
+                </div>
+                <div class="images-placeholder" ng-show="!experience.samples">
+                    Work in progress
                 </div>
             </div>
         </div>

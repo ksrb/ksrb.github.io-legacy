@@ -91,6 +91,18 @@
       }
     }
 
+    .images-placeholder {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      color: $divider-color;
+
+      padding: rem-calc(30px) 0;
+
+      background: whitesmoke;
+      border-radius: 4px;
+    }
+
     @media #{$small-only}{
       .image {
         margin: 0 auto;

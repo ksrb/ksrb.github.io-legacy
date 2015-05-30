@@ -131,6 +131,33 @@
 
             var experience = [
                 {
+                    organization: "Table Design Art",
+                    website: "http://www.tabledesignart.com",
+                    skills_used: [
+                        {
+                            name: "Liquid",
+                            usage: "40"
+                        },
+                        {
+                            name: "css",
+                            usage: "30"
+                        },
+                        {
+                            name: "js",
+                            usage: "30"
+                        }
+
+                    ],
+                    position: "Web Developer",
+                    start: new Date("2015-04"),
+                    purpose: "Startup company specializing in creating decorative table banners for special occasion.",
+                    contributions: [
+                        "Used Shopify to rapidly create webstore used the Liquid templating language to customize appearance.",
+                        "Simplified shipping process by using several 3rd party applications to integrate with shipping providers such as FedEx and UPS.",
+                        "Helping manage social media on Facebook, Pinterest, and Twitter."
+                    ],
+                },
+                {
                     organization: "Niksun",
                     website: "http://www.niksun.com",
                     skills_used: [
@@ -216,7 +243,6 @@
                         }
                     ]
                 }
-
             ];
             return {
                 getExperience: function () {
