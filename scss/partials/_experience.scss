@@ -103,24 +103,47 @@
   }
 
   /**
-   * Creates a successively brighter gradient class for each skill entered
+   * Creates a successively brighter gradient class for each skill entered.
+   * If too many skills are passed the hue will be adjusted and the brightness reset to avoid having the gradients become too bright.
+   * Similar skills can be grouped to assign the same gradient to the skills
    * @param $base-color - color in which gradients are based off of
    * @param $skill - array of skills by name
    */
   @mixin generate-skills-gradient($base-color, $skills...) {
+    $base-color-copy: $base-color;
     //Iterate through the skills
     @for $i from 1 through length($skills) {
-      //Generate class name based on skill name
-      #{"."+nth($skills, $i)} {
-        //Lighten top gradient by 15% of base color
-        @include background(linear-gradient(lighten($base-color, 15%), $base-color));
-        &:hover {
-          $hover-color: lighten(adjust_hue($base-color, 5%), 5%);
-          @include background(linear-gradient(lighten($hover-color, 15%), $hover-color));
+      $skill: nth($skills, $i);
+
+      //Reset base color and adjust hue every 4th skill
+      @if $i % 4 == 0 {
+        $base-color: adjust_hue($base-color-copy, 30%);
+      }
+
+      // Create the gradient for the skill
+      @if (length($skill) == 1) {
+        @include generate-skill-gradient($base-color, $skill);
+      } @else {
+        //If there is a grouping of skills create the same gradient for each skill
+        @for $j from 1 through length($skill) {
+          @include generate-skill-gradient($base-color, $skill);
         }
       }
+
       //lighten base color by 8% every iteration
       $base-color: lighten($base-color, 8%);
+    }
+  }
+
+  @mixin generate-skill-gradient($base-color, $skill) {
+    //Generate class name based on skill name
+    #{"."+$skill} {
+      //Lighten top gradient by 15% of base color
+      @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+      &:hover {
+        $hover-color: lighten(adjust_hue($base-color, 5%), 5%);
+        @include background(linear-gradient(lighten($hover-color, 15%), $hover-color));
+      }
     }
   }
 
@@ -128,7 +151,7 @@
   @include generate-skills-gradient(#354B88, 'Java', 'js');
 
   //Design skills are green
-  @include generate-skills-gradient(#457362, 'css', 'Photoshop', 'Illustrator');
+  @include generate-skills-gradient(#457362, 'css', 'Photoshop', 'Illustrator', ('Liquid', 'HTML'));
 }
 
 .reveal-modal {
