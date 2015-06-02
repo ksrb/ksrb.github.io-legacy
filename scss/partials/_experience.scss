@@ -48,20 +48,22 @@
 
   .overview {
     @include spacing;
+  }
 
+  .company-info, .position-info {
     display: flex;
     justify-content: space-between;
-
     font-weight: bold;
+  }
 
-    .date {
-      text-align: right;
-      font-style: italic;
-    }
+  .company-info .location, .position-info .date {
+    color: $secondary-text-color;
   }
 
   .contributions {
-    width: 60%;
+    @media #{$medium-up}{
+      width: 60%;
+    }
   }
 
   .samples {

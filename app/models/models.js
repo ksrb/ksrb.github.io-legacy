@@ -132,7 +132,8 @@
             var experience = [
                 {
                     organization: "Table Design Art",
-                    website: "http://www.tabledesignart.com",
+                    location: "Irvine, CA",
+                    website: "//www.tabledesignart.com",
                     skills_used: [
                         {
                             name: "Liquid",
@@ -148,18 +149,19 @@
                         }
 
                     ],
-                    position: "Web Developer",
+                    title: "Web Developer",
                     start: new Date("2015-04"),
                     purpose: "Startup company specializing in creating decorative table banners for special occasion.",
                     contributions: [
-                        "Used Shopify to rapidly create webstore used the Liquid templating language to customize appearance.",
-                        "Simplified shipping process by using several 3rd party applications to integrate with shipping providers such as FedEx and UPS.",
-                        "Helping manage social media on Facebook, Pinterest, and Twitter."
+                        "Used Shopify to rapidly create webstore, used the Liquid templating language to customize appearance.",
+                        "Simplified shipping process by integrating webstore with shipping providers such as FedEx and UPS",
+                        "Helping manage social media campaign on Facebook, Pinterest, and Twitter."
                     ],
                 },
                 {
                     organization: "Niksun",
-                    website: "http://www.niksun.com",
+                    location: "Princeton, NJ",
+                    website: "//www.niksun.com",
                     skills_used: [
                         {
                             name: "Java",
@@ -174,10 +176,10 @@
                             usage: "10"
                         }
                     ],
-                    position: "Web Developer",
+                    title: "Web Developer",
                     start: new Date("2013-09"),
                     end: new Date("2015-03"),
-                    purpose: "Company focused on providing network analysis software",
+                    purpose: "Company focused on providing network analysis software.",
                     contributions: [
                         /*
                          * It was a web app that polled a file analysis service (virus scanner) telling the client when the analysis was completed
@@ -186,7 +188,7 @@
                         /*
                          * Contributed the most LOC to the project, responsible for mocking and creating several prototypes.
                          */
-                        "Rapidly designed and wireframed several prototypes in a effort to modernize Niksun's client facing applications.",
+                        "Rapidly designed and wireframed several prototypes in an effort to modernize Niksun's client facing applications.",
                         /*
                          * Created a build script using Gradle to automate workspace setup and running the project
                          */
@@ -209,6 +211,7 @@
                 },
                 {
                     organization: "Scholars for Charity",
+                    location: "New Brunswick, NJ",
                     skills_used: [
                         {
                             name: "css",
@@ -223,7 +226,7 @@
                             usage: "10"
                         }
                     ],
-                    position: "Webmaster",
+                    title: "Webmaster",
                     start: new Date("2012-12"),
                     end: new Date("2013-05"),
                     purpose: "Nonprofit organization that designs websites for charity.",

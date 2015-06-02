@@ -18,18 +18,25 @@
 
         <div class="content">
             <div class="overview">
-                <div class="title">
-                    <a href="{{experience.website}}">{{experience.organization}}</a><br/>
-                    {{experience.position}}
+                <div class="company-info">
+                    <div class="name">
+                        <a href="{{experience.website}}">{{experience.organization}}</a>
+                    </div>
+                    <div class="location">
+                        {{experience.location}}
+                    </div>
                 </div>
-                <div class="date">
-                    {{experience.start | date: 'MMMM yyyy'}}<br/>
-                    <span ng-show="experience.end">
-                        {{experience.end | date: 'MMMM yyyy'}}
-                    </span>
-                    <span ng-show="!experience.end">
-                        Current
-                    </span>
+                <div class="position-info">
+                    <div class="title">{{experience.title}}</div>
+                    <div class="date">
+                        {{experience.start | date: 'MM/yyyy'}} -
+                        <span ng-show="experience.end">
+                            {{experience.end | date: 'MM/yyyy'}}
+                        </span>
+                        <span ng-show="!experience.end">
+                            Current
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="description">

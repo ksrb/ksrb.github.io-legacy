@@ -275,6 +275,10 @@ section.row {
     img {
       width: rem-calc(28px);
     }
+    span {
+      position: relative;
+      top: 6px;
+    }
   }
 
   a {
