@@ -10,67 +10,67 @@
                     name: "java",
                     category: "programming",
                     level: 8,
-                    site: "http://en.wikipedia.org/wiki/Java_%28programming_language%29"
+                    site: "//en.wikipedia.org/wiki/Java_%28programming_language%29"
                 },
                 {
                     name: "javascript",
                     category: "programming",
                     level: 5,
-                    site: "http://en.wikipedia.org/wiki/JavaScript"
+                    site: "//en.wikipedia.org/wiki/JavaScript"
                 },
                 {
-                    name: "gradle",
+                    name: "angularJS",
                     category: "programming",
                     level: 4,
-                    site: "http://en.wikipedia.org/wiki/Gradle"
+                    site: "//en.wikipedia.org/wiki/AngularJS"
                 },
                 {
                     name: "gwt",
                     category: "programming",
                     level: 6,
-                    site: "http://en.wikipedia.org/wiki/Google_Web_Toolkit"
+                    site: "//en.wikipedia.org/wiki/Google_Web_Toolkit"
                 },
                 {
                     name: "html",
                     category: "design",
                     level: 7,
-                    site: "http://en.wikipedia.org/wiki/HTML"
+                    site: "//en.wikipedia.org/wiki/HTML"
                 },
                 {
                     name: "css",
                     category: "design",
                     level: 7,
-                    site: "http://en.wikipedia.org/wiki/Cascading_Style_Sheets"
+                    site: "//en.wikipedia.org/wiki/Cascading_Style_Sheets"
                 },
                 {
                     name: "photoshop",
                     category: "design",
                     level: 8,
-                    site: "http://en.wikipedia.org/wiki/Adobe_Photoshop"
+                    site: "//en.wikipedia.org/wiki/Adobe_Photoshop"
                 },
                 {
                     name: "illustrator",
                     category: "design",
                     level: 5,
-                    site: "http://en.wikipedia.org/wiki/Adobe_Illustrator"
+                    site: "//en.wikipedia.org/wiki/Adobe_Illustrator"
                 },
                 {
                     name: "eclipse",
                     category: "tools",
                     level: 7,
-                    site: "http://en.wikipedia.org/wiki/Eclipse_%28software%29"
+                    site: "//en.wikipedia.org/wiki/Eclipse_%28software%29"
                 },
                 {
                     name: "intellij",
                     category: "tools",
                     level: 6,
-                    site: "http://en.wikipedia.org/wiki/IntelliJ_IDEA"
+                    site: "//en.wikipedia.org/wiki/IntelliJ_IDEA"
                 },
                 {
                     name: "git",
                     category: "tools",
                     level: 6,
-                    site: "http://en.wikipedia.org/wiki/Git_%28software%29"
+                    site: "//en.wikipedia.org/wiki/Git_%28software%29"
                 }
             ];
 
