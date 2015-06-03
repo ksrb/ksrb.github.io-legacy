@@ -10,8 +10,13 @@
             </div>
 
             <div class="skills-used">
-                <div ng-attr-style="width:{{skills_used.usage}}%" class="{{skills_used.name}}"
-                     ng-repeat="skills_used in experience.skills_used">{{skills_used.name}} {{skills_used.usage}}%
+                <div ng-attr-style="width:{{skills_used.usage}}%"
+                     class="{{getSkillName(skills_used)}}"
+                     ng-repeat="skills_used in experience.skills_used">
+                    <span class="long">{{getSkillName(skills_used)}}</span>
+                    <span class="short">{{getSkillName(skills_used, true)}}</span>
+                    {{skills_used.usage}}%
+
                 </div>
             </div>
         </header>

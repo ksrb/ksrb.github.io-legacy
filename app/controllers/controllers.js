@@ -48,7 +48,7 @@
                 var iconPathSuffix = ".svg";
 
                 this.getIcon = function (skill) {
-                    return iconPathPrefix + skill.name + iconPathSuffix;
+                    return iconPathPrefix + skill.obj.name + iconPathSuffix;
                 };
 
                 var gradientStops = {
@@ -75,8 +75,8 @@
                     ]
                 };
 
-                this.getGradientStop = function (category) {
-                    return gradientStops[category];
+                this.getGradientStop = function (skill) {
+                    return gradientStops[skill.obj.category];
                 };
 
             }
@@ -107,6 +107,18 @@
                 $scope.getSample = function (sample) {
                     return getExperienceFolderPath() + sample.image + ".png";
                 };
+
+                $scope.getSkillName = function (skill, useShort) {
+                    //If referencing a skill object access the name
+                    if (skill.obj) {
+                        if (useShort && skill.obj.short_name) {
+                            return skill.obj.short_name;
+                        }
+                        return skill.obj.name;
+                    }
+                    //If not referencing a skill obj try name obj
+                    return skill.name;
+                }
 
                 function getExperienceFolderPath() {
                     return "images/experience/" + $scope.experience.organization.toLowerCase() + "/";

@@ -40,6 +40,21 @@
     text-align: center;
     color: $primary-color-text;
     font-size: rem-calc(12px);
+
+    .short {
+      display: none;
+
+      @media #{$small-only} {
+        display: inline;
+      }
+    }
+
+    .long {
+
+      @media #{$small-only} {
+        display: none;
+      }
+    }
   }
 
   .content {
