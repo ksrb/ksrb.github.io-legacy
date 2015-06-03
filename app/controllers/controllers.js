@@ -48,7 +48,7 @@
                 var iconPathSuffix = ".svg";
 
                 this.getIcon = function (skill) {
-                    return iconPathPrefix + skill.obj.name + iconPathSuffix;
+                    return iconPathPrefix + skill.obj.name.toLowerCase() + iconPathSuffix;
                 };
 
                 var gradientStops = {
