@@ -194,7 +194,7 @@
 
                         ],
                         title: "Web Developer",
-                        start: new Date("2015-04"),
+                        start: new Date("2015-04-1"),
                         purpose: "Startup company specializing in creating decorative table banners for special occasion.",
                         contributions: [
                             "Used Shopify to rapidly create webstore, used the Liquid templating language to customize appearance.",
@@ -221,8 +221,8 @@
                             }
                         ],
                         title: "Web Developer",
-                        start: new Date("2013-09"),
-                        end: new Date("2015-03"),
+                        start: new Date("2013-09-1"),
+                        end: new Date("2015-03-1"),
                         purpose: "Company focused on providing network analysis software.",
                         contributions: [
                             /*
@@ -271,8 +271,8 @@
                             }
                         ],
                         title: "Webmaster",
-                        start: new Date("2012-12"),
-                        end: new Date("2013-05"),
+                        start: new Date("2012-12-1"),
+                        end: new Date("2013-05-1"),
                         purpose: "Nonprofit organization that designs websites for charity.",
                         contributions: [
                             "Gathered requirements, designed graphics, and created sites for clients.",
