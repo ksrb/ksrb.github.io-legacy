@@ -241,65 +241,59 @@ section.row {
     color: inherit;
   }
 
-  .icons {
-    margin-top: rem-calc(8px);
-    @include display-flex;
-    @include flex-direction(column);
-    font-size: rem-calc(13px);
-  }
-
-  .icon {
-    span {
-      display: none;
-      &:hover {
-        color: white;
-      }
-    }
-    margin-bottom: rem-calc(18px);
-
-    //Only show icon text when screen large (~1024px+)
-    @media #{$large-up} {
-      span {
-        display: inline;
-      }
-    }
-  }
-
-  .phone {
-    img {
-      width: rem-calc(31px);
-      height: rem-calc(35px);
-    }
-  }
-
-  .email {
-    img {
-      width: rem-calc(32px);
-    }
-  }
-
-  .github {
-    img {
-      width: rem-calc(29px);
-    }
-  }
-
-  .linkedin {
-    img {
-      width: rem-calc(28px);
-    }
-    span {
-      position: relative;
-      top: 6px;
-    }
-  }
-
   a {
     color: darken($primary-color-text, 20%);
     &:active, &:hover {
       color: $primary-color-text;
     }
   }
+
+  .contact-info {
+    border: none;
+    background: none;
+
+    tr {
+      td {
+        padding: rem-calc(3px);
+        color: $primary-color-text;
+
+        //Hide text on small and medium devices
+        @media #{$small-only}, #{$medium-only} {
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+
+      //Override stripping of table from foundation
+      &:nth-of-type(2n) {
+        background: none;
+      }
+    }
+  }
+
+  .icon {
+    $transition-duration: .3s;
+
+    display: block;
+    padding: rem-calc(5px);
+    border-radius: rem-calc(5px);
+    transition: background $transition-duration ease;
+
+    svg {
+      transition: fill $transition-duration ease;
+      width: 23px;
+      fill: $primary-color-text;
+    }
+
+    &:hover {
+      background: white;
+      svg {
+        fill: $primary-color-dark;
+      }
+    }
+  }
+
 }
 
 #education {

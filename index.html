@@ -94,7 +94,7 @@
     <header class="large-1 column">
         <h5>ABOUT</h5>
     </header>
-    <div class="large-8 medium-11 small-10 column">
+    <div class="large-7 medium-11 small-10 column">
         <p>
             Hi, I'm Kevin an aspiring JavaScript ninja. I'm currently enamored with AngularJS but am interested in
             all things JavaScript. I've also got some decent <a href="images/portfolio.png" target="_blank">Photoshop
@@ -107,34 +107,43 @@
             reach me to the right. Lets be ninjas together.
         </p>
     </div>
-    <div class="large-3 medium-1 small-2 column">
-        <div class="icons">
-            <!-- TODO tel and mailto not working in chrome -->
-            <div class="phone icon">
-                <a href="tel:+908-240-5093">
-                    <img src="images/about/phone.svg" alt="phone"/>
-                </a>
-                <span>(908) 240-5093</span>
-            </div>
-            <div class="email icon">
-                <a href="mailto:ksrbkevinsuen@gmail.com" target="_blank">
-                    <img src="images/about/email.svg" alt="email"/>
-                </a>
-                <span>ksrbkevinsuen@gmail.com</span>
-            </div>
-            <div class="github icon">
-                <a href="//github.com/ksrb" target="_blank">
-                    <img src="images/about/github.svg" alt="github"/>
-                </a>
-                <span>github.com/ksrb</span>
-            </div>
-            <div class="linkedin icon">
-                <a href="//linkedin.com/in/ksrbkevinsuen" target="_blank">
-                    <img src="images/about/linkedin.svg" alt="linkedin"/>
-                </a>
-                <span>linkedin.com/in/ksrbkevinsuen</span>
-            </div>
-        </div>
+    <div class="large-4 medium-1 small-2 column">
+        <table class="contact-info">
+            <tr>
+                <td>
+                    <a href="tel:+908-240-5093" class="icon" ng-include="'images/about/phone.svg'"></a>
+                </td>
+                <td>
+                    <span>(908) 240-5093</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="mailto:ksrbkevinsuen@gmail.com" class="icon" target="_blank"
+                       ng-include="'images/about/email.svg'"></a>
+                </td>
+                <td>
+                    <span>ksrbkevinsuen@gmail.com</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="//github.com/ksrb" class="icon" target="_blank" ng-include="'images/about/github.svg'"></a>
+                </td>
+                <td>
+                    <span>github.com/ksrb</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="//linkedin.com/in/ksrbkevinsuen" class="icon" target="_blank"
+                       ng-include="'images/about/linkedin.svg'"></a>
+                </td>
+                <td>
+                    <span>linkedin.com/in/ksrbkevinsuen</span>
+                </td>
+            </tr>
+        </table>
     </div>
 </section>
 
