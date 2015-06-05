@@ -58,11 +58,13 @@
 <nav id="nav" class="row">
     <!--TODO simplify jump to id via anchor-->
     <ul ng-controller="NavbarController as NavbarCtrl">
+        <li><a href="images/portfolio.png" target="_blank">DESIGN</a></li>
         <li><a ng-click="NavbarCtrl.scrollTo('about')">ABOUT</a></li>
         <li><a ng-click="NavbarCtrl.scrollTo('skills')">SKILLS</a></li>
         <li class="logo"><img src="images/logo.svg" alt="logo"/></li>
         <li><a ng-click="NavbarCtrl.scrollTo('experience')">EXPERIENCE</a></li>
         <li><a ng-click="NavbarCtrl.scrollTo('education')">EDUCATION</a></li>
+        <li><a></a></li>
     </ul>
     <div class="background"></div>
 </nav>
@@ -78,7 +80,7 @@
         <div id="design" class="slide right">
             <img class="splash-art" src="images/workflow/design.svg" alt="design"/>
 
-            <p class="tag-line">DESIGN</p>
+            <a href="images/portfolio.png" target="_blank"><p class="tag-line">DESIGN</p></a>
         </div>
         <div id="create" class="slide left">
             <img class="splash-art" src="images/workflow/create.svg" alt="create"/>
@@ -95,8 +97,9 @@
     <div class="large-8 medium-11 small-10 column">
         <p>
             Hi, I'm Kevin an aspiring JavaScript ninja. I'm currently enamored with AngularJS but am interested in
-            all things JavaScript. When I'm not programming you can catch me hiking, doodling on my Wacom tablet, or
-            watching some Twitch TV.
+            all things JavaScript. I've also got some decent <a href="images/portfolio.png" target="_blank">Photoshop
+            skills</a>. When I'm not programming you can catch me hiking, doodling on my Wacom tablet, or watching some
+            Crash Course.
         </p>
 
         <p>

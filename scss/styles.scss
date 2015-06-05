@@ -57,7 +57,7 @@ section.row {
       }
 
       //No hover effect for logo
-      &:hover:not(:nth-child(3)) {
+      &:hover:not(:nth-of-type(4)) {
 
         //Override foundation
         a {
@@ -140,7 +140,19 @@ section.row {
     overflow: hidden;
     left: 50%;
 
-    @include transition(z-index $transition-duration ease, transform $transition-duration ease, top $transition-duration ease, opacity $transition-duration ease, box-shadow .3s ease);
+    @include transition(
+            z-index $transition-duration ease,
+            transform $transition-duration ease,
+            top $transition-duration ease,
+            opacity $transition-duration ease,
+            box-shadow .3s ease);
+
+    @media #{$small-only}{
+      width: rem-calc($dimension/2);
+      height: rem-calc($dimension/2);
+
+      border-width: rem-calc($border-width/2);
+    }
 
     .tag-line, .splash-art {
       position: absolute;
@@ -169,18 +181,13 @@ section.row {
 
       background-color: $slide-color;
 
+      @include transition(background-color $transition-duration ease);
+
       @media #{$small-only}{
         font-size: rem-calc($font-size/2);
         height: rem-calc($height/2);
         bottom: 0;
       }
-    }
-
-    @media #{$small-only}{
-      width: rem-calc($dimension/2);
-      height: rem-calc($dimension/2);
-
-      border-width: rem-calc($border-width/2);
     }
 
     //Slide positioning
@@ -208,8 +215,14 @@ section.row {
       @include back;
       transform: translate(11%, 0)
     }
+
     &:hover {
       box-shadow: 0 0 rem-calc(10px) rgba(0, 0, 0, .7);
+      a {
+        .tag-line {
+          background-color: $accent-color;
+        }
+      }
     }
   }
 }
