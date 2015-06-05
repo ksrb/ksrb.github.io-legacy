@@ -121,11 +121,10 @@
     }
 
     @media #{$small-only}{
-      .image {
-        margin: 0 auto;
-        //Hide all but the first on small displays
-        &:not(:nth-child(1)) {
-          display: none;
+      .images {
+        @include flex-direction(column);
+        .image {
+          margin: rem-calc(5px) 0;
         }
       }
     }
