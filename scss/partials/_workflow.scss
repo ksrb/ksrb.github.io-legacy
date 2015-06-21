@@ -1,0 +1,161 @@
+@import 'compass';
+@import 'foundation/components/global';
+@import 'partials/settings';
+@import 'partials/globals';
+
+//TODO consider alternative to using mass media queries to resize slides
+#workflow {
+  $transition-duration: 1.5s;
+
+  #slides {
+    position: relative;
+    margin: rem-calc(9px) auto rem-calc(20px) auto;
+
+    $height: 372px;
+    height: rem-calc($height);
+
+    @media #{$small-only}{
+      height: rem-calc($height/2);
+    }
+  }
+
+  #think {
+    .splash-art {
+      $width: 300px;
+      $bottom: 65px;
+      width: rem-calc($width);
+      bottom: rem-calc(65px);
+
+      @media #{$small-only}{
+        width: rem-calc($width/2);
+        bottom: rem-calc($bottom/2);
+      }
+    }
+  }
+
+  #design {
+    .splash-art {
+      $width: 300px;
+      width: rem-calc($width);
+
+      @media #{$small-only}{
+        width: rem-calc($width/2);
+      }
+    }
+  }
+
+  #create {
+    .splash-art {
+      $width: 235px;
+      width: rem-calc($width);
+
+      @media #{$small-only}{
+        width: rem-calc($width/2);
+      }
+    }
+  }
+
+  .slide {
+    $slide-color: #264B7D;
+    //Hide slides in back
+    background-color: white;
+
+    $border-width: 5px;
+    border: rem-calc($border-width) solid $slide-color;
+    //Shape slide into a circle
+    @include border-radius(50%);
+
+    $dimension: 294px;
+    width: rem-calc($dimension);
+    height: rem-calc($dimension);
+
+    position: absolute;
+    overflow: hidden;
+    left: 50%;
+
+    @include transition(
+            z-index $transition-duration ease,
+            transform $transition-duration ease,
+            top $transition-duration ease,
+            opacity $transition-duration ease,
+            box-shadow .3s ease);
+
+    @media #{$small-only}{
+      width: rem-calc($dimension/2);
+      height: rem-calc($dimension/2);
+
+      border-width: rem-calc($border-width/2);
+    }
+
+    .tag-line, .splash-art {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .splash-art {
+      //Override foundation
+      max-width: none;
+    }
+
+    .tag-line {
+      //Override foundation
+      color: $primary-color-text;
+      $font-size: 13px;
+      font-size: rem-calc($font-size);
+      text-align: center;
+
+      $height: 20px;
+      height: rem-calc($height);
+      width: 100%;
+
+      $bottom: 20px;
+      bottom: rem-calc($bottom);
+
+      background-color: $slide-color;
+
+      @include transition(background-color $transition-duration ease);
+
+      @media #{$small-only}{
+        font-size: rem-calc($font-size/2);
+        height: rem-calc($height/2);
+        bottom: 0;
+      }
+    }
+
+    //Slide positioning
+    &.middle {
+      z-index: 1;
+      transform: translate(-50%, 0);
+      $top: 65px;
+      top: rem-calc($top);
+      @media #{$small-only}{
+        top: rem-calc($top/2);
+      }
+    }
+
+    @mixin back {
+      opacity: .5;
+      top: rem-calc(8px);
+    }
+
+    &.left {
+      @include back;
+      transform: translate(-111%, 0)
+    }
+
+    &.right {
+      @include back;
+      transform: translate(11%, 0)
+    }
+
+    &:hover {
+      box-shadow: 0 0 rem-calc(10px) rgba(0, 0, 0, .7);
+      a {
+        .tag-line {
+          background-color: $accent-color;
+        }
+      }
+    }
+  }
+}

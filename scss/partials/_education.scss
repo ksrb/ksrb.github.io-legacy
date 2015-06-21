@@ -1,0 +1,11 @@
+#education {
+
+  article {
+    display: flex;
+    justify-content: space-between;
+
+    .date {
+      text-align: right;
+    }
+  }
+}

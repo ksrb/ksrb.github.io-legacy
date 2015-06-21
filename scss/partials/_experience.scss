@@ -130,6 +130,25 @@
     }
   }
 
+
+  @mixin generate-skill-gradient($base-color, $skill) {
+    $classes: null;
+    //Create the class(es) for the skill(s)
+    @for $j from 1 through length($skill) {
+      $classes: append($classes, "."+nth($skill, $j), comma);
+    }
+
+    //Generate class name(s) based on skill name(s)
+    #{$classes} {
+      //Lighten top gradient by 15% of base color
+      @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+      &:hover {
+        $hover-color: lighten(adjust_hue($base-color, 5%), 5%);
+        @include background(linear-gradient(lighten($hover-color, 15%), $hover-color));
+      }
+    }
+  }
+
   /**
    * Creates a successively brighter gradient class for each skill entered.
    * If too many skills are passed the hue will be adjusted and the brightness reset to avoid having the gradients become too bright.
@@ -152,24 +171,6 @@
 
       //lighten base color by 8% every iteration
       $base-color: lighten($base-color, 8%);
-    }
-  }
-
-  @mixin generate-skill-gradient($base-color, $skill) {
-    $classes: null;
-    //Create the class(es) for the skill(s)
-    @for $j from 1 through length($skill) {
-      $classes: append($classes, "."+nth($skill, $j), comma);
-    }
-
-    //Generate class name(s) based on skill name(s)
-    #{$classes} {
-      //Lighten top gradient by 15% of base color
-      @include background(linear-gradient(lighten($base-color, 15%), $base-color));
-      &:hover {
-        $hover-color: lighten(adjust_hue($base-color, 5%), 5%);
-        @include background(linear-gradient(lighten($hover-color, 15%), $hover-color));
-      }
     }
   }
 

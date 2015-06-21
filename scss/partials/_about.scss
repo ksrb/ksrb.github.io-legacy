@@ -1,0 +1,72 @@
+@import 'compass';
+@import 'foundation/components/global';
+@import 'foundation/functions';
+@import 'globals';
+
+#about {
+  color: $primary-color-text;
+  text-align: justify;
+
+  background-color: $primary-color-dark;
+
+  padding: rem-calc(25px) 0 rem-calc(5px);
+  margin-bottom: rem-calc(10px);
+
+  header #{headings()} {
+    //Override foundation
+    color: inherit;
+  }
+
+  a {
+    color: darken($primary-color-text, 20%);
+    &:active, &:hover {
+      color: $primary-color-text;
+    }
+  }
+
+  .contact-info {
+    border: none;
+    background: none;
+
+    tr {
+      td {
+        padding: rem-calc(3px);
+        color: $primary-color-text;
+
+        //Hide text on small and medium devices
+        @media #{$small-only}, #{$medium-only} {
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+
+      //Override stripping of table from foundation
+      &:nth-of-type(2n) {
+        background: none;
+      }
+    }
+  }
+
+  .icon {
+    $transition-duration: .3s;
+
+    display: block;
+    padding: rem-calc(5px);
+    border-radius: rem-calc(5px);
+    transition: background $transition-duration ease;
+
+    svg {
+      transition: fill $transition-duration ease;
+      width: 23px;
+      fill: $primary-color-text;
+    }
+
+    &:hover {
+      background: white;
+      svg {
+        fill: $primary-color-dark;
+      }
+    }
+  }
+}

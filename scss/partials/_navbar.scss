@@ -1,0 +1,93 @@
+@import 'compass';
+@import 'foundation/functions';
+@import 'globals';
+
+#nav {
+  padding: rem-calc(20px) 0;
+
+  border-bottom: 2px solid rgb(247, 247, 247);
+
+  .logo {
+    padding: 0;
+    width: rem-calc(60px);
+    height: rem-calc(77px);
+    img {
+      //Fix for Firefox image dimensions are expanding beyond .logo's bounds
+      @extend .logo
+    }
+  }
+
+  > ul {
+    $transition-duration: .3s;
+    @include display-flex;
+    @include align-items(center);
+    @include justify-content(center);
+
+    font-size: rem-calc(11px);
+
+    //Override foundation
+    margin: 0;
+
+    > li {
+      list-style: none;
+
+      //Center content vertical + horizontal
+      @include display-flex;
+      @include align-items(center);
+      @include justify-content(center);
+
+      //No hover effect for logo
+      &:hover:not(:nth-of-type(4)) {
+
+        //Override foundation
+        a {
+          background: $primary-color;
+          color: $primary-color-text;
+        }
+      }
+
+    }
+
+    li {
+      //Override foundation
+      a {
+        text-align: center;
+        color: black;
+
+        width: rem-calc(80px);
+        padding: rem-calc(10px) 0;
+
+        transition: background-color $transition-duration ease, color $transition-duration ease;
+      }
+
+      &.coming-soon {
+        position: relative;
+
+        &:after {
+          content: "Coming soon";
+          font-size: rem-calc(11px);
+          color: $primary-color-text;
+          text-align: center;
+          line-height: normal;
+
+          display: none;
+
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        &:hover {
+          a {
+            color: rgba($primary-color-text, .35);
+          }
+          &:after {
+            display: block;
+          }
+        }
+      }
+
+    }
+  }
+}
