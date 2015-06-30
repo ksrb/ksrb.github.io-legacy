@@ -16,6 +16,9 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
 ####Navbar section
 * Content
     * Consider putting name into logo
+    
+* Functionality
+    * Consider animating logo
 
 ####About section
 * Content
@@ -24,7 +27,7 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
 ####Skills section
 * Code Quality 
     * Possibly refactor skill/icon code
-    * Move gradients to CSS (?) - not possible SVGs are only compatible with <linearGradient>s
+    * Move gradients to CSS (?) - not possible SVGs are only compatible with &lt;linearGradient&gt;s
     * Generate SVG meters dynamically (?)
     * Consider removing gradients and SVGs entirely for pseudo elements and solid color
     
@@ -66,4 +69,4 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
     * git clean -xdf - remove untracked, directories, and ignore files
     * python -m SimpleHTTPServer 8000 - to test the changes 
     * git push to deploy
-    * git tag [vX.X] -af [ref]
+    * git tag [vX.X] -af [ref] - use annotated tag, force to update version
