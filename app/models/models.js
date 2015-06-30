@@ -71,7 +71,7 @@
             var skills = [
                 {
                     obj: skillsObjs.java,
-                    level: 8
+                    level: 7
                 },
                 {
                     obj: skillsObjs.javascript,
@@ -193,7 +193,7 @@
                             }
 
                         ],
-                        title: "Web Developer",
+						title: "Web Developer - Part time",
                         start: new Date("2015-04-1"),
                         purpose: "Startup company specializing in creating decorative table banners for special occasion.",
                         contributions: [
@@ -220,7 +220,7 @@
                                 usage: "10"
                             }
                         ],
-                        title: "Web Developer",
+                        title: "Web Developer - Full time",
                         start: new Date("2013-09-1"),
                         end: new Date("2015-03-1"),
                         purpose: "Company focused on providing network analysis software.",
@@ -245,7 +245,7 @@
                             },
                             {
                                 image: "Template-with-Pods",
-                                caption: "Prototype of new NetDetector, Niksun's network analysis software, implemented using GWT. This is a mock as the product is proprietary."
+                                caption: "Prototype of new NetDetector, Niksun's network analysis software, implemented using GWT. This is a mock I designed in Photoshop, screenshots of the actually product are proprietary."
                             },
                             {
                                 image: "Login-Template",
@@ -270,7 +270,7 @@
                                 usage: "10"
                             }
                         ],
-                        title: "Webmaster",
+                        title: "Webmaster - Volunteer",
                         start: new Date("2012-12-1"),
                         end: new Date("2013-05-1"),
                         purpose: "Nonprofit organization that designs websites for charity.",

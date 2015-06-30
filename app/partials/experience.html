@@ -10,7 +10,7 @@
             </div>
 
             <div class="skills-used">
-                <div ng-attr-style="width:{{skills_used.usage}}%"
+                <div style="width:{{skills_used.usage}}%"
                      class="{{getSkillName(skills_used)}}"
                      ng-repeat="skills_used in experience.skills_used">
                     <span class="long">{{getSkillName(skills_used)}}</span>
@@ -38,7 +38,7 @@
                         <span ng-show="experience.end">
                             {{experience.end | date: 'MM/yyyy'}}
                         </span>
-                        <span ng-show="!experience.end">
+                        <span ng-hide="experience.end">
                             Current
                         </span>
                     </div>

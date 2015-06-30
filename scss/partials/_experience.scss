@@ -73,6 +73,7 @@
 
   .company-info .location, .position-info .date {
     color: $secondary-text-color;
+    text-align: right;
   }
 
   .contributions {
@@ -129,7 +130,6 @@
       }
     }
   }
-
 
   @mixin generate-skill-gradient($base-color, $skill) {
     $classes: null;
@@ -202,14 +202,21 @@
     }
 
     .slide-caption {
-      margin: 0;
+      position: absolute;
+      bottom: 0;
       padding: rem-calc(20px) 0;
+      margin: 0;
 
       width: 100%;
 
-      background: #F5F5F5;
+      background: rgba(0, 0, 0, .6);
 
       text-align: center;
+      color: $primary-color-text;
+
+      @media #{$small-only}{
+        display: none;
+      }
     }
   }
 }
