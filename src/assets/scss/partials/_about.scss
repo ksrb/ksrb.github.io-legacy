@@ -2,6 +2,7 @@
 @import 'foundation/components/global';
 @import 'foundation/functions';
 @import 'globals';
+@import 'functions';
 
 #about {
   color: $primary-color-text;
@@ -17,11 +18,8 @@
     color: inherit;
   }
 
-  a {
-    color: darken($primary-color-text, 20%);
-    &:active, &:hover {
-      color: $primary-color-text;
-    }
+  .summary {
+    @include animated-underline('a', darken($primary-color-text, 20%), $primary-color-text);
   }
 
   .contact-info {

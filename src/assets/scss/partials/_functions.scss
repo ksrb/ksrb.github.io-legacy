@@ -1,0 +1,44 @@
+@import "globals";
+
+/**
+* Creates a animated underline on the given selector when the user hovers over the element
+* @param $selector-string
+* @param $anchor-color
+* @param $anchor-hover-color
+* @param $transition-duration
+*/
+@mixin animated-underline($selector-string:'a', $anchor-color:$primary-color, $anchor-hover-color:$primary-color-dark, $transition-duration: .3s) {
+  #{$selector-string} {
+    color: $anchor-color;
+    position: relative;
+    transition: color $transition-duration ease;
+
+    //Active state for <a>'s
+    &:active {
+      color: $anchor-hover-color;
+    }
+
+    //Create pseudo element for underline
+    &:after {
+      content: "";
+
+      position: absolute;
+      left: 50%;
+      bottom: 0px;
+      transform: translateX(-50%);
+
+      width: 0;
+      border-bottom: 1px solid $anchor-color;
+
+      transition: width $transition-duration ease, border-color $transition-duration ease;
+    }
+
+    &:hover {
+      color: $anchor-hover-color;
+      &:after {
+        width: 100%;
+        border-bottom-color: $anchor-hover-color;
+      }
+    }
+  }
+}

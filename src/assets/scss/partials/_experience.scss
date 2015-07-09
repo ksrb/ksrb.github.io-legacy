@@ -2,6 +2,7 @@
 @import 'foundation/components/global';
 @import 'foundation/functions';
 @import 'globals';
+@import "functions";
 
 .experience-container {
 
@@ -62,6 +63,7 @@
   }
 
   .overview {
+    @include animated-underline('a', $primary-color, $primary-color-dark);
     @include spacing;
   }
 
