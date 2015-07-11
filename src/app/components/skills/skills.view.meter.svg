@@ -1,6 +1,6 @@
 <svg version="1.1" id="{{skill.obj.name}}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="519.9px" height="53px" viewBox="0 0 519.9 53" enable-background="new 0 0 519.9 53" xml:space="preserve">
 
-    <g>
+    <defs>
       <linearGradient id="label_{{skill.obj.name}}" gradientUnits="userSpaceOnUse" x1="-4.882813e-004" y1="26.5" x2="64.1187" y2="26.5">
             <stop  offset="0" stop-color="{{SkillsCtrl.getGradientStop(skill)[0][0]}}"/>
             <stop  offset="1" stop-color="{{SkillsCtrl.getGradientStop(skill)[0][1]}}"/>
@@ -21,7 +21,7 @@
             <stop  offset="0" stop-color="{{SkillsCtrl.getGradientStop(skill)[4][0]}}"/>
             <stop  offset="1" stop-color="{{SkillsCtrl.getGradientStop(skill)[4][0]}}"/>
         </linearGradient>
-    </g>
+    </defs>
 
     <g>
         <polygon fill="url(#label_{{skill.obj.name}})" points="0,53 45.7,53 64.1,26.6 45.7,0 0,0 	" />
