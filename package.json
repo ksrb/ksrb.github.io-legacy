@@ -1,4 +1,30 @@
 {
+  "name": "ksrb.github.io",
+  "description": "Personal website",
+  "version": "2.2.0",
+  "main": "src/index.html",
+  "homepage": "ksrb.github.io",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ksrb/ksrb.github.io.git"
+  },
+  "author": "Kevin Suen <ksrbkevinsuen@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ksrb/ksrb.github.io/issues"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.13",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.12.37",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-jasmine": "^0.3.6",
+    "karma-jspm": "^1.1.5",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-phantomjs-shim": "^1.0.0",
+    "phantomjs": "^1.9.17"
+  },
   "jspm": {
     "directories": {
       "baseURL": "src"
