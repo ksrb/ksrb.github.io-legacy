@@ -16,6 +16,8 @@
   "globals": {
     //Angular
     "angular": false,
+    //Angular-mocks,
+    "inject": false,
     //SystemJS
     "System": false,
     //Jquery

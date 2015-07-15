@@ -15,9 +15,10 @@ System.config({
 
 System.config({
   "map": {
-    "angular": "github:angular/bower-angular@1.4.1",
+    "angular": "github:angular/bower-angular@1.4.2",
     "angular-animate": "github:angular/bower-angular-animate@1.4.1",
     "angular-foundation": "github:pineconellc/angular-foundation-bower@0.6.0",
+    "angular-mocks": "github:angular/bower-angular-mocks@1.4.2",
     "babel": "npm:babel-core@5.6.15",
     "babel-runtime": "npm:babel-runtime@5.6.15",
     "core-js": "npm:core-js@0.9.18",
@@ -26,7 +27,10 @@ System.config({
     "kenwheeler/slick": "github:kenwheeler/slick@1.5.5",
     "pineconellc/angular-foundation-bower": "github:pineconellc/angular-foundation-bower@0.6.0",
     "github:angular/bower-angular-animate@1.4.1": {
-      "angular": "github:angular/bower-angular@1.4.1"
+      "angular": "github:angular/bower-angular@1.4.2"
+    },
+    "github:angular/bower-angular-mocks@1.4.2": {
+      "angular": "github:angular/bower-angular@1.4.2"
     },
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"
