@@ -11,10 +11,11 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
 ###TODOs
 
 ####General
-* Replace [Foundation](https://github.com/zurb/foundation) with [Foundation for Apps](https://github.com/zurb/foundation-apps) to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angular-foundation) dependency
+* Replace [Foundation](https://github.com/zurb/foundation) with [Foundation for Apps](https://github.com/zurb/foundation-apps) 
+to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angular-foundation) dependency
 * Consider replacing Ruby Sass and Compass with [node-sass](https://github.com/sass/node-sass)
 * Code Quality
-    * Testing not implemented
+    * Testing in process
     * Folder structure improved but should still consults best practices for more hints
 
 ####Navbar section
@@ -75,3 +76,16 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
     * git push to deploy
     * git tag [vX.X] -af [ref] - use annotated tag, force to update version
 
+###Intellij
+* Finding reference [F3] on directives only works with directives are set to ```restrict:"A,E, and/or C"``` and cannot resolve import chains
+    * Therefore in [src/main.js](https://github.com/ksrb/ksrb.github.io/blob/dev/src/app/main.js#L28) the &lt;skills&gt; and &lt;experience&gt; directive cannot be resolved
+    
+* There is a bug when using intellij to run karma with the karma-jspm adapter, new changes do not get picked up and karma continues to use the cached version, see this [bug report]()
+there are 2 simple fixes
+    * Run karma from the command line via node_modules\.bin\karma start
+    * Run karma as a Node process from intellij however this seems to causes the test to execute 3 times
+    
+###Tools
+* Add Browser-sync
+* Replace Compass with node-sass
+* Replace jshint with eslint

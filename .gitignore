@@ -2,17 +2,15 @@
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 
-#Eclipse
-.classpath
-/.settings
-*.project
-
-#Bower
-/bower_components
-
-#SASS
-/.sass-cache
-/src/assets/css
+#NPM
+node_modules
 
 #JSPM
-/src/jspm_packages
+src/jspm_packages
+
+#Bower
+bower_components
+
+#SASS
+.sass-cache
+src/assets/css
