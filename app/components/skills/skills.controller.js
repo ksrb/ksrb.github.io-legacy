@@ -31,7 +31,7 @@ class SkillsController {
         var iconPathSuffix = ".svg";
 
         this.getIcon = function (skill) {
-            return iconPathPrefix + skill.obj.name.toLowerCase() + iconPathSuffix;
+            return iconPathPrefix + skill.name.toLowerCase() + iconPathSuffix;
         };
 
         var gradientStops = {
@@ -59,7 +59,7 @@ class SkillsController {
         };
 
         this.getGradientStop = function (skill) {
-            return gradientStops[skill.obj.category];
+            return gradientStops[skill.category];
         };
     }
 }
