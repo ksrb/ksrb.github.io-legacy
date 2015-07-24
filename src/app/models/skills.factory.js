@@ -65,51 +65,24 @@ function SkillsFactory() {
 
     };
 
+    function createSkill(skillsObj, level) {
+        var skill = Object.create(skillsObj);
+        skill.level = level;
+        return skill;
+    }
+
     var skills = [
-        {
-            obj: skillsObjs.java,
-            level: 7
-        },
-        {
-            obj: skillsObjs.javascript,
-            level: 5
-        },
-        {
-            obj: skillsObjs.angularJS,
-            level: 4
-        },
-        {
-            obj: skillsObjs.gwt,
-            level: 6
-        },
-        {
-            obj: skillsObjs.html,
-            level: 7
-        },
-        {
-            obj: skillsObjs.css,
-            level: 7
-        },
-        {
-            obj: skillsObjs.photoshop,
-            level: 8
-        },
-        {
-            obj: skillsObjs.illustrator,
-            level: 5
-        },
-        {
-            obj: skillsObjs.eclipse,
-            level: 7
-        },
-        {
-            obj: skillsObjs.intellij,
-            level: 6
-        },
-        {
-            obj: skillsObjs.git,
-            level: 6
-        }
+        createSkill(skillsObjs.java, 7),
+        createSkill(skillsObjs.javascript, 5),
+        createSkill(skillsObjs.angularJS, 4),
+        createSkill(skillsObjs.gwt, 6),
+        createSkill(skillsObjs.html, 7),
+        createSkill(skillsObjs.css, 7),
+        createSkill(skillsObjs.photoshop, 8),
+        createSkill(skillsObjs.illustrator, 5),
+        createSkill(skillsObjs.eclipse, 7),
+        createSkill(skillsObjs.intellij, 6),
+        createSkill(skillsObjs.git, 6),
     ];
 
 
