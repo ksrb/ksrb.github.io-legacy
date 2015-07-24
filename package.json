@@ -6,7 +6,9 @@
   "homepage": "https://ksrb.github.io",
   "scripts": {
     "css:watch": "node-sass -w src/assets/scss -o src/assets/css",
-    "css:compile": "node-sass src/assets/scss/styles.scss -o src/assets/css"
+    "css:compile-styles": "node-sass src/assets/scss/styles.scss -o src/assets/css",
+    "css:compile-foundation": "node-sass src/assets/scss/app.scss -o src/assets/css",
+    "css:compile": "npm run css:compile-styles && npm run css:compile-foundation"
   },
   "repository": {
     "type": "git",
