@@ -10,13 +10,18 @@ has been orphaned and all necessary changes are manually pulled from the [dev br
 
 ###TODOs
 
-####General
+###General
+* Almost all code (js, sass) could use some review
+
+###JavaScript
 * Replace [Foundation](https://github.com/zurb/foundation) with [Foundation for Apps](https://github.com/zurb/foundation-apps) 
 to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angular-foundation) dependency
-* Consider replacing Ruby Sass and Compass with [node-sass](https://github.com/sass/node-sass)
-* Code Quality
-    * Testing in process
-    * Folder structure improved but should still consults best practices for more hints
+* Testing in process
+* Folder structure improved but should still consults best practices for more hints
+	
+###Tools
+* Add Browser-sync
+* Replace jshint with eslint
 
 ####Navbar section
 * Content
@@ -84,8 +89,3 @@ to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angul
 there are 2 simple fixes
     * Run karma from the command line via node_modules\.bin\karma start
     * Run karma as a Node process from intellij however this seems to causes the test to execute 3 times
-    
-###Tools
-* Add Browser-sync
-* Replace Compass with node-sass
-* Replace jshint with eslint
