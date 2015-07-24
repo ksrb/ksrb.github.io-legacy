@@ -1,6 +1,5 @@
-@import 'compass';
-@import 'foundation/components/global';
-@import 'foundation/functions';
+@import '../../../../bower_components/foundation/scss/foundation/components/global';
+@import '../../../../bower_components/foundation/scss/foundation/functions';
 @import 'globals';
 
 #skills {
@@ -9,7 +8,7 @@
   $margin-bottom: 7px;
 
   .legends {
-    @include display-flex;
+    display: flex;
     color: $primary-color-text;
     margin-bottom: $margin-bottom;
     width: $legend-width;
@@ -47,9 +46,9 @@
     position: relative;
     margin-right: 26px;
 
-    @include display-flex;
-    @include align-items(center);
-    @include justify-content(center);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     background: $primary-color-dark;
 

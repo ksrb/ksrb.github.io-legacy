@@ -1,7 +1,6 @@
-@import 'compass';
-@import 'foundation/components/global';
-@import 'partials/settings';
-@import 'partials/globals';
+@import '../../../../bower_components/foundation/scss/foundation/components/global';
+@import 'settings';
+@import 'globals';
 
 //TODO consider alternative to using mass media queries to resize slides
 #workflow {
@@ -63,7 +62,7 @@
     $border-width: 5px;
     border: rem-calc($border-width) solid $slide-color;
     //Shape slide into a circle
-    @include border-radius(50%);
+    border-radius: 50%;
 
     $dimension: 294px;
     width: rem-calc($dimension);
@@ -73,12 +72,11 @@
     overflow: hidden;
     left: 50%;
 
-    @include transition(
-            z-index $transition-duration ease,
-            transform $transition-duration ease,
-            top $transition-duration ease,
-            opacity $transition-duration ease,
-            box-shadow .3s ease);
+    transition: z-index $transition-duration ease,
+    transform $transition-duration ease,
+    top $transition-duration ease,
+    opacity $transition-duration ease,
+    box-shadow .3s ease;
 
     @media #{$small-only}{
       width: rem-calc($dimension/2);
@@ -114,7 +112,7 @@
 
       background-color: $slide-color;
 
-      @include transition(background-color $transition-duration ease);
+      transition: background-color $transition-duration ease;
 
       @media #{$small-only}{
         font-size: rem-calc($font-size/2);

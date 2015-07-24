@@ -1,6 +1,5 @@
-@import 'compass';
-@import 'foundation/components/global';
-@import 'foundation/functions';
+@import '../../../../bower_components/foundation/scss/foundation/components/global';
+@import '../../../../bower_components/foundation/scss/foundation/functions';
 @import 'globals';
 
 #nav {
@@ -20,9 +19,9 @@
 
   > ul {
     $transition-duration: .3s;
-    @include display-flex;
-    @include align-items(center);
-    @include justify-content(center);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     font-size: rem-calc(11px);
 
@@ -33,9 +32,9 @@
       list-style: none;
 
       //Center content vertical + horizontal
-      @include display-flex;
-      @include align-items(center);
-      @include justify-content(center);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       //No hover effect for logo
       &:hover:not(:nth-of-type(4)) {

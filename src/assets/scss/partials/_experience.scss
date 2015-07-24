@@ -1,6 +1,5 @@
-@import 'compass';
-@import 'foundation/components/global';
-@import 'foundation/functions';
+@import '../../../../bower_components/foundation/scss/foundation/components/global';
+@import '../../../../bower_components/foundation/scss/foundation/functions';
 @import 'globals';
 @import "functions";
 
@@ -35,7 +34,7 @@
   }
 
   .skills-used {
-    @include display-flex;
+    display: flex;
 
     line-height: rem-calc(16px);
     text-align: center;
@@ -98,7 +97,7 @@
 
     .images {
 
-      @include display-flex;
+      display: flex;
       justify-content: space-between;
       align-items: center;
 
@@ -125,7 +124,7 @@
 
     @media #{$small-only}{
       .images {
-        @include flex-direction(column);
+        flex-direction: column;
         .image {
           margin: rem-calc(5px) 0;
         }
@@ -133,20 +132,25 @@
     }
   }
 
+  //TODO slight rewrite for clarity?
   @mixin generate-skill-gradient($base-color, $skill) {
-    $classes: null;
+    $classes: '';
     //Create the class(es) for the skill(s)
-    @for $j from 1 through length($skill) {
-      $classes: append($classes, "."+nth($skill, $j), comma);
+    @for $i from 1 through length($skill) {
+      @if $i == 1 {
+        $classes: $classes + "." + nth($skill, $i);
+      } @else {
+        $classes: $classes + ", ." + nth($skill, $i);
+      }
     }
 
     //Generate class name(s) based on skill name(s)
     #{$classes} {
       //Lighten top gradient by 15% of base color
-      @include background(linear-gradient(lighten($base-color, 15%), $base-color));
+      background: linear-gradient(lighten($base-color, 15%), $base-color);
       &:hover {
         $hover-color: lighten(adjust_hue($base-color, 5%), 5%);
-        @include background(linear-gradient(lighten($hover-color, 15%), $hover-color));
+        background: linear-gradient(lighten($hover-color, 15%), $hover-color);
       }
     }
   }
