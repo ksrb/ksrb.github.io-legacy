@@ -4,7 +4,10 @@
   "version": "2.2.0",
   "main": "src/index.html",
   "homepage": "https://ksrb.github.io",
-  "scripts": {},
+  "scripts": {
+    "css:watch": "node-sass -w src/assets/scss -o src/assets/css",
+    "css:compile": "node-sass src/assets/scss/styles.scss -o src/assets/css"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ksrb/ksrb.github.io.git"
@@ -23,6 +26,7 @@
     "karma-jspm": "^1.1.5",
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-phantomjs-shim": "^1.0.0",
+    "node-sass": "^3.2.0",
     "phantomjs": "^1.9.17"
   },
   "jspm": {
