@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jspm_packages" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/jspm_packages" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
