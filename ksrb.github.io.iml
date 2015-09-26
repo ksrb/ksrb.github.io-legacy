@@ -11,5 +11,6 @@
     <orderEntry type="library" name="jQuery-2.0.0" level="application" />
     <orderEntry type="library" name="bower_components" level="project" />
     <orderEntry type="library" name="jspm_packages" level="project" />
+    <orderEntry type="library" name="ksrb.github.io node_modules" level="project" />
   </component>
 </module>

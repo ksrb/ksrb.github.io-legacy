@@ -1,20 +1,18 @@
 System.config({
-  "baseURL": "./",
-  "transpiler": "babel",
-  "babelOptions": {
+  baseURL: "./",
+  defaultJSExtensions: true,
+  transpiler: "babel",
+  babelOptions: {
     "optional": [
       "runtime"
     ]
   },
-  "paths": {
-    "*": "*.js",
-    "github:*": "jspm_packages/github/*.js",
-    "npm:*": "jspm_packages/npm/*.js"
-  }
-});
+  paths: {
+    "github:*": "jspm_packages/github/*",
+    "npm:*": "jspm_packages/npm/*"
+  },
 
-System.config({
-  "map": {
+  map: {
     "angular": "github:angular/bower-angular@1.4.2",
     "angular-animate": "github:angular/bower-angular-animate@1.4.1",
     "angular-foundation": "github:pineconellc/angular-foundation-bower@0.6.0",
@@ -45,4 +43,3 @@ System.config({
     }
   }
 });
-
