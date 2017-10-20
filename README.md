@@ -1,40 +1,40 @@
-##ksrb.github.io
+## ksrb.github.io
 
 [![Join the chat at https://gitter.im/ksrb/ksrb.github.io](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ksrb/ksrb.github.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-###[Master branch](https://github.com/ksrb/ksrb.github.io/tree/master)
+### [Master branch](https://github.com/ksrb/ksrb.github.io/tree/master)
 * Github pages for a user are deployed under the repository [username].github.io under the master branch.
 * Therefore to avoid polluting the development branch with unnecessary files (compiled css and js) the master
 has been orphaned and all necessary changes are manually pulled from the [dev branch](https://github.com/ksrb/ksrb.github.io/tree/dev)
 * Releases will be tagged
 
-###TODOs
+### TODOs
 
-###General
+### General
 * Almost all code (js, sass) could use some review
 
-###JavaScript
+### JavaScript
 * Replace [Foundation](https://github.com/zurb/foundation) with [Foundation for Apps](https://github.com/zurb/foundation-apps) 
 to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angular-foundation) dependency
 * Testing in process
 * Folder structure improved but should still consults best practices for more hints
 	
-###Tools
+### Tools
 * Add Browser-sync
 * Replace jshint with eslint
 
-####Navbar section
+#### Navbar section
 * Content
     * Consider putting name into logo
     
 * Functionality
     * Consider animating logo
 
-####About section
+#### About section
 * Content
     * Rewrite to sound more professional
 
-####Skills section
+#### Skills section
 * Code Quality 
     * Possibly refactor skill/icon code
     * Move gradients to CSS (?) - not possible SVGs are only compatible with &lt;linearGradient&gt;s
@@ -46,7 +46,7 @@ to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angul
     * Animated skill meters
     * Tooltip for skills
 
-####Experience section
+#### Experience section
 * Content
     * Rewrite for clarity and strength of points
     
@@ -58,16 +58,16 @@ to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angul
     * Tooltip for skills 
     * Consider pie chart for skill usage (would probably require redesign)
     
-####Convert Graphic Design portfolio to HTML
+#### Convert Graphic Design portfolio to HTML
 * Not implemented **secondary** to showing experience
 
-####Get [Karma](http://karma-runner.github.io/0.12/index.html) in there
+#### Get [Karma](http://karma-runner.github.io/0.12/index.html) in there
 * Important but can wait
 
-####Assets
+#### Assets
 * Consider creating a icon typeset to reduce network traffic
 
-####Deployment process
+#### Deployment process
 * Currently deployment is too complex, need build script before development continues, current process looks something like this:
     * git checkout master
     * git checkout dev .
@@ -81,7 +81,7 @@ to remove unmaintained [Angular Foundation](https://github.com/pineconellc/angul
     * git push to deploy
     * git tag [vX.X] -af [ref] - use annotated tag, force to update version
 
-###Intellij
+### Intellij
 * Finding reference [F3] on directives only works with directives are set to ```restrict:"A,E, and/or C"``` and cannot resolve import chains
     * Therefore in [src/main.js](https://github.com/ksrb/ksrb.github.io/blob/dev/src/app/main.js#L28) the &lt;skills&gt; and &lt;experience&gt; directive cannot be resolved
     
