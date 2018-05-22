@@ -1,0 +1,35 @@
+@import "~scss/defaults";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: $gutter;
+  height: 220px;
+  background: #404a5b;
+  color: $white;
+}
+
+.title {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title_name {
+  font-size: 18px;
+}
+
+.title_name_small {
+  font-size: 15px;
+}
+
+.title_tagline {
+  font-size: 11px;
+}
+
+.tagline {
+  text-align: center;
+  font-size: 10px;
+}

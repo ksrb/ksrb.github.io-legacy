@@ -52,4 +52,12 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  dataImg: resolveApp('src/data/img'),
+  alias: {
+    components: resolveApp('src/components'),
+    data: resolveApp('src/data'),
+    img: resolveApp('src/img'),
+    scss: resolveApp('src/scss'),
+    src: resolveApp('src'),
+  }
 };

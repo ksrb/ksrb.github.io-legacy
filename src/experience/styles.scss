@@ -1,0 +1,48 @@
+@import "~scss/defaults";
+
+.root {
+  background-color: #e0e0e0;
+}
+
+.card_header_img {
+  height: 25px;
+  padding: 7px;
+}
+
+.card_body_skills {
+  margin-bottom: 20px;
+}
+
+.card_body_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.card_body_header_left {
+  text-align: left;
+}
+
+.card_body_company_name {
+  color: $blue;
+}
+
+.card_body_header_right {
+  text-align: right;
+  color: #555555;
+}
+
+.card_body_list {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.card_body_list_item {
+  margin-bottom: 5px;
+}
+
+.card_body_purpose {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,53 @@
+@import "~scss/defaults";
+
+.root {
+  display: flex;
+  color: $white;
+}
+
+.about {
+  padding: $gutter;
+  background: $dark-blue;
+  font-size: 16px;
+}
+
+.about_text {
+  margin-bottom: 10px;
+}
+
+.about_contacts {
+  padding: $gutter;
+  background: $blue;
+}
+
+.about_contact {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.about_contact:first-child {
+  padding-top: 0;
+}
+
+.about_contact:last-child {
+  padding-bottom: 0;
+}
+
+.about_contact_icon_container {
+  padding-right: 15px;
+}
+
+.about_contact_icon {
+  $transition-delay: .2s;
+  transition: fill $transition-delay ease-in-out, background-color $transition-delay ease-in-out;
+  padding: 5px;
+  border-radius: 5px;
+  width: 20px;
+
+  fill: $white;
+  &:hover {
+    fill: $blue;
+    background-color: $white;
+  }
+}

@@ -1,0 +1,28 @@
+$white: white;
+$blue: #4a689b;
+$dark-blue: #34383f;
+
+$gutter: 20px;
+
+.a {
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    height: 1px;
+    margin-top: 2px;
+    min-width: 0;
+    background-color: $white;
+    transition: min-width .2s ease-out;
+  }
+
+  &:hover {
+    &::after {
+      min-width: 100%;
+    }
+  }
+}

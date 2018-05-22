@@ -1,0 +1,16 @@
+@import "~scss/defaults";
+
+.root {
+  border-radius: 4px;
+}
+
+.header {
+  background-color: $blue;
+}
+
+.body {
+  border: 3px solid $blue;
+  border-top: 0;
+  background: $white;
+  padding: 10px;
+}

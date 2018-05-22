@@ -1,0 +1,46 @@
+@import "~scss/defaults";
+
+.root {
+  display: flex;
+  font-size: 12px;
+  color: $white;
+}
+
+.skill {
+  transition: background-position .2s ease-in-out;
+  padding: 3px 0;
+  text-align: center;
+
+  $radius: 2px;
+  &:first-child {
+    border-radius: $radius 0 0 $radius;
+  }
+
+  &:last-child {
+    border-radius: 0 $radius $radius 0;
+  }
+}
+
+$skill-color-map: (
+  programming: #354b88,
+  visual: #457362
+);
+
+@each $name, $color in $skill-color-map {
+  @for $i from 0 through 3 {
+    $hue: 10;
+    $saturate: 10;
+    $light-color: saturate(adjust_hue(lighten($color, 35), $i * $hue), $i * $saturate);
+    $dark-color: saturate(adjust_hue($color, $i * $hue), $i * $saturate);
+
+    .skill_#{$name}_#{$i} {
+      background: linear-gradient($light-color, $dark-color);
+      background-size: 1px 120%;
+      background-position: 0 100%;
+
+      &:hover {
+        background-position: 0 0;
+      }
+    }
+  }
+}

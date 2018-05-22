@@ -1,0 +1,43 @@
+@import "~scss/defaults";
+
+.root {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 5px $gutter;
+
+  background: #3d5681;
+  color: $white;
+}
+
+.logo {
+
+}
+
+.logo_icon {
+
+}
+
+.logo_text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.logo_text_small {
+  font-size: 12px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar_item {
+  margin: 0 5px;
+  font-size: 12px;
+}
+
+.navbar_item__selected {
+  font-weight: bold;
+  font-size: 13px;
+}
