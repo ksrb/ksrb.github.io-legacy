@@ -18,8 +18,8 @@ const defaults = {
       },
       role: 'Full Stack Developer',
       hours: 'Full time',
-      startDate: new Date(2015, 6).toString(),
-      endDate: new Date(2018, 2).toString(),
+      startDate: new Date(2015, 5).toString(),
+      endDate: new Date(2018, 1).toString(),
       skills: [
         {
           __typename: 'Skill',
@@ -59,8 +59,8 @@ const defaults = {
       },
       role: 'Web Developer',
       hours: 'Part time',
-      startDate: new Date(2015, 4).toString(),
-      endDate: new Date(2015, 6).toString(),
+      startDate: new Date(2015, 3).toString(),
+      endDate: new Date(2015, 5).toString(),
       skills: [
         {
           __typename: 'Skill',
@@ -99,8 +99,8 @@ const defaults = {
       },
       role: 'Web Developer',
       hours: 'Full time',
-      startDate: new Date(2013, 9).toString(),
-      endDate: new Date(2015, 3).toString(),
+      startDate: new Date(2013, 8).toString(),
+      endDate: new Date(2015, 2).toString(),
       skills: [
         {
           __typename: 'Skill',
