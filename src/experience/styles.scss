@@ -1,7 +1,8 @@
 @import "~scss/defaults";
 
 .root {
-  background-color: #e0e0e0;
+  padding: $gutter 0;
+  background-color: $experience-grey;
 }
 
 .card_header_img {

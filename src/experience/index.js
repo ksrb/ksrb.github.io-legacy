@@ -11,6 +11,7 @@ import {
   CardBody,
 } from 'components/card';
 
+import Timeline from 'components/timeline';
 import SkillMeter from 'components/skillMeter';
 
 import styles from './styles.scss';
@@ -47,6 +48,7 @@ class Experience extends Component {
         {({ data: { experiences } }) => {
           return (
             <div className={styles.root}>
+              <Timeline experiences={experiences} />
               {experiences.map((experience, index) => {
                 let {
                   companyName,
