@@ -17,6 +17,7 @@ const aboutContacts = [
     alt: 'phone',
     Component: Phone,
     text: '(908) 240-5093',
+    href: '+9082405093',
     type: aboutTypes.phone,
   },
   {
@@ -39,12 +40,12 @@ const aboutContacts = [
   }
 ];
 
-const Link = ({ type, text, children, ...args }) => {
+const Link = ({ type, text, href, children, ...args }) => {
   switch (type) {
     case aboutTypes.email:
       return <a href={`mailto:${text}`} {...args}>{children}</a>;
     case aboutTypes.phone:
-      return <a href={`tel:${text}`} {...args}>{children}</a>;
+      return <a href={`tel:${href}`} {...args}>{children}</a>;
     case aboutTypes.link:
       return <a href={`//${text}`} target='_blank' {...args}>{children}</a>;
     default:
@@ -82,6 +83,7 @@ class About extends Component {
             const {
               text,
               type,
+              href,
               Component,
             } = aboutContact;
 
@@ -91,12 +93,12 @@ class About extends Component {
                 className={styles.about_contact}>
                 <div className={styles.about_contact_icon_container}>
                   {Component &&
-                  <Link type={type} text={text}>
+                  <Link type={type} text={text} href={href}>
                     <Component className={styles.about_contact_icon} />
                   </Link>}
                 </div>
 
-                <Link type={type} text={text} className={styles.a}>
+                <Link type={type} text={text} href={href} className={styles.a}>
                   {text}
                 </Link>
               </div>

@@ -1,4 +1,5 @@
 @import "~scss/defaults";
+@import "../../scss/shared.json";
 
 .root {
   display: flex;
@@ -21,11 +22,6 @@
   }
 }
 
-$skill-color-map: (
-  programming: #354b88,
-  visual: #457362
-);
-
 @each $name, $color in $skill-color-map {
   @for $i from 0 through 3 {
     $hue: 10;
@@ -34,6 +30,7 @@ $skill-color-map: (
     $dark-color: saturate(adjust_hue($color, $i * $hue), $i * $saturate);
 
     .skill_#{$name}_#{$i} {
+      cursor: default;
       background: linear-gradient($light-color, $dark-color);
       background-size: 1px 120%;
       background-position: 0 100%;

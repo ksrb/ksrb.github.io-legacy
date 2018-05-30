@@ -18,23 +18,23 @@ const defaults = {
       },
       role: 'Full Stack Developer',
       hours: 'Full time',
-      startDate: new Date(2015, 5).toString(),
-      endDate: new Date(2018, 1).toString(),
+      startDate: new Date(2015, 6).toString(),
+      endDate: new Date(2018, 2).toString(),
       skills: [
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'JavaScript (React)',
           type: 'programming',
           utilization: 60,
         },
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'Golang',
           type: 'programming',
           utilization: 25,
         },
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'Bash',
           type: 'programming',
           utilization: 15,
@@ -60,22 +60,22 @@ const defaults = {
       role: 'Web Developer',
       hours: 'Part time',
       startDate: new Date(2015, 3).toString(),
-      endDate: new Date(2015, 5).toString(),
+      endDate: new Date(2015, 6).toString(),
       skills: [
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'Liquid',
           type: 'visual',
           utilization: 40,
         },
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'css',
           type: 'visual',
           utilization: 30,
         },
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'JavaScript',
           type: 'programming',
           utilization: 30,
@@ -99,23 +99,23 @@ const defaults = {
       },
       role: 'Web Developer',
       hours: 'Full time',
-      startDate: new Date(2013, 8).toString(),
+      startDate: new Date(2013, 9).toString(),
       endDate: new Date(2015, 2).toString(),
       skills: [
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'GWT',
           type: 'programming',
           utilization: 70,
         },
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'JavaScript',
           type: 'programming',
           utilization: 20,
         },
         {
-          __typename: 'Skill',
+          __typename: 'ExperienceSkill',
           name: 'css',
           type: 'visual',
           utilization: 10,
@@ -128,11 +128,116 @@ const defaults = {
       ],
     }
   ],
+  skills: [
+    // programming
+    {
+      __typename: 'Skills',
+      name: 'JavaScript',
+      iconPath: require('data/img/javascript.svg'),
+      level: 4.5,
+      comment: 'Almost expert',
+      type: 'programming',
+      link: 'https://en.wikipedia.org/wiki/JavaScript'
+    },
+    {
+      __typename: 'Skills',
+      name: 'ReactJS',
+      iconPath: require('data/img/reactjs.svg'),
+      level: 3.5,
+      comment: 'Haven\'t taught yet',
+      type: 'programming',
+      link: 'https://en.wikipedia.org/wiki/React_(JavaScript_library)'
+    },
+    {
+      __typename: 'Skills',
+      name: 'Golang',
+      iconPath: require('data/img/golang.svg'),
+      level: 3,
+      comment: 'Proficient',
+      type: 'programming',
+      link: 'https://en.wikipedia.org/wiki/Go_(programming_language)',
+    },
+    {
+      __typename: 'Skills',
+      name: 'Java',
+      iconPath: require('data/img/java.svg'),
+      level: 3,
+      comment: 'Proficient',
+      type: 'programming',
+      link: 'https://en.wikipedia.org/wiki/Java_(programming_language)',
+    },
+    {
+      __typename: 'Skills',
+      name: 'Bash',
+      iconPath: require('data/img/bash.svg'),
+      level: 3,
+      comment: 'Proficient',
+      type: 'programming',
+      link: 'https://en.wikipedia.org/wiki/Bash_(Unix_shell)'
+    },
+    // visual
+    {
+      __typename: 'Skills',
+      name: 'Sass',
+      iconPath: require('data/img/sass.svg'),
+      level: 3.5,
+      comment: 'Proficient',
+      type: 'visual',
+      link: 'https://en.wikipedia.org/wiki/Sass_(stylesheet_language)'
+    },
+    {
+      __typename: 'Skills',
+      name: 'Photoshop',
+      iconPath: require('data/img/photoshop.svg'),
+      level: 3.5,
+      comment: 'Proficient',
+      type: 'visual',
+      link: 'https://en.wikipedia.org/wiki/Adobe_Photoshop'
+    },
+    {
+      __typename: 'Skills',
+      name: 'Illustrator',
+      iconPath: require('data/img/illustrator.svg'),
+      level: 2.5,
+      comment: 'Proficient',
+      type: 'visual',
+      link: 'https://en.wikipedia.org/wiki/Adobe_Illustrator',
+    },
+    // tool
+    {
+      __typename: 'Skills',
+      name: 'IntelliJ',
+      iconPath: require('data/img/intellij.svg'),
+      level: 3,
+      comment: 'Proficient',
+      type: 'tool',
+      link: 'https://en.wikipedia.org/wiki/IntelliJ_IDEA',
+    },
+    {
+      __typename: 'Skills',
+      name: 'vim',
+      iconPath: require('data/img/neovim.png'),
+      level: 3,
+      comment: 'Proficient',
+      type: 'tool',
+      link: 'https://en.wikipedia.org/wiki/Vim_(text_editor)#Neovim',
+    },
+    {
+      __typename: 'Skills',
+      name: 'git',
+      iconPath: require('data/img/git.svg'),
+      level: 4,
+      comment: 'Taught at Niksun',
+      type: 'tool',
+      link: 'https://en.wikipedia.org/wiki/Git'
+    },
+
+  ],
 };
 
 const Mutation = {
   // https://www.apollographql.com/docs/graphql-tools/resolvers
-  changeSelectedNavbarItem: (obj, args, context) => {
+  changeSelectedNavbarItem(obj, args, context) {
     const { cache } = context;
     cache.writeData({
       data: {
@@ -142,9 +247,8 @@ const Mutation = {
         }
       }
     });
-
     return null;
-  }
+  },
 };
 
 const Query = {
@@ -154,12 +258,15 @@ const Query = {
   experiences: (obj, args, { cache }) => {
     return cache.experiences;
   },
+  skills: (obj, args, { cache }) => {
+    return cache.skills;
+  },
 };
 
 const typeDefs = `
   type UIState {
-    id: Int!
     selectedItem: Int
+    searchedSkill: String
   }
 
   type Experience {
@@ -171,7 +278,7 @@ const typeDefs = `
     hours: String
     startDate: String
     endDate: String
-    skills: [Skill]
+    skills: [ExperienceSkill]
     accomplishments: [String]
   }
 
@@ -180,14 +287,23 @@ const typeDefs = `
     county: String
   }
 
-  type Skill {
+  type ExperienceSkill {
     name: String
     utilization: Int
+  }
+  
+  type Skill {
+    name: String
+    iconPath: String
+    level: Float
+    comment: string
+    type: String
   }
 
   type Query {
     uiState: UIState
     experiences: [Experience]
+    skills: [Skill]
   }
 
   type Mutation {
@@ -204,7 +320,6 @@ const client = new ApolloClient({
     },
     typeDefs,
   },
-
 });
 
 export default client;

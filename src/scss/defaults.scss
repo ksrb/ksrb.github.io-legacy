@@ -1,9 +1,17 @@
-$white: white;
-$blue: #4a689b;
-$dark-blue: #34383f;
-$experience-grey: #e0e0e0;
+@import "shared.json";
+
+$white: map-get($colors, white);
+$blue: map-get($colors, blue);
+$dark-blue: map-get($colors, dark-blue);
+$experience-grey: map-get($colors, experience-grey);
 
 $gutter: 20px;
+
+$skill-color-map: (
+  programming: map-get($colors, programming),
+  visual: map-get($colors, visual),
+  tool: map-get($colors, tool),
+);
 
 .a {
   position: relative;

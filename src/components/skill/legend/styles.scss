@@ -1,0 +1,153 @@
+@import "~scss/defaults";
+@import "../variables";
+
+.root {
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: $node-bullet-large-size;
+}
+
+.search__hidden {
+  display: none;
+}
+
+.search__visible {
+  $animation-delay: .4s;
+  .search_connector_vertical_fill,
+  .node_bullet,
+  .node_connector_fill,
+  .search_input_container {
+    visibility: hidden;
+    animation-fill-mode: forwards;
+    animation-duration: .5s;
+  }
+
+  .search_connector_vertical_fill {
+    animation-name: grow-height;
+  }
+
+  .node_bullet {
+    animation-delay: $animation-delay;
+    animation-name: grow-width-height;
+  }
+
+  .node_connector_fill {
+    animation-delay: $animation-delay * 2;
+    animation-name: grow-width;
+  }
+
+  .search_input_container {
+    animation-delay: $animation-delay * 3;
+    animation-name: grow-input;
+  }
+}
+
+@keyframes grow-height {
+  from {
+    height: 0;
+  }
+
+  to {
+    visibility: visible;
+    height: calc(100% + 4px);
+  }
+}
+
+@keyframes grow-width-height {
+  from {
+    width: 0;
+    height: 0;
+  }
+
+  to {
+    visibility: visible;
+    width: $node-bullet-size;
+    height: $node-bullet-size;
+  }
+}
+
+@keyframes grow-width {
+  from {
+    width: 0;
+  }
+
+  to {
+    visibility: visible;
+    width: calc(100% + 4px);
+  }
+}
+
+$search-input-width: 270px;
+@keyframes grow-input {
+  from {
+    width: 0;
+  }
+
+  to {
+    visibility: visible;
+    width: $search-input-width;
+  }
+}
+
+.search_connector_vertical {
+  position: relative;
+  height: 20px;
+}
+
+.search_connector_vertical_fill {
+  position: absolute;
+  top: -2px;
+  width: $node-connector-width;
+  height: calc(100% + 4px);
+  transform: translateX(-50%);
+  background: $white;
+}
+
+.search_node_connector {
+  width: 20px;
+}
+
+.search_bullet_container {
+  position: relative;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  width: $node-bullet-size + $border-width * 2;
+  height: $node-bullet-size + $border-width * 2;
+}
+
+.search_bar {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
+.search_input_container {
+  display: flex;
+  align-items: center;
+  border: $border-width solid $white;
+  border-radius: 20px;
+  overflow: hidden;
+  height: $node-bullet-size;
+  width: $search-input-width;
+  padding: 0 10px;
+}
+
+.search_input {
+  width: $search-input-width;
+  border: none;
+  background: none;
+  height: $node-bullet-size + $border-width * 2;
+  color: $white;
+  &:focus {
+    outline: none;
+  }
+}
+

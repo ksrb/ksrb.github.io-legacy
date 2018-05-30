@@ -1,0 +1,88 @@
+@import "~scss/defaults";
+@import "variables";
+
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.node_bullet_large {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: $node-bullet-large-size;
+  width: $node-bullet-large-size;
+  padding: 12px;
+
+  border: $border-width solid $white;
+  border-radius: 50%;
+
+  font-size: 11px;
+  color: $white;
+}
+
+.node_large_icon {
+  height: 22px;
+  margin-bottom: 2px;
+}
+
+.node_connector {
+  flex: 1 0;
+  position: relative;
+}
+
+.node_connector_fill {
+  position: absolute;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: $node-connector-width;
+  transform: translateY(-50%);
+  background: $white;
+}
+
+.node_bullet, .node_bullet_small {
+  position: relative;
+  height: $node-bullet-size;
+  width: $node-bullet-size;
+  border: $border-width solid $white;
+  border-radius: 50%;
+}
+
+.node_bullet_placeholder {
+  width: $node-bullet-size;
+  height: $node-bullet-size;
+  border: $border-width solid transparent;
+}
+
+.node_bullet_text, .node_bullet_text_small {
+  position: absolute;
+  color: $white;
+  top: $node-bullet-size + $border-width * 2;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  text-align: center;
+}
+
+.node_bullet_small {
+  position: absolute;
+  width: $node-bullet-small-size;
+  height: $node-bullet-small-size;
+  transform: translateY(-50%);
+}
+
+.node_bullet_text_small {
+  top: $node-bullet-small-size + $border-width * 2;
+}
+
+@each $name, $color in $skill-color-map {
+  .node_connector_fill__#{$name} {
+    background: $color;
+  }
+
+  .node_bullet__#{$name} {
+    border-color: $color;
+  }
+}

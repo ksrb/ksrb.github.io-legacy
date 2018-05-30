@@ -1,0 +1,11 @@
+{
+  "colors": {
+    "white": "white",
+    "blue": "#4a689b",
+    "dark-blue": "#34383f",
+    "experience-grey": "#e0e0e0",
+    "programming": "#354b88",
+    "visual": "#457362",
+    "tool": "#663e3e"
+  }
+}

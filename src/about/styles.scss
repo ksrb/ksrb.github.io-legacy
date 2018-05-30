@@ -16,6 +16,9 @@
 }
 
 .about_contacts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: $gutter;
   background: $blue;
 }

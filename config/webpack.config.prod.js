@@ -13,6 +13,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const config = require('./webpack.config.shared');
+const jsonImporter = require('node-sass-json-importer');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -124,7 +125,7 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -152,7 +153,7 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+
               compact: true,
             },
           },
@@ -214,6 +215,7 @@ module.exports = {
                       loader: require.resolve('sass-loader'),
                       options: {
                         sourceMap: true,
+                        importer: jsonImporter,
                       },
                     }
                   ],
