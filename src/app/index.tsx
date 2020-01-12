@@ -1,126 +1,132 @@
 import React, { FC, useEffect, useRef } from "react";
-import cytoscape, {
-  CytoscapeOptions,
-  EdgeDefinition,
-  NodeDefinition,
-} from "cytoscape";
+import * as d3 from "d3";
 
-import useStyles, { graphStyle } from "./styles";
+import graph from "./miserables.json";
 
-const graphProperties = {
-  xNodes: 7,
-  xOffset: 10,
-  yNodes: 7,
-  yOffset: 10,
-};
+import useStyles from "./styles";
 
-function generateGraph(): CytoscapeOptions["elements"] {
-  const nodes: NodeDefinition[] = [];
-  const edges: EdgeDefinition[] = [];
-
-  const { xNodes, xOffset, yNodes, yOffset } = graphProperties;
-  for (let row = 0; row < yNodes; row++) {
-    for (let column = 0; column < xNodes; column++) {
-      const node: NodeDefinition = {
-        data: {
-          id: `node::${row}${column}`,
-        },
-        position: {
-          x: (row + 1) * xOffset,
-          y: (column + 1) * yOffset,
-        },
-        group: "nodes",
-        selected: false,
-        selectable: true,
-        locked: false,
-        grabbable: true,
-        classes: "",
-      };
-      nodes.push(node);
-
-      if (row !== yNodes - 1) {
-        const edgeBottom: EdgeDefinition = {
-          data: {
-            id: `edgeBottom::${row}${column} bottom`,
-            source: `node::${row}${column}`,
-            target: `node::${row + 1}${column}`,
-          },
-          group: "edges",
-          selected: false,
-          selectable: true,
-          locked: false,
-          grabbable: true,
-          classes: "",
-        };
-        edges.push(edgeBottom);
-      }
-
-      if (column !== xNodes - 1) {
-        const edgeRight: EdgeDefinition = {
-          data: {
-            id: `edge::${row}${column} right`,
-            source: `node::${row}${column}`,
-            target: `node::${row}${column + 1}`,
-          },
-          group: "edges",
-          selected: false,
-          selectable: true,
-          locked: false,
-          grabbable: true,
-          classes: "",
-        };
-        edges.push(edgeRight);
-      }
-    }
-  }
-
-  return nodes.concat(edges);
+interface Node {
+  id: string;
+  group: string;
 }
 
-let graph: ReturnType<typeof cytoscape>;
+interface Link {
+  source: string;
+  target: string;
+  // TODO: unused consider removing
+  value: string;
+}
+
+let canvas: HTMLCanvasElement;
+let context: CanvasRenderingContext2D;
+
+const draw = () => {
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+
+  const { width, height } = canvas;
+
+  const simulation = d3
+    .forceSimulation()
+    .force(
+      "link",
+      d3
+        .forceLink()
+        .id(function(d) {
+          // @ts-ignore
+          return d.id;
+        })
+        .distance(20),
+    )
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width / 2, height / 2));
+
+  simulation.nodes(graph.nodes).on("tick", tick);
+
+  // @ts-ignore
+  simulation.force("link").links(graph.links);
+
+  d3.select(canvas).call(
+    // @ts-ignore
+    d3
+      .drag()
+      .container(canvas)
+      .subject(dragSubject)
+      .on("start", handleDragStarted)
+      .on("drag", handleDrag)
+      .on("end", handleDragEnded),
+  );
+
+  function tick() {
+    context.clearRect(0, 0, width, height);
+
+    context.beginPath();
+    graph.links.forEach(drawLink);
+    context.strokeStyle = "#aaa";
+    context.stroke();
+
+    context.beginPath();
+    graph.nodes.forEach(drawNode);
+    context.fill();
+  }
+
+  function dragSubject() {
+    return simulation.find(d3.event.x, d3.event.y);
+  }
+
+  function handleDragStarted() {
+    if (!d3.event.active) {
+      simulation.alphaTarget(0.3).restart();
+    }
+    d3.event.subject.fx = d3.event.subject.x;
+    d3.event.subject.fy = d3.event.subject.y;
+  }
+
+  function handleDrag() {
+    d3.event.subject.fx = d3.event.x;
+    d3.event.subject.fy = d3.event.y;
+  }
+
+  function handleDragEnded() {
+    if (!d3.event.active) {
+      simulation.alphaTarget(0);
+    }
+    d3.event.subject.fx = null;
+    d3.event.subject.fy = null;
+  }
+
+  function drawLink(d: any) {
+    context.moveTo(d.source.x, d.source.y);
+    context.lineTo(d.target.x, d.target.y);
+  }
+
+  function drawNode(d: any) {
+    context.moveTo(d.x + 3, d.y);
+    context.arc(d.x, d.y, 3, 0, 2 * Math.PI);
+  }
+};
 
 const App: FC = () => {
-  const graphContainerRef = useRef<HTMLDivElement>(null);
+  const graphContainerRef = useRef<HTMLCanvasElement>(null);
   const classes = useStyles();
 
   useEffect(() => {
-    graph = cytoscape({
-      autounselectify: true,
-      container: graphContainerRef.current,
-      elements: generateGraph(),
-      layout: {
-        name: "grid",
-      },
-      panningEnabled: false,
-      style: graphStyle,
-      userZoomingEnabled: false,
-    });
+    canvas = graphContainerRef.current as HTMLCanvasElement;
+    if (!canvas) {
+      return;
+    }
 
-    // graph.getElementById("n40").animate(
-    //   {
-    //     position: { x: 1000, y: 1000 },
-    //     style: { backgroundColor: "red" },
-    //   },
-    //   {
-    //     duration: 10000,
-    //   },
-    // );
-    // graph.nodes().animate(
-    //   {
-    //     position: { x: 100, y: 100 },
-    //     style: { backgroundColor: "red" },
-    //   },
-    //   {
-    //     duration: 1000,
-    //   },
-    // );
+    context = canvas.getContext("2d") as CanvasRenderingContext2D;
+    if (!context) {
+      return;
+    }
 
-    return function destroyGraph() {
-      graph.destroy();
-    };
+    draw();
+
+    window.addEventListener("resize", draw);
   }, [graphContainerRef]);
 
-  return <div className={classes.graph} ref={graphContainerRef} />;
+  return <canvas className={classes.graph} ref={graphContainerRef} />;
 };
 
 export default App;

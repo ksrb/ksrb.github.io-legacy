@@ -2,6 +2,10 @@ import { createUseStyles } from "react-jss";
 
 export default createUseStyles({
   "@global": {
+    "html, body, #root": {
+      width: "100%",
+      height: "100%",
+    },
     body: {
       margin: 0,
       fontFamily:
@@ -16,32 +20,7 @@ export default createUseStyles({
   },
 
   graph: {
-    position: "absolute",
-    left: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
+    width: "100%",
+    height: "100%",
   },
 });
-
-// Cytoscape stylesheet see: https://js.cytoscape.org/#style
-export const graphStyle = [
-  {
-    selector: "node",
-    style: {
-      height: 10,
-      width: 10,
-      "background-color": "black",
-      opacity: 1,
-    },
-  },
-  {
-    selector: "edge",
-    style: {
-      "curve-style": "haystack",
-      "haystack-radius": 0,
-      "line-color": "black",
-      width: 2,
-    },
-  },
-];
