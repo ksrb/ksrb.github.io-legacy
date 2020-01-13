@@ -1,0 +1,20 @@
+overwrite: true
+schema:
+  - src/graphql/schema.graphql
+documents: "src/**/*.graphql"
+generates:
+  src/graphql/__generated__/index.tsx:
+    config:
+      avoidOptionals:
+        object: true
+        inputValue: false
+      withHooks: true
+      withHOC: false
+      withComponent: false
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo

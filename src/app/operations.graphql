@@ -1,0 +1,6 @@
+query ExperienceGet {
+  experiences {
+    companyName
+    hidden
+  }
+}
