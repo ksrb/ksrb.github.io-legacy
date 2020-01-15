@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
+import jss from "jss";
+import preset from "jss-preset-default";
+import { StylesProvider } from "@material-ui/styles";
 
 import client from "./graphql";
 
@@ -8,9 +11,13 @@ import App from "./app";
 
 import * as serviceWorker from "./serviceWorker";
 
+jss.setup(preset());
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <StylesProvider jss={jss}>
+      <App />
+    </StylesProvider>
   </ApolloProvider>,
   document.getElementById("root"),
 );
