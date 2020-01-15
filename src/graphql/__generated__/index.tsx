@@ -25,7 +25,7 @@ export type Experience = {
   endDate: Maybe<Scalars["String"]>;
   hidden: Scalars["Boolean"];
   hours: Scalars["String"];
-  iconPath: Scalars["String"];
+  iconPath: Maybe<Scalars["String"]>;
   purpose: Scalars["String"];
   role: Scalars["String"];
   skills: Array<Skill>;
@@ -40,6 +40,7 @@ export type Query = {
 export type Skill = {
   __typename?: "Skill";
   name: Scalars["String"];
+  type: Scalars["String"];
   utilization: Scalars["Int"];
 };
 
@@ -47,15 +48,44 @@ export type ExperienceGetQueryVariables = {};
 
 export type ExperienceGetQuery = { __typename?: "Query" } & {
   experiences: Array<
-    { __typename?: "Experience" } & Pick<Experience, "companyName" | "hidden">
+    { __typename?: "Experience" } & Pick<
+      Experience,
+      | "accomplishments"
+      | "companyName"
+      | "endDate"
+      | "hidden"
+      | "iconPath"
+      | "purpose"
+      | "role"
+      | "startDate"
+    > & {
+        address: { __typename?: "Address" } & Pick<Address, "county" | "state">;
+        skills: Array<
+          { __typename?: "Skill" } & Pick<Skill, "name" | "utilization">
+        >;
+      }
   >;
 };
 
 export const ExperienceGetDocument = gql`
   query ExperienceGet {
     experiences {
+      accomplishments
+      address {
+        county
+        state
+      }
       companyName
+      endDate
       hidden
+      iconPath
+      purpose
+      role
+      skills {
+        name
+        utilization
+      }
+      startDate
     }
   }
 `;

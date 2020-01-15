@@ -1,0 +1,20 @@
+query ExperienceGet {
+  experiences {
+    accomplishments
+    address {
+      county
+      state
+    }
+    companyName
+    endDate
+    hidden
+    iconPath
+    purpose
+    role
+    skills {
+      name
+      utilization
+    }
+    startDate
+  }
+}

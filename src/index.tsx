@@ -7,7 +7,7 @@ import { StylesProvider } from "@material-ui/styles";
 
 import client from "./graphql";
 
-import App from "./app";
+import App from "./components/app";
 
 import * as serviceWorker from "./serviceWorker";
 

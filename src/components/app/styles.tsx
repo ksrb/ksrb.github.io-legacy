@@ -24,14 +24,12 @@ export default makeStyles({
   root: {},
 
   header: {
-    display: "flex",
     justifyContent: "center",
-    marginTop: 50,
-    marginBottom: 20,
+    margin: "50px 0 2px",
   },
 
   header_name: {
-    fontSize: 30,
+    fontSize: 36,
     "&:first-child": {
       marginRight: 5,
     },
@@ -39,12 +37,12 @@ export default makeStyles({
       marginLeft: 5,
     },
   },
-  header_name__first: {
+  header_name__last: {
     color: primaryColor,
   },
-
-  navbar: { display: "flex" },
-  navbar_item: {},
+  header_name__small: {
+    fontSize: 32,
+  },
 
   graph: {
     width: "100%",

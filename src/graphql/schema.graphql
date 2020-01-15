@@ -5,7 +5,7 @@ type Experience {
   endDate: String
   hidden: Boolean!
   hours: String!
-  iconPath: String!
+  iconPath: String
   purpose: String!
   role: String!
   skills: [Skill!]!
@@ -19,6 +19,7 @@ type Address {
 
 type Skill {
   name: String!
+  type: String!
   utilization: Int!
 }
 
