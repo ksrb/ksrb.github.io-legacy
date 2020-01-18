@@ -17,19 +17,40 @@ export type Address = {
   county: Scalars["String"];
 };
 
+export type Company = {
+  __typename?: "Company";
+  address: Address;
+  purpose: Scalars["String"];
+  name: Scalars["String"];
+  logo: Maybe<Scalars["String"]>;
+};
+
+export type Displayed = {
+  title: Scalars["String"];
+};
+
 export type Experience = {
   __typename?: "Experience";
   accomplishments: Array<Scalars["String"]>;
-  address: Address;
-  companyName: Scalars["String"];
+  company: Company;
   endDate: Maybe<Scalars["String"]>;
   hidden: Scalars["Boolean"];
   hours: Scalars["String"];
-  iconPath: Maybe<Scalars["String"]>;
-  purpose: Scalars["String"];
   role: Scalars["String"];
-  skills: Array<Skill>;
+  history: Array<History>;
   startDate: Scalars["String"];
+};
+
+export type History = {
+  __typename?: "History";
+  value: Array<Displayed>;
+  children: Maybe<Array<History>>;
+  utilization: Maybe<Scalars["Int"]>;
+};
+
+export type Language = Displayed & {
+  __typename?: "Language";
+  title: Scalars["String"];
 };
 
 export type Query = {
@@ -37,11 +58,17 @@ export type Query = {
   experiences: Array<Experience>;
 };
 
-export type Skill = {
-  __typename?: "Skill";
-  name: Scalars["String"];
-  type: Scalars["String"];
-  utilization: Scalars["Int"];
+export type Tool = Displayed & {
+  __typename?: "Tool";
+  languages: Maybe<Array<Maybe<Language>>>;
+  title: Scalars["String"];
+  url: Scalars["String"];
+  use: Use;
+};
+
+export type Use = Displayed & {
+  __typename?: "Use";
+  title: Scalars["String"];
 };
 
 export type ExperienceGetQueryVariables = {};
@@ -50,19 +77,17 @@ export type ExperienceGetQuery = { __typename?: "Query" } & {
   experiences: Array<
     { __typename?: "Experience" } & Pick<
       Experience,
-      | "accomplishments"
-      | "companyName"
-      | "endDate"
-      | "hidden"
-      | "iconPath"
-      | "purpose"
-      | "role"
-      | "startDate"
+      "accomplishments" | "endDate" | "hidden" | "role" | "startDate"
     > & {
-        address: { __typename?: "Address" } & Pick<Address, "county" | "state">;
-        skills: Array<
-          { __typename?: "Skill" } & Pick<Skill, "name" | "utilization">
-        >;
+        company: { __typename?: "Company" } & Pick<
+          Company,
+          "name" | "purpose"
+        > & {
+            address: { __typename?: "Address" } & Pick<
+              Address,
+              "county" | "state"
+            >;
+          };
       }
   >;
 };
@@ -71,20 +96,17 @@ export const ExperienceGetDocument = gql`
   query ExperienceGet {
     experiences {
       accomplishments
-      address {
-        county
-        state
+      company {
+        name
+        purpose
+        address {
+          county
+          state
+        }
       }
-      companyName
       endDate
       hidden
-      iconPath
-      purpose
       role
-      skills {
-        name
-        utilization
-      }
       startDate
     }
   }

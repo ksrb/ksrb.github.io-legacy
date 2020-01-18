@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
-import { marginBottom } from "../../styles";
+import { marginBottom, primaryColor } from "src/styles";
 
 export default makeStyles({
   root: {},
@@ -16,11 +16,19 @@ export default makeStyles({
   },
 
   company: {},
-  company_name: {},
-  company_location: {},
+  company_name: {
+    color: primaryColor,
+    fontWeight: 600,
+  },
+  company_location: {
+    color: "black",
+    fontWeight: 500,
+  },
 
   header_right: {
     textAlign: "right",
+    color: "#555555",
+    fontWeight: 500,
   },
   role: {},
   startEndDate: {},

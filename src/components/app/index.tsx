@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import classnames from "classnames";
 import { Grid } from "@material-ui/core";
 
-import About from "../about";
-import Experience from "../experience";
-import Navbar from "../navbar";
+import About from "src/components/about";
+import Experience from "src/components/experience";
+import Navbar from "src/components/navbar";
 
 import useStyles from "./styles";
 

@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 
 import useStyles from "./styles";
 
-const Navbar: FC = props => {
+const Navbar: FC = () => {
   const classes = useStyles();
 
   return (

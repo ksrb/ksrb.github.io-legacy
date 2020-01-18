@@ -9,24 +9,21 @@
     "@graphql-codegen/typescript": "^1.11.2",
     "@graphql-codegen/typescript-operations": "^1.11.2",
     "@graphql-codegen/typescript-react-apollo": "^1.11.2",
-    "@material-ui/core": "^4.8.3",
+    "@material-ui/core": "^4.9.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/classnames": "^2.2.9",
-    "@types/d3": "^5.7.2",
-    "@types/jest": "^24.0.25",
-    "@types/node": "^12.12.24",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
+    "@types/jest": "^24.9.0",
+    "@types/node": "^12.12.25",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
     "@types/react-jss": "^10.0.0",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "apollo-utilities": "^1.3.3",
     "classnames": "^2.2.6",
     "concurrently": "^5.0.2",
-    "cytoscape": "^3.13.0",
-    "d3": "^5.15.0",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "graphql.macro": "^1.4.2",
@@ -37,13 +34,14 @@
     "react-dom": "^16.12.0",
     "react-jss": "^10.0.3",
     "react-scripts": "3.3.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "concurrently -r \"npm:start:dev\" \"npm:graphql-codegen:watch\"",
     "start:dev": "react-scripts start",
     "graphql-codegen": "graphql-codegen",
     "graphql-codegen:watch": "npm run graphql-codegen -- -w",
+    "format": "prettier --write \"src/**/*.{tsx,graphql}\" \"src/*.{tsx,graphql}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -62,8 +60,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/cytoscape": "^3.8.7"
   }
 }

@@ -1,26 +1,49 @@
-type Experience {
-  accomplishments: [String!]!
-  address: Address!
-  companyName: String!
-  endDate: String
-  hidden: Boolean!
-  hours: String!
-  iconPath: String
-  purpose: String!
-  role: String!
-  skills: [Skill!]!
-  startDate: String!
-}
-
 type Address {
   state: String!
   county: String!
 }
 
-type Skill {
+type Company {
+  address: Address!
+  purpose: String!
   name: String!
-  type: String!
-  utilization: Int!
+  logo: String
+}
+
+interface Displayed {
+  title: String!
+}
+
+type Use implements Displayed {
+  title: String!
+}
+
+type Language implements Displayed {
+  title: String!
+}
+
+type Tool implements Displayed {
+  languages: [Language]
+  title: String!
+  url: String!
+  use: Use!
+}
+
+type History {
+  value: [Displayed!]!
+  children: [History!]
+  utilization: Int
+}
+
+type Experience {
+  accomplishments: [String!]!
+  company: Company!
+  endDate: String
+  hidden: Boolean!
+  hours: String!
+  role: String!
+  history: [History!]!
+  startDate: String!
 }
 
 type Query {

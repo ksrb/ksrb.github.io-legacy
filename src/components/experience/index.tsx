@@ -1,9 +1,15 @@
 import React, { FC } from "react";
 import { Grid } from "@material-ui/core";
-import { useExperienceGetQuery } from "../../graphql/__generated__";
+import { useExperienceGetQuery } from "src/graphql/__generated__";
+
 import useStyles from "./styles";
 
-const Experience: FC = props => {
+function renderDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return `${date.getMonth()}/${date.getFullYear()}`;
+}
+
+const Experience: FC = () => {
   const { data } = useExperienceGetQuery();
   const experiences = data?.experiences ?? [];
 
@@ -16,28 +22,35 @@ const Experience: FC = props => {
         .map(
           ({
             accomplishments,
-            address: { county, state },
-            companyName,
+            company,
+            company: {
+              purpose,
+              address: { county, state },
+            },
             endDate,
-            hidden,
-            iconPath,
-            purpose,
+            // iconPath,
             role,
             // skills: { name, utilization },
             startDate,
           }) => (
-            <Grid key={companyName} item xs={12} className={classes.experience}>
+            <Grid
+              key={company.name}
+              item
+              xs={12}
+              className={classes.experience}
+            >
               <div className={classes.header}>
                 <div className={classes.company}>
-                  <div className={classes.company_name}>{companyName}</div>
+                  <div className={classes.company_name}>{company.name}</div>
                   <div className={classes.company_location}>
                     {county}, {state}
                   </div>
                 </div>
                 <div className={classes.header_right}>
-                  <div className={classes.role}>{companyName}</div>
+                  <div className={classes.role}>{role}</div>
                   <div className={classes.startEndDate}>
-                    {county}, {state}
+                    {renderDate(startDate)} -{" "}
+                    {endDate ? renderDate(endDate) : "Current"}
                   </div>
                 </div>
               </div>

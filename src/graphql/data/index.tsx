@@ -1,45 +1,73 @@
-import { Experience } from "../__generated__";
-import typenames from "../typenames";
+import typenames from "src/graphql/typenames";
+import { Experience, History } from "src/graphql/__generated__";
+
+import companies from "./companies";
+import languages from "./languages";
+import tools from "./tools";
+import uses from "./uses";
+
+type RequiredBy<T, K extends keyof T> = Pick<T, K> & Partial<Omit<T, K>>;
+
+function createHistory(history: RequiredBy<History, "value">): History {
+  return {
+    __typename: typenames.History,
+    children: null,
+    utilization: null,
+    ...history,
+  };
+}
 
 export const experiences: Experience[] = [
   {
     __typename: typenames.Experience,
-    companyName: "PMAT Inc.",
-    // iconPath: require("data/img/pmat.svg"),
-    iconPath: null,
-    purpose:
-      "Company focused on developing solutions for the defense sector specializing in web applications providing situational awareness for command and control.",
-    address: {
-      __typename: typenames.Address,
-      state: "CA",
-      county: "San Diego",
-    },
+    company: companies.pmat,
     role: "Senior Frontend Developer",
     hours: "Full time",
     startDate: new Date(2018, 7).toString(),
-    endDate: "Current",
-    skills: [
-      {
-        __typename: typenames.Skill,
-        name: "React",
-        type: "programming",
+    endDate: null,
+    history: [
+      createHistory({
+        value: [uses.Frontend],
         utilization: 70,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "Java",
-        type: "programming",
+        children: [
+          createHistory({
+            value: [languages.javaScript, languages.typescript],
+            children: [
+              createHistory({ value: [tools.react] }),
+              createHistory({ value: [tools.redux] }),
+              createHistory({ value: [tools.graphql] }),
+              createHistory({ value: [tools.apollo] }),
+              createHistory({ value: [tools.cesium] }),
+              createHistory({ value: [tools.leaflet] }),
+            ],
+          }),
+        ],
+      }),
+      createHistory({
+        value: [uses.Backend],
         utilization: 20,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "Bash",
-        type: "programming",
+        children: [
+          createHistory({
+            value: [languages.java],
+            children: [
+              createHistory({ value: [tools.graphqlJava] }),
+              createHistory({ value: [tools.javaServlet] }),
+            ],
+          }),
+        ],
+      }),
+      createHistory({
+        value: [uses.Build],
         utilization: 10,
-      },
+        children: [
+          createHistory({ value: [languages.bash] }),
+          createHistory({ value: [tools.docker] }),
+          createHistory({ value: [tools.gradle] }),
+        ],
+      }),
     ],
     accomplishments: [
-      "Lead a team of 3 frontend developers transitioning core AngularJS application to one utilizing ReactJS + Apollo + Typescript improving overall code quality and performance.",
+      "Lead a team of 3 frontend developers transitioning core Angular application to one utilizing ReactJS + Apollo + Typescript improving overall code quality and performance.",
       "Designed and implemented core application code, significant contributions include major rendering improvements by utilizing HTML canvas to render 50k+ entities on a map.",
       "Introduced and maintaining GraphQL service, streamlining development process between backend and frontend teams.",
     ],
@@ -47,83 +75,64 @@ export const experiences: Experience[] = [
   },
   {
     __typename: typenames.Experience,
-    companyName: "Lantern Credit",
-    // iconPath: require("data/img/lantern.svg"),
-    iconPath: null,
-    purpose:
-      "Startup focused on modernizing the credit scoring industry by creating an application that allows users to modify their credit score in real time.",
-    address: {
-      __typename: typenames.Address,
-      state: "CA",
-      county: "Irvine",
-    },
+    company: companies.lanternCredit,
     role: "Full Stack Developer",
     hours: "Full time",
     startDate: new Date(2015, 6).toString(),
     endDate: new Date(2018, 2).toString(),
-    skills: [
-      {
-        __typename: typenames.Skill,
-        name: "JavaScript (React)",
-        type: "programming",
+    history: [
+      createHistory({
+        value: [uses.Frontend],
         utilization: 60,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "Golang",
-        type: "programming",
-        utilization: 25,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "Bash",
-        type: "programming",
-        utilization: 15,
-      },
+        children: [
+          createHistory({
+            value: [languages.javaScript],
+            children: [
+              createHistory({ value: [tools.react] }),
+              createHistory({ value: [tools.graphql] }),
+            ],
+          }),
+        ],
+      }),
+      createHistory({
+        value: [uses.Backend],
+        utilization: 30,
+        children: [createHistory({ value: [languages.golang] })],
+      }),
+      createHistory({
+        value: [uses.Build],
+        utilization: 10,
+        children: [
+          createHistory({ value: [languages.bash] }),
+          createHistory({ value: [tools.docker] }),
+        ],
+      }),
     ],
     accomplishments: [
       "Used ReactJS, Babel, and Webpack to create front-end application using current and experimental versions of JavaScript.",
       "Maintained front end build and deployment pipeline and incorporated new technologies to streamline development such as SASS and CSS modules.",
-      "Created several microservices using Golang to retrieve data from credit agencies such as Transunion and Equifax. ",
+      "Created several microservices using Golang to retrieve data from credit agencies such as Transunion and Equifax.",
       "Built and deployed microservices using Docker, took part in the creation of a 3-tier architecture creating a system that was both secure and scalable.",
     ],
     hidden: false,
   },
   {
     __typename: typenames.Experience,
-    companyName: "Table Design Art",
-    // iconPath: require("data/img/table design art.png"),
-    iconPath: null,
-    purpose:
-      "Startup company specializing in creating decorative table banners for special occasion.",
-    address: {
-      __typename: typenames.Address,
-      state: "CA",
-      county: "Irvine",
-    },
+    company: companies.tableDesignArt,
     role: "Web Developer",
     hours: "Part time",
     startDate: new Date(2015, 4).toString(),
     endDate: new Date(2015, 6).toString(),
-    skills: [
-      {
-        __typename: typenames.Skill,
-        name: "Liquid",
-        type: "visual",
-        utilization: 40,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "css",
-        type: "visual",
-        utilization: 30,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "JavaScript",
-        type: "programming",
-        utilization: 30,
-      },
+    history: [
+      createHistory({
+        value: [tools.liquid],
+      }),
+      createHistory({
+        value: [languages.css],
+      }),
+      createHistory({
+        value: [languages.javaScript],
+      }),
     ],
     accomplishments: [
       "Used Shopify to rapidly create a webstore, used the Liquid templating language to customize appearance.",
@@ -134,38 +143,30 @@ export const experiences: Experience[] = [
   },
   {
     __typename: typenames.Experience,
-    companyName: "Niksun",
-    // iconPath: require("data/img/niksun.png"),
-    iconPath: null,
-    purpose: "Company focused on providing network analysis software.",
-    address: {
-      __typename: typenames.Address,
-      state: "CA",
-      county: "Irvine",
-    },
+    company: companies.niksun,
     role: "Web Developer",
     hours: "Full time",
     startDate: new Date(2013, 9).toString(),
     endDate: new Date(2015, 3).toString(),
-    skills: [
-      {
-        __typename: typenames.Skill,
-        name: "GWT",
-        type: "programming",
-        utilization: 70,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "JavaScript",
-        type: "programming",
-        utilization: 20,
-      },
-      {
-        __typename: typenames.Skill,
-        name: "css",
-        type: "visual",
+    history: [
+      createHistory({
+        value: [uses.Frontend],
+        utilization: 90,
+        children: [
+          createHistory({
+            value: [tools.gwt],
+            utilization: 70,
+          }),
+          createHistory({
+            value: [tools.angularJS],
+            utilization: 30,
+          }),
+        ],
+      }),
+      createHistory({
+        value: [tools.gradle],
         utilization: 10,
-      },
+      }),
     ],
     accomplishments: [
       "Created a real time reporting web application for Niksun's file analysis service, used by several clients including Wells Fargo.",

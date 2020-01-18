@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
-import { marginBottom } from "../../styles";
+import { marginBottom } from "src/styles";
 
 export default makeStyles({
   root: {

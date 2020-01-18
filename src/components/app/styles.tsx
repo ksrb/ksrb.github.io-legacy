@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
-
-const primaryColor = "#4a679b";
+import { marginBottom, primaryColor } from "src/styles";
 
 export default makeStyles({
   "@global": {
@@ -25,7 +24,7 @@ export default makeStyles({
 
   header: {
     justifyContent: "center",
-    margin: "50px 0 2px",
+    margin: `50px 0 ${marginBottom}`,
   },
 
   header_name: {
@@ -41,7 +40,7 @@ export default makeStyles({
     color: primaryColor,
   },
   header_name__small: {
-    fontSize: 32,
+    fontSize: 30,
   },
 
   graph: {
