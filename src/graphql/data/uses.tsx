@@ -1,20 +1,27 @@
+import typenames from "src/graphql/typenames";
 import { Use } from "src/graphql/__generated__";
 
-import typenames from "src/graphql/typenames";
+import { RequiredBy } from "src/types";
+
+let id = 0;
+function createUse(use: RequiredBy<Use, "title">): Use {
+  return {
+    __typename: typenames.Use,
+    id: (id++).toString(),
+    ...use,
+  };
+}
 
 const uses = {
-  Backend: {
-    __typename: typenames.Use,
+  Backend: createUse({
     title: "Backend",
-  } as Use,
-  Build: {
-    __typename: typenames.Use,
+  }),
+  Build: createUse({
     title: "Build",
-  } as Use,
-  Frontend: {
-    __typename: typenames.Use,
+  }),
+  Frontend: createUse({
     title: "Frontend",
-  } as Use,
+  }),
 };
 
 export default uses as { [key in keyof typeof uses]: Use };

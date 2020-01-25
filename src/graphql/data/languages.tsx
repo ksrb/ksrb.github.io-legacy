@@ -1,39 +1,40 @@
+import typenames from "src/graphql/typenames";
 import { Language } from "src/graphql/__generated__";
-import typenames from "../typenames";
+import { RequiredBy } from "src/types";
 
+let id = 0;
+function createLanguage(language: RequiredBy<Language, "title">) {
+  return {
+    __typename: typenames.Language,
+    id: (id++).toString(),
+    ...language,
+  };
+}
 const languages = {
-  css: {
-    __typename: typenames.Language,
+  css: createLanguage({
     title: "CSS",
-  } as Language,
-  javaScript: {
-    __typename: typenames.Language,
+  }),
+  javascript: createLanguage({
     title: "JavaScript",
-  } as Language,
-  java: {
-    __typename: typenames.Language,
+  }),
+  java: createLanguage({
     title: "Java",
-  } as Language,
-  golang: {
-    __typename: typenames.Language,
+  }),
+  golang: createLanguage({
     title: "Golang",
-  } as Language,
-  groovy: {
-    __typename: typenames.Language,
+  }),
+  groovy: createLanguage({
     title: "Groovy",
-  } as Language,
-  ruby: {
-    __typename: typenames.Language,
+  }),
+  ruby: createLanguage({
     title: "Ruby",
-  } as Language,
-  typescript: {
-    __typename: typenames.Language,
+  }),
+  typescript: createLanguage({
     title: "TypeScript",
-  } as Language,
-  bash: {
-    __typename: typenames.Language,
+  }),
+  bash: createLanguage({
     title: "Bash",
-  } as Language,
+  }),
 };
 
 export default languages as { [key in keyof typeof languages]: Language };

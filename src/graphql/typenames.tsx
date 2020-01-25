@@ -4,16 +4,31 @@ import {
   Experience,
   History,
   Language,
+  Skill,
   Tool,
   Use,
 } from "./__generated__";
 
-export default {
-  Address: "Address" as Address["__typename"],
-  Company: "Company" as Company["__typename"],
-  Experience: "Experience" as Experience["__typename"],
-  History: "History" as History["__typename"],
-  Skill: "Skill" as Tool["__typename"],
-  Language: "Language" as Language["__typename"],
-  Use: "Use" as Use["__typename"],
+interface Typenames {
+  Address: NonNullable<Address["__typename"]>;
+  Company: NonNullable<Company["__typename"]>;
+  Experience: NonNullable<Experience["__typename"]>;
+  History: NonNullable<History["__typename"]>;
+  Tool: NonNullable<Tool["__typename"]>;
+  Language: NonNullable<Language["__typename"]>;
+  Use: NonNullable<Use["__typename"]>;
+  Skill: NonNullable<Skill["__typename"]>;
+}
+
+const typenames: Typenames = {
+  Address: "Address",
+  Company: "Company",
+  Experience: "Experience",
+  History: "History",
+  Tool: "Tool",
+  Language: "Language",
+  Use: "Use",
+  Skill: "Skill",
 };
+
+export default typenames;

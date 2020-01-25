@@ -3,8 +3,9 @@ import classnames from "classnames";
 import { Grid } from "@material-ui/core";
 
 import About from "src/components/about";
-import Experience from "src/components/experience";
+import Experience from "src/components/experiences";
 import Navbar from "src/components/navbar";
+import Skills from "src/components/skills";
 
 import useStyles from "./styles";
 
@@ -26,6 +27,7 @@ const App: FC = () => {
       <Navbar />
       <About />
       <Experience />
+      <Skills />
     </div>
   );
 };

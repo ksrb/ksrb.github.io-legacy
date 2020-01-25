@@ -1,51 +1,70 @@
-type Address {
-  state: String!
-  county: String!
+interface Node {
+  id: ID!
 }
 
-type Company {
+type Address {
+  county: String!
+  state: String!
+}
+
+type Company implements Node {
+  id: ID!
   address: Address!
-  purpose: String!
-  name: String!
   logo: String
+  name: String!
+  purpose: String!
 }
 
 interface Displayed {
   title: String!
 }
 
-type Use implements Displayed {
+type Use implements Node & Displayed {
+  id: ID!
   title: String!
 }
 
-type Language implements Displayed {
+type Language implements Node & Displayed {
+  id: ID!
   title: String!
 }
 
-type Tool implements Displayed {
-  languages: [Language]
+type Tool implements Node & Displayed {
+  id: ID!
+  languages: [Language!]
   title: String!
   url: String!
   use: Use!
 }
 
-type History {
-  value: [Displayed!]!
+type History implements Node {
+  id: ID!
   children: [History!]
   utilization: Int
+  values: [Displayed!]!
 }
 
-type Experience {
+type Experience implements Node {
+  id: ID!
   accomplishments: [String!]!
   company: Company!
   endDate: String
   hidden: Boolean!
+  history: [History!]!
   hours: String!
   role: String!
-  history: [History!]!
   startDate: String!
+}
+
+type Skill implements Node {
+  id: ID!
+  experience: Experience!
+  languages: [Language!]
+  utilization: Int!
+  values: [Displayed!]!
 }
 
 type Query {
   experiences: [Experience!]!
+  skills: [Skill!]!
 }

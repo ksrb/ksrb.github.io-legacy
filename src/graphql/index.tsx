@@ -2,7 +2,8 @@ import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { loader } from "graphql.macro";
 
-import { experiences } from "./data";
+import { WriteQueryDocument } from "./__generated__";
+import { experiences, skillsComputed } from "./data";
 
 const cache = new InMemoryCache();
 const client = new ApolloClient({
@@ -11,9 +12,11 @@ const client = new ApolloClient({
   typeDefs: loader("./schema.graphql"),
 });
 
-cache.writeData({
+client.writeQuery({
+  query: WriteQueryDocument,
   data: {
     experiences,
+    skills: skillsComputed,
   },
 });
 

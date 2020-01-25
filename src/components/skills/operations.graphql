@@ -1,0 +1,23 @@
+fragment SkillFields on Skill {
+  id
+  experience {
+    id
+    company {
+      name
+    }
+  }
+  languages {
+    id
+    title
+  }
+  utilization
+  values {
+    title
+  }
+}
+
+query SkillsGet {
+  skills {
+    ...SkillFields
+  }
+}

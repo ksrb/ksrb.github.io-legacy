@@ -21,6 +21,7 @@ const Experience: FC = () => {
         .filter(({ hidden }) => !hidden)
         .map(
           ({
+            id,
             accomplishments,
             company,
             company: {
@@ -33,12 +34,7 @@ const Experience: FC = () => {
             // skills: { name, utilization },
             startDate,
           }) => (
-            <Grid
-              key={company.name}
-              item
-              xs={12}
-              className={classes.experience}
-            >
+            <Grid key={id} item xs={12} className={classes.experience}>
               <div className={classes.header}>
                 <div className={classes.company}>
                   <div className={classes.company_name}>{company.name}</div>

@@ -1,9 +1,30 @@
 import typenames from "src/graphql/typenames";
 import { Company } from "src/graphql/__generated__";
+import { RequiredBy } from "../../types";
+
+let id = 0;
+function createCompany(
+  company: RequiredBy<Company, "address" | "name" | "purpose">,
+): Company {
+  return {
+    __typename: typenames.Company,
+    id: (id++).toString(),
+    logo: null,
+    ...company,
+  };
+}
 
 const companies = {
-  pmat: {
-    __typename: typenames.Company,
+  personal: createCompany({
+    address: {
+      __typename: typenames.Address,
+      state: "CA",
+      county: "Irvine",
+    },
+    name: "Personal",
+    purpose: "",
+  }),
+  pmat: createCompany({
     address: {
       __typename: typenames.Address,
       state: "CA",
@@ -12,9 +33,8 @@ const companies = {
     name: "PMAT Inc.",
     purpose:
       "company focused on developing solutions for the defense sector specializing in web applications providing situational awareness for command and control.",
-    logo: null,
-  } as Company,
-  lanternCredit: {
+  }),
+  lanternCredit: createCompany({
     __typename: typenames.Company,
     address: {
       __typename: typenames.Address,
@@ -24,21 +44,19 @@ const companies = {
     name: "Lantern Credit",
     purpose:
       "Startup focused on modernizing the credit scoring industry by creating an application that allows users to modify their credit score in real time.",
-    logo: null,
-  } as Company,
-  tableDesignArt: {
+  }),
+  tableDesignArt: createCompany({
     __typename: typenames.Company,
     address: {
       __typename: typenames.Address,
       state: "CA",
-      county: "IRvine",
+      county: "Irvine",
     },
     name: "Table Design Art",
     purpose:
       "Startup company specializing in creating decorative table banners for special occasion.",
-    logo: null,
-  } as Company,
-  niksun: {
+  }),
+  niksun: createCompany({
     __typename: typenames.Company,
     address: {
       __typename: typenames.Address,
@@ -47,8 +65,7 @@ const companies = {
     },
     name: "Niksun",
     purpose: "Company focused on providing network analysis software.",
-    logo: null,
-  } as Company,
+  }),
 };
 
 export default companies as { [key in keyof typeof companies]: Company };

@@ -1,0 +1,8 @@
+query WriteQuery {
+  experiences {
+    ...ExperienceFields
+  }
+  skills {
+    ...SkillFields
+  }
+}

@@ -1,0 +1,23 @@
+fragment ExperienceFields on Experience {
+  id
+  accomplishments
+  company {
+    id
+    name
+    purpose
+    address {
+      county
+      state
+    }
+  }
+  endDate
+  hidden
+  role
+  startDate
+}
+
+query ExperienceGet {
+  experiences {
+    ...ExperienceFields
+  }
+}
