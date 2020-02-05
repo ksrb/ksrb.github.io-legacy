@@ -7,12 +7,13 @@ import languages from "./languages";
 import uses from "./uses";
 
 let id = 0;
-function createTool(
-  tool: RequiredBy<Tool, "title" | "url" | "use" | "languages">,
-): Tool {
+function createTool(tool: RequiredBy<Tool, "title">): Tool {
   return {
     __typename: typenames.Tool,
     id: (id++).toString(),
+    url: "",
+    use: uses.None,
+    languages: null,
     ...tool,
   };
 }
@@ -30,6 +31,12 @@ const tools = {
     use: uses.Frontend,
     languages: [languages.typescript],
   }),
+  bootstrap: createTool({
+    title: "Bootstrap",
+    url: "https://github.com/twbs/bootstrap-sass",
+    use: uses.Frontend,
+    languages: [languages.scss],
+  }),
   cesium: createTool({
     title: "Cesium",
     url: "https://cesium.com/cesiumjs/",
@@ -40,7 +47,13 @@ const tools = {
     title: "Docker",
     url: "https://www.docker.com/",
     use: uses.Build,
-    languages: [languages.golang],
+    languages: [languages.bash],
+  }),
+  foundation: createTool({
+    title: "Foundation",
+    url: "https://foundation.zurb.com/",
+    use: uses.Frontend,
+    languages: [languages.scss],
   }),
   gradle: createTool({
     title: "Gradle",
@@ -61,8 +74,8 @@ const tools = {
     languages: [languages.java],
   }),
   gwt: createTool({
-    title: "GWT",
-    url: "http://www.gwtproject.org/",
+    title: "SmartGWT",
+    url: "https://www.smartclient.com/product/smartgwt.jsp",
     use: uses.Frontend,
     languages: [languages.java],
   }),
@@ -90,6 +103,11 @@ const tools = {
     use: uses.Frontend,
     languages: [languages.ruby],
   }),
+  photoshop: createTool({
+    title: "Photoshop",
+    url: "https://www.adobe.com/products/photoshop.html",
+    use: uses.Frontend,
+  }),
   react: createTool({
     title: "React",
     url: "https://reactjs.org/",
@@ -101,6 +119,9 @@ const tools = {
     url: "https://redux.js.org/",
     use: uses.Frontend,
     languages: [languages.javascript],
+  }),
+  timeOff: createTool({
+    title: "Time off",
   }),
 };
 

@@ -10,7 +10,7 @@ type Address {
 type Company implements Node {
   id: ID!
   address: Address!
-  logo: String
+  logo: String!
   name: String!
   purpose: String!
 }
@@ -27,6 +27,8 @@ type Use implements Node & Displayed {
 type Language implements Node & Displayed {
   id: ID!
   title: String!
+  url: String!
+  logo: String!
 }
 
 type Tool implements Node & Displayed {
@@ -50,7 +52,7 @@ type Experience implements Node {
   company: Company!
   endDate: String
   hidden: Boolean!
-  history: [History!]!
+  histories: [History!]!
   hours: String!
   role: String!
   startDate: String!

@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
-import jss from "jss";
-import preset from "jss-preset-default";
-import { StylesProvider } from "@material-ui/styles";
+import { create } from "jss";
+import compose from "jss-plugin-compose";
+import { jssPreset, StylesProvider } from "@material-ui/styles";
 
 import client from "./graphql";
 
@@ -11,7 +11,7 @@ import App from "./components/app";
 
 import * as serviceWorker from "./serviceWorker";
 
-jss.setup(preset());
+const jss = create({ plugins: [...jssPreset().plugins, compose()] });
 
 ReactDOM.render(
   <ApolloProvider client={client}>

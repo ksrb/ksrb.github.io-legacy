@@ -1,18 +1,19 @@
 import { makeStyles } from "@material-ui/styles";
 
-import { marginBottom, primaryColor } from "src/styles";
+import { marginBottomClass, primaryColor } from "src/styles";
 
 export default makeStyles({
+  ...marginBottomClass,
   root: {},
 
   experience: {
-    margin: `0 0 ${marginBottom}`,
+    composes: "$marginBottom",
   },
 
   header: {
+    composes: "$marginBottom",
     display: "flex",
     justifyContent: "space-between",
-    margin: `0 0 ${marginBottom}`,
   },
 
   company: {},
@@ -34,8 +35,25 @@ export default makeStyles({
   startEndDate: {},
 
   purpose: {
-    margin: `0 0 ${marginBottom}`,
+    composes: "$marginBottom",
   },
 
   accomplishments: {},
+
+  // History
+  histories: {
+    display: "flex",
+  },
+  history: {
+    flex: 1,
+    boxSizing: "border-box",
+    border: "1px solid black",
+    textAlign: "center",
+    "&:not(:first-child)": {
+      borderLeft: "none",
+    },
+  },
+  history__root: {},
+  history__leaf: {},
+  history_title: {},
 });

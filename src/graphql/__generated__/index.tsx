@@ -21,7 +21,7 @@ export type Company = Node & {
   __typename?: "Company";
   id: Scalars["ID"];
   address: Address;
-  logo: Maybe<Scalars["String"]>;
+  logo: Scalars["String"];
   name: Scalars["String"];
   purpose: Scalars["String"];
 };
@@ -37,7 +37,7 @@ export type Experience = Node & {
   company: Company;
   endDate: Maybe<Scalars["String"]>;
   hidden: Scalars["Boolean"];
-  history: Array<History>;
+  histories: Array<History>;
   hours: Scalars["String"];
   role: Scalars["String"];
   startDate: Scalars["String"];
@@ -56,6 +56,8 @@ export type Language = Node &
     __typename?: "Language";
     id: Scalars["ID"];
     title: Scalars["String"];
+    url: Scalars["String"];
+    logo: Scalars["String"];
   };
 
 export type Node = {
@@ -94,6 +96,17 @@ export type Use = Node &
     title: Scalars["String"];
   };
 
+export type HistoryFieldsFragment = { __typename?: "History" } & Pick<
+  History,
+  "id" | "utilization"
+> & {
+    values: Array<
+      | ({ __typename?: "Language" } & Pick<Language, "title">)
+      | ({ __typename?: "Use" } & Pick<Use, "title">)
+      | ({ __typename?: "Tool" } & Pick<Tool, "title">)
+    >;
+  };
+
 export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
   Experience,
   "id" | "accomplishments" | "endDate" | "hidden" | "role" | "startDate"
@@ -104,6 +117,25 @@ export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
     > & {
         address: { __typename?: "Address" } & Pick<Address, "county" | "state">;
       };
+    histories: Array<
+      { __typename?: "History" } & {
+        children: Maybe<
+          Array<
+            { __typename?: "History" } & {
+              children: Maybe<
+                Array<
+                  { __typename?: "History" } & {
+                    children: Maybe<
+                      Array<{ __typename?: "History" } & HistoryFieldsFragment>
+                    >;
+                  } & HistoryFieldsFragment
+                >
+              >;
+            } & HistoryFieldsFragment
+          >
+        >;
+      } & HistoryFieldsFragment
+    >;
   };
 
 export type ExperienceGetQueryVariables = {};
@@ -142,6 +174,15 @@ export type WriteQueryQuery = { __typename?: "Query" } & {
   skills: Array<{ __typename?: "Skill" } & SkillFieldsFragment>;
 };
 
+export const HistoryFieldsFragmentDoc = gql`
+  fragment HistoryFields on History {
+    id
+    utilization
+    values {
+      title
+    }
+  }
+`;
 export const ExperienceFieldsFragmentDoc = gql`
   fragment ExperienceFields on Experience {
     id
@@ -155,11 +196,24 @@ export const ExperienceFieldsFragmentDoc = gql`
         state
       }
     }
+    histories {
+      ...HistoryFields
+      children {
+        ...HistoryFields
+        children {
+          ...HistoryFields
+          children {
+            ...HistoryFields
+          }
+        }
+      }
+    }
     endDate
     hidden
     role
     startDate
   }
+  ${HistoryFieldsFragmentDoc}
 `;
 export const SkillFieldsFragmentDoc = gql`
   fragment SkillFields on Skill {

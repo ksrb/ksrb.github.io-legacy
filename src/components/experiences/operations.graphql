@@ -1,3 +1,11 @@
+fragment HistoryFields on History {
+  id
+  utilization
+  values {
+    title
+  }
+}
+
 fragment ExperienceFields on Experience {
   id
   accomplishments
@@ -8,6 +16,18 @@ fragment ExperienceFields on Experience {
     address {
       county
       state
+    }
+  }
+  histories {
+    ...HistoryFields
+    children {
+      ...HistoryFields
+      children {
+        ...HistoryFields
+        children {
+          ...HistoryFields
+        }
+      }
     }
   }
   endDate

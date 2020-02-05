@@ -22,6 +22,9 @@ const uses = {
   Frontend: createUse({
     title: "Frontend",
   }),
+  None: createUse({
+    title: "None",
+  }),
 };
 
 export default uses as { [key in keyof typeof uses]: Use };

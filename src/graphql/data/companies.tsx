@@ -9,7 +9,7 @@ function createCompany(
   return {
     __typename: typenames.Company,
     id: (id++).toString(),
-    logo: null,
+    logo: "",
     ...company,
   };
 }
@@ -65,6 +65,16 @@ const companies = {
     },
     name: "Niksun",
     purpose: "Company focused on providing network analysis software.",
+  }),
+  scholarsForCharity: createCompany({
+    __typename: typenames.Company,
+    address: {
+      __typename: typenames.Address,
+      state: "NJ",
+      county: "Princeton",
+    },
+    name: "Scholars for Charity",
+    purpose: "Nonprofit organization that designs websites for charity.",
   }),
 };
 

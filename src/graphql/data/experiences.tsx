@@ -9,10 +9,11 @@ import tools from "./tools";
 import uses from "./uses";
 
 let experienceId = 0;
+
 function createExperience(
   experience: RequiredBy<
     Experience,
-    "accomplishments" | "company" | "history" | "hours" | "role" | "startDate"
+    "accomplishments" | "company" | "histories" | "startDate"
   >,
 ): Experience {
   return {
@@ -20,11 +21,14 @@ function createExperience(
     id: (experienceId++).toString(),
     endDate: null,
     hidden: false,
+    hours: "",
+    role: "",
     ...experience,
   };
 }
 
 let historyId = 0;
+
 function createHistory(history: RequiredBy<History, "values">): History {
   return {
     __typename: typenames.History,
@@ -40,9 +44,8 @@ const experiences: Experience[] = [
     company: companies.pmat,
     role: "Senior Frontend Developer",
     hours: "Full time",
-    startDate: new Date(2018, 7).toString(),
-    endDate: null,
-    history: [
+    startDate: new Date("2018-07-1").toString(),
+    histories: [
       createHistory({
         values: [uses.Frontend],
         utilization: 65,
@@ -58,6 +61,7 @@ const experiences: Experience[] = [
               createHistory({ values: [tools.leaflet] }),
             ],
           }),
+          createHistory({ values: [languages.scss], utilization: 5 }),
         ],
       }),
       createHistory({
@@ -95,21 +99,29 @@ const experiences: Experience[] = [
   }),
   createExperience({
     company: companies.personal,
-    role: "",
-    hours: "",
-    startDate: new Date(2018, 2).toString(),
-    endDate: new Date(2018, 7).toString(),
-    history: [createHistory({ values: [tools.react] })],
-    accomplishments: [],
+    startDate: new Date("2018-02-1").toString(),
+    endDate: new Date("2018-07-1").toString(),
+    histories: [
+      createHistory({ values: [tools.react] }),
+      createHistory({ values: [tools.graphql] }),
+      createHistory({ values: [languages.scss] }),
+      createHistory({
+        values: [tools.timeOff],
+        utilization: 50,
+      }),
+    ],
+    accomplishments: [
+      "Experiment with GraphQL and ApolloJS on attempted website rewrite",
+    ],
     hidden: true,
   }),
   createExperience({
     company: companies.lanternCredit,
     role: "Full Stack Developer",
     hours: "Full time",
-    startDate: new Date(2015, 6).toString(),
-    endDate: new Date(2018, 2).toString(),
-    history: [
+    startDate: new Date("2015-06-1").toString(),
+    endDate: new Date("2018-02-1").toString(),
+    histories: [
       createHistory({
         values: [uses.Frontend],
         utilization: 55,
@@ -121,9 +133,13 @@ const experiences: Experience[] = [
                 values: [tools.react],
                 utilization: 90,
               }),
-              createHistory({ values: [tools.graphql], utilization: 10 }),
+              createHistory({
+                values: [tools.graphql],
+                utilization: 10,
+              }),
             ],
           }),
+          createHistory({ values: [languages.scss], utilization: 10 }),
         ],
       }),
       createHistory({
@@ -155,18 +171,12 @@ const experiences: Experience[] = [
     company: companies.tableDesignArt,
     role: "Web Developer",
     hours: "Part time",
-    startDate: new Date(2015, 4).toString(),
-    endDate: new Date(2015, 6).toString(),
-    history: [
-      createHistory({
-        values: [tools.liquid],
-      }),
-      createHistory({
-        values: [languages.css],
-      }),
-      createHistory({
-        values: [languages.javascript],
-      }),
+    startDate: new Date("2015-04-1").toString(),
+    endDate: new Date("2015-06-1").toString(),
+    histories: [
+      createHistory({ values: [tools.liquid] }),
+      createHistory({ values: [languages.scss] }),
+      createHistory({ values: [languages.javascript] }),
     ],
     accomplishments: [
       "Used Shopify to rapidly create a webstore, used the Liquid templating language to customize appearance.",
@@ -177,32 +187,42 @@ const experiences: Experience[] = [
   }),
   createExperience({
     company: companies.personal,
-    role: "",
-    hours: "",
-    startDate: new Date(2015, 3).toString(),
-    endDate: new Date(2015, 6).toString(),
-    history: [createHistory({ values: [tools.angularJS] })],
-    accomplishments: [],
+    startDate: new Date("2015-03-1").toString(),
+    endDate: new Date("2015-06-1").toString(),
+    histories: [
+      createHistory({ values: [tools.angularJS] }),
+      createHistory({ values: [tools.foundation] }),
+      createHistory({ values: [tools.timeOff] }),
+    ],
+    accomplishments: [
+      "Created personal site using AngularJS",
+      "Studied JS using Professional JavaScript for Web Developers, 3rd Edition",
+      "Studied AngularJS using Build Your Own AngularJS",
+    ],
     hidden: true,
   }),
   createExperience({
     company: companies.niksun,
     role: "Web Developer",
     hours: "Full time",
-    startDate: new Date(2013, 9).toString(),
-    endDate: new Date(2015, 3).toString(),
-    history: [
+    startDate: new Date("2013-09-1").toString(),
+    endDate: new Date("2015-03-1").toString(),
+    histories: [
       createHistory({
         values: [uses.Frontend],
         utilization: 85,
         children: [
           createHistory({
             values: [tools.gwt],
-            utilization: 70,
+            utilization: 65,
           }),
           createHistory({
             values: [tools.angularJS],
-            utilization: 30,
+            utilization: 25,
+          }),
+          createHistory({
+            values: [tools.bootstrap],
+            utilization: 10,
           }),
         ],
       }),
@@ -219,6 +239,23 @@ const experiences: Experience[] = [
       "Created a real time reporting web application for Niksun's file analysis service, used by several clients including Wells Fargo.",
       "Rapidly designed and wireframed several prototypes in an effort to modernize Niksun's client facing applications.",
       "Created a workspace setup and build script using Gradle, significantly reducing onboarding time of new developers.",
+    ],
+  }),
+  createExperience({
+    company: companies.scholarsForCharity,
+    role: "Webmaster",
+    hours: "Volunteer",
+    startDate: new Date("2012-12-1").toString(),
+    endDate: new Date("2013-05-1").toString(),
+    histories: [
+      createHistory({ values: [languages.css] }),
+      createHistory({ values: [languages.php] }),
+      createHistory({ values: [tools.photoshop] }),
+    ],
+    accomplishments: [
+      "Gathered requirements, designed graphics, and created sites for clients.",
+      "Lead session for web and graphic design training new members in basic development techniques and best practices.",
+      "Actively promoted organization responsible for recruiting several members.",
     ],
   }),
 ];
