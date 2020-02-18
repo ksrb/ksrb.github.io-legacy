@@ -7,7 +7,6 @@ import uses from "src/graphql/data/uses";
 import {
   HistoryFieldsFragment,
   Maybe,
-  Node,
   Tool,
   Use,
   useExperienceGetQuery,
@@ -24,10 +23,14 @@ function renderDate(dateStr: string): string {
   return `${date.getMonth()}/${date.getFullYear()}`;
 }
 
-function getColorByType(nodes: Node[], parentNodes?: Node[]): string {
+type DisplayedNode = HistoryFieldsFragment["values"][0];
+
+function getColorByType(
+  nodes: DisplayedNode[],
+  parentNodes?: DisplayedNode[],
+): string {
   const node = nodes[0];
 
-  // @ts-ignore
   const { __typename } = node;
 
   switch (__typename) {
@@ -44,6 +47,7 @@ function getColorByType(nodes: Node[], parentNodes?: Node[]): string {
 
 function getColorByUse(use: Use): string {
   const { id } = use;
+
   switch (id) {
     case uses.Frontend.id:
       return primaryColor;
@@ -61,6 +65,7 @@ type History = HistoryFieldsFragment & {
 };
 
 type HistoryWithChildren = RequiredBy<History, "children">;
+
 const History: FC<{
   history: History;
   historyParent: HistoryWithChildren;
@@ -80,7 +85,6 @@ const History: FC<{
 
   const backgroundColorValue = getColorByType(
     history.values,
-    // @ts-ignore
     historyParent && historyParent.values,
   );
 
