@@ -1,4 +1,4 @@
 import experiences from "./experiences";
-import skillsComputed from "./skills";
+import skills from "./skills";
 
-export { experiences, skillsComputed };
+export { experiences, skills };

@@ -30,6 +30,8 @@ export type Displayed = {
   title: Scalars["String"];
 };
 
+export type DisplayedNode = Language | Tool | Use;
+
 export type Experience = Node & {
   __typename?: "Experience";
   id: Scalars["ID"];
@@ -48,7 +50,7 @@ export type History = Node & {
   id: Scalars["ID"];
   children: Maybe<Array<History>>;
   utilization: Maybe<Scalars["Int"]>;
-  values: Array<Displayed>;
+  values: Array<DisplayedNode>;
 };
 
 export type Language = Node &
@@ -76,7 +78,7 @@ export type Skill = Node & {
   experience: Experience;
   languages: Maybe<Array<Language>>;
   utilization: Scalars["Int"];
-  values: Array<Displayed>;
+  values: Array<DisplayedNode>;
 };
 
 export type Tool = Node &
@@ -101,9 +103,17 @@ export type HistoryFieldsFragment = { __typename?: "History" } & Pick<
   "id" | "utilization"
 > & {
     values: Array<
-      | ({ __typename?: "Language" } & Pick<Language, "title">)
-      | ({ __typename?: "Use" } & Pick<Use, "title">)
-      | ({ __typename?: "Tool" } & Pick<Tool, "title">)
+      | ({ __typename?: "Language" } & Pick<
+          Language,
+          "id" | "logo" | "title" | "url"
+        >)
+      | ({ __typename?: "Tool" } & Pick<Tool, "id" | "title" | "url"> & {
+            languages: Maybe<
+              Array<{ __typename?: "Language" } & Pick<Language, "id">>
+            >;
+            use: { __typename?: "Use" } & Pick<Use, "id">;
+          })
+      | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
     >;
   };
 
@@ -155,9 +165,9 @@ export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
       Array<{ __typename?: "Language" } & Pick<Language, "id" | "title">>
     >;
     values: Array<
-      | ({ __typename?: "Language" } & Pick<Language, "title">)
-      | ({ __typename?: "Use" } & Pick<Use, "title">)
-      | ({ __typename?: "Tool" } & Pick<Tool, "title">)
+      | ({ __typename?: "Language" } & Pick<Language, "id" | "title">)
+      | ({ __typename?: "Tool" } & Pick<Tool, "id" | "title">)
+      | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
     >;
   };
 
@@ -179,7 +189,27 @@ export const HistoryFieldsFragmentDoc = gql`
     id
     utilization
     values {
-      title
+      ... on Tool {
+        id
+        languages {
+          id
+        }
+        title
+        url
+        use {
+          id
+        }
+      }
+      ... on Language {
+        id
+        logo
+        title
+        url
+      }
+      ... on Use {
+        id
+        title
+      }
     }
   }
 `;
@@ -230,7 +260,18 @@ export const SkillFieldsFragmentDoc = gql`
     }
     utilization
     values {
-      title
+      ... on Tool {
+        id
+        title
+      }
+      ... on Language {
+        id
+        title
+      }
+      ... on Use {
+        id
+        title
+      }
     }
   }
 `;

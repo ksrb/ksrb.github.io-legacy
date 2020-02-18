@@ -12,7 +12,18 @@ fragment SkillFields on Skill {
   }
   utilization
   values {
-    title
+    ... on Tool {
+      id
+      title
+    }
+    ... on Language {
+      id
+      title
+    }
+    ... on Use {
+      id
+      title
+    }
   }
 }
 

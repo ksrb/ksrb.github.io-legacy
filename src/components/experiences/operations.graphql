@@ -2,7 +2,27 @@ fragment HistoryFields on History {
   id
   utilization
   values {
-    title
+    ... on Tool {
+      id
+      languages {
+        id
+      }
+      title
+      url
+      use {
+        id
+      }
+    }
+    ... on Language {
+      id
+      logo
+      title
+      url
+    }
+    ... on Use {
+      id
+      title
+    }
   }
 }
 

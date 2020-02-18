@@ -3,6 +3,9 @@ schema:
   - src/graphql/schema.graphql
 documents: "src/**/*.graphql"
 generates:
+  src/graphql/__generated__/introspectionQueryResultData.tsx:
+    plugins:
+      - fragment-matcher
   src/graphql/__generated__/index.tsx:
     config:
       avoidOptionals:

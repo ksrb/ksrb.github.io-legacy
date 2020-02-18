@@ -2,11 +2,14 @@ import React, { FC } from "react";
 import { Grid } from "@material-ui/core";
 import clsx from "clsx";
 
+import typenames from "src/graphql/typenames";
 import uses from "src/graphql/data/uses";
 import {
-  Node,
   HistoryFieldsFragment,
   Maybe,
+  Node,
+  Tool,
+  Use,
   useExperienceGetQuery,
 } from "src/graphql/__generated__";
 import { computeUtilization } from "src/graphql/data/skills";
@@ -14,18 +17,42 @@ import { computeUtilization } from "src/graphql/data/skills";
 import { RequiredBy } from "src/types";
 
 import useStyles from "./styles";
+import { primaryColor, secondaryColor, trinaryColor } from "src/styles";
 
 function renderDate(dateStr: string): string {
   const date = new Date(dateStr);
   return `${date.getMonth()}/${date.getFullYear()}`;
 }
 
-function getColorByType(node: Node): string {
+function getColorByType(nodes: Node[], parentNodes?: Node[]): string {
+  const node = nodes[0];
+
   // @ts-ignore
   const { __typename } = node;
-  switch(__typename) {
-    case use.
+
+  switch (__typename) {
+    case typenames.Use:
+      return getColorByUse(node as Use);
+    case typenames.Tool:
+      return getColorByUse((node as Tool).use);
+    case typenames.Language:
+      return parentNodes ? getColorByType(parentNodes) : "";
   }
+
+  return "";
+}
+
+function getColorByUse(use: Use): string {
+  const { id } = use;
+  switch (id) {
+    case uses.Frontend.id:
+      return primaryColor;
+    case uses.Backend.id:
+      return secondaryColor;
+    case uses.Build.id:
+      return trinaryColor;
+  }
+
   return "";
 }
 
@@ -51,7 +78,12 @@ const History: FC<{
 
   const utilizationRounded = Math.round(utilization);
 
-  const backgroundColorValue = 255 * (((depth * 1.1 + 5) * 10) / 100);
+  const backgroundColorValue = getColorByType(
+    history.values,
+    // @ts-ignore
+    historyParent && historyParent.values,
+  );
+
   return (
     <div className={classes.history} style={{ flexBasis: `${utilization}%` }}>
       <div
@@ -61,7 +93,7 @@ const History: FC<{
           !children && classes.history_title__leaf,
         )}
         style={{
-          backgroundColor: `rgba(${backgroundColorValue}, ${backgroundColorValue}, ${backgroundColorValue})`,
+          backgroundColor: `${backgroundColorValue}`,
         }}
       >
         {values.map(({ title }, index) => {
@@ -72,7 +104,7 @@ const History: FC<{
       </div>
       {children && (
         <div className={classes.histories}>
-          {children.map((childHistory, index) => {
+          {children.map(childHistory => {
             const component = (
               <History
                 key={childHistory.id}
@@ -145,7 +177,7 @@ const Experience: FC = () => {
               </div>
 
               <div className={classes.histories}>
-                {histories.map((history, index) => (
+                {histories.map(history => (
                   <History
                     key={history.id}
                     history={history}
