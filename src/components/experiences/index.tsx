@@ -4,6 +4,7 @@ import clsx from "clsx";
 
 import uses from "src/graphql/data/uses";
 import {
+  Node,
   HistoryFieldsFragment,
   Maybe,
   useExperienceGetQuery,
@@ -17,6 +18,15 @@ import useStyles from "./styles";
 function renderDate(dateStr: string): string {
   const date = new Date(dateStr);
   return `${date.getMonth()}/${date.getFullYear()}`;
+}
+
+function getColorByType(node: Node): string {
+  // @ts-ignore
+  const { __typename } = node;
+  switch(__typename) {
+    case use.
+  }
+  return "";
 }
 
 type History = HistoryFieldsFragment & {
@@ -39,38 +49,37 @@ const History: FC<{
     historyParentUtilization,
   );
 
-  utilization = Math.round(utilization);
+  const utilizationRounded = Math.round(utilization);
 
   const backgroundColorValue = 255 * (((depth * 1.1 + 5) * 10) / 100);
   return (
-    <div
-      className={clsx(
-        classes.history,
-        depth === 0 && classes.history__root,
-        !children && classes.history__leaf,
-      )}
-      style={{
-        flexBasis: `${utilization}%`,
-        backgroundColor: `rgba(${backgroundColorValue}, ${backgroundColorValue}, ${backgroundColorValue})`,
-      }}
-    >
-      <div className={classes.history_title}>
+    <div className={classes.history} style={{ flexBasis: `${utilization}%` }}>
+      <div
+        className={clsx(
+          classes.history_title,
+          depth === 0 && classes.history_title__root,
+          !children && classes.history_title__leaf,
+        )}
+        style={{
+          backgroundColor: `rgba(${backgroundColorValue}, ${backgroundColorValue}, ${backgroundColorValue})`,
+        }}
+      >
         {values.map(({ title }, index) => {
           const space = index !== values.length - 1 ? " " : "";
           return title + space;
         })}{" "}
-        {utilization}%
+        {utilizationRounded}%
       </div>
       {children && (
         <div className={classes.histories}>
-          {children.map(childHistory => {
+          {children.map((childHistory, index) => {
             const component = (
               <History
                 key={childHistory.id}
                 history={childHistory}
                 // Typecast as history is guaranteed to have children here
                 historyParent={history as HistoryWithChildren}
-                historyParentUtilization={utilization}
+                historyParentUtilization={100}
                 depth={++depth}
                 classes={classes}
               />
@@ -136,7 +145,7 @@ const Experience: FC = () => {
               </div>
 
               <div className={classes.histories}>
-                {histories.map(history => (
+                {histories.map((history, index) => (
                   <History
                     key={history.id}
                     history={history}

@@ -79,16 +79,13 @@ const experiences: Experience[] = [
       }),
       createHistory({
         values: [uses.Build],
-        utilization: 10,
+        utilization: 15,
         children: [
           createHistory({ values: [languages.bash] }),
           createHistory({ values: [tools.docker] }),
           createHistory({ values: [tools.gradle] }),
+          createHistory({ values: [tools.git] }),
         ],
-      }),
-      createHistory({
-        values: [tools.git],
-        utilization: 5,
       }),
     ],
     accomplishments: [
@@ -149,15 +146,12 @@ const experiences: Experience[] = [
       }),
       createHistory({
         values: [uses.Build],
-        utilization: 10,
+        utilization: 15,
         children: [
           createHistory({ values: [languages.bash] }),
           createHistory({ values: [tools.docker] }),
+          createHistory({ values: [tools.git] }),
         ],
-      }),
-      createHistory({
-        values: [tools.git],
-        utilization: 5,
       }),
     ],
     accomplishments: [

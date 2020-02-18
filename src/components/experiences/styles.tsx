@@ -1,6 +1,13 @@
 import { makeStyles } from "@material-ui/styles";
 
-import { marginBottomClass, primaryColor } from "src/styles";
+import {
+  marginBottomClass,
+  primaryColor,
+  secondaryColor,
+  trinaryColor,
+} from "src/styles";
+
+const borderStyle = "1px solid black";
 
 export default makeStyles({
   ...marginBottomClass,
@@ -46,14 +53,27 @@ export default makeStyles({
   },
   history: {
     flex: 1,
-    boxSizing: "border-box",
-    border: "1px solid black",
-    textAlign: "center",
-    "&:not(:first-child)": {
+    "&:not(:first-child) > $history_title": {
       borderLeft: "none",
     },
   },
-  history__root: {},
-  history__leaf: {},
-  history_title: {},
+  history_title: {
+    border: borderStyle,
+    borderTop: "none",
+    textAlign: "center",
+    whiteSpace: "nowrap",
+  },
+  history_title__root: {
+    borderTop: borderStyle,
+  },
+  history_title__leaf: {},
+  history_title__frontend: {
+    backgroundColor: primaryColor,
+  },
+  history_title__backend: {
+    backgroundColor: secondaryColor,
+  },
+  history_title__build: {
+    backgroundColor: trinaryColor,
+  },
 });
