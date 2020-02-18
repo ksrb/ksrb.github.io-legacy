@@ -221,12 +221,16 @@ const experiences: Experience[] = [
         ],
       }),
       createHistory({
-        values: [tools.gradle],
-        utilization: 10,
-      }),
-      createHistory({
-        values: [tools.git],
-        utilization: 5,
+        values: [uses.Build],
+        utilization: 15,
+        children: [
+          createHistory({
+            values: [tools.gradle],
+          }),
+          createHistory({
+            values: [tools.git],
+          }),
+        ],
       }),
     ],
     accomplishments: [
@@ -242,9 +246,22 @@ const experiences: Experience[] = [
     startDate: new Date("2012-12-1").toString(),
     endDate: new Date("2013-05-1").toString(),
     histories: [
-      createHistory({ values: [languages.css] }),
-      createHistory({ values: [languages.php] }),
-      createHistory({ values: [tools.photoshop] }),
+      createHistory({
+        values: [uses.Frontend],
+        utilization: 80,
+        children: [
+          createHistory({ values: [languages.javascript] }),
+          createHistory({ values: [tools.foundation] }),
+          createHistory({ values: [tools.photoshop] }),
+        ],
+      }),
+      createHistory({
+        values: [uses.Backend],
+        children: [
+          createHistory({ values: [languages.php] }),
+          createHistory({ values: [languages.mysql] }),
+        ],
+      }),
     ],
     accomplishments: [
       "Gathered requirements, designed graphics, and created sites for clients.",

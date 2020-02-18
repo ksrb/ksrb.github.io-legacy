@@ -36,6 +36,10 @@ const languages = {
     title: "Groovy",
     url: "https://groovy-lang.org/",
   }),
+  mysql: createLanguage({
+    title: "MySQL",
+    url: "https://www.mysql.com/",
+  }),
   php: createLanguage({
     title: "PHP",
     url: "https://www.php.net/",

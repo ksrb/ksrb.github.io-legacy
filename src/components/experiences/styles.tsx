@@ -7,8 +7,6 @@ import {
   trinaryColor,
 } from "src/styles";
 
-const borderStyle = "1px solid black";
-
 export default makeStyles({
   ...marginBottomClass,
   root: {},
@@ -53,19 +51,16 @@ export default makeStyles({
   },
   history: {
     flex: 1,
-    "&:not(:first-child) > $history_title": {
-      borderLeft: "none",
-    },
   },
   history_title: {
-    border: borderStyle,
-    borderTop: "none",
+    margin: "0 3px 10px",
+    padding: "0 5px",
+    borderRadius: "2px",
+    color: "white",
     textAlign: "center",
     whiteSpace: "nowrap",
   },
-  history_title__root: {
-    borderTop: borderStyle,
-  },
+  history_title__root: {},
   history_title__leaf: {},
   history_title__frontend: {
     backgroundColor: primaryColor,
