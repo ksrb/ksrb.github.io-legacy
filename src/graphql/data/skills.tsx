@@ -1,6 +1,6 @@
 import typenames from "src/graphql/typenames";
 import {
-  Displayed,
+  DisplayedNode,
   Experience,
   History,
   Language,
@@ -203,12 +203,8 @@ function createSkill(skill: SkillRequiredProperties): Skill {
   };
 }
 
-function getCacheKey(node: Node | Displayed): string {
-  // @ts-ignore all instances of Displayed implement Node, this would be better
-  // described by having Displayed implement Node but this is not possible at
-  // the moment see:
-  // https://github.com/graphql/graphql-spec/pull/373
-  const { __typename, id } = node;
+function getCacheKey(displayedNode: DisplayedNode): string {
+  const { __typename, id } = displayedNode;
   return `${__typename}:${id}`;
 }
 

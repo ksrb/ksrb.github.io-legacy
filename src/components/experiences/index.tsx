@@ -26,10 +26,10 @@ function renderDate(dateStr: string): string {
 type DisplayedNode = HistoryFieldsFragment["values"][0];
 
 function getColorByType(
-  nodes: DisplayedNode[],
-  parentNodes?: DisplayedNode[],
+  displayedNode: DisplayedNode[],
+  parentDisplayedNodes?: DisplayedNode[],
 ): string {
-  const node = nodes[0];
+  const node = displayedNode[0];
 
   const { __typename } = node;
 
@@ -39,7 +39,7 @@ function getColorByType(
     case typenames.Tool:
       return getColorByUse((node as Tool).use);
     case typenames.Language:
-      return parentNodes ? getColorByType(parentNodes) : "";
+      return parentDisplayedNodes ? getColorByType(parentDisplayedNodes) : "";
   }
 
   return "";
