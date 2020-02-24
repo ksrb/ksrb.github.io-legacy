@@ -3,9 +3,6 @@ schema:
   - src/graphql/schema.graphql
 documents: "src/**/*.graphql"
 generates:
-  src/graphql/__generated__/introspectionQueryResultData.tsx:
-    plugins:
-      - fragment-matcher
   src/graphql/__generated__/index.tsx:
     config:
       avoidOptionals:
@@ -14,10 +11,21 @@ generates:
       withHooks: true
       withHOC: false
       withComponent: false
+      contextType: ApolloClientContext
     hooks:
       afterOneFileWrite:
         - prettier --write
     plugins:
+      - add: "import { InMemoryCache } from \"apollo-cache-inmemory\";"
+      - add: "type getCacheKey = (obj: { __typename: string; id: string | number; }) => any"
+      - add: "type ApolloClientContext = { cache: InMemoryCache; getCacheKey: getCacheKey }"
       - typescript
       - typescript-operations
       - typescript-react-apollo
+      - typescript-resolvers
+  src/graphql/__generated__/introspectionQueryResultData.tsx:
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+    plugins:
+      - fragment-matcher

@@ -38,7 +38,7 @@ export function computeUtilization(
 
   // Else no utilization
 
-  // This typecast is necessary as Typescript complains that parent.children
+  // This typecast is necessary as TypeScript complains that parent.children
   // could be null but this is impossible as the condition above checks if the
   // parent exists, for a parent to exists it has to children
   const children = historyParent.children as History[];

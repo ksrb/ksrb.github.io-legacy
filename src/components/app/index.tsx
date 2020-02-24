@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { Grid } from "@material-ui/core";
 
 import About from "src/components/about";
-import Experience from "src/components/experiences";
+import Experiences from "src/components/experiences";
 import Navbar from "src/components/navbar";
 import Skills from "src/components/skills";
 
@@ -24,7 +24,7 @@ const App: FC = () => {
       </Grid>
       <Navbar />
       <About />
-      <Experience />
+      <Experiences />
       <Skills />
     </div>
   );

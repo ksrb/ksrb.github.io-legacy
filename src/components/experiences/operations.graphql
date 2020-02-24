@@ -56,8 +56,15 @@ fragment ExperienceFields on Experience {
   startDate
 }
 
-query ExperienceGet {
+query ExperiencesGet {
   experiences {
+    id
+    hidden
+  }
+}
+
+query ExperienceGet($id: ID!) {
+  experience(id: $id) @client {
     ...ExperienceFields
   }
 }

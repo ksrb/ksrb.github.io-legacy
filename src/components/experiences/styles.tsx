@@ -7,8 +7,25 @@ import {
   trinaryColor,
 } from "src/styles";
 
+const history_titleTransitionDuration = "200ms";
+const history_titleTransitionFunction = "ease";
+
+const history_titleTransition = [
+  `${history_titleTransitionDuration} height ${history_titleTransitionFunction}`,
+  `${history_titleTransitionDuration} margin ${history_titleTransitionFunction}`,
+].join(", ");
+
+const history_title__expanded = {
+  height: "18px",
+  width: "auto",
+  margin: "0 3px 10px",
+  padding: "0 5px",
+  "border-radius": "2px",
+};
+
 export default makeStyles({
   ...marginBottomClass,
+
   root: {},
 
   experience: {
@@ -46,22 +63,40 @@ export default makeStyles({
   accomplishments: {},
 
   // History
+  history: {
+    flex: 1,
+    "&:hover > $histories > $history > $history_title": {
+      ...history_title__expanded,
+    },
+  },
+  history__expanded: {
+    "& $history_title": {
+      ...history_title__expanded,
+    },
+  },
   histories: {
     display: "flex",
   },
-  history: {
-    flex: 1,
-  },
   history_title: {
-    margin: "0 3px 10px",
-    padding: "0 5px",
-    borderRadius: "2px",
+    borderRadius: "0",
+
+    height: "0",
+    width: "0",
+    margin: "0",
+    padding: "0",
+
     color: "white",
-    textAlign: "center",
     whiteSpace: "nowrap",
+    overflow: "hidden",
+    textAlign: "center",
+
+    transition: history_titleTransition,
   },
-  history_title__root: {},
-  history_title__leaf: {},
+  history_title__root: {
+    ...history_title__expanded,
+    borderRadius: 0,
+    margin: 0,
+  },
   history_title__frontend: {
     backgroundColor: primaryColor,
   },
