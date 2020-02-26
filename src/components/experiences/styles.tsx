@@ -15,12 +15,18 @@ const history_titleTransition = [
   `${history_titleTransitionDuration} margin ${history_titleTransitionFunction}`,
 ].join(", ");
 
+const history_titleFontSize = "16px";
+const history_titleLineHeight = "1.2";
+
 const history_title__expanded = {
-  height: "18px",
+  height: `calc(${history_titleFontSize} * ${history_titleLineHeight})`,
   width: "auto",
   margin: "0 3px 10px",
   padding: "0 5px",
-  "border-radius": "2px",
+  borderRadius: "2px",
+
+  fontSize: history_titleFontSize,
+  lineHeight: history_titleLineHeight,
 };
 
 export default makeStyles({
@@ -78,12 +84,12 @@ export default makeStyles({
     display: "flex",
   },
   history_title: {
-    borderRadius: "0",
-
     height: "0",
     width: "0",
     margin: "0",
     padding: "0",
+
+    borderRadius: "0",
 
     color: "white",
     whiteSpace: "nowrap",
