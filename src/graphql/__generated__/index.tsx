@@ -1,17 +1,14 @@
-import { InMemoryCache } from "apollo-cache-inmemory";
 import { GraphQLResolveInfo } from "graphql";
+import { ApolloClientContext } from "src/graphql/types";
 import gql from "graphql-tag";
 import * as ApolloReactCommon from "@apollo/react-common";
 import * as ApolloReactHooks from "@apollo/react-hooks";
-type getCacheKey = (obj: { __typename: string; id: string | number }) => any;
-type ApolloClientContext = { cache: InMemoryCache; getCacheKey: getCacheKey };
 export type Maybe<T> = T | null;
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = {
   [X in Exclude<keyof T, K>]?: T[X];
 } &
   { [P in K]-?: NonNullable<T[P]> };
-
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;

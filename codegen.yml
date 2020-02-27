@@ -11,14 +11,11 @@ generates:
       withHooks: true
       withHOC: false
       withComponent: false
-      contextType: ApolloClientContext
+      contextType: src/graphql/types#ApolloClientContext
     hooks:
       afterOneFileWrite:
         - prettier --write
     plugins:
-      - add: "import { InMemoryCache } from \"apollo-cache-inmemory\";"
-      - add: "type getCacheKey = (obj: { __typename: string; id: string | number; }) => any"
-      - add: "type ApolloClientContext = { cache: InMemoryCache; getCacheKey: getCacheKey }"
       - typescript
       - typescript-operations
       - typescript-react-apollo
