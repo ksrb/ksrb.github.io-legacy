@@ -31,6 +31,25 @@ export type Company = Node & {
   logo: Scalars["String"];
   name: Scalars["String"];
   purpose: Scalars["String"];
+  values: Array<CompanyValues>;
+};
+
+export type CompanyInput = {
+  name?: Maybe<Scalars["String"]>;
+  values?: Maybe<Array<CompanyValuesInput>>;
+};
+
+export type CompanyValues = {
+  __typename?: "CompanyValues";
+  id: Scalars["ID"];
+  string: Scalars["String"];
+  strings: Maybe<Array<Scalars["String"]>>;
+};
+
+export type CompanyValuesInput = {
+  id: Scalars["ID"];
+  string: Scalars["String"];
+  strings?: Maybe<Array<Scalars["String"]>>;
 };
 
 export type Displayed = {
@@ -52,6 +71,12 @@ export type Experience = Node & {
   startDate: Scalars["String"];
 };
 
+export type ExperienceInput = {
+  id: Scalars["ID"];
+  role?: Maybe<Scalars["String"]>;
+  company?: Maybe<CompanyInput>;
+};
+
 export type History = Node & {
   __typename?: "History";
   id: Scalars["ID"];
@@ -68,6 +93,15 @@ export type Language = Node &
     url: Scalars["String"];
     logo: Scalars["String"];
   };
+
+export type Mutation = {
+  __typename?: "Mutation";
+  experienceUpdate: Maybe<Scalars["Boolean"]>;
+};
+
+export type MutationExperienceUpdateArgs = {
+  experience: ExperienceInput;
+};
 
 export type Node = {
   id: Scalars["ID"];
@@ -138,6 +172,12 @@ export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
       "id" | "name" | "purpose"
     > & {
         address: { __typename?: "Address" } & Pick<Address, "county" | "state">;
+        values: Array<
+          { __typename?: "CompanyValues" } & Pick<
+            CompanyValues,
+            "id" | "string" | "strings"
+          >
+        >;
       };
     histories: Array<
       { __typename?: "History" } & {
@@ -175,6 +215,15 @@ export type ExperienceGetQueryVariables = {
 export type ExperienceGetQuery = { __typename?: "Query" } & {
   experience: Maybe<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
 };
+
+export type ExperienceUpdateMutationVariables = {
+  experience: ExperienceInput;
+};
+
+export type ExperienceUpdateMutation = { __typename?: "Mutation" } & Pick<
+  Mutation,
+  "experienceUpdate"
+>;
 
 export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
   Skill,
@@ -246,6 +295,11 @@ export const ExperienceFieldsFragmentDoc = gql`
       address {
         county
         state
+      }
+      values {
+        id
+        string
+        strings
       }
     }
     histories {
@@ -409,6 +463,54 @@ export type ExperienceGetLazyQueryHookResult = ReturnType<
 export type ExperienceGetQueryResult = ApolloReactCommon.QueryResult<
   ExperienceGetQuery,
   ExperienceGetQueryVariables
+>;
+export const ExperienceUpdateDocument = gql`
+  mutation ExperienceUpdate($experience: ExperienceInput!) {
+    experienceUpdate(experience: $experience) @client
+  }
+`;
+export type ExperienceUpdateMutationFn = ApolloReactCommon.MutationFunction<
+  ExperienceUpdateMutation,
+  ExperienceUpdateMutationVariables
+>;
+
+/**
+ * __useExperienceUpdateMutation__
+ *
+ * To run a mutation, you first call `useExperienceUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useExperienceUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [experienceUpdateMutation, { data, loading, error }] = useExperienceUpdateMutation({
+ *   variables: {
+ *      experience: // value for 'experience'
+ *   },
+ * });
+ */
+export function useExperienceUpdateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    ExperienceUpdateMutation,
+    ExperienceUpdateMutationVariables
+  >,
+) {
+  return ApolloReactHooks.useMutation<
+    ExperienceUpdateMutation,
+    ExperienceUpdateMutationVariables
+  >(ExperienceUpdateDocument, baseOptions);
+}
+export type ExperienceUpdateMutationHookResult = ReturnType<
+  typeof useExperienceUpdateMutation
+>;
+export type ExperienceUpdateMutationResult = ApolloReactCommon.MutationResult<
+  ExperienceUpdateMutation
+>;
+export type ExperienceUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  ExperienceUpdateMutation,
+  ExperienceUpdateMutationVariables
 >;
 export const SkillsGetDocument = gql`
   query SkillsGet {
@@ -638,6 +740,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars["String"]>;
   Company: ResolverTypeWrapper<Company>;
   Address: ResolverTypeWrapper<Address>;
+  CompanyValues: ResolverTypeWrapper<CompanyValues>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   History: ResolverTypeWrapper<
     Omit<History, "values"> & { values: Array<ResolversTypes["DisplayedNode"]> }
@@ -654,6 +757,10 @@ export type ResolversTypes = {
   Skill: ResolverTypeWrapper<
     Omit<Skill, "values"> & { values: Array<ResolversTypes["DisplayedNode"]> }
   >;
+  Mutation: ResolverTypeWrapper<{}>;
+  ExperienceInput: ExperienceInput;
+  CompanyInput: CompanyInput;
+  CompanyValuesInput: CompanyValuesInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -665,6 +772,7 @@ export type ResolversParentTypes = {
   String: Scalars["String"];
   Company: Company;
   Address: Address;
+  CompanyValues: CompanyValues;
   Boolean: Scalars["Boolean"];
   History: Omit<History, "values"> & {
     values: Array<ResolversParentTypes["DisplayedNode"]>;
@@ -681,6 +789,10 @@ export type ResolversParentTypes = {
   Skill: Omit<Skill, "values"> & {
     values: Array<ResolversParentTypes["DisplayedNode"]>;
   };
+  Mutation: {};
+  ExperienceInput: ExperienceInput;
+  CompanyInput: CompanyInput;
+  CompanyValuesInput: CompanyValuesInput;
 };
 
 export type AddressResolvers<
@@ -701,6 +813,25 @@ export type CompanyResolvers<
   logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   name: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   purpose: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  values: Resolver<
+    Array<ResolversTypes["CompanyValues"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type CompanyValuesResolvers<
+  ContextType = ApolloClientContext,
+  ParentType extends ResolversParentTypes["CompanyValues"] = ResolversParentTypes["CompanyValues"]
+> = {
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  string: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  strings: Resolver<
+    Maybe<Array<ResolversTypes["String"]>>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 };
 
@@ -779,6 +910,18 @@ export type LanguageResolvers<
   url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type MutationResolvers<
+  ContextType = ApolloClientContext,
+  ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
+> = {
+  experienceUpdate: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType,
+    RequireFields<MutationExperienceUpdateArgs, "experience">
+  >;
 };
 
 export type NodeResolvers<
@@ -865,11 +1008,13 @@ export type UseResolvers<
 export type Resolvers<ContextType = ApolloClientContext> = {
   Address: AddressResolvers<ContextType>;
   Company: CompanyResolvers<ContextType>;
+  CompanyValues: CompanyValuesResolvers<ContextType>;
   Displayed: DisplayedResolvers;
   DisplayedNode: DisplayedNodeResolvers;
   Experience: ExperienceResolvers<ContextType>;
   History: HistoryResolvers<ContextType>;
   Language: LanguageResolvers<ContextType>;
+  Mutation: MutationResolvers<ContextType>;
   Node: NodeResolvers;
   Query: QueryResolvers<ContextType>;
   Skill: SkillResolvers<ContextType>;

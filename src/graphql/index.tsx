@@ -6,6 +6,7 @@ import {
 import { loader } from "graphql.macro";
 
 import {
+  ExperienceFieldsFragment,
   ExperienceFieldsFragmentDoc,
   Resolvers,
   WriteQueryDocument,
@@ -14,12 +15,18 @@ import introspectionQueryResultData from "./__generated__/introspectionQueryResu
 
 import typenames from "./typenames";
 import { experiences, skills } from "./data";
+import { DataProxy } from "apollo-cache";
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 });
 
-const resolvers: { Query: Pick<Resolvers["Query"], "experience"> } = {
+type ResolversSelected = {
+  Query: Pick<Resolvers["Query"], "experience">;
+  Mutation: Pick<Resolvers["Mutation"], "experienceUpdate">;
+};
+
+const resolvers: ResolversSelected = {
   Query: {
     experience(_, { id }, { cache, getCacheKey }) {
       return cache.readFragment({
@@ -29,6 +36,46 @@ const resolvers: { Query: Pick<Resolvers["Query"], "experience"> } = {
         // can be changed easily
         fragmentName: ExperienceFieldsFragmentDoc.definitions[0].name.value,
       });
+    },
+  },
+  Mutation: {
+    experienceUpdate(_, { experience }, { cache, getCacheKey }) {
+      const { id, role, company } = experience;
+
+      const fragmentOptions: DataProxy.Fragment<ExperienceFieldsFragment> = {
+        id: getCacheKey({ __typename: typenames.Experience, id }),
+        fragment: ExperienceFieldsFragmentDoc,
+        fragmentName: ExperienceFieldsFragmentDoc.definitions[0].name.value,
+      };
+
+      const data = cache.readFragment<ExperienceFieldsFragment>(
+        fragmentOptions,
+      );
+
+      if (!data) {
+        return false;
+      }
+
+      const companyFinal = {
+        ...company,
+        name: company?.name ?? "",
+        values: company?.values ?? [],
+      };
+
+      cache.writeFragment<ExperienceFieldsFragment>({
+        ...fragmentOptions,
+        data: {
+          ...data,
+          role: role ?? "",
+          // @ts-ignore
+          company: {
+            ...data.company,
+            ...companyFinal,
+          },
+        },
+      });
+
+      return true;
     },
   },
 };

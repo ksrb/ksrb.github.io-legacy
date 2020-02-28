@@ -10,6 +10,7 @@ function createCompany(
     __typename: typenames.Company,
     id: (id++).toString(),
     logo: "",
+    values: [],
     ...company,
   };
 }
@@ -33,6 +34,20 @@ const companies = {
     name: "PMAT Inc.",
     purpose:
       "company focused on developing solutions for the defense sector specializing in web applications providing situational awareness for command and control.",
+    values: [
+      {
+        __typename: "CompanyValues",
+        id: "1",
+        string: "Doing stuff right there",
+        strings: ["1", "2", "3"],
+      },
+      {
+        __typename: "CompanyValues",
+        id: "2",
+        string: "Nothing",
+        strings: ["1", "2"],
+      },
+    ],
   }),
   lanternCredit: createCompany({
     __typename: typenames.Company,

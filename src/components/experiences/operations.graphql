@@ -37,6 +37,11 @@ fragment ExperienceFields on Experience {
       county
       state
     }
+    values {
+      id
+      string
+      strings
+    }
   }
   histories {
     ...HistoryFields
@@ -67,4 +72,8 @@ query ExperienceGet($id: ID!) {
   experience(id: $id) @client {
     ...ExperienceFields
   }
+}
+
+mutation ExperienceUpdate($experience: ExperienceInput!) {
+  experienceUpdate(experience: $experience) @client
 }

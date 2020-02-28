@@ -12,6 +12,7 @@ import {
   Use,
   useExperienceGetQuery,
   useExperiencesGetQuery,
+  useExperienceUpdateMutation,
 } from "src/graphql/__generated__";
 import { computeUtilization } from "src/graphql/data/skills";
 
@@ -139,6 +140,47 @@ const Experience: FC<{ id: Scalars["ID"] }> = ({ id }) => {
     setHistoryExpanded(!historyExpanded);
   }, [historyExpanded]);
 
+  const [experienceUpdate] = useExperienceUpdateMutation();
+
+  const handleInputChange = useCallback(
+    ({ target: { value } }) => {
+      if (!data || !data.experience) {
+        return;
+      }
+
+      const {
+        experience: {
+          company: { values },
+        },
+      } = data;
+
+      let index = 0;
+      for (; index < values.length; index++) {
+        const value = values[index];
+        const { id } = value;
+        if (id === "1") {
+          break;
+        }
+      }
+      const newValues = [...values];
+      newValues.splice(index, 1, { ...values[index], string: value });
+
+      experienceUpdate({
+        variables: {
+          experience: {
+            id,
+            role: value,
+            company: {
+              name: value,
+              values: newValues,
+            },
+          },
+        },
+      });
+    },
+    [data, experienceUpdate, id],
+  );
+
   const classes = useStyles();
 
   if (error || loading) {
@@ -156,6 +198,7 @@ const Experience: FC<{ id: Scalars["ID"] }> = ({ id }) => {
       company: {
         purpose,
         address: { county, state },
+        values,
       },
       endDate,
       role,
@@ -166,6 +209,8 @@ const Experience: FC<{ id: Scalars["ID"] }> = ({ id }) => {
 
   return (
     <Grid item xs={12} className={classes.experience}>
+      <input value={role} onChange={handleInputChange} />
+      <div>Hello {JSON.stringify(values)}</div>
       <div className={classes.header}>
         <div className={classes.company}>
           <div className={classes.company_name}>{company.name}</div>

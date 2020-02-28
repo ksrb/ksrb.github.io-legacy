@@ -7,12 +7,19 @@ interface Node {
   id: ID!
 }
 
+type CompanyValues {
+  id: ID!
+  string: String!
+  strings: [String!]
+}
+
 type Company implements Node {
   id: ID!
   address: Address!
   logo: String!
   name: String!
   purpose: String!
+  values: [CompanyValues!]!
 }
 
 interface Displayed {
@@ -72,4 +79,25 @@ type Query {
   experiences: [Experience!]!
   experience(id: ID!): Experience
   skills: [Skill!]!
+}
+
+input CompanyValuesInput {
+  id: ID!
+  string: String!
+  strings: [String!]
+}
+
+input CompanyInput {
+  name: String
+  values: [CompanyValuesInput!]
+}
+
+input ExperienceInput {
+  id: ID!
+  role: String
+  company: CompanyInput
+}
+
+type Mutation {
+  experienceUpdate(experience: ExperienceInput!): Boolean
 }
