@@ -84,6 +84,7 @@ const experiences: Experience[] = [
           createHistory({ values: [languages.bash] }),
           createHistory({ values: [tools.docker] }),
           createHistory({ values: [tools.gradle] }),
+          createHistory({ values: [tools.webpack] }),
           createHistory({ values: [tools.git] }),
         ],
       }),
@@ -150,6 +151,7 @@ const experiences: Experience[] = [
         children: [
           createHistory({ values: [languages.bash] }),
           createHistory({ values: [tools.docker] }),
+          createHistory({ values: [tools.webpack] }),
           createHistory({ values: [tools.git] }),
         ],
       }),
@@ -186,6 +188,7 @@ const experiences: Experience[] = [
     histories: [
       createHistory({ values: [tools.angularJS] }),
       createHistory({ values: [tools.foundation] }),
+      createHistory({ values: [tools.jspm], utilization: 15 }),
       createHistory({ values: [tools.timeOff] }),
     ],
     accomplishments: [
@@ -207,7 +210,7 @@ const experiences: Experience[] = [
         utilization: 85,
         children: [
           createHistory({
-            values: [tools.gwt],
+            values: [tools.smartGwt],
             utilization: 65,
           }),
           createHistory({

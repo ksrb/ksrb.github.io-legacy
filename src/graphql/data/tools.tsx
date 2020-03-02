@@ -73,7 +73,7 @@ const tools = {
     use: uses.Backend,
     languages: [languages.java],
   }),
-  gwt: createTool({
+  smartGwt: createTool({
     title: "SmartGWT",
     url: "https://www.smartclient.com/product/smartgwt.jsp",
     use: uses.Frontend,
@@ -90,6 +90,12 @@ const tools = {
     url: "https://en.wikipedia.org/wiki/Java_servlet",
     use: uses.Backend,
     languages: [languages.java],
+  }),
+  jspm: createTool({
+    title: "jspm",
+    url: "https://jspm.io/",
+    use: uses.Build,
+    languages: [languages.javascript],
   }),
   leaflet: createTool({
     title: "Leaflet",
@@ -118,6 +124,12 @@ const tools = {
     title: "Redux",
     url: "https://redux.js.org/",
     use: uses.Frontend,
+    languages: [languages.javascript],
+  }),
+  webpack: createTool({
+    title: "Webpack",
+    url: "https://webpack.js.org/",
+    use: uses.Build,
     languages: [languages.javascript],
   }),
   timeOff: createTool({
