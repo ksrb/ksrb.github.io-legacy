@@ -58,8 +58,7 @@ fragment ExperienceFields on Experience {
 
 query ExperiencesGet {
   experiences {
-    id
-    hidden
+    ...ExperienceFields
   }
 }
 

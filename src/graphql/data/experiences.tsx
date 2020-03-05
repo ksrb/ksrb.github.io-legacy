@@ -61,7 +61,7 @@ const experiences: Experience[] = [
               createHistory({ values: [tools.leaflet] }),
             ],
           }),
-          createHistory({ values: [languages.scss], utilization: 5 }),
+          createHistory({ values: [languages.sass], utilization: 5 }),
         ],
       }),
       createHistory({
@@ -102,7 +102,7 @@ const experiences: Experience[] = [
     histories: [
       createHistory({ values: [tools.react] }),
       createHistory({ values: [tools.graphql] }),
-      createHistory({ values: [languages.scss] }),
+      createHistory({ values: [languages.sass] }),
       createHistory({
         values: [tools.timeOff],
         utilization: 50,
@@ -137,7 +137,7 @@ const experiences: Experience[] = [
               }),
             ],
           }),
-          createHistory({ values: [languages.scss], utilization: 10 }),
+          createHistory({ values: [languages.sass], utilization: 10 }),
         ],
       }),
       createHistory({
@@ -171,7 +171,7 @@ const experiences: Experience[] = [
     endDate: new Date("2015-06-1").toString(),
     histories: [
       createHistory({ values: [tools.liquid] }),
-      createHistory({ values: [languages.scss] }),
+      createHistory({ values: [languages.sass] }),
       createHistory({ values: [languages.javascript] }),
     ],
     accomplishments: [
@@ -211,7 +211,7 @@ const experiences: Experience[] = [
         children: [
           createHistory({
             values: [tools.smartGwt],
-            utilization: 65,
+            utilization: 60,
           }),
           createHistory({
             values: [tools.angularJS],
@@ -221,6 +221,8 @@ const experiences: Experience[] = [
             values: [tools.bootstrap],
             utilization: 10,
           }),
+          createHistory({ values: [tools.photoshop] }),
+          createHistory({ values: [tools.illustrator] }),
         ],
       }),
       createHistory({
@@ -256,6 +258,7 @@ const experiences: Experience[] = [
           createHistory({ values: [languages.javascript] }),
           createHistory({ values: [tools.foundation] }),
           createHistory({ values: [tools.photoshop] }),
+          createHistory({ values: [tools.illustrator] }),
         ],
       }),
       createHistory({

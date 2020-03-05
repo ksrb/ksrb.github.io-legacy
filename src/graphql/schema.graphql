@@ -34,6 +34,7 @@ type Language implements Node & Displayed {
 type Tool implements Node & Displayed {
   id: ID!
   languages: [Language!]
+  logo: String!
   title: String!
   url: String!
   use: Use!
@@ -72,4 +73,5 @@ type Query {
   experiences: [Experience!]!
   experience(id: ID!): Experience
   skills: [Skill!]!
+  skill(id: ID!): Skill
 }

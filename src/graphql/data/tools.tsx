@@ -2,6 +2,7 @@ import { Tool } from "src/graphql/__generated__";
 
 import typenames from "src/graphql/typenames";
 import { RequiredBy } from "src/types";
+import { publicUrl } from "src/constants/config";
 
 import languages from "./languages";
 import uses from "./uses";
@@ -14,6 +15,7 @@ function createTool(tool: RequiredBy<Tool, "title">): Tool {
     url: "",
     use: uses.None,
     languages: null,
+    logo: "",
     ...tool,
   };
 }
@@ -35,7 +37,7 @@ const tools = {
     title: "Bootstrap",
     url: "https://github.com/twbs/bootstrap-sass",
     use: uses.Frontend,
-    languages: [languages.scss],
+    languages: [languages.sass],
   }),
   cesium: createTool({
     title: "Cesium",
@@ -53,7 +55,7 @@ const tools = {
     title: "Foundation",
     url: "https://foundation.zurb.com/",
     use: uses.Frontend,
-    languages: [languages.scss],
+    languages: [languages.sass],
   }),
   gradle: createTool({
     title: "Gradle",
@@ -62,7 +64,7 @@ const tools = {
     languages: [languages.groovy],
   }),
   graphql: createTool({
-    title: "GraphQl",
+    title: "GraphQL",
     url: "https://graphql.org/",
     use: uses.Frontend,
     languages: [languages.javascript],
@@ -90,6 +92,7 @@ const tools = {
     url: "https://en.wikipedia.org/wiki/Java_servlet",
     use: uses.Backend,
     languages: [languages.java],
+    logo: `${publicUrl}/assets/skills/Java.svg`,
   }),
   jspm: createTool({
     title: "jspm",
@@ -108,6 +111,12 @@ const tools = {
     url: "https://help.shopify.com/en/themes/liquid/",
     use: uses.Frontend,
     languages: [languages.ruby],
+    logo: `${publicUrl}/assets/skills/Shopify.svg`,
+  }),
+  illustrator: createTool({
+    title: "Illustrator",
+    url: "https://www.adobe.com/products/illustrator.html",
+    use: uses.Frontend,
   }),
   photoshop: createTool({
     title: "Photoshop",
@@ -136,5 +145,11 @@ const tools = {
     title: "Time off",
   }),
 };
+
+Object.values(tools).forEach(tool => {
+  if (!tool.logo) {
+    tool.logo = `${publicUrl}/assets/skills/${tool.title}.svg`;
+  }
+});
 
 export default tools as { [key in keyof typeof tools]: Tool };

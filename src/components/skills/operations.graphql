@@ -3,22 +3,31 @@ fragment SkillFields on Skill {
   experience {
     id
     company {
+      id
       name
     }
   }
   languages {
     id
     title
+    logo
   }
   utilization
+  # TODO: consider consolidation with HistoryFields.values using fragment on
+  # DisplayedNode
   values {
     ... on Tool {
       id
+      logo
       title
+      use {
+        id
+      }
     }
     ... on Language {
       id
       title
+      logo
     }
     ... on Use {
       id
@@ -29,6 +38,12 @@ fragment SkillFields on Skill {
 
 query SkillsGet {
   skills {
+    ...SkillFields
+  }
+}
+
+query SkillGet($id: ID!) {
+  skill(id: $id) @client {
     ...SkillFields
   }
 }

@@ -78,9 +78,14 @@ export type Query = {
   experiences: Array<Experience>;
   experience: Maybe<Experience>;
   skills: Array<Skill>;
+  skill: Maybe<Skill>;
 };
 
 export type QueryExperienceArgs = {
+  id: Scalars["ID"];
+};
+
+export type QuerySkillArgs = {
   id: Scalars["ID"];
 };
 
@@ -98,6 +103,7 @@ export type Tool = Node &
     __typename?: "Tool";
     id: Scalars["ID"];
     languages: Maybe<Array<Language>>;
+    logo: Scalars["String"];
     title: Scalars["String"];
     url: Scalars["String"];
     use: Use;
@@ -163,9 +169,7 @@ export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
 export type ExperiencesGetQueryVariables = {};
 
 export type ExperiencesGetQuery = { __typename?: "Query" } & {
-  experiences: Array<
-    { __typename?: "Experience" } & Pick<Experience, "id" | "hidden">
-  >;
+  experiences: Array<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
 };
 
 export type ExperienceGetQueryVariables = {
@@ -181,14 +185,18 @@ export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
   "id" | "utilization"
 > & {
     experience: { __typename?: "Experience" } & Pick<Experience, "id"> & {
-        company: { __typename?: "Company" } & Pick<Company, "name">;
+        company: { __typename?: "Company" } & Pick<Company, "id" | "name">;
       };
     languages: Maybe<
-      Array<{ __typename?: "Language" } & Pick<Language, "id" | "title">>
+      Array<
+        { __typename?: "Language" } & Pick<Language, "id" | "title" | "logo">
+      >
     >;
     values: Array<
-      | ({ __typename?: "Language" } & Pick<Language, "id" | "title">)
-      | ({ __typename?: "Tool" } & Pick<Tool, "id" | "title">)
+      | ({ __typename?: "Language" } & Pick<Language, "id" | "title" | "logo">)
+      | ({ __typename?: "Tool" } & Pick<Tool, "id" | "logo" | "title"> & {
+            use: { __typename?: "Use" } & Pick<Use, "id">;
+          })
       | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
     >;
   };
@@ -197,6 +205,14 @@ export type SkillsGetQueryVariables = {};
 
 export type SkillsGetQuery = { __typename?: "Query" } & {
   skills: Array<{ __typename?: "Skill" } & SkillFieldsFragment>;
+};
+
+export type SkillGetQueryVariables = {
+  id: Scalars["ID"];
+};
+
+export type SkillGetQuery = { __typename?: "Query" } & {
+  skill: Maybe<{ __typename?: "Skill" } & SkillFieldsFragment>;
 };
 
 export type WriteQueryQueryVariables = {};
@@ -273,22 +289,29 @@ export const SkillFieldsFragmentDoc = gql`
     experience {
       id
       company {
+        id
         name
       }
     }
     languages {
       id
       title
+      logo
     }
     utilization
     values {
       ... on Tool {
         id
+        logo
         title
+        use {
+          id
+        }
       }
       ... on Language {
         id
         title
+        logo
       }
       ... on Use {
         id
@@ -300,10 +323,10 @@ export const SkillFieldsFragmentDoc = gql`
 export const ExperiencesGetDocument = gql`
   query ExperiencesGet {
     experiences {
-      id
-      hidden
+      ...ExperienceFields
     }
   }
+  ${ExperienceFieldsFragmentDoc}
 `;
 
 /**
@@ -463,6 +486,61 @@ export type SkillsGetLazyQueryHookResult = ReturnType<
 export type SkillsGetQueryResult = ApolloReactCommon.QueryResult<
   SkillsGetQuery,
   SkillsGetQueryVariables
+>;
+export const SkillGetDocument = gql`
+  query SkillGet($id: ID!) {
+    skill(id: $id) @client {
+      ...SkillFields
+    }
+  }
+  ${SkillFieldsFragmentDoc}
+`;
+
+/**
+ * __useSkillGetQuery__
+ *
+ * To run a query within a React component, call `useSkillGetQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSkillGetQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSkillGetQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSkillGetQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    SkillGetQuery,
+    SkillGetQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useQuery<SkillGetQuery, SkillGetQueryVariables>(
+    SkillGetDocument,
+    baseOptions,
+  );
+}
+export function useSkillGetLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    SkillGetQuery,
+    SkillGetQueryVariables
+  >,
+) {
+  return ApolloReactHooks.useLazyQuery<SkillGetQuery, SkillGetQueryVariables>(
+    SkillGetDocument,
+    baseOptions,
+  );
+}
+export type SkillGetQueryHookResult = ReturnType<typeof useSkillGetQuery>;
+export type SkillGetLazyQueryHookResult = ReturnType<
+  typeof useSkillGetLazyQuery
+>;
+export type SkillGetQueryResult = ApolloReactCommon.QueryResult<
+  SkillGetQuery,
+  SkillGetQueryVariables
 >;
 export const WriteQueryDocument = gql`
   query WriteQuery {
@@ -815,6 +893,12 @@ export type QueryResolvers<
     RequireFields<QueryExperienceArgs, "id">
   >;
   skills: Resolver<Array<ResolversTypes["Skill"]>, ParentType, ContextType>;
+  skill: Resolver<
+    Maybe<ResolversTypes["Skill"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QuerySkillArgs, "id">
+  >;
 };
 
 export type SkillResolvers<
@@ -847,6 +931,7 @@ export type ToolResolvers<
     ParentType,
     ContextType
   >;
+  logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   use: Resolver<ResolversTypes["Use"], ParentType, ContextType>;

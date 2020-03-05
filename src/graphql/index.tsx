@@ -8,6 +8,7 @@ import { loader } from "graphql.macro";
 import {
   ExperienceFieldsFragmentDoc,
   Resolvers,
+  SkillFieldsFragmentDoc,
   WriteQueryDocument,
 } from "./__generated__";
 import introspectionQueryResultData from "./__generated__/introspectionQueryResultData";
@@ -19,7 +20,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 });
 
-const resolvers: { Query: Pick<Resolvers["Query"], "experience"> } = {
+const resolvers: { Query: Pick<Resolvers["Query"], "experience" | "skill"> } = {
   Query: {
     experience(_, { id }, { cache, getCacheKey }) {
       return cache.readFragment({
@@ -28,6 +29,14 @@ const resolvers: { Query: Pick<Resolvers["Query"], "experience"> } = {
         // TODO: potentially fragile as the order of the fragment definitions
         // can be changed easily
         fragmentName: ExperienceFieldsFragmentDoc.definitions[0].name.value,
+      });
+    },
+    // @ts-ignore
+    skill(_, { id }, { cache, getCacheKey }) {
+      return cache.readFragment({
+        id: getCacheKey({ __typename: typenames.Skill, id }),
+        fragment: SkillFieldsFragmentDoc,
+        fragmentName: SkillFieldsFragmentDoc.definitions[0].name.value,
       });
     },
   },

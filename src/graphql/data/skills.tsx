@@ -72,6 +72,7 @@ function computeSkillsFromHistory(
   historyParent: HistoryWithChildren,
   historyParentDays: number,
   experience: Experience,
+  onlyLanguages: boolean = false,
 ): SkillRequiredProperties[] {
   const skills: SkillRequiredProperties[] = [];
   const { children, values } = history;
@@ -84,12 +85,12 @@ function computeSkillsFromHistory(
 
   // Has parent
   if (historyParent) {
-    const parentIsLanguages = !(historyParent.values as Language[]).some(
+    const parentIsOnlyLanguages = !(historyParent.values as Language[]).some(
       value => value.__typename !== typenames.Language,
     );
 
-    // Has parent and parent is a language
-    if (parentIsLanguages) {
+    // Has parent and parent is only languages
+    if (parentIsOnlyLanguages) {
       const languages = historyParent.values as Language[];
 
       skills.push({
@@ -104,10 +105,12 @@ function computeSkillsFromHistory(
   }
 
   const uses = values as Use[];
-  const isUses = !uses.some(({ __typename }) => __typename !== typenames.Use);
+  const isOnlyUses = !uses.some(
+    ({ __typename }) => __typename !== typenames.Use,
+  );
 
-  // Values are uses
-  if (isUses) {
+  // Values are only uses
+  if (isOnlyUses) {
     skills.push({
       experience,
       values,
@@ -116,12 +119,13 @@ function computeSkillsFromHistory(
   }
 
   const tools = values as Tool[];
-  const isTools = !tools.some(
+  const isOnlyTools = !tools.some(
     ({ __typename }) => __typename !== typenames.Tool,
   );
 
-  // Values are tools
-  if (isTools) {
+  // Values are only tools
+  if (isOnlyTools) {
+    // Extract languages if they exists
     const languages = tools.reduce<Language[]>((prev, { languages }) => {
       if (languages) {
         prev.push(...languages);
@@ -134,42 +138,57 @@ function computeSkillsFromHistory(
       experience,
       values,
       utilization: computedUtilization,
-      languages,
+      // If tool doesn't have languages then set to null
+      languages: languages.length !== 0 ? languages : null,
     });
   }
 
   const languages = values as Language[];
-  const isLanguages = !languages.find(
+  const isOnlyLanguages = !languages.some(
     ({ __typename }) => __typename !== typenames.Language,
   );
 
-  // Values are languages
-  if (isLanguages) {
+  // Values are only languages
+  if (isOnlyLanguages) {
     skills.push({
       experience,
       values,
       utilization: computedUtilization,
       languages,
     });
+
+    // If computing only languages don't recurse to children, as history which
+    // are languages are always wrappers for the children and would result in
+    // doubling of the language utilization
+    if (onlyLanguages) {
+      return skills;
+    }
   }
 
+  // If history has children
   if (children) {
+    // Loop through children
     for (const childrenHistory of children) {
       skills.push(
+        // Recurse
         ...computeSkillsFromHistory(
           childrenHistory,
           history,
           computedUtilization,
           experience,
+          onlyLanguages,
         ),
       );
     }
   }
+
   return skills;
 }
 
-function computeSkillsFromExperiences(): SkillRequiredProperties[] {
-  return experiences.reduce<SkillRequiredProperties[]>((prev, experience) => {
+function computeSkillsFromExperiences(
+  onlyLanguages?: boolean,
+): SkillRequiredProperties[] {
+  return experiences.reduce<SkillRequiredProperties[]>((skills, experience) => {
     const { histories } = experience;
     const { startDate: startDateStr, endDate: endDateStr } = experience;
 
@@ -179,17 +198,21 @@ function computeSkillsFromExperiences(): SkillRequiredProperties[] {
       (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
 
     for (const history of histories) {
-      prev.push(
+      skills.push(
         ...computeSkillsFromHistory(
           history,
-          { values: [uses.None], children: histories },
+          {
+            values: [uses.None],
+            children: histories,
+          },
           days,
           experience,
+          onlyLanguages,
         ),
       );
     }
 
-    return prev;
+    return skills;
   }, []);
 }
 
@@ -240,26 +263,13 @@ function aggregateSkillUtilization(
     (values as Tool[]).find(tool => tool.id !== tools.timeOff.id),
   );
 }
+
 const skills = aggregateSkillUtilization(computeSkillsFromExperiences());
 
-const skillsUses = skills
-  .filter(({ values }) =>
-    (values as Use[]).find(use => use.__typename === typenames.Use),
-  )
-  .sort((a, b) => b.utilization - a.utilization);
-
-const skillsLanguages = computeSkillsFromExperiences().reduce<
+const skillsLanguages = computeSkillsFromExperiences(true).reduce<
   SkillRequiredPropertiesMap
 >((skillMap, skill) => {
-  const { values, languages, utilization, experience } = skill;
-
-  const valuesAreLanguages = !(values as Language[]).some(
-    ({ __typename }) => __typename !== typenames.Language,
-  );
-
-  if (valuesAreLanguages) {
-    return skillMap;
-  }
+  const { languages, utilization, experience } = skill;
 
   if (!languages) {
     return skillMap;
@@ -274,6 +284,7 @@ const skillsLanguages = computeSkillsFromExperiences().reduce<
         values: [language],
         utilization,
         experience,
+        languages: [language],
       });
       return;
     }
@@ -289,10 +300,6 @@ const skillsTools = skills
   )
   .sort((a, b) => b.utilization - a.utilization);
 
-export default skillsUses
-  .concat(
-    Object.values(skillsLanguages).sort(
-      (a, b) => b.utilization - a.utilization,
-    ),
-  )
+export default Object.values(skillsLanguages)
+  .sort((a, b) => b.utilization - a.utilization)
   .concat(skillsTools);

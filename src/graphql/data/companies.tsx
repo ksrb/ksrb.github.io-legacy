@@ -32,7 +32,7 @@ const companies = {
     },
     name: "PMAT Inc.",
     purpose:
-      "company focused on developing solutions for the defense sector specializing in web applications providing situational awareness for command and control.",
+      "Company focused on developing solutions for the defense sector specializing in web applications providing situational awareness for command and control.",
   }),
   lanternCredit: createCompany({
     __typename: typenames.Company,

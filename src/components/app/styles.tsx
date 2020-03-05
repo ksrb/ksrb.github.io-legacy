@@ -22,7 +22,9 @@ export default makeStyles({
     },
   },
 
-  root: {},
+  root: {
+    padding: "0 10px",
+  },
 
   header: {
     composes: "$marginBottom",

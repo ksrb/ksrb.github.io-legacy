@@ -1,65 +1,24 @@
 import React, { FC, useCallback, useState } from "react";
 import { Grid } from "@material-ui/core";
 import clsx from "clsx";
-
-import typenames from "src/graphql/typenames";
 import uses from "src/graphql/data/uses";
 import {
+  ExperiencesGetQuery,
   HistoryFieldsFragment,
   Maybe,
-  Scalars,
-  Tool,
-  Use,
-  useExperienceGetQuery,
   useExperiencesGetQuery,
 } from "src/graphql/__generated__";
 import { computeUtilization } from "src/graphql/data/skills";
 
 import { RequiredBy } from "src/types";
 
+import { getColorByType } from "src/components/util";
+
 import useStyles from "./styles";
-import { primaryColor, secondaryColor, trinaryColor } from "src/styles";
 
 function renderDate(dateStr: string): string {
   const date = new Date(dateStr);
   return `${date.getMonth()}/${date.getFullYear()}`;
-}
-
-type DisplayedNode = HistoryFieldsFragment["values"][0];
-
-function getColorByType(
-  displayedNode: DisplayedNode[],
-  parentDisplayedNodes?: DisplayedNode[],
-): string {
-  const node = displayedNode[0];
-
-  const { __typename } = node;
-
-  switch (__typename) {
-    case typenames.Use:
-      return getColorByUse(node as Use);
-    case typenames.Tool:
-      return getColorByUse((node as Tool).use);
-    case typenames.Language:
-      return parentDisplayedNodes ? getColorByType(parentDisplayedNodes) : "";
-  }
-
-  return "";
-}
-
-function getColorByUse(use: Use): string {
-  const { id } = use;
-
-  switch (id) {
-    case uses.Frontend.id:
-      return primaryColor;
-    case uses.Backend.id:
-      return secondaryColor;
-    case uses.Build.id:
-      return trinaryColor;
-  }
-
-  return "";
 }
 
 type History = HistoryFieldsFragment & {
@@ -85,7 +44,7 @@ const History: FC<{
 
   const utilizationRounded = Math.round(utilization);
 
-  const backgroundColorValue = getColorByType(
+  const backgroundColor = getColorByType(
     history.values,
     historyParent && historyParent.values,
   );
@@ -97,9 +56,7 @@ const History: FC<{
           classes.history_title,
           depth === 0 && classes.history_title__root,
         )}
-        style={{
-          backgroundColor: `${backgroundColorValue}`,
-        }}
+        style={{ backgroundColor }}
       >
         {values.map(({ title }, index) => {
           const space = index !== values.length - 1 ? " " : "";
@@ -130,9 +87,9 @@ const History: FC<{
   );
 };
 
-const Experience: FC<{ id: Scalars["ID"] }> = ({ id }) => {
-  const { data, error, loading } = useExperienceGetQuery({ variables: { id } });
-
+const Experience: FC<{ experience: ExperiencesGetQuery["experiences"][0] }> = ({
+  experience,
+}) => {
   const [historyExpanded, setHistoryExpanded] = useState(false);
 
   const handleHistoryRootClick = useCallback(() => {
@@ -141,28 +98,18 @@ const Experience: FC<{ id: Scalars["ID"] }> = ({ id }) => {
 
   const classes = useStyles();
 
-  if (error || loading) {
-    return null;
-  }
-
-  if (!data || !data.experience) {
-    return null;
-  }
-
   const {
-    experience: {
-      accomplishments,
-      company,
-      company: {
-        purpose,
-        address: { county, state },
-      },
-      endDate,
-      role,
-      histories,
-      startDate,
+    accomplishments,
+    company,
+    company: {
+      purpose,
+      address: { county, state },
     },
-  } = data;
+    endDate,
+    role,
+    histories,
+    startDate,
+  } = experience;
 
   return (
     <Grid item xs={12} className={classes.experience}>
@@ -228,8 +175,8 @@ const Experiences: FC = () => {
     <Grid container className={classes.root}>
       {experiences
         .filter(({ hidden }) => !hidden)
-        .map(({ id }) => (
-          <Experience key={id} id={id} />
+        .map(experience => (
+          <Experience key={experience.id} experience={experience} />
         ))}
     </Grid>
   );
