@@ -28,6 +28,7 @@ const resolvers: { Query: Pick<Resolvers["Query"], "experience" | "skill"> } = {
         fragment: ExperienceFieldsFragmentDoc,
         // TODO: potentially fragile as the order of the fragment definitions
         // can be changed easily
+        // @ts-ignore
         fragmentName: ExperienceFieldsFragmentDoc.definitions[0].name.value,
       });
     },
@@ -36,6 +37,7 @@ const resolvers: { Query: Pick<Resolvers["Query"], "experience" | "skill"> } = {
       return cache.readFragment({
         id: getCacheKey({ __typename: typenames.Skill, id }),
         fragment: SkillFieldsFragmentDoc,
+        // @ts-ignore
         fragmentName: SkillFieldsFragmentDoc.definitions[0].name.value,
       });
     },

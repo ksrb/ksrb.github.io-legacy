@@ -1,6 +1,6 @@
 import typenames from "src/graphql/typenames";
 import {
-  DisplayedNode,
+  Displayed,
   Experience,
   History,
   Language,
@@ -38,9 +38,14 @@ export function computeUtilization(
 
   // Else no utilization
 
-  // This typecast is necessary as TypeScript complains that parent.children
-  // could be null but this is impossible as the condition above checks if the
-  // parent exists, for a parent to exists it has to children
+  if (!historyParent) {
+    return historyParentDays;
+  }
+
+  // This typecast is necessary as TypeScript complains that
+  // historyParent.children could be null but this is impossible as the
+  // condition above checks if the parent exists, for a parent to exists it has
+  // to children
   const children = historyParent.children as History[];
 
   // Else no set utilizations
@@ -86,7 +91,7 @@ function computeSkillsFromHistory(
   // Has parent
   if (historyParent) {
     const parentIsOnlyLanguages = !(historyParent.values as Language[]).some(
-      value => value.__typename !== typenames.Language,
+      (value) => value.__typename !== typenames.Language,
     );
 
     // Has parent and parent is only languages
@@ -173,7 +178,8 @@ function computeSkillsFromHistory(
         // Recurse
         ...computeSkillsFromHistory(
           childrenHistory,
-          history,
+          // Cast necessary here is conditional aboe
+          history as HistoryWithChildren,
           computedUtilization,
           experience,
           onlyLanguages,
@@ -226,7 +232,8 @@ function createSkill(skill: SkillRequiredProperties): Skill {
   };
 }
 
-function getCacheKey(displayedNode: DisplayedNode): string {
+function getCacheKey(displayedNode: Displayed): string {
+  // @ts-ignore
   const { __typename, id } = displayedNode;
   return `${__typename}:${id}`;
 }
@@ -238,7 +245,7 @@ function aggregateSkillUtilization(
     (skillsMap, skill) => {
       const { utilization, values } = skill;
 
-      values.forEach(value => {
+      values.forEach((value) => {
         const id = getCacheKey(value);
         const skillInSkillMap: SkillRequiredProperties = skillsMap[id];
 
@@ -260,7 +267,7 @@ function aggregateSkillUtilization(
   );
 
   return Object.values(skillsMap).filter(({ values }) =>
-    (values as Tool[]).find(tool => tool.id !== tools.timeOff.id),
+    (values as Tool[]).find((tool) => tool.id !== tools.timeOff.id),
   );
 }
 
@@ -275,7 +282,7 @@ const skillsLanguages = computeSkillsFromExperiences(true).reduce<
     return skillMap;
   }
 
-  languages.forEach(language => {
+  languages.forEach((language) => {
     const { id } = language;
     const skillInSkillMap = skillMap[id];
 
@@ -296,7 +303,7 @@ const skillsLanguages = computeSkillsFromExperiences(true).reduce<
 
 const skillsTools = skills
   .filter(({ values }) =>
-    (values as Tool[]).find(tool => tool.__typename === typenames.Tool),
+    (values as Tool[]).find((tool) => tool.__typename === typenames.Tool),
   )
   .sort((a, b) => b.utilization - a.utilization);
 

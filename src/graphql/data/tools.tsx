@@ -146,7 +146,7 @@ const tools = {
   }),
 };
 
-Object.values(tools).forEach(tool => {
+Object.values(tools).forEach((tool) => {
   if (!tool.logo) {
     tool.logo = `${publicUrl}/assets/skills/${tool.title}.svg`;
   }

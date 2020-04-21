@@ -17,40 +17,25 @@ const result: IntrospectionResultData = {
         name: "Node",
         possibleTypes: [
           {
-            name: "Experience",
+            name: "Company",
           },
           {
-            name: "Company",
+            name: "Use",
+          },
+          {
+            name: "Language",
+          },
+          {
+            name: "Tool",
           },
           {
             name: "History",
           },
           {
-            name: "Language",
-          },
-          {
-            name: "Tool",
-          },
-          {
-            name: "Use",
+            name: "Experience",
           },
           {
             name: "Skill",
-          },
-        ],
-      },
-      {
-        kind: "UNION",
-        name: "DisplayedNode",
-        possibleTypes: [
-          {
-            name: "Language",
-          },
-          {
-            name: "Tool",
-          },
-          {
-            name: "Use",
           },
         ],
       },
@@ -59,13 +44,13 @@ const result: IntrospectionResultData = {
         name: "Displayed",
         possibleTypes: [
           {
+            name: "Use",
+          },
+          {
             name: "Language",
           },
           {
             name: "Tool",
-          },
-          {
-            name: "Use",
           },
         ],
       },

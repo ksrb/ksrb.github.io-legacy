@@ -4,7 +4,6 @@ import gql from "graphql-tag";
 import * as ApolloReactCommon from "@apollo/react-common";
 import * as ApolloReactHooks from "@apollo/react-hooks";
 export type Maybe<T> = T | null;
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = {
   [X in Exclude<keyof T, K>]?: T[X];
 } &
@@ -24,6 +23,10 @@ export type Address = {
   state: Scalars["String"];
 };
 
+export type Node = {
+  id: Scalars["ID"];
+};
+
 export type Company = Node & {
   __typename?: "Company";
   id: Scalars["ID"];
@@ -37,28 +40,12 @@ export type Displayed = {
   title: Scalars["String"];
 };
 
-export type DisplayedNode = Language | Tool | Use;
-
-export type Experience = Node & {
-  __typename?: "Experience";
-  id: Scalars["ID"];
-  accomplishments: Array<Scalars["String"]>;
-  company: Company;
-  endDate: Maybe<Scalars["String"]>;
-  hidden: Scalars["Boolean"];
-  histories: Array<History>;
-  hours: Scalars["String"];
-  role: Scalars["String"];
-  startDate: Scalars["String"];
-};
-
-export type History = Node & {
-  __typename?: "History";
-  id: Scalars["ID"];
-  children: Maybe<Array<History>>;
-  utilization: Maybe<Scalars["Int"]>;
-  values: Array<DisplayedNode>;
-};
+export type Use = Node &
+  Displayed & {
+    __typename?: "Use";
+    id: Scalars["ID"];
+    title: Scalars["String"];
+  };
 
 export type Language = Node &
   Displayed & {
@@ -69,16 +56,53 @@ export type Language = Node &
     logo: Scalars["String"];
   };
 
-export type Node = {
+export type Tool = Node &
+  Displayed & {
+    __typename?: "Tool";
+    id: Scalars["ID"];
+    languages?: Maybe<Array<Language>>;
+    logo: Scalars["String"];
+    title: Scalars["String"];
+    url: Scalars["String"];
+    use: Use;
+  };
+
+export type History = Node & {
+  __typename?: "History";
   id: Scalars["ID"];
+  children?: Maybe<Array<History>>;
+  utilization?: Maybe<Scalars["Int"]>;
+  values: Array<Displayed>;
+};
+
+export type Experience = Node & {
+  __typename?: "Experience";
+  id: Scalars["ID"];
+  accomplishments: Array<Scalars["String"]>;
+  company: Company;
+  endDate?: Maybe<Scalars["String"]>;
+  hidden: Scalars["Boolean"];
+  histories: Array<History>;
+  hours: Scalars["String"];
+  role: Scalars["String"];
+  startDate: Scalars["String"];
+};
+
+export type Skill = Node & {
+  __typename?: "Skill";
+  id: Scalars["ID"];
+  experience: Experience;
+  languages?: Maybe<Array<Language>>;
+  utilization: Scalars["Int"];
+  values: Array<Displayed>;
 };
 
 export type Query = {
   __typename?: "Query";
   experiences: Array<Experience>;
-  experience: Maybe<Experience>;
+  experience?: Maybe<Experience>;
   skills: Array<Skill>;
-  skill: Maybe<Skill>;
+  skill?: Maybe<Skill>;
 };
 
 export type QueryExperienceArgs = {
@@ -89,49 +113,22 @@ export type QuerySkillArgs = {
   id: Scalars["ID"];
 };
 
-export type Skill = Node & {
-  __typename?: "Skill";
-  id: Scalars["ID"];
-  experience: Experience;
-  languages: Maybe<Array<Language>>;
-  utilization: Scalars["Int"];
-  values: Array<DisplayedNode>;
-};
-
-export type Tool = Node &
-  Displayed & {
-    __typename?: "Tool";
-    id: Scalars["ID"];
-    languages: Maybe<Array<Language>>;
-    logo: Scalars["String"];
-    title: Scalars["String"];
-    url: Scalars["String"];
-    use: Use;
-  };
-
-export type Use = Node &
-  Displayed & {
-    __typename?: "Use";
-    id: Scalars["ID"];
-    title: Scalars["String"];
-  };
-
 export type HistoryFieldsFragment = { __typename?: "History" } & Pick<
   History,
   "id" | "utilization"
 > & {
     values: Array<
+      | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
       | ({ __typename?: "Language" } & Pick<
           Language,
           "id" | "logo" | "title" | "url"
         >)
       | ({ __typename?: "Tool" } & Pick<Tool, "id" | "title" | "url"> & {
-            languages: Maybe<
+            languages?: Maybe<
               Array<{ __typename?: "Language" } & Pick<Language, "id">>
             >;
             use: { __typename?: "Use" } & Pick<Use, "id">;
           })
-      | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
     >;
   };
 
@@ -147,13 +144,13 @@ export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
       };
     histories: Array<
       { __typename?: "History" } & {
-        children: Maybe<
+        children?: Maybe<
           Array<
             { __typename?: "History" } & {
-              children: Maybe<
+              children?: Maybe<
                 Array<
                   { __typename?: "History" } & {
-                    children: Maybe<
+                    children?: Maybe<
                       Array<{ __typename?: "History" } & HistoryFieldsFragment>
                     >;
                   } & HistoryFieldsFragment
@@ -177,7 +174,7 @@ export type ExperienceGetQueryVariables = {
 };
 
 export type ExperienceGetQuery = { __typename?: "Query" } & {
-  experience: Maybe<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
+  experience?: Maybe<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
 };
 
 export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
@@ -187,17 +184,17 @@ export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
     experience: { __typename?: "Experience" } & Pick<Experience, "id"> & {
         company: { __typename?: "Company" } & Pick<Company, "id" | "name">;
       };
-    languages: Maybe<
+    languages?: Maybe<
       Array<
         { __typename?: "Language" } & Pick<Language, "id" | "title" | "logo">
       >
     >;
     values: Array<
+      | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
       | ({ __typename?: "Language" } & Pick<Language, "id" | "title" | "logo">)
       | ({ __typename?: "Tool" } & Pick<Tool, "id" | "logo" | "title"> & {
             use: { __typename?: "Use" } & Pick<Use, "id">;
           })
-      | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
     >;
   };
 
@@ -212,7 +209,7 @@ export type SkillGetQueryVariables = {
 };
 
 export type SkillGetQuery = { __typename?: "Query" } & {
-  skill: Maybe<{ __typename?: "Skill" } & SkillFieldsFragment>;
+  skill?: Maybe<{ __typename?: "Skill" } & SkillFieldsFragment>;
 };
 
 export type WriteQueryQueryVariables = {};
@@ -603,13 +600,6 @@ export type WriteQueryQueryResult = ApolloReactCommon.QueryResult<
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-export type ResolverFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo,
-) => Promise<TResult> | TResult;
-
 export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
@@ -618,6 +608,13 @@ export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
   | StitchingResolver<TResult, TParent, TContext, TArgs>;
+
+export type ResolverFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo,
+) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -685,12 +682,12 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
   info: GraphQLResolveInfo,
-) => Maybe<TTypes>;
+) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
 export type isTypeOfResolverFn<T = {}> = (
   obj: T,
   info: GraphQLResolveInfo,
-) => boolean;
+) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -709,56 +706,60 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Query: ResolverTypeWrapper<{}>;
-  Experience: ResolverTypeWrapper<Experience>;
-  Node: ResolverTypeWrapper<Node>;
-  ID: ResolverTypeWrapper<Scalars["ID"]>;
   String: ResolverTypeWrapper<Scalars["String"]>;
-  Company: ResolverTypeWrapper<Company>;
-  Address: ResolverTypeWrapper<Address>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
-  History: ResolverTypeWrapper<
-    Omit<History, "values"> & { values: Array<ResolversTypes["DisplayedNode"]> }
-  >;
-  Int: ResolverTypeWrapper<Scalars["Int"]>;
-  DisplayedNode:
+  Address: ResolverTypeWrapper<Address>;
+  Node:
+    | ResolversTypes["Company"]
+    | ResolversTypes["Use"]
     | ResolversTypes["Language"]
     | ResolversTypes["Tool"]
-    | ResolversTypes["Use"];
-  Language: ResolverTypeWrapper<Language>;
-  Displayed: ResolverTypeWrapper<Displayed>;
-  Tool: ResolverTypeWrapper<Tool>;
+    | ResolversTypes["History"]
+    | ResolversTypes["Experience"]
+    | ResolversTypes["Skill"];
+  ID: ResolverTypeWrapper<Scalars["ID"]>;
+  Company: ResolverTypeWrapper<Company>;
+  Displayed:
+    | ResolversTypes["Use"]
+    | ResolversTypes["Language"]
+    | ResolversTypes["Tool"];
   Use: ResolverTypeWrapper<Use>;
-  Skill: ResolverTypeWrapper<
-    Omit<Skill, "values"> & { values: Array<ResolversTypes["DisplayedNode"]> }
-  >;
+  Language: ResolverTypeWrapper<Language>;
+  Tool: ResolverTypeWrapper<Tool>;
+  History: ResolverTypeWrapper<History>;
+  Int: ResolverTypeWrapper<Scalars["Int"]>;
+  Experience: ResolverTypeWrapper<Experience>;
+  Skill: ResolverTypeWrapper<Skill>;
+  Query: ResolverTypeWrapper<{}>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Query: {};
-  Experience: Experience;
-  Node: Node;
-  ID: Scalars["ID"];
   String: Scalars["String"];
-  Company: Company;
-  Address: Address;
   Boolean: Scalars["Boolean"];
-  History: Omit<History, "values"> & {
-    values: Array<ResolversParentTypes["DisplayedNode"]>;
-  };
-  Int: Scalars["Int"];
-  DisplayedNode:
+  Address: Address;
+  Node:
+    | ResolversParentTypes["Company"]
+    | ResolversParentTypes["Use"]
     | ResolversParentTypes["Language"]
     | ResolversParentTypes["Tool"]
-    | ResolversParentTypes["Use"];
-  Language: Language;
-  Displayed: Displayed;
-  Tool: Tool;
+    | ResolversParentTypes["History"]
+    | ResolversParentTypes["Experience"]
+    | ResolversParentTypes["Skill"];
+  ID: Scalars["ID"];
+  Company: Company;
+  Displayed:
+    | ResolversParentTypes["Use"]
+    | ResolversParentTypes["Language"]
+    | ResolversParentTypes["Tool"];
   Use: Use;
-  Skill: Omit<Skill, "values"> & {
-    values: Array<ResolversParentTypes["DisplayedNode"]>;
-  };
+  Language: Language;
+  Tool: Tool;
+  History: History;
+  Int: Scalars["Int"];
+  Experience: Experience;
+  Skill: Skill;
+  Query: {};
 };
 
 export type AddressResolvers<
@@ -768,6 +769,24 @@ export type AddressResolvers<
   county: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   state: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type NodeResolvers<
+  ContextType = ApolloClientContext,
+  ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
+> = {
+  __resolveType: TypeResolveFn<
+    | "Company"
+    | "Use"
+    | "Language"
+    | "Tool"
+    | "History"
+    | "Experience"
+    | "Skill",
+    ParentType,
+    ContextType
+  >;
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 };
 
 export type CompanyResolvers<
@@ -787,22 +806,63 @@ export type DisplayedResolvers<
   ParentType extends ResolversParentTypes["Displayed"] = ResolversParentTypes["Displayed"]
 > = {
   __resolveType: TypeResolveFn<
-    "Language" | "Tool" | "Use",
+    "Use" | "Language" | "Tool",
     ParentType,
     ContextType
   >;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 };
 
-export type DisplayedNodeResolvers<
+export type UseResolvers<
   ContextType = ApolloClientContext,
-  ParentType extends ResolversParentTypes["DisplayedNode"] = ResolversParentTypes["DisplayedNode"]
+  ParentType extends ResolversParentTypes["Use"] = ResolversParentTypes["Use"]
 > = {
-  __resolveType: TypeResolveFn<
-    "Language" | "Tool" | "Use",
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type LanguageResolvers<
+  ContextType = ApolloClientContext,
+  ParentType extends ResolversParentTypes["Language"] = ResolversParentTypes["Language"]
+> = {
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type ToolResolvers<
+  ContextType = ApolloClientContext,
+  ParentType extends ResolversParentTypes["Tool"] = ResolversParentTypes["Tool"]
+> = {
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  languages: Resolver<
+    Maybe<Array<ResolversTypes["Language"]>>,
     ParentType,
     ContextType
   >;
+  logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  use: Resolver<ResolversTypes["Use"], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+};
+
+export type HistoryResolvers<
+  ContextType = ApolloClientContext,
+  ParentType extends ResolversParentTypes["History"] = ResolversParentTypes["History"]
+> = {
+  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  children: Resolver<
+    Maybe<Array<ResolversTypes["History"]>>,
+    ParentType,
+    ContextType
+  >;
+  utilization: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  values: Resolver<Array<ResolversTypes["Displayed"]>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 };
 
 export type ExperienceResolvers<
@@ -829,52 +889,20 @@ export type ExperienceResolvers<
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 };
 
-export type HistoryResolvers<
+export type SkillResolvers<
   ContextType = ApolloClientContext,
-  ParentType extends ResolversParentTypes["History"] = ResolversParentTypes["History"]
+  ParentType extends ResolversParentTypes["Skill"] = ResolversParentTypes["Skill"]
 > = {
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  children: Resolver<
-    Maybe<Array<ResolversTypes["History"]>>,
+  experience: Resolver<ResolversTypes["Experience"], ParentType, ContextType>;
+  languages: Resolver<
+    Maybe<Array<ResolversTypes["Language"]>>,
     ParentType,
     ContextType
   >;
-  utilization: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
-  values: Resolver<
-    Array<ResolversTypes["DisplayedNode"]>,
-    ParentType,
-    ContextType
-  >;
+  utilization: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  values: Resolver<Array<ResolversTypes["Displayed"]>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
-};
-
-export type LanguageResolvers<
-  ContextType = ApolloClientContext,
-  ParentType extends ResolversParentTypes["Language"] = ResolversParentTypes["Language"]
-> = {
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-};
-
-export type NodeResolvers<
-  ContextType = ApolloClientContext,
-  ParentType extends ResolversParentTypes["Node"] = ResolversParentTypes["Node"]
-> = {
-  __resolveType: TypeResolveFn<
-    | "Experience"
-    | "Company"
-    | "History"
-    | "Language"
-    | "Tool"
-    | "Use"
-    | "Skill",
-    ParentType,
-    ContextType
-  >;
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 };
 
 export type QueryResolvers<
@@ -901,65 +929,18 @@ export type QueryResolvers<
   >;
 };
 
-export type SkillResolvers<
-  ContextType = ApolloClientContext,
-  ParentType extends ResolversParentTypes["Skill"] = ResolversParentTypes["Skill"]
-> = {
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  experience: Resolver<ResolversTypes["Experience"], ParentType, ContextType>;
-  languages: Resolver<
-    Maybe<Array<ResolversTypes["Language"]>>,
-    ParentType,
-    ContextType
-  >;
-  utilization: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
-  values: Resolver<
-    Array<ResolversTypes["DisplayedNode"]>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-};
-
-export type ToolResolvers<
-  ContextType = ApolloClientContext,
-  ParentType extends ResolversParentTypes["Tool"] = ResolversParentTypes["Tool"]
-> = {
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  languages: Resolver<
-    Maybe<Array<ResolversTypes["Language"]>>,
-    ParentType,
-    ContextType
-  >;
-  logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  use: Resolver<ResolversTypes["Use"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-};
-
-export type UseResolvers<
-  ContextType = ApolloClientContext,
-  ParentType extends ResolversParentTypes["Use"] = ResolversParentTypes["Use"]
-> = {
-  id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
-  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-};
-
 export type Resolvers<ContextType = ApolloClientContext> = {
   Address: AddressResolvers<ContextType>;
+  Node: NodeResolvers;
   Company: CompanyResolvers<ContextType>;
   Displayed: DisplayedResolvers;
-  DisplayedNode: DisplayedNodeResolvers;
-  Experience: ExperienceResolvers<ContextType>;
-  History: HistoryResolvers<ContextType>;
-  Language: LanguageResolvers<ContextType>;
-  Node: NodeResolvers;
-  Query: QueryResolvers<ContextType>;
-  Skill: SkillResolvers<ContextType>;
-  Tool: ToolResolvers<ContextType>;
   Use: UseResolvers<ContextType>;
+  Language: LanguageResolvers<ContextType>;
+  Tool: ToolResolvers<ContextType>;
+  History: HistoryResolvers<ContextType>;
+  Experience: ExperienceResolvers<ContextType>;
+  Skill: SkillResolvers<ContextType>;
+  Query: QueryResolvers<ContextType>;
 };
 
 /**

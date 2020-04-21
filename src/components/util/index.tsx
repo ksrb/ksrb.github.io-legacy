@@ -1,6 +1,6 @@
 import typenames from "src/graphql/typenames";
 import uses from "src/graphql/data/uses";
-import { DisplayedNode, Tool, Use } from "src/graphql/__generated__";
+import { Displayed, Tool, Use } from "src/graphql/__generated__";
 
 import {
   languagesColor,
@@ -25,12 +25,13 @@ function getColorByUse(use: Use): string {
 }
 
 export function getColorByType(
-  displayedNode: DisplayedNode[],
-  parentDisplayedNodes?: DisplayedNode[],
+  displayedNode: Displayed[],
+  parentDisplayedNodes?: Displayed[],
 ): string {
   // TODO: consider nodes with mixed use
   const node = displayedNode[0];
 
+  // @ts-ignore
   const { __typename } = node;
 
   switch (__typename) {

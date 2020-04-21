@@ -40,13 +40,11 @@ type Tool implements Node & Displayed {
   use: Use!
 }
 
-union DisplayedNode = Language | Tool | Use
-
 type History implements Node {
   id: ID!
   children: [History!]
   utilization: Int
-  values: [DisplayedNode!]!
+  values: [Displayed!]!
 }
 
 type Experience implements Node {
@@ -66,7 +64,7 @@ type Skill implements Node {
   experience: Experience!
   languages: [Language!]
   utilization: Int!
-  values: [DisplayedNode!]!
+  values: [Displayed!]!
 }
 
 type Query {

@@ -66,7 +66,7 @@ const History: FC<{
       </div>
       {children && (
         <div className={classes.histories}>
-          {children.map(childHistory => {
+          {children.map((childHistory) => {
             const component = (
               <History
                 key={childHistory.id}
@@ -147,7 +147,7 @@ const Experience: FC<{ experience: ExperiencesGetQuery["experiences"][0] }> = ({
         onClick={handleHistoryRootClick}
       >
         <div className={classes.histories}>
-          {histories.map(history => (
+          {histories.map((history) => (
             <History
               key={history.id}
               history={history}
@@ -175,7 +175,7 @@ const Experiences: FC = () => {
     <Grid container className={classes.root}>
       {experiences
         .filter(({ hidden }) => !hidden)
-        .map(experience => (
+        .map((experience) => (
           <Experience key={experience.id} experience={experience} />
         ))}
     </Grid>

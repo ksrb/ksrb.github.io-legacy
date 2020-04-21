@@ -177,10 +177,10 @@ const Skill: FC<{
               </>
             )}
           </div>
+          <div className={classes.skill_title}>{title}</div>
         </div>
         {nodes}
       </div>
-      <div className={classes.skill_title}>{title}</div>
     </div>
   );
 };
@@ -210,7 +210,7 @@ const Skills: FC = () => {
               skillsExpanded && classes.skills__expanded,
             )}
           >
-            {skills.map(skill => (
+            {skills.map((skill) => (
               <Skill
                 key={skill.id}
                 skill={skill}
