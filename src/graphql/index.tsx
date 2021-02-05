@@ -53,7 +53,7 @@ const client = new ApolloClient({
   typeDefs: loader("./schema.graphql"),
 });
 
-client.writeQuery({
+cache.writeQuery({
   query: WriteQueryDocument,
   data: {
     experiences,

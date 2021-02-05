@@ -29,7 +29,7 @@ import {
 } from "src/styles";
 import useStyles from "./styles";
 
-const ColorMask: FC<{ color: string }> = ({ color }) => (
+const Filter: FC<{ color: string }> = ({ color }) => (
   <filter id={color.substring(1)}>
     <feColorMatrix
       in="SourceGraphic"
@@ -155,8 +155,11 @@ const Skill: FC<{
   return (
     <div className={classes.skill}>
       <div ref={meterRef} className={classes.meter}>
-        <div className={classes.meter_rootWrapper}>
-          <div className={classes.meter_root} style={{ borderColor: color }}>
+        <div className={classes.meter_root}>
+          <div
+            className={classes.meter_rootContent}
+            style={{ borderColor: color }}
+          >
             {logo && (
               <>
                 <img
@@ -177,10 +180,10 @@ const Skill: FC<{
               </>
             )}
           </div>
-          <div className={classes.skill_title}>{title}</div>
         </div>
         {nodes}
       </div>
+      <div className={classes.skill_title}>{title}</div>
     </div>
   );
 };
@@ -220,11 +223,12 @@ const Skills: FC = () => {
           </div>
         </Grid>
       </Grid>
-      <svg>
-        <ColorMask color={primaryColor} />
-        <ColorMask color={secondaryColor} />
-        <ColorMask color={trinaryColor} />
-        <ColorMask color={languagesColor} />
+
+      <svg className={classes.filters}>
+        <Filter color={primaryColor} />
+        <Filter color={secondaryColor} />
+        <Filter color={trinaryColor} />
+        <Filter color={languagesColor} />
       </svg>
     </>
   );

@@ -18,7 +18,7 @@ import useStyles from "./styles";
 
 function renderDate(dateStr: string): string {
   const date = new Date(dateStr);
-  return `${date.getMonth()}/${date.getFullYear()}`;
+  return `${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
 type History = HistoryFieldsFragment & {

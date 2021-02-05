@@ -10,11 +10,13 @@ import {
 
 const stroke = "3px";
 
-const skill_titleFontSize = "12px";
-const skill_titleLineHeight = "1.4";
+const skill_titleFontSize = 12;
+const skill_titleLineHeight = 1.4;
+
+const skill_titleHeight = skill_titleFontSize * skill_titleLineHeight;
 
 const skill_titleExpanded = {
-  height: `calc(${skill_titleFontSize} * ${skill_titleLineHeight})`,
+  height: `${skill_titleHeight}px`,
 };
 
 const meter_rootPadding = "3px";
@@ -48,7 +50,10 @@ export default makeStyles({
     },
   },
   skill: {
-    marginBottom: "5px",
+    position: "relative",
+    paddingBottom: skill_titleHeight,
+    marginBottom: "3px",
+    overflow: "hidden",
     "&:hover $skill_title": {
       ...skill_titleExpanded,
     },
@@ -57,11 +62,19 @@ export default makeStyles({
     },
   },
   skill_title: {
-    height: 0,
+    position: "absolute",
+    top: `calc(100% - ${skill_titleHeight}px)`,
+    padding: "0 3px",
+
+    height: "0px",
+    minWidth: meter_rootSize,
+
     fontSize: skill_titleFontSize,
     lineHeight: skill_titleLineHeight,
+    textAlign: "center",
+
     overflow: "hidden",
-    transition: "200ms height ease",
+    transition: "400ms height ease",
   },
 
   meter: {
@@ -70,12 +83,12 @@ export default makeStyles({
     height: meter_rootSize,
   },
 
-  meter_rootWrapper: {
+  meter_root: {
     ...meter_rootExpanded,
     position: "relative",
   },
 
-  meter_root: {
+  meter_rootContent: {
     ...meter_rootExpanded,
     display: "flex",
     justifyContent: "center",
@@ -128,5 +141,9 @@ export default makeStyles({
   },
   [languagesColor.substring(1)]: {
     filter: `url(${languagesColor})`,
+  },
+  filters: {
+    height: 0,
+    width: 0,
   },
 });
