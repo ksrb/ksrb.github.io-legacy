@@ -36,7 +36,6 @@ const History: FC<{
   const classes = useStyles();
   const { children, values } = history;
   let utilization = computeUtilization(
-    // @ts-ignore consider typecasting
     history,
     historyParent,
     historyParentUtilization,
@@ -59,8 +58,8 @@ const History: FC<{
         style={{ backgroundColor }}
       >
         {values.map(({ title }, index) => {
-          const space = index !== values.length - 1 ? " " : "";
-          return title + space;
+          const slash = index !== values.length - 1 ? "/" : "";
+          return title + slash;
         })}{" "}
         {utilizationRounded}%
       </div>

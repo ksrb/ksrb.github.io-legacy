@@ -1,24 +1,14 @@
-import ApolloClient from "apollo-client";
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from "apollo-cache-inmemory";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { loader } from "graphql.macro";
-
 import {
   ExperienceFieldsFragmentDoc,
   Resolvers,
   SkillFieldsFragmentDoc,
   WriteQueryDocument,
 } from "./__generated__";
-import introspectionQueryResultData from "./__generated__/introspectionQueryResultData";
-
+import introspectionResults from "./__generated__/introspection-results";
 import typenames from "./typenames";
 import { experiences, skills } from "./data";
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-});
 
 const resolvers: { Query: Pick<Resolvers["Query"], "experience" | "skill"> } = {
   Query: {
@@ -32,7 +22,6 @@ const resolvers: { Query: Pick<Resolvers["Query"], "experience" | "skill"> } = {
         fragmentName: ExperienceFieldsFragmentDoc.definitions[0].name.value,
       });
     },
-    // @ts-ignore
     skill(_, { id }, { cache, getCacheKey }) {
       return cache.readFragment({
         id: getCacheKey({ __typename: typenames.Skill, id }),
@@ -44,7 +33,10 @@ const resolvers: { Query: Pick<Resolvers["Query"], "experience" | "skill"> } = {
   },
 };
 
-const cache = new InMemoryCache({ fragmentMatcher });
+const cache = new InMemoryCache({
+  possibleTypes: introspectionResults.possibleTypes,
+});
+
 const client = new ApolloClient({
   cache,
   // @ts-ignore generated resolver type valid but does not match apollo-client

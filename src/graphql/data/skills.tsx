@@ -273,9 +273,9 @@ function aggregateSkillUtilization(
 
 const skills = aggregateSkillUtilization(computeSkillsFromExperiences());
 
-const skillsLanguages = computeSkillsFromExperiences(true).reduce<
-  SkillRequiredPropertiesMap
->((skillMap, skill) => {
+const skillsLanguages = computeSkillsFromExperiences(
+  true,
+).reduce<SkillRequiredPropertiesMap>((skillMap, skill) => {
   const { languages, utilization, experience } = skill;
 
   if (!languages) {

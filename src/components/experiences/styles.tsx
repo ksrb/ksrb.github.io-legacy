@@ -79,6 +79,9 @@ export default makeStyles({
     "& $history_title": {
       ...history_title__expanded,
     },
+    "& > $histories": {
+      flexWrap: "wrap",
+    },
   },
   histories: {
     display: "flex",

@@ -1,9 +1,15 @@
 import { GraphQLResolveInfo } from "graphql";
 import { ApolloClientContext } from "src/graphql/types";
-import gql from "graphql-tag";
-import * as ApolloReactCommon from "@apollo/react-common";
-import * as ApolloReactHooks from "@apollo/react-hooks";
+import { gql } from "@apollo/client";
+import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
 export type RequireFields<T, K extends keyof T> = {
   [X in Exclude<keyof T, K>]?: T[X];
 } &
@@ -163,15 +169,15 @@ export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
     >;
   };
 
-export type ExperiencesGetQueryVariables = {};
+export type ExperiencesGetQueryVariables = Exact<{ [key: string]: never }>;
 
 export type ExperiencesGetQuery = { __typename?: "Query" } & {
   experiences: Array<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
 };
 
-export type ExperienceGetQueryVariables = {
+export type ExperienceGetQueryVariables = Exact<{
   id: Scalars["ID"];
-};
+}>;
 
 export type ExperienceGetQuery = { __typename?: "Query" } & {
   experience?: Maybe<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
@@ -198,21 +204,21 @@ export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
     >;
   };
 
-export type SkillsGetQueryVariables = {};
+export type SkillsGetQueryVariables = Exact<{ [key: string]: never }>;
 
 export type SkillsGetQuery = { __typename?: "Query" } & {
   skills: Array<{ __typename?: "Skill" } & SkillFieldsFragment>;
 };
 
-export type SkillGetQueryVariables = {
+export type SkillGetQueryVariables = Exact<{
   id: Scalars["ID"];
-};
+}>;
 
 export type SkillGetQuery = { __typename?: "Query" } & {
   skill?: Maybe<{ __typename?: "Skill" } & SkillFieldsFragment>;
 };
 
-export type WriteQueryQueryVariables = {};
+export type WriteQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 export type WriteQueryQuery = { __typename?: "Query" } & {
   experiences: Array<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
@@ -342,26 +348,26 @@ export const ExperiencesGetDocument = gql`
  * });
  */
 export function useExperiencesGetQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
+  baseOptions?: Apollo.QueryHookOptions<
     ExperiencesGetQuery,
     ExperiencesGetQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useQuery<
-    ExperiencesGetQuery,
-    ExperiencesGetQueryVariables
-  >(ExperiencesGetDocument, baseOptions);
+  return Apollo.useQuery<ExperiencesGetQuery, ExperiencesGetQueryVariables>(
+    ExperiencesGetDocument,
+    baseOptions,
+  );
 }
 export function useExperiencesGetLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+  baseOptions?: Apollo.LazyQueryHookOptions<
     ExperiencesGetQuery,
     ExperiencesGetQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useLazyQuery<
-    ExperiencesGetQuery,
-    ExperiencesGetQueryVariables
-  >(ExperiencesGetDocument, baseOptions);
+  return Apollo.useLazyQuery<ExperiencesGetQuery, ExperiencesGetQueryVariables>(
+    ExperiencesGetDocument,
+    baseOptions,
+  );
 }
 export type ExperiencesGetQueryHookResult = ReturnType<
   typeof useExperiencesGetQuery
@@ -369,7 +375,7 @@ export type ExperiencesGetQueryHookResult = ReturnType<
 export type ExperiencesGetLazyQueryHookResult = ReturnType<
   typeof useExperiencesGetLazyQuery
 >;
-export type ExperiencesGetQueryResult = ApolloReactCommon.QueryResult<
+export type ExperiencesGetQueryResult = Apollo.QueryResult<
   ExperiencesGetQuery,
   ExperiencesGetQueryVariables
 >;
@@ -399,26 +405,26 @@ export const ExperienceGetDocument = gql`
  * });
  */
 export function useExperienceGetQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
+  baseOptions: Apollo.QueryHookOptions<
     ExperienceGetQuery,
     ExperienceGetQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useQuery<
-    ExperienceGetQuery,
-    ExperienceGetQueryVariables
-  >(ExperienceGetDocument, baseOptions);
+  return Apollo.useQuery<ExperienceGetQuery, ExperienceGetQueryVariables>(
+    ExperienceGetDocument,
+    baseOptions,
+  );
 }
 export function useExperienceGetLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+  baseOptions?: Apollo.LazyQueryHookOptions<
     ExperienceGetQuery,
     ExperienceGetQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useLazyQuery<
-    ExperienceGetQuery,
-    ExperienceGetQueryVariables
-  >(ExperienceGetDocument, baseOptions);
+  return Apollo.useLazyQuery<ExperienceGetQuery, ExperienceGetQueryVariables>(
+    ExperienceGetDocument,
+    baseOptions,
+  );
 }
 export type ExperienceGetQueryHookResult = ReturnType<
   typeof useExperienceGetQuery
@@ -426,7 +432,7 @@ export type ExperienceGetQueryHookResult = ReturnType<
 export type ExperienceGetLazyQueryHookResult = ReturnType<
   typeof useExperienceGetLazyQuery
 >;
-export type ExperienceGetQueryResult = ApolloReactCommon.QueryResult<
+export type ExperienceGetQueryResult = Apollo.QueryResult<
   ExperienceGetQuery,
   ExperienceGetQueryVariables
 >;
@@ -455,23 +461,23 @@ export const SkillsGetDocument = gql`
  * });
  */
 export function useSkillsGetQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
+  baseOptions?: Apollo.QueryHookOptions<
     SkillsGetQuery,
     SkillsGetQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useQuery<SkillsGetQuery, SkillsGetQueryVariables>(
+  return Apollo.useQuery<SkillsGetQuery, SkillsGetQueryVariables>(
     SkillsGetDocument,
     baseOptions,
   );
 }
 export function useSkillsGetLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+  baseOptions?: Apollo.LazyQueryHookOptions<
     SkillsGetQuery,
     SkillsGetQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useLazyQuery<SkillsGetQuery, SkillsGetQueryVariables>(
+  return Apollo.useLazyQuery<SkillsGetQuery, SkillsGetQueryVariables>(
     SkillsGetDocument,
     baseOptions,
   );
@@ -480,7 +486,7 @@ export type SkillsGetQueryHookResult = ReturnType<typeof useSkillsGetQuery>;
 export type SkillsGetLazyQueryHookResult = ReturnType<
   typeof useSkillsGetLazyQuery
 >;
-export type SkillsGetQueryResult = ApolloReactCommon.QueryResult<
+export type SkillsGetQueryResult = Apollo.QueryResult<
   SkillsGetQuery,
   SkillsGetQueryVariables
 >;
@@ -510,23 +516,20 @@ export const SkillGetDocument = gql`
  * });
  */
 export function useSkillGetQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    SkillGetQuery,
-    SkillGetQueryVariables
-  >,
+  baseOptions: Apollo.QueryHookOptions<SkillGetQuery, SkillGetQueryVariables>,
 ) {
-  return ApolloReactHooks.useQuery<SkillGetQuery, SkillGetQueryVariables>(
+  return Apollo.useQuery<SkillGetQuery, SkillGetQueryVariables>(
     SkillGetDocument,
     baseOptions,
   );
 }
 export function useSkillGetLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+  baseOptions?: Apollo.LazyQueryHookOptions<
     SkillGetQuery,
     SkillGetQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useLazyQuery<SkillGetQuery, SkillGetQueryVariables>(
+  return Apollo.useLazyQuery<SkillGetQuery, SkillGetQueryVariables>(
     SkillGetDocument,
     baseOptions,
   );
@@ -535,7 +538,7 @@ export type SkillGetQueryHookResult = ReturnType<typeof useSkillGetQuery>;
 export type SkillGetLazyQueryHookResult = ReturnType<
   typeof useSkillGetLazyQuery
 >;
-export type SkillGetQueryResult = ApolloReactCommon.QueryResult<
+export type SkillGetQueryResult = Apollo.QueryResult<
   SkillGetQuery,
   SkillGetQueryVariables
 >;
@@ -568,43 +571,50 @@ export const WriteQueryDocument = gql`
  * });
  */
 export function useWriteQueryQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
+  baseOptions?: Apollo.QueryHookOptions<
     WriteQueryQuery,
     WriteQueryQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useQuery<WriteQueryQuery, WriteQueryQueryVariables>(
+  return Apollo.useQuery<WriteQueryQuery, WriteQueryQueryVariables>(
     WriteQueryDocument,
     baseOptions,
   );
 }
 export function useWriteQueryLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+  baseOptions?: Apollo.LazyQueryHookOptions<
     WriteQueryQuery,
     WriteQueryQueryVariables
   >,
 ) {
-  return ApolloReactHooks.useLazyQuery<
-    WriteQueryQuery,
-    WriteQueryQueryVariables
-  >(WriteQueryDocument, baseOptions);
+  return Apollo.useLazyQuery<WriteQueryQuery, WriteQueryQueryVariables>(
+    WriteQueryDocument,
+    baseOptions,
+  );
 }
 export type WriteQueryQueryHookResult = ReturnType<typeof useWriteQueryQuery>;
 export type WriteQueryLazyQueryHookResult = ReturnType<
   typeof useWriteQueryLazyQuery
 >;
-export type WriteQueryQueryResult = ApolloReactCommon.QueryResult<
+export type WriteQueryQueryResult = Apollo.QueryResult<
   WriteQueryQuery,
   WriteQueryQueryVariables
 >;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
-export type StitchingResolver<TResult, TParent, TContext, TArgs> = {
+export type LegacyStitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
 
+export type NewStitchingResolver<TResult, TParent, TContext, TArgs> = {
+  selectionSet: string;
+  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+};
+export type StitchingResolver<TResult, TParent, TContext, TArgs> =
+  | LegacyStitchingResolver<TResult, TParent, TContext, TArgs>
+  | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
   | StitchingResolver<TResult, TParent, TContext, TArgs>;
@@ -684,8 +694,9 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type isTypeOfResolverFn<T = {}> = (
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
   obj: T,
+  context: TContext,
   info: GraphQLResolveInfo,
 ) => boolean | Promise<boolean>;
 
@@ -706,9 +717,8 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  String: ResolverTypeWrapper<Scalars["String"]>;
-  Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Address: ResolverTypeWrapper<Address>;
+  String: ResolverTypeWrapper<Scalars["String"]>;
   Node:
     | ResolversTypes["Company"]
     | ResolversTypes["Use"]
@@ -729,15 +739,15 @@ export type ResolversTypes = {
   History: ResolverTypeWrapper<History>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   Experience: ResolverTypeWrapper<Experience>;
+  Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Skill: ResolverTypeWrapper<Skill>;
   Query: ResolverTypeWrapper<{}>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  String: Scalars["String"];
-  Boolean: Scalars["Boolean"];
   Address: Address;
+  String: Scalars["String"];
   Node:
     | ResolversParentTypes["Company"]
     | ResolversParentTypes["Use"]
@@ -758,6 +768,7 @@ export type ResolversParentTypes = {
   History: History;
   Int: Scalars["Int"];
   Experience: Experience;
+  Boolean: Scalars["Boolean"];
   Skill: Skill;
   Query: {};
 };
@@ -768,7 +779,7 @@ export type AddressResolvers<
 > = {
   county: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   state: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type NodeResolvers<
@@ -798,7 +809,7 @@ export type CompanyResolvers<
   logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   name: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   purpose: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DisplayedResolvers<
@@ -819,7 +830,7 @@ export type UseResolvers<
 > = {
   id: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type LanguageResolvers<
@@ -830,7 +841,7 @@ export type LanguageResolvers<
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ToolResolvers<
@@ -847,7 +858,7 @@ export type ToolResolvers<
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   use: Resolver<ResolversTypes["Use"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type HistoryResolvers<
@@ -862,7 +873,7 @@ export type HistoryResolvers<
   >;
   utilization: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
   values: Resolver<Array<ResolversTypes["Displayed"]>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ExperienceResolvers<
@@ -886,7 +897,7 @@ export type ExperienceResolvers<
   hours: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   role: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   startDate: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type SkillResolvers<
@@ -902,7 +913,7 @@ export type SkillResolvers<
   >;
   utilization: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   values: Resolver<Array<ResolversTypes["Displayed"]>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<
@@ -931,9 +942,9 @@ export type QueryResolvers<
 
 export type Resolvers<ContextType = ApolloClientContext> = {
   Address: AddressResolvers<ContextType>;
-  Node: NodeResolvers;
+  Node: NodeResolvers<ContextType>;
   Company: CompanyResolvers<ContextType>;
-  Displayed: DisplayedResolvers;
+  Displayed: DisplayedResolvers<ContextType>;
   Use: UseResolvers<ContextType>;
   Language: LanguageResolvers<ContextType>;
   Tool: ToolResolvers<ContextType>;
@@ -947,6 +958,6 @@ export type Resolvers<ContextType = ApolloClientContext> = {
  * @deprecated
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
-export type IResolvers<ContextType = ApolloClientContext> = Resolvers<
-  ContextType
->;
+export type IResolvers<
+  ContextType = ApolloClientContext
+> = Resolvers<ContextType>;

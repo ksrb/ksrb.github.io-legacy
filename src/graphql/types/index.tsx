@@ -1,4 +1,4 @@
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { InMemoryCache } from "@apollo/client";
 
 type getCacheKey = (obj: { __typename: string; id: string | number }) => any;
 

@@ -20,7 +20,7 @@ generates:
       - typescript-operations
       - typescript-react-apollo
       - typescript-resolvers
-  src/graphql/__generated__/introspectionQueryResultData.tsx:
+  src/graphql/__generated__/introspection-results.tsx:
     hooks:
       afterOneFileWrite:
         - prettier --write
