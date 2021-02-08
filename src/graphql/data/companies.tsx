@@ -1,6 +1,6 @@
-import typenames from "src/graphql/typenames";
 import { Company } from "src/graphql/__generated__";
-import { RequiredBy } from "../../types";
+import typenames from "src/graphql/typenames";
+import { RequiredBy } from "src/types";
 
 let id = 0;
 function createCompany(

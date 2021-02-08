@@ -1,13 +1,9 @@
-import typenames from "src/graphql/typenames";
-import uses from "src/graphql/data/uses";
 import { Displayed, Tool, Use } from "src/graphql/__generated__";
+import uses from "src/graphql/data/uses";
+import typenames from "src/graphql/typenames";
+import theme from "src/theme";
 
-import {
-  languagesColor,
-  primaryColor,
-  secondaryColor,
-  trinaryColor,
-} from "src/styles";
+const { primaryColor, languagesColor, secondaryColor, trinaryColor } = theme;
 
 function getColorByUse(use: Use): string {
   const { id } = use;

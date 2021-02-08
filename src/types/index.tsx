@@ -10,3 +10,5 @@ export type RequiredBy<T, K extends keyof T> = Required<Pick<T, K>> &
  * leaving all other as is.
  */
 export type OptionalBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+export declare type ExtractArrayType<T> = T extends Array<infer U> ? U : T;

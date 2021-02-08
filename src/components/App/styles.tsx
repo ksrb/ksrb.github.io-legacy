@@ -1,9 +1,7 @@
 import { makeStyles } from "@material-ui/styles";
-import { marginBottomClass, primaryColor } from "src/styles";
+import { Theme } from "src/theme";
 
-export default makeStyles({
-  ...marginBottomClass,
-
+export default makeStyles<Theme>(({ marginBottom, primaryColor }) => ({
   "@global": {
     "html, body, #root": {
       width: "100%",
@@ -27,7 +25,7 @@ export default makeStyles({
   },
 
   header: {
-    composes: "$marginBottom",
+    marginBottom: marginBottom,
     justifyContent: "center",
     marginTop: "50px",
   },
@@ -52,4 +50,4 @@ export default makeStyles({
     width: "100%",
     height: "100%",
   },
-});
+}));

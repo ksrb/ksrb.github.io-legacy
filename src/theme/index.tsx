@@ -1,14 +1,20 @@
-import {
-  createMuiTheme,
-  Theme as MaterialUITheme,
-} from "@material-ui/core/styles";
+import { createMuiTheme, Theme as MaterialUITheme } from "@material-ui/core";
+
+const primaryColor = "#4a679b";
+const secondaryColor = "#909b4a";
+const trinaryColor = "#9b554a";
+const languagesColor = "#2988d4";
+
+const { spacing } = createMuiTheme();
 
 const args = {
-  marginBottom: {
-    marginBottom: "20px",
-  },
+  marginBottom: spacing(3),
+  primaryColor,
+  secondaryColor,
+  trinaryColor,
+  languagesColor,
 };
 
-type Theme = MaterialUITheme & { [key in keyof typeof args]: any };
+export type Theme = MaterialUITheme & typeof args;
 
-export default createMuiTheme({}, args);
+export default createMuiTheme({}, args) as Theme;

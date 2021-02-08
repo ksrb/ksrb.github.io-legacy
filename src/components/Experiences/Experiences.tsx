@@ -10,11 +10,12 @@ import {
 } from "src/graphql/__generated__";
 import { computeUtilization } from "src/graphql/data/skills";
 
-import { RequiredBy } from "src/types";
+import { ExtractArrayType, RequiredBy } from "src/types";
 
 import { getColorByType } from "src/components/util";
 
 import useStyles from "./styles";
+import Timeline from "./Timeline";
 
 function renderDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -86,9 +87,9 @@ const History: FC<{
   );
 };
 
-const Experience: FC<{ experience: ExperiencesGetQuery["experiences"][0] }> = ({
-  experience,
-}) => {
+const Experience: FC<{
+  experience: ExtractArrayType<ExperiencesGetQuery["experiences"]>;
+}> = ({ experience }) => {
   const [historyExpanded, setHistoryExpanded] = useState(false);
 
   const handleHistoryRootClick = useCallback(() => {

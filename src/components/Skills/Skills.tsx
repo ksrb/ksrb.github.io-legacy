@@ -1,3 +1,7 @@
+import { Grid, IconButton } from "@material-ui/core";
+import { AddCircle } from "@material-ui/icons";
+import clsx from "clsx";
+import gsap from "gsap";
 import React, {
   FC,
   Fragment,
@@ -6,25 +10,19 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import clsx from "clsx";
-import gsap from "gsap";
-import { AddCircle } from "@material-ui/icons";
-import { Grid, IconButton } from "@material-ui/core";
-import typenames from "src/graphql/typenames";
+import { getColorByType } from "src/components/util";
 import {
   Language,
   SkillsGetQuery,
   Tool,
   useSkillsGetQuery,
 } from "src/graphql/__generated__";
-import { getColorByType } from "src/components/util";
-import {
-  languagesColor,
-  primaryColor,
-  secondaryColor,
-  trinaryColor,
-} from "src/styles";
+import typenames from "src/graphql/typenames";
+import theme from "src/theme";
+import { ExtractArrayType } from "src/types";
 import useStyles from "./styles";
+
+const { primaryColor, trinaryColor, secondaryColor, languagesColor } = theme;
 
 const Filter: FC<{ color: string }> = ({ color }) => (
   <filter id={color.substring(1)}>
@@ -50,7 +48,9 @@ const Filter: FC<{ color: string }> = ({ color }) => (
   </filter>
 );
 
-function getLogo({ values }: SkillsGetQuery["skills"][0]): string {
+function getLogo({
+  values,
+}: ExtractArrayType<SkillsGetQuery["skills"]>): string {
   const languages = values as Language[];
   const isOnlyLanguages = !languages.some(
     ({ __typename }) => __typename !== typenames.Language,
@@ -73,7 +73,7 @@ function getLogo({ values }: SkillsGetQuery["skills"][0]): string {
 }
 
 const Skill: FC<{
-  skill: SkillsGetQuery["skills"][0];
+  skill: ExtractArrayType<SkillsGetQuery["skills"]>;
   skillsExpanded: boolean;
 }> = ({ skill }) => {
   const classes = useStyles();

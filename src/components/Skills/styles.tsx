@@ -1,12 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
-
-import {
-  languagesColor,
-  marginBottomClass,
-  primaryColor,
-  secondaryColor,
-  trinaryColor,
-} from "src/styles";
+import { Theme } from "src/theme";
 
 const stroke = "3px";
 
@@ -38,112 +31,112 @@ const meter_edgeExpanded = {
   flexBasis: meter_edgeSize,
 };
 
-export default makeStyles({
-  ...marginBottomClass,
+export default makeStyles<Theme>(
+  ({ primaryColor, languagesColor, trinaryColor, secondaryColor }) => ({
+    root: {},
 
-  root: {},
-
-  skills: {},
-  skills__expanded: {
-    "& $skill $skill_title": {
-      ...skill_titleExpanded,
+    skills: {},
+    skills__expanded: {
+      "& $skill $skill_title": {
+        ...skill_titleExpanded,
+      },
     },
-  },
-  skill: {
-    position: "relative",
-    paddingBottom: skill_titleHeight,
-    marginBottom: "3px",
-    overflow: "hidden",
-    "&:hover $skill_title": {
-      ...skill_titleExpanded,
+    skill: {
+      position: "relative",
+      paddingBottom: skill_titleHeight,
+      marginBottom: "3px",
+      overflow: "hidden",
+      "&:hover $skill_title": {
+        ...skill_titleExpanded,
+      },
+      "&:hover $meter_rootIconFader": {
+        opacity: 0,
+      },
     },
-    "&:hover $meter_rootIconFader": {
-      opacity: 0,
+    skill_title: {
+      position: "absolute",
+      top: `calc(100% - ${skill_titleHeight}px)`,
+      padding: "0 3px",
+
+      height: "0px",
+      minWidth: meter_rootSize,
+
+      fontSize: skill_titleFontSize,
+      lineHeight: skill_titleLineHeight,
+      textAlign: "center",
+
+      overflow: "hidden",
+      transition: "400ms height ease",
     },
-  },
-  skill_title: {
-    position: "absolute",
-    top: `calc(100% - ${skill_titleHeight}px)`,
-    padding: "0 3px",
 
-    height: "0px",
-    minWidth: meter_rootSize,
+    meter: {
+      display: "flex",
+      alignItems: "center",
+      height: meter_rootSize,
+    },
 
-    fontSize: skill_titleFontSize,
-    lineHeight: skill_titleLineHeight,
-    textAlign: "center",
+    meter_root: {
+      ...meter_rootExpanded,
+      position: "relative",
+    },
 
-    overflow: "hidden",
-    transition: "400ms height ease",
-  },
+    meter_rootContent: {
+      ...meter_rootExpanded,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexShrink: 0,
 
-  meter: {
-    display: "flex",
-    alignItems: "center",
-    height: meter_rootSize,
-  },
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
 
-  meter_root: {
-    ...meter_rootExpanded,
-    position: "relative",
-  },
+      borderRadius: "50%",
+      border: `${stroke} solid ${primaryColor}`,
+      padding: meter_rootPadding,
+      overflow: "hidden",
 
-  meter_rootContent: {
-    ...meter_rootExpanded,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexShrink: 0,
+      boxSizing: "border-box",
+    },
 
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    meter_rootIcon: {
+      width: meter_rootIconSize,
+    },
 
-    borderRadius: "50%",
-    border: `${stroke} solid ${primaryColor}`,
-    padding: meter_rootPadding,
-    overflow: "hidden",
+    meter_rootIconFader: {
+      position: "absolute",
+      transition: "1s ease opacity",
+    },
 
-    boxSizing: "border-box",
-  },
+    meter_edge: {
+      ...meter_edgeExpanded,
+      height: stroke,
+      backgroundColor: primaryColor,
+    },
 
-  meter_rootIcon: {
-    width: meter_rootIconSize,
-  },
+    meter_node: {
+      ...meter_nodeExpanded,
+      flexShrink: 0,
+      borderRadius: "50%",
+      backgroundColor: primaryColor,
+    },
 
-  meter_rootIconFader: {
-    position: "absolute",
-    transition: "1s ease opacity",
-  },
-
-  meter_edge: {
-    ...meter_edgeExpanded,
-    height: stroke,
-    backgroundColor: primaryColor,
-  },
-
-  meter_node: {
-    ...meter_nodeExpanded,
-    flexShrink: 0,
-    borderRadius: "50%",
-    backgroundColor: primaryColor,
-  },
-
-  [primaryColor.substring(1)]: {
-    filter: `url(${primaryColor})`,
-  },
-  [secondaryColor.substring(1)]: {
-    filter: `url(${secondaryColor})`,
-  },
-  [trinaryColor.substring(1)]: {
-    filter: `url(${trinaryColor})`,
-  },
-  [languagesColor.substring(1)]: {
-    filter: `url(${languagesColor})`,
-  },
-  filters: {
-    height: 0,
-    width: 0,
-  },
-});
+    [primaryColor.substring(1)]: {
+      filter: `url(${primaryColor})`,
+    },
+    [secondaryColor.substring(1)]: {
+      filter: `url(${secondaryColor})`,
+    },
+    [trinaryColor.substring(1)]: {
+      filter: `url(${trinaryColor})`,
+    },
+    [languagesColor.substring(1)]: {
+      filter: `url(${languagesColor})`,
+    },
+    filters: {
+      height: 0,
+      width: 0,
+    },
+  }),
+);

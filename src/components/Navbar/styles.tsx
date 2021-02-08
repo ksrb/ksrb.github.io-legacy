@@ -1,18 +1,15 @@
 import { makeStyles } from "@material-ui/styles";
+import { Theme } from "src/theme";
 
-import { marginBottomClass } from "src/styles";
-
-export default makeStyles({
-  ...marginBottomClass,
-
+export default makeStyles<Theme>(({ marginBottom }) => ({
   root: {
-    composes: "$marginBottom",
     display: "flex",
     justifyContent: "center",
+    marginBottom: marginBottom,
   },
 
   item: {
     margin: "0 5px 0 5px",
     fontWeight: 500,
   },
-});
+}));
