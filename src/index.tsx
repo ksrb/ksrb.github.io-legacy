@@ -7,7 +7,7 @@ import { jssPreset, StylesProvider } from "@material-ui/styles";
 
 import client from "./graphql";
 
-import App from "./components/app";
+import App from "./components/App";
 
 import * as serviceWorker from "./serviceWorker";
 

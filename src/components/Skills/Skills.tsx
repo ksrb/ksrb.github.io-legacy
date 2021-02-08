@@ -10,7 +10,6 @@ import clsx from "clsx";
 import gsap from "gsap";
 import { AddCircle } from "@material-ui/icons";
 import { Grid, IconButton } from "@material-ui/core";
-
 import typenames from "src/graphql/typenames";
 import {
   Language,
@@ -18,9 +17,7 @@ import {
   Tool,
   useSkillsGetQuery,
 } from "src/graphql/__generated__";
-
 import { getColorByType } from "src/components/util";
-
 import {
   languagesColor,
   primaryColor,

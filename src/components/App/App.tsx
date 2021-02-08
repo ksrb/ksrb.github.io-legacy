@@ -1,11 +1,10 @@
 import React, { FC } from "react";
 import clsx from "clsx";
 import { Grid } from "@material-ui/core";
-
-import About from "src/components/about";
-import Experiences from "src/components/experiences";
-import Navbar from "src/components/navbar";
-import Skills from "src/components/skills";
+import About from "src/components/About";
+import Experiences from "src/components/Experiences";
+import Navbar from "src/components/Navbar";
+import Skills from "src/components/Skills";
 
 import useStyles from "./styles";
 
