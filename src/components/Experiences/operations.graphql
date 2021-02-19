@@ -38,6 +38,7 @@ fragment ExperienceFields on Experience {
       state
     }
   }
+  days
   histories {
     ...HistoryFields
     children {
@@ -52,6 +53,7 @@ fragment ExperienceFields on Experience {
   }
   endDate
   hidden
+  index
   role
   startDate
 }

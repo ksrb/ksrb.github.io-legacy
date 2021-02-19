@@ -51,10 +51,12 @@ type Experience implements Node {
   id: ID!
   accomplishments: [String!]!
   company: Company!
+  days: Int!
   endDate: String
   hidden: Boolean!
   histories: [History!]!
-  hours: String!
+  jobType: String!
+  index: Int!
   role: String!
   startDate: String!
 }

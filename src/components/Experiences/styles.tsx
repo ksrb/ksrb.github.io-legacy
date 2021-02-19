@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/styles";
-
 import { Theme } from "src/theme";
 
 const history_titleTransitionDuration = "200ms";
@@ -30,6 +29,10 @@ export default makeStyles<Theme>(
 
     experience: {
       display: "flex",
+    },
+
+    experience_content: {
+      flex: 1,
       marginBottom: marginBottom,
     },
 

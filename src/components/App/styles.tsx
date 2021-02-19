@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "src/theme";
 
-export default makeStyles<Theme>(({ marginBottom, primaryColor }) => ({
+export default makeStyles<Theme>(({ spacing, marginBottom, primaryColor }) => ({
   "@global": {
     "html, body, #root": {
       width: "100%",
@@ -21,13 +21,13 @@ export default makeStyles<Theme>(({ marginBottom, primaryColor }) => ({
   },
 
   root: {
-    padding: "0 10px",
+    padding: spacing(0, 2),
   },
 
   header: {
-    marginBottom: marginBottom,
     justifyContent: "center",
-    marginTop: "50px",
+    marginTop: spacing(6),
+    marginBottom: marginBottom,
   },
 
   header_name: {

@@ -86,10 +86,12 @@ export type Experience = Node & {
   id: Scalars["ID"];
   accomplishments: Array<Scalars["String"]>;
   company: Company;
+  days: Scalars["Int"];
   endDate?: Maybe<Scalars["String"]>;
   hidden: Scalars["Boolean"];
   histories: Array<History>;
-  hours: Scalars["String"];
+  jobType: Scalars["String"];
+  index: Scalars["Int"];
   role: Scalars["String"];
   startDate: Scalars["String"];
 };
@@ -140,7 +142,14 @@ export type HistoryFieldsFragment = { __typename?: "History" } & Pick<
 
 export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
   Experience,
-  "id" | "accomplishments" | "endDate" | "hidden" | "role" | "startDate"
+  | "id"
+  | "accomplishments"
+  | "days"
+  | "endDate"
+  | "hidden"
+  | "index"
+  | "role"
+  | "startDate"
 > & {
     company: { __typename?: "Company" } & Pick<
       Company,
@@ -267,6 +276,7 @@ export const ExperienceFieldsFragmentDoc = gql`
         state
       }
     }
+    days
     histories {
       ...HistoryFields
       children {
@@ -281,6 +291,7 @@ export const ExperienceFieldsFragmentDoc = gql`
     }
     endDate
     hidden
+    index
     role
     startDate
   }
@@ -887,6 +898,7 @@ export type ExperienceResolvers<
     ContextType
   >;
   company: Resolver<ResolversTypes["Company"], ParentType, ContextType>;
+  days: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   endDate: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   hidden: Resolver<ResolversTypes["Boolean"], ParentType, ContextType>;
   histories: Resolver<
@@ -894,7 +906,8 @@ export type ExperienceResolvers<
     ParentType,
     ContextType
   >;
-  hours: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  jobType: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  index: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   role: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   startDate: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

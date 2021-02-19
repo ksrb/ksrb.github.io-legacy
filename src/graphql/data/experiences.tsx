@@ -1,8 +1,7 @@
-import typenames from "src/graphql/typenames";
+import { DAY } from "src/constants";
 import { Experience, History } from "src/graphql/__generated__";
-
+import typenames from "src/graphql/typenames";
 import { RequiredBy } from "src/types";
-
 import companies from "./companies";
 import languages from "./languages";
 import tools from "./tools";
@@ -16,14 +15,21 @@ function createExperience(
     "accomplishments" | "company" | "histories" | "startDate"
   >,
 ): Experience {
+  const { startDate: startDateStr, endDate: endDateStr } = experience;
+  const endDate = endDateStr ? new Date(endDateStr) : new Date();
+  const startDate = new Date(startDateStr);
+  const days = (endDate.getTime() - startDate.getTime()) / DAY;
+
   return {
     __typename: typenames.Experience,
-    id: (experienceId++).toString(),
+    id: experienceId.toString(),
     endDate: null,
     hidden: false,
-    hours: "",
+    index: experienceId++,
+    jobType: "",
     role: "",
     ...experience,
+    days,
   };
 }
 
@@ -43,8 +49,8 @@ const experiences: Experience[] = [
   createExperience({
     company: companies.pmat,
     role: "Senior Frontend Developer",
-    hours: "Full time",
-    startDate: new Date("2018-07-1").toString(),
+    jobType: "Full time",
+    startDate: new Date(2018, 6, 1).toString(),
     histories: [
       createHistory({
         values: [uses.Frontend],
@@ -97,8 +103,8 @@ const experiences: Experience[] = [
   }),
   createExperience({
     company: companies.personal,
-    startDate: new Date("2018-02-1").toString(),
-    endDate: new Date("2018-07-1").toString(),
+    startDate: new Date(2018, 1, 1).toString(),
+    endDate: new Date(2018, 6, 1).toString(),
     histories: [
       createHistory({ values: [tools.react] }),
       createHistory({ values: [tools.graphql] }),
@@ -116,9 +122,9 @@ const experiences: Experience[] = [
   createExperience({
     company: companies.lanternCredit,
     role: "Full Stack Developer",
-    hours: "Full time",
-    startDate: new Date("2015-06-1").toString(),
-    endDate: new Date("2018-02-1").toString(),
+    jobType: "Full time",
+    startDate: new Date(2015, 5, 1).toString(),
+    endDate: new Date(2018, 1, 1).toString(),
     histories: [
       createHistory({
         values: [uses.Frontend],
@@ -166,9 +172,9 @@ const experiences: Experience[] = [
   createExperience({
     company: companies.tableDesignArt,
     role: "Web Developer",
-    hours: "Part time",
-    startDate: new Date("2015-04-1").toString(),
-    endDate: new Date("2015-06-1").toString(),
+    jobType: "Part time",
+    startDate: new Date(2015, 3, 1).toString(),
+    endDate: new Date(2015, 5, 1).toString(),
     histories: [
       createHistory({ values: [tools.liquid] }),
       createHistory({ values: [languages.sass] }),
@@ -183,8 +189,8 @@ const experiences: Experience[] = [
   }),
   createExperience({
     company: companies.personal,
-    startDate: new Date("2015-03-1").toString(),
-    endDate: new Date("2015-06-1").toString(),
+    startDate: new Date(2015, 2, 1).toString(),
+    endDate: new Date(2015, 5, 1).toString(),
     histories: [
       createHistory({ values: [tools.angularJS] }),
       createHistory({ values: [tools.foundation] }),
@@ -201,9 +207,9 @@ const experiences: Experience[] = [
   createExperience({
     company: companies.niksun,
     role: "Web Developer",
-    hours: "Full time",
-    startDate: new Date("2013-09-1").toString(),
-    endDate: new Date("2015-03-1").toString(),
+    jobType: "Full time",
+    startDate: new Date(2013, 8, 1).toString(),
+    endDate: new Date(2015, 1, 1).toString(),
     histories: [
       createHistory({
         values: [uses.Frontend],
@@ -247,9 +253,9 @@ const experiences: Experience[] = [
   createExperience({
     company: companies.scholarsForCharity,
     role: "Webmaster",
-    hours: "Volunteer",
-    startDate: new Date("2012-12-1").toString(),
-    endDate: new Date("2013-05-1").toString(),
+    jobType: "Volunteer",
+    startDate: new Date(2012, 4, 1).toString(),
+    endDate: new Date(2013, 4, 1).toString(),
     histories: [
       createHistory({
         values: [uses.Frontend],
@@ -271,8 +277,8 @@ const experiences: Experience[] = [
     ],
     accomplishments: [
       "Gathered requirements, designed graphics, and created sites for clients.",
-      "Lead session for web and graphic design training new members in basic development techniques and best practices.",
-      "Actively promoted organization responsible for recruiting several members.",
+      "Lead sessions for web and graphic design, training new members in basic development techniques and best practices.",
+      "Actively promoted organization and responsible for recruiting several members.",
     ],
   }),
 ];

@@ -1,4 +1,3 @@
-import typenames from "src/graphql/typenames";
 import {
   Displayed,
   Experience,
@@ -8,9 +7,8 @@ import {
   Tool,
   Use,
 } from "src/graphql/__generated__";
-
+import typenames from "src/graphql/typenames";
 import { RequiredBy } from "src/types";
-
 import experiences from "./experiences";
 import tools from "./tools";
 import uses from "./uses";
@@ -195,13 +193,7 @@ function computeSkillsFromExperiences(
   onlyLanguages?: boolean,
 ): SkillRequiredProperties[] {
   return experiences.reduce<SkillRequiredProperties[]>((skills, experience) => {
-    const { histories } = experience;
-    const { startDate: startDateStr, endDate: endDateStr } = experience;
-
-    const startDate = new Date(startDateStr);
-    const endDate = endDateStr ? new Date(endDateStr) : new Date();
-    const days =
-      (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
+    const { histories, days } = experience;
 
     for (const history of histories) {
       skills.push(

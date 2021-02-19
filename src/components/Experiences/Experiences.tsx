@@ -1,7 +1,7 @@
-import React, { FC, useCallback, useState } from "react";
 import { Grid } from "@material-ui/core";
 import clsx from "clsx";
-import uses from "src/graphql/data/uses";
+import React, { FC, useCallback, useState } from "react";
+import { getColorByType } from "src/components/util";
 import {
   ExperiencesGetQuery,
   HistoryFieldsFragment,
@@ -9,11 +9,8 @@ import {
   useExperiencesGetQuery,
 } from "src/graphql/__generated__";
 import { computeUtilization } from "src/graphql/data/skills";
-
+import uses from "src/graphql/data/uses";
 import { ExtractArrayType, RequiredBy } from "src/types";
-
-import { getColorByType } from "src/components/util";
-
 import useStyles from "./styles";
 import Timeline from "./Timeline";
 
@@ -22,14 +19,14 @@ function renderDate(dateStr: string): string {
   return `${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
-type History = HistoryFieldsFragment & {
-  children?: Maybe<Array<History & { __typename?: "History" }>>;
+type HistoryType = HistoryFieldsFragment & {
+  children?: Maybe<Array<HistoryType & { __typename?: "History" }>>;
 };
 
-type HistoryWithChildren = RequiredBy<History, "children">;
+type HistoryWithChildren = RequiredBy<HistoryType, "children">;
 
 const History: FC<{
-  history: History;
+  history: HistoryType;
   historyParent: HistoryWithChildren;
   historyParentUtilization: number;
   depth: number;
@@ -113,52 +110,55 @@ const Experience: FC<{
 
   return (
     <Grid item xs={12} className={classes.experience}>
-      <div className={classes.header}>
-        <div className={classes.company}>
-          <div className={classes.company_name}>{company.name}</div>
-          <div className={classes.company_location}>
-            {county}, {state}
+      <Timeline experience={experience} />
+      <div className={classes.experience_content}>
+        <div className={classes.header}>
+          <div className={classes.company}>
+            <div className={classes.company_name}>{company.name}</div>
+            <div className={classes.company_location}>
+              {county}, {state}
+            </div>
+          </div>
+          <div className={classes.header_right}>
+            <div className={classes.role}>{role}</div>
+            <div className={classes.startEndDate}>
+              {renderDate(startDate)} -{" "}
+              {endDate ? renderDate(endDate) : "Current"}
+            </div>
           </div>
         </div>
-        <div className={classes.header_right}>
-          <div className={classes.role}>{role}</div>
-          <div className={classes.startEndDate}>
-            {renderDate(startDate)} -{" "}
-            {endDate ? renderDate(endDate) : "Current"}
-          </div>
+
+        <div className={classes.purpose}>{purpose}</div>
+
+        <div className={classes.accomplishments}>
+          <ul>
+            {accomplishments.map((accomplishment, index) => (
+              <li key={index}>{accomplishment}</li>
+            ))}
+          </ul>
         </div>
-      </div>
 
-      <div className={classes.purpose}>{purpose}</div>
-
-      <div className={classes.accomplishments}>
-        <ul>
-          {accomplishments.map((accomplishment, index) => (
-            <li key={index}>{accomplishment}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div
-        className={clsx(
-          classes.history,
-          historyExpanded && classes.history__expanded,
-        )}
-        onClick={handleHistoryRootClick}
-      >
-        <div className={classes.histories}>
-          {histories.map((history) => (
-            <History
-              key={history.id}
-              history={history}
-              historyParent={{
-                values: [uses.None],
-                children: histories,
-              }}
-              historyParentUtilization={100}
-              depth={0}
-            />
-          ))}
+        <div
+          className={clsx(
+            classes.history,
+            historyExpanded && classes.history__expanded,
+          )}
+          onClick={handleHistoryRootClick}
+        >
+          <div className={classes.histories}>
+            {histories.map((history) => (
+              <History
+                key={history.id}
+                history={history}
+                historyParent={{
+                  values: [uses.None],
+                  children: histories,
+                }}
+                historyParentUtilization={100}
+                depth={0}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </Grid>

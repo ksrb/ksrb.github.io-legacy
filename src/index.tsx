@@ -1,7 +1,10 @@
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider } from "@apollo/client";
 import { jssPreset, StylesProvider, ThemeProvider } from "@material-ui/styles";
 import { create } from "jss";
+import camelCase from "jss-plugin-camel-case";
 import compose from "jss-plugin-compose";
+import extend from "jss-plugin-extend";
+import defaultUnit from "jss-plugin-default-unit";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
@@ -9,7 +12,15 @@ import client from "./graphql";
 import * as serviceWorker from "./serviceWorker";
 import theme from "./theme";
 
-const jss = create({ plugins: [...jssPreset().plugins, compose()] });
+const jss = create({
+  plugins: [
+    ...jssPreset().plugins,
+    extend(),
+    compose(),
+    camelCase(),
+    defaultUnit(),
+  ],
+});
 
 ReactDOM.render(
   <ApolloProvider client={client}>
