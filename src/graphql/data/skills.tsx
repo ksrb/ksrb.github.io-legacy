@@ -8,25 +8,26 @@ import {
   Use,
 } from "src/graphql/__generated__";
 import typenames from "src/graphql/typenames";
-import { RequiredBy } from "src/types";
+import { NonNullableBy, RequiredByElsePartial } from "src/types";
 import experiences from "./experiences";
 import tools from "./tools";
-import uses from "./uses";
 
-type SkillRequiredProperties = RequiredBy<
+type SkillRequiredProperties = RequiredByElsePartial<
   Skill,
   "experience" | "utilization" | "values"
 >;
+
 type SkillRequiredPropertiesMap = {
   [key: string]: SkillRequiredProperties;
 };
 
-type HistoryWithChildren = RequiredBy<History, "children">;
+export type HistoryWithChildren = NonNullableBy<History, "children">;
 
 export function computeUtilization(
   history: History,
-  historyParent: HistoryWithChildren,
+  historyParent: HistoryWithChildren | undefined,
   historyParentDays: number,
+  histories?: History[],
 ): number {
   let { utilization } = history;
 
@@ -35,18 +36,13 @@ export function computeUtilization(
   }
 
   // Else no utilization
+  const children = historyParent ? historyParent.children : histories;
 
-  if (!historyParent) {
-    return historyParentDays;
+  if (!children) {
+    throw new Error(
+      `historyParent or histories not provided for history with id: ${history.id}`,
+    );
   }
-
-  // This typecast is necessary as TypeScript complains that
-  // historyParent.children could be null but this is impossible as the
-  // condition above checks if the parent exists, for a parent to exists it has
-  // to children
-  const children = historyParent.children as History[];
-
-  // Else no set utilizations
 
   const childrenWithUtilization = children.filter(
     ({ utilization }) => utilization,
@@ -70,20 +66,27 @@ export function computeUtilization(
   );
 }
 
+function isHistoryWithChildren(
+  history: History,
+): history is HistoryWithChildren {
+  return Boolean(history.children);
+}
+
 function computeSkillsFromHistory(
   history: History,
-  historyParent: HistoryWithChildren,
+  historyParent: HistoryWithChildren | undefined,
   historyParentDays: number,
   experience: Experience,
   onlyLanguages: boolean = false,
 ): SkillRequiredProperties[] {
   const skills: SkillRequiredProperties[] = [];
-  const { children, values } = history;
+  const { values } = history;
 
   let computedUtilization = computeUtilization(
     history,
     historyParent,
     historyParentDays,
+    experience.histories,
   );
 
   // Has parent
@@ -169,15 +172,14 @@ function computeSkillsFromHistory(
   }
 
   // If history has children
-  if (children) {
+  if (isHistoryWithChildren(history)) {
     // Loop through children
-    for (const childrenHistory of children) {
+    for (const childrenHistory of history.children) {
       skills.push(
         // Recurse
         ...computeSkillsFromHistory(
           childrenHistory,
-          // Cast necessary here is conditional aboe
-          history as HistoryWithChildren,
+          history,
           computedUtilization,
           experience,
           onlyLanguages,
@@ -199,10 +201,7 @@ function computeSkillsFromExperiences(
       skills.push(
         ...computeSkillsFromHistory(
           history,
-          {
-            values: [uses.None],
-            children: histories,
-          },
+          undefined,
           days,
           experience,
           onlyLanguages,
@@ -220,6 +219,7 @@ function createSkill(skill: SkillRequiredProperties): Skill {
     __typename: typenames.Skill,
     id: (id++).toString(),
     languages: null,
+    title: skill.values.map(({ title }) => title).join(" "),
     ...skill,
   };
 }

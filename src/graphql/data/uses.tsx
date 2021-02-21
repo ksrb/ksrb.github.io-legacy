@@ -1,10 +1,10 @@
 import typenames from "src/graphql/typenames";
 import { Use } from "src/graphql/__generated__";
 
-import { RequiredBy } from "src/types";
+import { RequiredByElsePartial } from "src/types";
 
 let id = 0;
-function createUse(use: RequiredBy<Use, "title">): Use {
+function createUse(use: RequiredByElsePartial<Use, "title">): Use {
   return {
     __typename: typenames.Use,
     id: (id++).toString(),

@@ -1,14 +1,14 @@
 import { Tool } from "src/graphql/__generated__";
 
 import typenames from "src/graphql/typenames";
-import { RequiredBy } from "src/types";
+import { RequiredByElsePartial } from "src/types";
 import { publicUrl } from "src/constants/config";
 
 import languages from "./languages";
 import uses from "./uses";
 
 let id = 0;
-function createTool(tool: RequiredBy<Tool, "title">): Tool {
+function createTool(tool: RequiredByElsePartial<Tool, "title">): Tool {
   return {
     __typename: typenames.Tool,
     id: (id++).toString(),

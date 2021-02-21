@@ -13,6 +13,7 @@ type Company implements Node {
   logo: String!
   name: String!
   purpose: String!
+  url: String!
 }
 
 interface Displayed {
@@ -65,6 +66,7 @@ type Skill implements Node {
   id: ID!
   experience: Experience!
   languages: [Language!]
+  title: String!
   utilization: Int!
   values: [Displayed!]!
 }

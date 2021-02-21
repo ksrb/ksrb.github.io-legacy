@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Link } from "@material-ui/core";
 import clsx from "clsx";
 import React, { FC, useCallback, useState } from "react";
 import { getColorByType } from "src/components/util";
@@ -8,9 +8,11 @@ import {
   Maybe,
   useExperiencesGetQuery,
 } from "src/graphql/__generated__";
-import { computeUtilization } from "src/graphql/data/skills";
-import uses from "src/graphql/data/uses";
-import { ExtractArrayType, RequiredBy } from "src/types";
+import {
+  computeUtilization,
+  HistoryWithChildren,
+} from "src/graphql/data/skills";
+import { ExtractArrayType } from "src/types";
 import useStyles from "./styles";
 import Timeline from "./Timeline";
 
@@ -23,20 +25,26 @@ type HistoryType = HistoryFieldsFragment & {
   children?: Maybe<Array<HistoryType & { __typename?: "History" }>>;
 };
 
-type HistoryWithChildren = RequiredBy<HistoryType, "children">;
-
 const History: FC<{
   history: HistoryType;
-  historyParent: HistoryWithChildren;
+  historyParent?: HistoryWithChildren;
   historyParentUtilization: number;
+  histories?: HistoryType[];
   depth: number;
-}> = ({ history, historyParent, historyParentUtilization, depth }) => {
+}> = ({
+  history,
+  historyParent,
+  historyParentUtilization,
+  histories,
+  depth,
+}) => {
   const classes = useStyles();
   const { children, values } = history;
   let utilization = computeUtilization(
     history,
     historyParent,
     historyParentUtilization,
+    histories,
   );
 
   const utilizationRounded = Math.round(utilization);
@@ -99,8 +107,9 @@ const Experience: FC<{
     accomplishments,
     company,
     company: {
-      purpose,
       address: { county, state },
+      purpose,
+      url,
     },
     endDate,
     role,
@@ -114,7 +123,15 @@ const Experience: FC<{
       <div className={classes.experience_content}>
         <div className={classes.header}>
           <div className={classes.company}>
-            <div className={classes.company_name}>{company.name}</div>
+            <div className={classes.company_name}>
+              {url ? (
+                <Link color="primary" href={url} rel="noopener" target="_blank">
+                  {company.name}
+                </Link>
+              ) : (
+                company.name
+              )}
+            </div>
             <div className={classes.company_location}>
               {county}, {state}
             </div>
@@ -150,11 +167,8 @@ const Experience: FC<{
               <History
                 key={history.id}
                 history={history}
-                historyParent={{
-                  values: [uses.None],
-                  children: histories,
-                }}
                 historyParentUtilization={100}
+                histories={histories}
                 depth={0}
               />
             ))}

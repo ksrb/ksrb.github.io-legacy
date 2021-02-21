@@ -1,4 +1,4 @@
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton, TextField } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import clsx from "clsx";
 import gsap from "gsap";
@@ -72,20 +72,16 @@ function getLogo({
   return "";
 }
 
+type SkillType = ExtractArrayType<SkillsGetQuery["skills"]>;
+
 const Skill: FC<{
-  skill: ExtractArrayType<SkillsGetQuery["skills"]>;
+  skill: SkillType;
   skillsExpanded: boolean;
 }> = ({ skill }) => {
   const classes = useStyles();
 
-  const { values, utilization } = skill;
+  const { title, utilization, values } = skill;
 
-  const title = values.reduce((prev, { title }) => {
-    if (prev) {
-      return prev + " " + title;
-    }
-    return title;
-  }, "");
   const logUtilization = Math.round(Math.log(utilization));
 
   const timeline = useMemo(() => gsap.timeline(), []);

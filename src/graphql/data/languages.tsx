@@ -1,10 +1,10 @@
 import typenames from "src/graphql/typenames";
 import { Language } from "src/graphql/__generated__";
-import { RequiredBy } from "src/types";
+import { RequiredByElsePartial } from "src/types";
 import { publicUrl } from "src/constants/config";
 
 let id = 0;
-function createLanguage(language: RequiredBy<Language, "title">) {
+function createLanguage(language: RequiredByElsePartial<Language, "title">) {
   return {
     __typename: typenames.Language,
     id: (id++).toString(),

@@ -1,7 +1,7 @@
 import { DAY } from "src/constants";
 import { Experience, History } from "src/graphql/__generated__";
 import typenames from "src/graphql/typenames";
-import { RequiredBy } from "src/types";
+import { RequiredByElsePartial } from "src/types";
 import companies from "./companies";
 import languages from "./languages";
 import tools from "./tools";
@@ -10,7 +10,7 @@ import uses from "./uses";
 let experienceId = 0;
 
 function createExperience(
-  experience: RequiredBy<
+  experience: RequiredByElsePartial<
     Experience,
     "accomplishments" | "company" | "histories" | "startDate"
   >,
@@ -35,7 +35,9 @@ function createExperience(
 
 let historyId = 0;
 
-function createHistory(history: RequiredBy<History, "values">): History {
+function createHistory(
+  history: RequiredByElsePartial<History, "values">,
+): History {
   return {
     __typename: typenames.History,
     id: (historyId++).toString(),

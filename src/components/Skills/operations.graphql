@@ -1,5 +1,6 @@
 fragment SkillFields on Skill {
   id
+  title
   experience {
     id
     company {

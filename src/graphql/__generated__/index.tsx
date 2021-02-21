@@ -40,6 +40,7 @@ export type Company = Node & {
   logo: Scalars["String"];
   name: Scalars["String"];
   purpose: Scalars["String"];
+  url: Scalars["String"];
 };
 
 export type Displayed = {
@@ -101,6 +102,7 @@ export type Skill = Node & {
   id: Scalars["ID"];
   experience: Experience;
   languages?: Maybe<Array<Language>>;
+  title: Scalars["String"];
   utilization: Scalars["Int"];
   values: Array<Displayed>;
 };
@@ -153,7 +155,7 @@ export type ExperienceFieldsFragment = { __typename?: "Experience" } & Pick<
 > & {
     company: { __typename?: "Company" } & Pick<
       Company,
-      "id" | "name" | "purpose"
+      "id" | "name" | "purpose" | "url"
     > & {
         address: { __typename?: "Address" } & Pick<Address, "county" | "state">;
       };
@@ -194,7 +196,7 @@ export type ExperienceGetQuery = { __typename?: "Query" } & {
 
 export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
   Skill,
-  "id" | "utilization"
+  "id" | "title" | "utilization"
 > & {
     experience: { __typename?: "Experience" } & Pick<Experience, "id"> & {
         company: { __typename?: "Company" } & Pick<Company, "id" | "name">;
@@ -269,12 +271,13 @@ export const ExperienceFieldsFragmentDoc = gql`
     accomplishments
     company {
       id
-      name
-      purpose
       address {
         county
         state
       }
+      name
+      purpose
+      url
     }
     days
     histories {
@@ -300,6 +303,7 @@ export const ExperienceFieldsFragmentDoc = gql`
 export const SkillFieldsFragmentDoc = gql`
   fragment SkillFields on Skill {
     id
+    title
     experience {
       id
       company {
@@ -820,6 +824,7 @@ export type CompanyResolvers<
   logo: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   name: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   purpose: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  url: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -924,6 +929,7 @@ export type SkillResolvers<
     ParentType,
     ContextType
   >;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   utilization: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   values: Resolver<Array<ResolversTypes["Displayed"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

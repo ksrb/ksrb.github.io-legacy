@@ -31,12 +31,13 @@ fragment ExperienceFields on Experience {
   accomplishments
   company {
     id
-    name
-    purpose
     address {
       county
       state
     }
+    name
+    purpose
+    url
   }
   days
   histories {

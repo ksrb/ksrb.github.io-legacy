@@ -25,7 +25,9 @@ const history_title__expanded = {
 
 export default makeStyles<Theme>(
   ({ marginBottom, primaryColor, secondaryColor, trinaryColor }) => ({
-    root: {},
+    root: {
+      marginBottom: marginBottom,
+    },
 
     experience: {
       display: "flex",
@@ -44,7 +46,6 @@ export default makeStyles<Theme>(
 
     company: {},
     company_name: {
-      color: primaryColor,
       fontWeight: 600,
     },
     company_location: {
