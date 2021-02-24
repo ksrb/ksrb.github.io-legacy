@@ -28,8 +28,8 @@ function createExperience(
     index: experienceId++,
     jobType: "",
     role: "",
-    ...experience,
     days,
+    ...experience,
   };
 }
 
@@ -38,10 +38,17 @@ let historyId = 0;
 function createHistory(
   history: RequiredByElsePartial<History, "values">,
 ): History {
+  const { values } = history;
+  const title = values.reduce((previousValue, { title }, index) => {
+    const slash = index !== values.length - 1 ? "/" : "";
+    return previousValue + title + slash;
+  }, "");
+
   return {
     __typename: typenames.History,
     id: (historyId++).toString(),
     children: null,
+    title,
     utilization: null,
     ...history,
   };

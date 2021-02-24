@@ -1,3 +1,25 @@
+fragment SkillValueFields on DisplayedNode {
+  ... on Tool {
+    id
+    logo
+    title
+    url
+    use {
+      id
+    }
+  }
+  ... on Language {
+    id
+    title
+    logo
+    url
+  }
+  ... on Use {
+    id
+    title
+  }
+}
+
 fragment SkillFields on Skill {
   id
   title
@@ -14,26 +36,11 @@ fragment SkillFields on Skill {
     logo
   }
   utilization
-  # TODO: consider consolidation with HistoryFields.values using fragment on
-  # DisplayedNode
+  value {
+    ...SkillValueFields
+  }
   values {
-    ... on Tool {
-      id
-      logo
-      title
-      use {
-        id
-      }
-    }
-    ... on Language {
-      id
-      title
-      logo
-    }
-    ... on Use {
-      id
-      title
-    }
+    ...SkillValueFields
   }
 }
 

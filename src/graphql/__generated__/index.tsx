@@ -47,15 +47,15 @@ export type Displayed = {
   title: Scalars["String"];
 };
 
-export type Use = Node &
-  Displayed & {
+export type Use = Displayed &
+  Node & {
     __typename?: "Use";
     id: Scalars["ID"];
     title: Scalars["String"];
   };
 
-export type Language = Node &
-  Displayed & {
+export type Language = Displayed &
+  Node & {
     __typename?: "Language";
     id: Scalars["ID"];
     title: Scalars["String"];
@@ -63,8 +63,8 @@ export type Language = Node &
     logo: Scalars["String"];
   };
 
-export type Tool = Node &
-  Displayed & {
+export type Tool = Displayed &
+  Node & {
     __typename?: "Tool";
     id: Scalars["ID"];
     languages?: Maybe<Array<Language>>;
@@ -79,6 +79,7 @@ export type History = Node & {
   id: Scalars["ID"];
   children?: Maybe<Array<History>>;
   utilization?: Maybe<Scalars["Int"]>;
+  title: Scalars["String"];
   values: Array<Displayed>;
 };
 
@@ -104,8 +105,11 @@ export type Skill = Node & {
   languages?: Maybe<Array<Language>>;
   title: Scalars["String"];
   utilization: Scalars["Int"];
+  value: Displayed;
   values: Array<Displayed>;
 };
+
+export type DisplayedNode = Tool | Language | Use;
 
 export type Query = {
   __typename?: "Query";
@@ -125,14 +129,11 @@ export type QuerySkillArgs = {
 
 export type HistoryFieldsFragment = { __typename?: "History" } & Pick<
   History,
-  "id" | "utilization"
+  "id" | "title" | "utilization"
 > & {
     values: Array<
       | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
-      | ({ __typename?: "Language" } & Pick<
-          Language,
-          "id" | "logo" | "title" | "url"
-        >)
+      | ({ __typename?: "Language" } & Pick<Language, "id" | "title" | "url">)
       | ({ __typename?: "Tool" } & Pick<Tool, "id" | "title" | "url"> & {
             languages?: Maybe<
               Array<{ __typename?: "Language" } & Pick<Language, "id">>
@@ -194,6 +195,26 @@ export type ExperienceGetQuery = { __typename?: "Query" } & {
   experience?: Maybe<{ __typename?: "Experience" } & ExperienceFieldsFragment>;
 };
 
+type SkillValueFields_Tool_Fragment = { __typename?: "Tool" } & Pick<
+  Tool,
+  "id" | "logo" | "title" | "url"
+> & { use: { __typename?: "Use" } & Pick<Use, "id"> };
+
+type SkillValueFields_Language_Fragment = { __typename?: "Language" } & Pick<
+  Language,
+  "id" | "title" | "logo" | "url"
+>;
+
+type SkillValueFields_Use_Fragment = { __typename?: "Use" } & Pick<
+  Use,
+  "id" | "title"
+>;
+
+export type SkillValueFieldsFragment =
+  | SkillValueFields_Tool_Fragment
+  | SkillValueFields_Language_Fragment
+  | SkillValueFields_Use_Fragment;
+
 export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
   Skill,
   "id" | "title" | "utilization"
@@ -206,12 +227,14 @@ export type SkillFieldsFragment = { __typename?: "Skill" } & Pick<
         { __typename?: "Language" } & Pick<Language, "id" | "title" | "logo">
       >
     >;
+    value:
+      | ({ __typename?: "Use" } & SkillValueFields_Use_Fragment)
+      | ({ __typename?: "Language" } & SkillValueFields_Language_Fragment)
+      | ({ __typename?: "Tool" } & SkillValueFields_Tool_Fragment);
     values: Array<
-      | ({ __typename?: "Use" } & Pick<Use, "id" | "title">)
-      | ({ __typename?: "Language" } & Pick<Language, "id" | "title" | "logo">)
-      | ({ __typename?: "Tool" } & Pick<Tool, "id" | "logo" | "title"> & {
-            use: { __typename?: "Use" } & Pick<Use, "id">;
-          })
+      | ({ __typename?: "Use" } & SkillValueFields_Use_Fragment)
+      | ({ __typename?: "Language" } & SkillValueFields_Language_Fragment)
+      | ({ __typename?: "Tool" } & SkillValueFields_Tool_Fragment)
     >;
   };
 
@@ -239,6 +262,7 @@ export type WriteQueryQuery = { __typename?: "Query" } & {
 export const HistoryFieldsFragmentDoc = gql`
   fragment HistoryFields on History {
     id
+    title
     utilization
     values {
       ... on Tool {
@@ -254,7 +278,6 @@ export const HistoryFieldsFragmentDoc = gql`
       }
       ... on Language {
         id
-        logo
         title
         url
       }
@@ -300,6 +323,29 @@ export const ExperienceFieldsFragmentDoc = gql`
   }
   ${HistoryFieldsFragmentDoc}
 `;
+export const SkillValueFieldsFragmentDoc = gql`
+  fragment SkillValueFields on DisplayedNode {
+    ... on Tool {
+      id
+      logo
+      title
+      url
+      use {
+        id
+      }
+    }
+    ... on Language {
+      id
+      title
+      logo
+      url
+    }
+    ... on Use {
+      id
+      title
+    }
+  }
+`;
 export const SkillFieldsFragmentDoc = gql`
   fragment SkillFields on Skill {
     id
@@ -317,26 +363,14 @@ export const SkillFieldsFragmentDoc = gql`
       logo
     }
     utilization
+    value {
+      ...SkillValueFields
+    }
     values {
-      ... on Tool {
-        id
-        logo
-        title
-        use {
-          id
-        }
-      }
-      ... on Language {
-        id
-        title
-        logo
-      }
-      ... on Use {
-        id
-        title
-      }
+      ...SkillValueFields
     }
   }
+  ${SkillValueFieldsFragmentDoc}
 `;
 export const ExperiencesGetDocument = gql`
   query ExperiencesGet {
@@ -756,6 +790,10 @@ export type ResolversTypes = {
   Experience: ResolverTypeWrapper<Experience>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Skill: ResolverTypeWrapper<Skill>;
+  DisplayedNode:
+    | ResolversTypes["Tool"]
+    | ResolversTypes["Language"]
+    | ResolversTypes["Use"];
   Query: ResolverTypeWrapper<{}>;
 };
 
@@ -785,6 +823,10 @@ export type ResolversParentTypes = {
   Experience: Experience;
   Boolean: Scalars["Boolean"];
   Skill: Skill;
+  DisplayedNode:
+    | ResolversParentTypes["Tool"]
+    | ResolversParentTypes["Language"]
+    | ResolversParentTypes["Use"];
   Query: {};
 };
 
@@ -888,6 +930,7 @@ export type HistoryResolvers<
     ContextType
   >;
   utilization: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   values: Resolver<Array<ResolversTypes["Displayed"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -931,8 +974,20 @@ export type SkillResolvers<
   >;
   title: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   utilization: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  value: Resolver<ResolversTypes["Displayed"], ParentType, ContextType>;
   values: Resolver<Array<ResolversTypes["Displayed"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DisplayedNodeResolvers<
+  ContextType = ApolloClientContext,
+  ParentType extends ResolversParentTypes["DisplayedNode"] = ResolversParentTypes["DisplayedNode"]
+> = {
+  __resolveType: TypeResolveFn<
+    "Tool" | "Language" | "Use",
+    ParentType,
+    ContextType
+  >;
 };
 
 export type QueryResolvers<
@@ -970,6 +1025,7 @@ export type Resolvers<ContextType = ApolloClientContext> = {
   History: HistoryResolvers<ContextType>;
   Experience: ExperienceResolvers<ContextType>;
   Skill: SkillResolvers<ContextType>;
+  DisplayedNode: DisplayedNodeResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
 };
 

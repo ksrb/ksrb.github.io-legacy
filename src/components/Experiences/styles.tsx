@@ -24,7 +24,15 @@ const history_title__expanded = {
 };
 
 export default makeStyles<Theme>(
-  ({ marginBottom, primaryColor, secondaryColor, trinaryColor }) => ({
+  ({
+    palette: {
+      common: { white, black },
+    },
+    marginBottom,
+    primaryColor,
+    secondaryColor,
+    trinaryColor,
+  }) => ({
     root: {
       marginBottom: marginBottom,
     },
@@ -49,7 +57,7 @@ export default makeStyles<Theme>(
       fontWeight: 600,
     },
     company_location: {
-      color: "black",
+      color: black,
       fontWeight: 500,
     },
 
@@ -86,6 +94,8 @@ export default makeStyles<Theme>(
       display: "flex",
     },
     history_title: {
+      display: "block",
+
       height: "0",
       width: "0",
       margin: "0",
@@ -93,7 +103,6 @@ export default makeStyles<Theme>(
 
       borderRadius: "0",
 
-      color: "white",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textAlign: "center",
@@ -113,6 +122,9 @@ export default makeStyles<Theme>(
     },
     history_title__build: {
       backgroundColor: trinaryColor,
+    },
+    history_titleText: {
+      color: white,
     },
   }),
 );

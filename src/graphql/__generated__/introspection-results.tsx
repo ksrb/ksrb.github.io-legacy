@@ -15,6 +15,7 @@ const result: PossibleTypesResultData = {
       "Skill",
     ],
     Displayed: ["Use", "Language", "Tool"],
+    DisplayedNode: ["Tool", "Language", "Use"],
   },
 };
 export default result;

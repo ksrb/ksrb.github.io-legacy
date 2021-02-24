@@ -220,6 +220,7 @@ function createSkill(skill: SkillRequiredProperties): Skill {
     id: (id++).toString(),
     languages: null,
     title: skill.values.map(({ title }) => title).join(" "),
+    value: skill.values[0],
     ...skill,
   };
 }
@@ -258,12 +259,14 @@ function aggregateSkillUtilization(
     {},
   );
 
-  return Object.values(skillsMap).filter(({ values }) =>
-    (values as Tool[]).find((tool) => tool.id !== tools.timeOff.id),
-  );
+  return Object.values(skillsMap);
 }
 
-const skills = aggregateSkillUtilization(computeSkillsFromExperiences());
+const skills = aggregateSkillUtilization(
+  computeSkillsFromExperiences(),
+).filter(({ values }) =>
+  (values as Tool[]).find((tool) => tool.id !== tools.timeOff.id),
+);
 
 const skillsLanguages = computeSkillsFromExperiences(
   true,

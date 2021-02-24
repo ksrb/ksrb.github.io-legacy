@@ -10,6 +10,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import Link from "src/components/Link";
 import { getColorByType } from "src/components/util";
 import {
   Language,
@@ -80,7 +81,16 @@ const Skill: FC<{
 }> = ({ skill }) => {
   const classes = useStyles();
 
-  const { title, utilization, values } = skill;
+  const { title, utilization, value } = skill;
+  const url = useMemo(() => {
+    // Value type is Language or Tool
+    if (
+      value.__typename === typenames.Language ||
+      value.__typename === typenames.Tool
+    ) {
+      return value.url;
+    }
+  }, [value]);
 
   const logUtilization = Math.round(Math.log(utilization));
 
@@ -126,7 +136,7 @@ const Skill: FC<{
     [classes.meter_edge, classes.meter_node, classes.meter_root, timeline],
   );
 
-  const color = getColorByType(values);
+  const color = getColorByType(value);
   const nodes: ReactNode[] = [];
   for (let i = 0; i < logUtilization; i++) {
     nodes.push(
@@ -148,7 +158,12 @@ const Skill: FC<{
   return (
     <div className={classes.skill}>
       <div ref={meterRef} className={classes.meter}>
-        <div className={classes.meter_root}>
+        <Link
+          href={url}
+          className={classes.meter_root}
+          rel="noreferrer"
+          target="_blank"
+        >
           <div
             className={classes.meter_rootContent}
             style={{ borderColor: color }}
@@ -164,7 +179,6 @@ const Skill: FC<{
                   className={clsx(
                     classes.meter_rootIcon,
                     classes.meter_rootIconFader,
-                    // @ts-ignore
                     classes[color.substring(1)],
                   )}
                   src={logo}
@@ -173,7 +187,7 @@ const Skill: FC<{
               </>
             )}
           </div>
-        </div>
+        </Link>
         {nodes}
       </div>
       <div className={classes.skill_title}>{title}</div>

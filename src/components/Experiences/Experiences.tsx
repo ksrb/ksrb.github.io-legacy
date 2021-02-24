@@ -1,11 +1,10 @@
-import { Grid, Link } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import clsx from "clsx";
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { getColorByType } from "src/components/util";
 import {
+  ExperienceFieldsFragment,
   ExperiencesGetQuery,
-  HistoryFieldsFragment,
-  Maybe,
   useExperiencesGetQuery,
 } from "src/graphql/__generated__";
 import {
@@ -13,17 +12,17 @@ import {
   HistoryWithChildren,
 } from "src/graphql/data/skills";
 import { ExtractArrayType } from "src/types";
+import typenames from "../../graphql/typenames";
 import useStyles from "./styles";
 import Timeline from "./Timeline";
+import Link from "src/components/Link";
 
 function renderDate(dateStr: string): string {
   const date = new Date(dateStr);
   return `${date.getMonth() + 1}/${date.getFullYear()}`;
 }
 
-type HistoryType = HistoryFieldsFragment & {
-  children?: Maybe<Array<HistoryType & { __typename?: "History" }>>;
-};
+type HistoryType = ExtractArrayType<ExperienceFieldsFragment["histories"]>;
 
 const History: FC<{
   history: HistoryType;
@@ -38,8 +37,7 @@ const History: FC<{
   histories,
   depth,
 }) => {
-  const classes = useStyles();
-  const { children, values } = history;
+  const { children, title, values } = history;
   let utilization = computeUtilization(
     history,
     historyParent,
@@ -50,9 +48,24 @@ const History: FC<{
   const utilizationRounded = Math.round(utilization);
 
   const backgroundColor = getColorByType(
-    history.values,
+    values,
     historyParent && historyParent.values,
   );
+
+  const url = useMemo(() => {
+    const value = values[0];
+    // Value type is Language or Tool
+    if (
+      value.__typename === typenames.Language ||
+      value.__typename === typenames.Tool
+    ) {
+      return value.url;
+    }
+  }, [values]);
+
+  const stopPropagation = useCallback((e) => e.stopPropagation(), []);
+
+  const classes = useStyles();
 
   return (
     <div className={classes.history} style={{ flexBasis: `${utilization}%` }}>
@@ -63,11 +76,13 @@ const History: FC<{
         )}
         style={{ backgroundColor }}
       >
-        {values.map(({ title }, index) => {
-          const slash = index !== values.length - 1 ? "/" : "";
-          return title + slash;
-        })}{" "}
-        {utilizationRounded}%
+        <Link
+          href={url}
+          className={classes.history_titleText}
+          onClick={stopPropagation}
+        >
+          {title} {utilizationRounded}%
+        </Link>
       </div>
       {children && (
         <div className={classes.histories}>
@@ -124,13 +139,9 @@ const Experience: FC<{
         <div className={classes.header}>
           <div className={classes.company}>
             <div className={classes.company_name}>
-              {url ? (
-                <Link color="primary" href={url} rel="noopener" target="_blank">
-                  {company.name}
-                </Link>
-              ) : (
-                company.name
-              )}
+              <Link color="primary" href={url}>
+                {company.name}
+              </Link>
             </div>
             <div className={classes.company_location}>
               {county}, {state}

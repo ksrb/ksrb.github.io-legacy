@@ -1,5 +1,6 @@
 fragment HistoryFields on History {
   id
+  title
   utilization
   values {
     ... on Tool {
@@ -15,7 +16,6 @@ fragment HistoryFields on History {
     }
     ... on Language {
       id
-      logo
       title
       url
     }

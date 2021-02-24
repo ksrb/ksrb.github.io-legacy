@@ -21,11 +21,11 @@ function getColorByUse(use: Use): string {
 }
 
 export function getColorByType(
-  displayedNode: Displayed[],
+  displayedNode: Displayed[] | Displayed,
   parentDisplayedNodes?: Displayed[],
 ): string {
   // TODO: consider nodes with mixed use
-  const node = displayedNode[0];
+  const node = Array.isArray(displayedNode) ? displayedNode[0] : displayedNode;
 
   // @ts-ignore
   const { __typename } = node;

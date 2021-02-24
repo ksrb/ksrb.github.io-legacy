@@ -20,19 +20,19 @@ interface Displayed {
   title: String!
 }
 
-type Use implements Node & Displayed {
+type Use implements Displayed & Node {
   id: ID!
   title: String!
 }
 
-type Language implements Node & Displayed {
+type Language implements Displayed & Node {
   id: ID!
   title: String!
   url: String!
   logo: String!
 }
 
-type Tool implements Node & Displayed {
+type Tool implements Displayed & Node {
   id: ID!
   languages: [Language!]
   logo: String!
@@ -45,6 +45,7 @@ type History implements Node {
   id: ID!
   children: [History!]
   utilization: Int
+  title: String!
   values: [Displayed!]!
 }
 
@@ -68,8 +69,11 @@ type Skill implements Node {
   languages: [Language!]
   title: String!
   utilization: Int!
+  value: Displayed!
   values: [Displayed!]!
 }
+
+union DisplayedNode = Tool | Language | Use
 
 type Query {
   experiences: [Experience!]!
