@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Displayed, Tool, Use } from "src/graphql/__generated__";
 import uses from "src/graphql/data/uses";
 import typenames from "src/graphql/typenames";
@@ -42,4 +43,16 @@ export function getColorByType(
     default:
       return "";
   }
+}
+
+type ColorsByTypeParameters = Parameters<typeof getColorByType>;
+
+export function useColorByType(
+  displayNode: ColorsByTypeParameters[0],
+  parentDisplayedNodes?: ColorsByTypeParameters[1],
+) {
+  return useMemo(() => getColorByType(displayNode, parentDisplayedNodes), [
+    displayNode,
+    parentDisplayedNodes,
+  ]);
 }

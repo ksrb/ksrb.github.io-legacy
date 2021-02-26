@@ -33,7 +33,7 @@ const resolvers: { Query: Pick<Resolvers["Query"], "experience" | "skill"> } = {
   },
 };
 
-const cache = new InMemoryCache({
+export const cache = new InMemoryCache({
   possibleTypes: introspectionResults.possibleTypes,
 });
 

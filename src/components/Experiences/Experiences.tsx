@@ -1,7 +1,8 @@
 import { Grid } from "@material-ui/core";
 import clsx from "clsx";
 import React, { FC, useCallback, useMemo, useState } from "react";
-import { getColorByType } from "src/components/util";
+import Link from "src/components/Link";
+import { useColorByType } from "src/components/util";
 import {
   ExperienceFieldsFragment,
   ExperiencesGetQuery,
@@ -15,7 +16,6 @@ import { ExtractArrayType } from "src/types";
 import typenames from "../../graphql/typenames";
 import useStyles from "./styles";
 import Timeline from "./Timeline";
-import Link from "src/components/Link";
 
 function renderDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -47,7 +47,7 @@ const History: FC<{
 
   const utilizationRounded = Math.round(utilization);
 
-  const backgroundColor = getColorByType(
+  const backgroundColor = useColorByType(
     values,
     historyParent && historyParent.values,
   );
@@ -63,7 +63,7 @@ const History: FC<{
     }
   }, [values]);
 
-  const stopPropagation = useCallback((e) => e.stopPropagation(), []);
+  const stopPropagation = useCallback((e) => url && e.stopPropagation(), [url]);
 
   const classes = useStyles();
 
