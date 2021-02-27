@@ -13,7 +13,7 @@ import {
   HistoryWithChildren,
 } from "src/graphql/data/skills";
 import { ExtractArrayType } from "src/types";
-import typenames from "../../graphql/typenames";
+import typenames from "src/graphql/typenames";
 import useStyles from "./styles";
 import Timeline from "./Timeline";
 

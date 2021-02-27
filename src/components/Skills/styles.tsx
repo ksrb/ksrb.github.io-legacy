@@ -1,44 +1,42 @@
+import { fade } from "@material-ui/core/styles/colorManipulator";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "src/theme";
+export const stroke = 3;
 
-const stroke = 3;
+export const skill_titleFontSize = 12;
+export const skill_titleLineHeight = 1.4;
+export const skill_titleHeight = skill_titleFontSize * skill_titleLineHeight;
 
-const skill_titleFontSize = 12;
-const skill_titleLineHeight = 1.4;
-const skill_titleHeight = skill_titleFontSize * skill_titleLineHeight;
-const skill_titleExpanded = {
-  height: skill_titleHeight,
-};
-
-const meter_rootPadding = 3;
-const meter_rootIconSize = 32;
-const meter_rootSize = meter_rootIconSize + meter_rootPadding * 2 + stroke * 2;
-const meter_rootExpanded = {
+export const meter_rootPadding = 3;
+export const meter_rootIconSize = 32;
+export const meter_rootSize =
+  meter_rootIconSize + meter_rootPadding * 2 + stroke * 2;
+export const meter_rootExpanded = {
   height: meter_rootSize,
   width: meter_rootSize,
 };
 
-const meter_nodeSize = 16;
-const meter_nodeExpanded = {
+export const meter_nodeSize = 16;
+export const meter_nodeExpanded = {
   height: meter_nodeSize,
   width: meter_nodeSize,
 };
 
-const meter_edgeSize = 50;
-const meter_edgeExpanded = {
+export const meter_edgeSize = 50;
+export const meter_edgeExpanded = {
   flexBasis: meter_edgeSize,
 };
 
 export default makeStyles<Theme>(
   ({
     spacing,
+    shape,
+    typography,
     palette: {
+      grey,
+      primary,
       common: { white },
     },
-    primaryColor,
-    languagesColor,
-    trinaryColor,
-    secondaryColor,
   }) => ({
     root: {},
 
@@ -47,110 +45,59 @@ export default makeStyles<Theme>(
         display: "none",
       },
     },
-    skills__expanded: {
-      "& $skill $skill_title": {
-        ...skill_titleExpanded,
-      },
-    },
+
     skill: {
       position: "relative",
       paddingBottom: skill_titleHeight + spacing(1),
       overflow: "hidden",
-      "&:hover $skill_title": {
-        ...skill_titleExpanded,
-      },
       "&:hover $meter_rootIconFader": {
         opacity: 0,
       },
-    },
-    skill_title: {
-      position: "absolute",
-      padding: "0 3px",
-
-      height: "0px",
-      minWidth: meter_rootSize,
-
-      fontSize: skill_titleFontSize,
-      lineHeight: skill_titleLineHeight,
-      textAlign: "center",
-
-      overflow: "hidden",
-      background: white,
-      transition: "400ms height ease",
-    },
-
-    meter: {
-      display: "flex",
-      alignItems: "center",
-      height: meter_rootSize,
-    },
-
-    meter_root: {
-      ...meter_rootExpanded,
-      position: "relative",
-      background: white,
-    },
-
-    meter_rootContent: {
-      ...meter_rootExpanded,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexShrink: 0,
-
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-
-      borderRadius: "50%",
-      border: `${stroke}px solid ${primaryColor}`,
-      padding: meter_rootPadding,
-      overflow: "hidden",
-
-      boxSizing: "border-box",
+      "&:hover $meter_nodeToolTip": {
+        maxWidth: 300,
+        opacity: 1,
+      },
     },
 
     meter_rootIcon: {
       position: "absolute",
       width: meter_rootIconSize,
     },
-
     meter_rootIconFader: {
-      transition: "1s ease opacity",
+      transition: ".5s ease opacity",
     },
-
-    meter_edge: {
-      ...meter_edgeExpanded,
-      height: stroke,
-    },
-
     meter_edgeVertical: {
       position: "absolute",
       top: 0,
       left: meter_rootSize / 2,
       height: "100%",
       width: stroke,
+      backgroundColor: primary.main,
+    },
+    meter_nodeToolTip: {
+      maxWidth: 0,
+      opacity: 0,
+      overflow: "hidden",
+      position: "absolute",
+      left: `calc(100% + ${spacing(1)}px)`,
+      top: "50%",
+      transform: "translateY(-50%)",
+      transition: "max-width .1s ease-in, opacity .1s ease-in",
+
+      // Style copied from:
+      // https://github.com/mui-org/material-ui/blob/v4.11.3/packages/material-ui/src/Tooltip/Tooltip.js#L82-L93
+      whiteSpace: "nowrap",
+      backgroundColor: fade(grey[700], 0.9),
+      borderRadius: shape.borderRadius,
+      color: white,
+      fontFamily: typography.fontFamily,
+      padding: "4px 8px",
+      fontSize: typography.pxToRem(10),
+      lineHeight: "1.4em",
+      wordWrap: "break-word",
+      fontWeight: typography.fontWeightMedium,
     },
 
-    meter_node: {
-      ...meter_nodeExpanded,
-      flexShrink: 0,
-      borderRadius: "50%",
-    },
-
-    [primaryColor.substring(1)]: {
-      filter: `url(${primaryColor})`,
-    },
-    [secondaryColor.substring(1)]: {
-      filter: `url(${secondaryColor})`,
-    },
-    [trinaryColor.substring(1)]: {
-      filter: `url(${trinaryColor})`,
-    },
-    [languagesColor.substring(1)]: {
-      filter: `url(${languagesColor})`,
-    },
     filters: {
       height: 0,
       width: 0,

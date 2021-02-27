@@ -13,5 +13,5 @@ export function useHover(hoverHandler?: (e: boolean) => void) {
     setHover(false);
   }, [hoverHandler]);
 
-  return { isHovering, onMouseEnter, onMouseLeave };
+  return { onMouseEnter, onMouseLeave };
 }

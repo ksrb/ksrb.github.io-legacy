@@ -19,7 +19,12 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es5",
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "src"
