@@ -4,14 +4,15 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@material-ui/lab";
+import clsx from "clsx";
 import React, { FC, useCallback, useMemo, useState } from "react";
-import { useStylesShared } from "./index";
 import { publicUrl } from "src/constants/config";
 import { cache } from "src/graphql";
 import { useSkillsGetQuery } from "src/graphql/__generated__";
 import uses from "src/graphql/data/uses";
 import typenames from "src/graphql/typenames";
 import theme from "src/theme";
+import { useStylesShared } from "./index";
 import MeterRoot from "./MeterRoot";
 import Skill, { SkillType } from "./Skill";
 
@@ -86,20 +87,14 @@ const Skills: FC = () => {
     [selectedSkill, skills, toggles],
   );
 
-  const { classesSkills: classes, classesSkill } = useStylesShared();
+  const handleShowSearch = useCallback(() => {}, []);
+
+  const { classesSkills, classesSkill, classesMeterRoot } = useStylesShared();
 
   return (
     <>
-      <Grid container className={classes.root}>
+      <Grid container className={classesSkills.root}>
         <Grid item xs={12}>
-          <Autocomplete
-            options={skills}
-            getOptionLabel={({ title }) => title}
-            renderInput={(params) => (
-              <TextField {...params} variant="outlined" />
-            )}
-            onChange={handleAutoCompleteChange}
-          />
           <ToggleButtonGroup
             value={toggles}
             onChange={handleToggleButtonGroupOnChange}
@@ -115,13 +110,36 @@ const Skills: FC = () => {
               {uses.Build.title}
             </ToggleButton>
           </ToggleButtonGroup>
-          <div className={classes.skills}>
-            <div className={classes.skill}>
+          <div className={classesSkill.skills}>
+            <div
+              className={clsx(classesSkill.skill, classesSkills.skill__search)}
+            >
               <MeterRoot
+                onClick={handleShowSearch}
                 title="Search"
                 logo={`${publicUrl}/assets/icons/Search.svg`}
               />
               <div className={classesSkill.skill_title}>Search</div>
+            </div>
+            <div className={classesSkill.skill}>
+              <div className={classesSkill.meter_edgeVertical} />
+              <div
+                className={clsx(
+                  classesMeterRoot.meter,
+                  classesMeterRoot.meter__search,
+                )}
+              >
+                <div className={classesSkill.meter_node} />
+                <div className={classesSkill.meter_edge} />
+                <Autocomplete
+                  options={skills}
+                  getOptionLabel={({ title }) => title}
+                  renderInput={(params) => (
+                    <TextField {...params} variant="outlined" />
+                  )}
+                  onChange={handleAutoCompleteChange}
+                />
+              </div>
             </div>
             {skillsFiltered.map((skill) => (
               <Skill key={skill.id} skill={skill} />
@@ -130,7 +148,7 @@ const Skills: FC = () => {
         </Grid>
       </Grid>
 
-      <svg className={classes.filters}>
+      <svg className={classesSkills.filters}>
         <Filter color={primaryColor} />
         <Filter color={secondaryColor} />
         <Filter color={trinaryColor} />

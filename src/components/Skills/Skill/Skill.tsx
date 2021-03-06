@@ -74,11 +74,7 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
   }, [value]);
 
   const timeline = useMemo(() => gsap.timeline(), []);
-  const {
-    classesMeterRoot,
-    classesSkill: classes,
-    classesSkills,
-  } = useStylesShared();
+  const { classesMeterRoot, classesSkill, classesSkills } = useStylesShared();
 
   const skillRef = useCallback(
     (element: HTMLDivElement) => {
@@ -90,14 +86,14 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
         `.${classesMeterRoot.meter_rootContent}`,
       );
       const meterEdgeVerticalElements = element.querySelectorAll(
-        `.${classesSkills.meter_edgeVertical}`,
+        `.${classesMeterRoot.meter_edgeVertical}`,
       );
 
       const meterEdgeElements = element.querySelectorAll(
-        `.${classes.meter_edge}`,
+        `.${classesSkill.meter_edge}`,
       );
       const meterNodeElements = element.querySelectorAll(
-        `.${classes.meter_node}`,
+        `.${classesSkill.meter_node}`,
       );
 
       timeline.from(meterRootElement, {
@@ -131,10 +127,10 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
       }
     },
     [
-      classes.meter_edge,
-      classes.meter_node,
       classesMeterRoot.meter_rootContent,
-      classesSkills.meter_edgeVertical,
+      classesSkill.meter_edge,
+      classesSkill.meter_edgeVertical,
+      classesSkill.meter_node,
       timeline,
     ],
   );
@@ -158,21 +154,19 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
     nodes.push(
       <Fragment key={i}>
         <div
-          className={classes.meter_edge}
+          className={classesSkill.meter_edge}
           style={{ backgroundColor: color }}
         />
         {lastNode ? (
           <div
-            className={classes.meter_node}
+            className={classesSkill.meter_node}
             style={{ backgroundColor: color }}
           >
-            <div className={classesSkills.meter_nodeToolTip}>
-              {tooltipTitle}
-            </div>
+            <div className={classesSkill.meter_nodeToolTip}>{tooltipTitle}</div>
           </div>
         ) : (
           <div
-            className={classes.meter_node}
+            className={classesSkill.meter_node}
             style={{ backgroundColor: color }}
           />
         )}
@@ -183,11 +177,11 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
   const logo = getLogo(skill);
 
   return (
-    <div className={classesSkills.skill} ref={skillRef}>
+    <div className={classesSkill.skill} ref={skillRef}>
       <MeterRoot url={url} color={color} logo={logo} title={title}>
         {nodes}
       </MeterRoot>
-      <div className={classes.skill_title}>{title}</div>
+      <div className={classesSkill.skill_title}>{title}</div>
     </div>
   );
 };

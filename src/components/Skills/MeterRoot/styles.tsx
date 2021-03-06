@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 import {
-  meter_edgeExpanded,
+  meter_nodeSize,
   meter_rootExpanded,
   meter_rootIconSize,
   meter_rootPadding,
@@ -12,18 +12,23 @@ import { Theme } from "src/theme";
 export default makeStyles<Theme>(
   ({
     palette: {
-      common: { white },
       primary,
+      common: { white },
     },
     primaryColor,
-    languagesColor,
-    trinaryColor,
     secondaryColor,
+    trinaryColor,
+    languagesColor,
   }) => ({
     meter: {
       display: "flex",
       alignItems: "center",
       height: meter_rootSize,
+    },
+
+    meter__search: {
+      marginLeft: meter_rootSize / 2 - meter_nodeSize / 2 + 1,
+      height: meter_nodeSize,
     },
 
     meter_root: {
@@ -56,10 +61,16 @@ export default makeStyles<Theme>(
       position: "absolute",
       width: meter_rootIconSize,
     },
-
-    meter_edge: {
-      ...meter_edgeExpanded,
-      height: stroke,
+    meter_rootIconFader: {
+      transition: ".5s ease opacity",
+    },
+    meter_edgeVertical: {
+      position: "absolute",
+      top: 0,
+      left: meter_rootSize / 2,
+      height: "100%",
+      width: stroke,
+      backgroundColor: primary.main,
     },
 
     [primaryColor.substring(1)]: {

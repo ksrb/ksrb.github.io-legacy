@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { FC } from "react";
+import React, { DOMAttributes, FC } from "react";
 import Link from "src/components/Link";
 import { useStylesShared } from "src/components/Skills";
 
@@ -8,41 +8,48 @@ type Props = {
   logo?: string;
   title?: string;
   url?: string;
-};
+} & Pick<DOMAttributes<HTMLDivElement>, "onClick">;
 
-const MeterRoot: FC<Props> = ({ children, color, logo, title, url }) => {
-  const { classesMeterRoot: classes, classesSkills } = useStylesShared();
+const MeterRoot: FC<Props> = ({
+  children,
+  color,
+  logo,
+  title,
+  url,
+  onClick,
+}) => {
+  const { classesMeterRoot, classesSkills } = useStylesShared();
 
   return (
     <>
       <div
-        className={classesSkills.meter_edgeVertical}
+        className={classesMeterRoot.meter_edgeVertical}
         style={{ backgroundColor: color }}
       />
-      <div className={classes.meter}>
+      <div className={classesMeterRoot.meter} onClick={onClick}>
         <Link
           href={url}
-          className={classes.meter_root}
+          className={classesMeterRoot.meter_root}
           rel="noreferrer"
           target="_blank"
         >
           <div
-            className={classes.meter_rootContent}
+            className={classesMeterRoot.meter_rootContent}
             style={{ borderColor: color }}
           >
             {logo && (
               <>
                 <img
-                  className={clsx(classes.meter_rootIcon)}
+                  className={clsx(classesMeterRoot.meter_rootIcon)}
                   src={logo}
                   alt={title}
                 />
                 {color && (
                   <img
                     className={clsx(
-                      classesSkills.meter_rootIcon,
-                      classesSkills.meter_rootIconFader,
-                      classes[color.substring(1)],
+                      classesMeterRoot.meter_rootIcon,
+                      classesMeterRoot.meter_rootIconFader,
+                      classesMeterRoot[color.substring(1)],
                     )}
                     src={logo}
                     alt={title}
