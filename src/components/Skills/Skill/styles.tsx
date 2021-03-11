@@ -25,10 +25,12 @@ export default makeStyles<Theme>(
     skill: {
       position: "relative",
       paddingBottom: skill_titleHeight + spacing(1),
-      overflow: "hidden",
       "&:hover $meter_nodeToolTip": {
         maxWidth: 300,
         opacity: 1,
+      },
+      "&:hover $meter_rootIconFader": {
+        opacity: 0,
       },
     },
     skill_title: {
@@ -46,12 +48,26 @@ export default makeStyles<Theme>(
       background: white,
       transition: "400ms height ease",
     },
-
-    meter: {
-      display: "flex",
-      alignItems: "center",
-      height: meter_rootSize,
+    skill_title__meterRoot: {
+      top: "100%",
+      left: "50%",
+      transform: "translateX(-50%)",
     },
+
+    meter_edgeVertical: {
+      position: "absolute",
+      top: 0,
+      left: meter_rootSize / 2,
+      height: "100%",
+      width: stroke,
+      backgroundColor: primary.main,
+    },
+
+    meter_edgeVertical__lastChild: {
+      height: `calc(50% - ${skill_titleHeight / 2}px)`,
+    },
+
+    meter_rootIconFader: {},
 
     meter_edge: {
       ...meter_edgeExpanded,
@@ -89,6 +105,25 @@ export default makeStyles<Theme>(
       lineHeight: "1.4em",
       wordWrap: "break-word",
       fontWeight: typography.fontWeightMedium,
+    },
+
+    // Styles for <Skills> component
+    meter_nodeWrapper: {
+      ...meter_nodeExpanded,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+
+    meter_text: {
+      display: "flex",
+      alignItems: "center",
+      boxSizing: "border-box",
+      textAlign: "center",
+      padding: spacing(0, 1),
+      border: `${stroke}px solid ${primary.main}`,
+      borderRadius: `${meter_rootSize / 2}px / 50%`,
+      height: meter_rootSize,
     },
   }),
 );

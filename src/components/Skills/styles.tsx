@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "src/theme";
+import { toggleMapValues } from "./constants";
 
 export const stroke = 3;
 
@@ -27,24 +28,74 @@ export const meter_edgeExpanded = {
   flexBasis: meter_edgeSize,
 };
 
-export default makeStyles<Theme>(({ spacing }) => ({
-  root: {},
-
-  skills: {
-    "& $skill:last-child $meter_edgeVertical": {
-      display: "none",
+export default makeStyles<Theme>(
+  ({
+    palette: {
+      primary,
+      common: { white },
     },
-  },
+  }) => {
+    return toggleMapValues.reduce<{
+      [key: string]: any;
+    }>(
+      (aggregator, { color, className }) => {
+        aggregator[className] = {
+          borderColor: color,
+        };
+        aggregator.skills[`& $${className}`] = {
+          borderColor: color,
+          color,
+        };
+        aggregator.skills["& $meterRootContent__selected"][`&$${className}`] = {
+          background: color,
+        };
 
-  skill: {},
-  meter_edgeVertical: {},
+        return aggregator;
+      },
+      {
+        root: {},
 
-  skill__search: {
-    paddingBottom: skill_titleHeight * 2 + spacing(1),
-  },
+        skills: {
+          "& $meter_edge": {
+            flexBasis: meter_edgeSize - meter_rootSize / 2,
+          },
 
-  filters: {
-    height: 0,
-    width: 0,
+          "& $meterRootContent__selected": {
+            background: primary.main,
+          },
+
+          "& $skill_title__selected": {
+            color: white,
+          },
+
+          "& $skill:last-child $meter_edgeVertical": {
+            display: "none",
+          },
+        },
+        skill: {},
+        skill_title__selected: {},
+
+        meterRootContent__selected: {},
+        meter_edge: {},
+        meter_edgeVertical: {},
+
+        autoComplete: {
+          flexBasis:
+            meter_rootSize * 4 +
+            meter_rootSize / 2 +
+            (meter_edgeSize - meter_rootSize / 2) *
+              (toggleMapValues.length - 1),
+          overflow: "visible",
+        },
+        autoComplete_inputRoot: {
+          borderRadius: "28px / 50%",
+        },
+
+        filters: {
+          height: 0,
+          width: 0,
+        },
+      },
+    );
   },
-}));
+);

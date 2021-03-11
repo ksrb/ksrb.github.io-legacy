@@ -1,17 +1,30 @@
 import { Grid, TextField } from "@material-ui/core";
-import {
-  Autocomplete,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "@material-ui/lab";
+import { Autocomplete } from "@material-ui/lab";
 import clsx from "clsx";
-import React, { FC, useCallback, useMemo, useState } from "react";
-import { publicUrl } from "src/constants/config";
+import gsap from "gsap";
+import React, {
+  createElement,
+  FC,
+  Fragment,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import { cache } from "src/graphql";
 import { useSkillsGetQuery } from "src/graphql/__generated__";
-import uses from "src/graphql/data/uses";
 import typenames from "src/graphql/typenames";
+import Search from "src/icons/Search";
 import theme from "src/theme";
+import {
+  autoCompleteTweenVars,
+  meterEdgeTweenVars,
+  meterNodeTweenVars,
+  meterSkillTweenVars,
+  toggleMapValues,
+  usesBackendIdentity,
+  usesBuildIdentity,
+  usesFrontendIdentity,
+} from "./constants";
 import { useStylesShared } from "./index";
 import MeterRoot from "./MeterRoot";
 import Skill, { SkillType } from "./Skill";
@@ -55,15 +68,18 @@ const Skills: FC = () => {
     [],
   );
 
-  const [toggles, setToggles] = useState<string[]>(
-    Object.values(uses)
-      .map((use) => cache.identify(use)!)
-      .concat([typenames.Language]),
-  );
+  const [toggles, setToggles] = useState<{ [key: string]: boolean }>({
+    [typenames.Language]: true,
+    [usesFrontendIdentity]: true,
+    [usesBackendIdentity]: true,
+    [usesBuildIdentity]: true,
+  });
 
   const handleToggleButtonGroupOnChange = useCallback(
-    (events, toggles) => setToggles(toggles),
-    [],
+    (value: string) => () => {
+      setToggles({ ...toggles, [value]: !toggles[value] });
+    },
+    [toggles],
   );
 
   const skillsFiltered = useMemo(
@@ -78,60 +94,154 @@ const Skills: FC = () => {
         })
         .filter(({ value }) => {
           if (value.__typename === typenames.Tool) {
-            const identity = cache.identify(value.use);
-            return toggles.find((toggle) => toggle === identity);
+            const identity = cache.identify(value.use)!;
+            return toggles[identity];
           }
 
-          return toggles.find((toggle) => toggle === value.__typename);
+          return toggles[value.__typename as string];
         }),
     [selectedSkill, skills, toggles],
   );
 
-  const handleShowSearch = useCallback(() => {}, []);
-
   const { classesSkills, classesSkill, classesMeterRoot } = useStylesShared();
+
+  const [showSearch, setShowSearch] = useState(false);
+  const timeline = useMemo(
+    () => gsap.timeline({ paused: true, yoyo: true }),
+    [],
+  );
+
+  const searchRef = useCallback(
+    (element: HTMLDivElement) => {
+      if (!element) {
+        return;
+      }
+      const meterSkillElement = element;
+      const meterNodeElement = element.querySelector(
+        `.${classesSkill.meter_node}`,
+      );
+      const meterEdgeElement = element.querySelector(
+        `.${classesSkill.meter_edge}`,
+      );
+      const autoComplete = element.querySelector(
+        `.${classesSkills.autoComplete}`,
+      );
+
+      timeline.from(meterSkillElement, meterSkillTweenVars);
+      timeline.from(meterNodeElement, meterNodeTweenVars);
+      timeline.from(meterEdgeElement, meterEdgeTweenVars);
+      timeline.from(autoComplete, autoCompleteTweenVars);
+    },
+    [
+      classesSkill.meter_edge,
+      classesSkill.meter_node,
+      classesSkills.autoComplete,
+      timeline,
+    ],
+  );
+
+  const handleShowSearch = useCallback(() => {
+    if (!showSearch) {
+      setShowSearch(true);
+      timeline.play();
+      return;
+    }
+
+    setShowSearch(false);
+    timeline.reverse();
+    setSelectedSkill(undefined);
+  }, [showSearch, timeline]);
 
   return (
     <>
       <Grid container className={classesSkills.root}>
         <Grid item xs={12}>
-          <ToggleButtonGroup
-            value={toggles}
-            onChange={handleToggleButtonGroupOnChange}
-          >
-            <ToggleButton value={typenames.Language}>Language</ToggleButton>
-            <ToggleButton value={cache.identify(uses.Frontend)}>
-              {uses.Frontend.title}
-            </ToggleButton>
-            <ToggleButton value={cache.identify(uses.Backend)}>
-              {uses.Backend.title}
-            </ToggleButton>
-            <ToggleButton value={cache.identify(uses.Build)}>
-              {uses.Build.title}
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <div className={classesSkill.skills}>
-            <div
-              className={clsx(classesSkill.skill, classesSkills.skill__search)}
-            >
+          <div className={classesSkills.skills}>
+            <div className={classesSkill.skill}>
+              <div className={classesSkill.meter_edgeVertical} />
               <MeterRoot
                 onClick={handleShowSearch}
                 title="Search"
-                logo={`${publicUrl}/assets/icons/Search.svg`}
-              />
+                classes={{
+                  meter_rootContent: clsx(
+                    showSearch && classesSkills.meterRootContent__selected,
+                  ),
+                }}
+                logo={
+                  <Search
+                    color="primary"
+                    className={clsx(
+                      showSearch && classesSkills.skill_title__selected,
+                    )}
+                  />
+                }
+              >
+                {toggleMapValues.map(({ logo, title, value, className }) => {
+                  const selected = toggles[value];
+
+                  return (
+                    <Fragment key={value}>
+                      <div
+                        className={clsx(
+                          classesSkill.meter_edge,
+                          classesSkills.meter_edge,
+                        )}
+                      />
+                      <MeterRoot
+                        classes={{
+                          meter_rootContent: clsx(
+                            classesSkills[className],
+                            selected &&
+                              classesSkills.meterRootContent__selected,
+                          ),
+                        }}
+                        onClick={handleToggleButtonGroupOnChange(value)}
+                        logo={createElement(logo, {
+                          className: clsx(
+                            selected && classesSkills.skill_title__selected,
+                          ),
+                        })}
+                        title={title}
+                      >
+                        <div
+                          className={clsx(
+                            classesSkill.skill_title,
+                            classesSkill.skill_title__meterRoot,
+                          )}
+                        >
+                          {title}
+                        </div>
+                      </MeterRoot>
+                    </Fragment>
+                  );
+                })}
+              </MeterRoot>
               <div className={classesSkill.skill_title}>Search</div>
             </div>
-            <div className={classesSkill.skill}>
+
+            <div
+              className={clsx(classesSkill.skill, classesSkills.skill)}
+              ref={searchRef}
+            >
               <div className={classesSkill.meter_edgeVertical} />
               <div
                 className={clsx(
                   classesMeterRoot.meter,
-                  classesMeterRoot.meter__search,
+                  classesMeterRoot.meter_smallRoot,
                 )}
               >
-                <div className={classesSkill.meter_node} />
-                <div className={classesSkill.meter_edge} />
+                <div className={classesSkill.meter_nodeWrapper}>
+                  <div className={classesSkill.meter_node} />
+                </div>
+                <div
+                  className={clsx(
+                    classesSkill.meter_edge,
+                    classesSkills.meter_edge,
+                  )}
+                />
                 <Autocomplete
+                  classes={{ inputRoot: classesSkills.autoComplete_inputRoot }}
+                  className={classesSkills.autoComplete}
                   options={skills}
                   getOptionLabel={({ title }) => title}
                   renderInput={(params) => (
@@ -144,6 +254,35 @@ const Skills: FC = () => {
             {skillsFiltered.map((skill) => (
               <Skill key={skill.id} skill={skill} />
             ))}
+
+            {skillsFiltered.length === 0 && (
+              <div className={clsx(classesSkill.skill, classesSkills.skill)}>
+                <div
+                  className={clsx(
+                    classesSkill.meter_edgeVertical,
+                    classesSkill.meter_edgeVertical__lastChild,
+                  )}
+                />
+                <div
+                  className={clsx(
+                    classesMeterRoot.meter,
+                    classesMeterRoot.meter_smallRoot,
+                  )}
+                >
+                  <div className={classesSkill.meter_nodeWrapper}>
+                    <div className={classesSkill.meter_node} />
+                  </div>
+
+                  <div
+                    className={clsx(
+                      classesSkill.meter_edge,
+                      classesSkills.meter_edge,
+                    )}
+                  />
+                  <div className={classesSkill.meter_text}>No results</div>
+                </div>
+              </div>
+            )}
           </div>
         </Grid>
       </Grid>

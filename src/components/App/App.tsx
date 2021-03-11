@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import clsx from "clsx";
 import { Grid } from "@material-ui/core";
+import clsx from "clsx";
+import React, { FC } from "react";
 import About from "src/components/About";
 import Experiences from "src/components/Experiences";
 import Navbar from "src/components/Navbar";
@@ -14,7 +14,7 @@ const App: FC = () => {
   return (
     <div className={classes.root}>
       <Grid container className={classes.header}>
-        <div className={clsx(classes.header_name)}>
+        <div className={classes.header_name}>
           K<span className={classes.header_name__small}>EVIN</span>
         </div>
         <div className={clsx(classes.header_name, classes.header_name__last)}>
@@ -23,8 +23,8 @@ const App: FC = () => {
       </Grid>
       <Navbar />
       <About />
-      <Experiences />
       <Skills />
+      <Experiences />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import gsap from "gsap";
 import React, { FC, Fragment, ReactNode, useCallback, useMemo } from "react";
 import { useStylesShared } from "src/components/Skills";
@@ -81,32 +82,34 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
       if (!element) {
         return;
       }
-
-      const meterRootElement = element.querySelector(
+      const meterRootContentElement = element.querySelector(
         `.${classesMeterRoot.meter_rootContent}`,
       );
       const meterEdgeVerticalElements = element.querySelectorAll(
-        `.${classesMeterRoot.meter_edgeVertical}`,
+        `.${classesSkill.meter_edgeVertical}`,
       );
-
       const meterEdgeElements = element.querySelectorAll(
         `.${classesSkill.meter_edge}`,
       );
       const meterNodeElements = element.querySelectorAll(
         `.${classesSkill.meter_node}`,
       );
-
-      timeline.from(meterRootElement, {
-        duration: 0.5,
-        ease: "power1",
-        height: 0,
-        width: 0,
-      });
+      const skillTitleElement = element.querySelector(
+        `.${classesSkill.skill_title}`,
+      );
 
       timeline.from(meterEdgeVerticalElements, {
         duration: 0.5,
         ease: "power1",
         height: 0,
+      });
+      timeline.from(meterRootContentElement, {
+        duration: 0.5,
+        ease: "power1",
+        height: 0,
+        width: 0,
+        padding: 0,
+        borderWidth: 0,
       });
 
       for (let i = 0; i < meterEdgeElements.length; i++) {
@@ -125,12 +128,23 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
           width: 0,
         });
       }
+
+      timeline.from(
+        skillTitleElement,
+        {
+          duration: 0.1,
+          ease: "power1",
+          height: 0,
+        },
+        1.3,
+      );
     },
     [
+      classesSkill.meter_edgeVertical,
       classesMeterRoot.meter_rootContent,
       classesSkill.meter_edge,
-      classesSkill.meter_edgeVertical,
       classesSkill.meter_node,
+      classesSkill.skill_title,
       timeline,
     ],
   );
@@ -177,7 +191,17 @@ export const Skill: FC<{ skill: SkillType }> = ({ skill }) => {
   const logo = getLogo(skill);
 
   return (
-    <div className={classesSkill.skill} ref={skillRef}>
+    <div
+      className={clsx(classesSkill.skill, classesSkills.skill)}
+      ref={skillRef}
+    >
+      <div
+        className={clsx(
+          classesSkill.meter_edgeVertical,
+          classesSkills.meter_edgeVertical,
+        )}
+        style={{ backgroundColor: color }}
+      />
       <MeterRoot url={url} color={color} logo={logo} title={title}>
         {nodes}
       </MeterRoot>

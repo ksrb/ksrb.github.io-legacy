@@ -21,20 +21,21 @@ export default makeStyles<Theme>(
     languagesColor,
   }) => ({
     meter: {
+      // Styles for <Skills> component
+      position: "relative",
+
       display: "flex",
       alignItems: "center",
-      height: meter_rootSize,
     },
 
-    meter__search: {
+    // Styles for <Skills> component
+    meter_smallRoot: {
       marginLeft: meter_rootSize / 2 - meter_nodeSize / 2 + 1,
-      height: meter_nodeSize,
     },
 
     meter_root: {
       ...meter_rootExpanded,
       position: "relative",
-      background: white,
     },
 
     meter_rootContent: {
@@ -55,6 +56,8 @@ export default makeStyles<Theme>(
       overflow: "hidden",
 
       boxSizing: "border-box",
+
+      background: white,
     },
 
     meter_rootIcon: {
@@ -63,14 +66,6 @@ export default makeStyles<Theme>(
     },
     meter_rootIconFader: {
       transition: ".5s ease opacity",
-    },
-    meter_edgeVertical: {
-      position: "absolute",
-      top: 0,
-      left: meter_rootSize / 2,
-      height: "100%",
-      width: stroke,
-      backgroundColor: primary.main,
     },
 
     [primaryColor.substring(1)]: {
