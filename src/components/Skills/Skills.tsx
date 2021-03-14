@@ -15,6 +15,8 @@ import { useSkillsGetQuery } from "src/graphql/__generated__";
 import typenames from "src/graphql/typenames";
 import Search from "src/icons/Search";
 import theme from "src/theme";
+import { skillsListenerId } from "../../constants";
+import { useScrollProviderRefCallback } from "../ScrollProvider";
 import {
   autoCompleteTweenVars,
   meterEdgeTweenVars,
@@ -152,9 +154,11 @@ const Skills: FC = () => {
     setSelectedSkill(undefined);
   }, [showSearch, timeline]);
 
+  const scrollProviderRef = useScrollProviderRefCallback(skillsListenerId);
+
   return (
     <>
-      <Grid container className={classesSkills.root}>
+      <Grid container className={classesSkills.root} ref={scrollProviderRef}>
         <Grid item xs={12}>
           <div className={classesSkills.skills}>
             <div className={classesSkill.skill}>

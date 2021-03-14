@@ -2,7 +2,9 @@ import { Grid } from "@material-ui/core";
 import clsx from "clsx";
 import React, { FC, useCallback, useMemo, useState } from "react";
 import Link from "src/components/Link";
+import { useScrollProviderRefCallback } from "src/components/ScrollProvider";
 import { useColorByType } from "src/components/util";
+import { experiencesListenerId } from "src/constants";
 import {
   ExperienceFieldsFragment,
   ExperiencesGetQuery,
@@ -12,8 +14,8 @@ import {
   computeUtilization,
   HistoryWithChildren,
 } from "src/graphql/data/skills";
-import { ExtractArrayType } from "src/types";
 import typenames from "src/graphql/typenames";
+import { ExtractArrayType } from "src/types";
 import useStyles from "./styles";
 import Timeline from "./Timeline";
 
@@ -194,10 +196,12 @@ const Experiences: FC = () => {
   const { data } = useExperiencesGetQuery();
   const experiences = data?.experiences ?? [];
 
+  const scrollProviderRef = useScrollProviderRefCallback(experiencesListenerId);
+
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container className={classes.root} ref={scrollProviderRef}>
       {experiences
         .filter(({ hidden }) => !hidden)
         .map((experience) => (
